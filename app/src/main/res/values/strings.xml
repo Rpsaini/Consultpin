@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Consultpin</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="your_email">Username</string>
+    <string name="password">password</string>
+    <string name="forgot_pwd">Forgot Password</string>
+    <string name="sign_in">Login</string>
+    <string name="register_free">Register for free</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="mail">Mail</string>
+    <string name="phone">Phone</string>
+    <string name="con_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="become_consultant">Become a consultant</string>
+    <string name="search">Search Consultant or Category</string>
+    <string name="papular_cat">Popular Categories</string>
+    <string name="papular_cat_new">New Categories</string>
+    <string name="papular_consultant">Popular Consultant</string>
+</resources>

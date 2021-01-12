@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/ll_search"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:background="@drawable/toolbar_header_drawable"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+           android:layout_marginEnd="10dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_search"
+
+             ></ImageView>
+
+        <fontpackageforEdittext.Regular
+            android:background="@android:color/transparent"
+            android:gravity="center|left"
+            android:id="@+id/ed_search"
+            android:maxLines="1"
+            android:hint="@string/search"
+            style="@style/edittext_style_12_grey"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorBody"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        <fontspackageForTextView.BoldMedium
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+             android:text="@string/papular_cat"
+            ></fontspackageForTextView.BoldMedium>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_papular_cat_half_img"
+
+                ></ImageView>
+        </RelativeLayout>
+
+        <View
+           android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/border_color"
+            ></View>
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:layout_width="match_parent"
+             android:layout_height="100dp"
+             android:id="@+id/recyclerview_popular_cat"
+             ></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <fontspackageForTextView.BoldMedium
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                style="@style/edittext_style_14_black"
+                android:text="@string/papular_consultant"
+                ></fontspackageForTextView.BoldMedium>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_papular_cat_half_img"
+                ></ImageView>
+        </RelativeLayout>
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/border_color"
+            ></View>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/recyclerview_popular_consultant"
+            ></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+<!--        New Category-->
+
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <fontspackageForTextView.BoldMedium
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/edittext_style_14_black"
+                    android:text="@string/papular_cat_new"
+                    ></fontspackageForTextView.BoldMedium>
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_papular_cat_half_img"
+                    ></ImageView>
+            </RelativeLayout>
+
+            <View
+                android:layout_height="1dp"
+                android:layout_width="match_parent"
+                android:background="@color/border_color"
+                ></View>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/recyclerview_new_category"
+                ></androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

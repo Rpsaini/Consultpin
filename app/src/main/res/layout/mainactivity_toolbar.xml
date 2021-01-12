@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/shadow_drawable"
+    android:layout_height="65dp">
+
+    <ImageView
+        android:id="@+id/nav_oprn_toolbar"
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_side_nav"
+        ></ImageView>
+
+
+    <ImageView
+        android:layout_marginStart="5dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_consultpin_logo"
+        ></ImageView>
+
+
+    <LinearLayout
+        android:layout_marginEnd="10dp"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        >
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_bell_skyeblue"
+            ></ImageView>
+
+        <RelativeLayout
+            android:layout_marginStart="5dp"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:background="@drawable/toolbar_header_drawable"
+            >
+            <TextView
+                android:gravity="center"
+                style="@style/edittext_style_12_purple"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/become_consultant"
+                android:drawableEnd="@drawable/ic_userimg"
+                ></TextView>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
