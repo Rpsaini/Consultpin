@@ -16,4 +16,6 @@
     <color name="header_toolbar_color">#E8C7FF</color>
     <color name="header_toolbar_border">#F8F8FF</color>
     <color name="border_color">#D5D5D5</color>
+    <color name="bottom_navigation_color">#A1A1A1</color>
+    <color name="sidenavigation_upper_color">#3598E0</color>
 </resources>

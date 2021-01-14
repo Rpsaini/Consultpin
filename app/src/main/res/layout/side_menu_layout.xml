@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        >
+    <RelativeLayout
+        android:background="@color/sidenavigation_upper_color"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        >
+        <ImageView
+            android:id="@+id/rr_homenav"
+            android:alpha=".1"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:src="@drawable/profileavtar"
+            ></ImageView>
+
+    </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_marginStart="10dp"
+            android:id="@+id/rr_profile"
+            >
+        <ImageView
+
+            android:id="@+id/profileimage"
+            android:scaleType="fitXY"
+
+            android:layout_height="90dp"
+            android:layout_width="85dp"
+
+            android:src="@drawable/profileavtar"
+            ></ImageView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/edit_profile"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/rr_profile"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:orientation="vertical"
+            >
+
+            <fontspackageForTextView.BoldMedium
+                android:maxLines="1"
+                android:id="@+id/nav_name"
+                style="@style/edittext_style_18_black"
+                android:layout_marginTop="10dp"
+                 android:text="Username"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                ></fontspackageForTextView.BoldMedium>
+
+            <fontspackageForTextView.Regular
+                android:id="@+id/tv_edit_profile"
+                android:paddingBottom="10dp"
+                android:paddingStart="5dp"
+                style="@style/edittext_style_12_grey"
+                android:text="Edit Profile"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                ></fontspackageForTextView.Regular>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+
+    <ScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:scrollbarThumbVertical="@android:color/transparent"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+       <fontspackageForTextView.Regular
+           android:id="@+id/tv_home"
+           android:drawablePadding="10dp"
+           android:padding="10dp"
+           android:gravity="center|left"
+           android:drawableLeft="@drawable/ic_home"
+           style="@style/edittext_style_14_black"
+           android:text="@string/home"
+
+           android:layout_height="50dp"
+           android:layout_width="match_parent"
+           ></fontspackageForTextView.Regular>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+    <fontspackageForTextView.Regular
+        android:id="@+id/tv_myorder"
+        android:gravity="center|left"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_become_consultant"
+        style="@style/edittext_style_14_black"
+        android:text="@string/becom_consultant"
+
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        ></fontspackageForTextView.Regular>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_favorite"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_favorite"
+            style="@style/edittext_style_14_black"
+            android:text="@string/Favorites"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+    <fontspackageForTextView.Regular
+        android:id="@+id/tv_reservation"
+        android:gravity="center|left"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_wallet"
+        style="@style/edittext_style_14_black"
+        android:text="@string/pinpara_wallet"
+
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        ></fontspackageForTextView.Regular>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+
+    <fontspackageForTextView.Regular
+        android:id="@+id/tv_register_buisness"
+        android:drawablePadding="10dp"
+        android:gravity="center|left"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_appointment"
+        style="@style/edittext_style_14_black"
+        android:text="@string/appointment"
+
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        ></fontspackageForTextView.Regular>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+
+    <fontspackageForTextView.Regular
+
+        android:id="@+id/tv_settings"
+        android:gravity="center|left"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_history"
+        style="@style/edittext_style_14_black"
+        android:text="@string/appointment_history"
+
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        ></fontspackageForTextView.Regular>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+    <fontspackageForTextView.Regular
+        android:id="@+id/tv_help"
+        android:gravity="center|left"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_help"
+        style="@style/edittext_style_14_black"
+        android:text="@string/help"
+
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        ></fontspackageForTextView.Regular>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+
+
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_aboutus"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_about_us"
+            style="@style/edittext_style_14_black"
+            android:text="@string/about_us"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_privacy"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_star"
+            style="@style/edittext_style_14_black"
+            android:text="@string/rate_us"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color"
+        ></View>
+
+    <fontspackageForTextView.Regular
+        android:visibility="gone"
+        android:id="@+id/tv_rateus"
+        android:gravity="center|left"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_star"
+        style="@style/edittext_style_14_black"
+        android:text="@string/Logout"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        ></fontspackageForTextView.Regular>
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

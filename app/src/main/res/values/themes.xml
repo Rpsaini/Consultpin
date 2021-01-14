@@ -2,11 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.Consultpin" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>  //app bar color code
+        <item name="colorPrimary">@color/black</item>  //app bar color code
         <item name="colorPrimaryDark">@color/white</item>  //status bar color code
         <item name="colorAccent">@color/buttonskyblue</item>  //buttonetc color bar color code
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/texthintcolor</item>
+        <item name="android:windowDisablePreview">true</item>
 
 
         <!-- Status bar color. -->
@@ -50,6 +51,17 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="edittext_style_18_black">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="edittext_style_12_bottomnav">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/bottom_navigation_color</item>
+    </style>
+
+
     <style name="edittext_style_12_grey">
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">@color/texthintcolor</item>
@@ -62,4 +74,9 @@
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+
+
+
+
 </resources>

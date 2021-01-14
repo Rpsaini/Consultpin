@@ -144,6 +144,17 @@
                     android:inputType="textEmailAddress" />
 
 
+
+                <fontpackageforEdittext.Regular
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_bottom_drawable"
+                    android:maxLength="70"
+                    android:id="@+id/ed_mobile"
+                    style="@style/edittext_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/mobile_number"
+                    android:inputType="number" />
                <RelativeLayout
                    android:layout_marginTop="15dp"
                    android:layout_width="match_parent"
@@ -204,6 +215,7 @@
                  android:orientation="horizontal"
                  >
                  <CheckBox
+
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:id="@+id/chk_termsselected"
