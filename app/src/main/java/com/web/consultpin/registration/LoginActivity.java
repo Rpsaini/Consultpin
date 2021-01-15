@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.app.dialogsnpickers.DialogCallBacks;
 import com.app.vollycommunicationlib.CallBack;
+import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
+import com.web.consultpin.Utilclass;
 import com.web.consultpin.main.BaseActivity;
 
 import org.json.JSONObject;
@@ -44,10 +46,10 @@ public class LoginActivity extends BaseActivity {
         tv_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               addClickEventEffet(tv_sign_in);
 
                 if (validationRule.checkEmptyString(et_email) == 0) {
-                    alertDialogs.alertDialog(LoginActivity.this, "Required", "Enter Username.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(LoginActivity.this, getResources().getString(R.string.Required), getResources().getString(R.string.enteryouremail), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -55,18 +57,10 @@ public class LoginActivity extends BaseActivity {
                     });
                     return;
                 }
-//                if (validationRule.checkEmail(et_mail) == 0) {
-//                    alertDialogs.alertDialog(RegistrationScreen.this, "Invalid", "Enter valid Email.", "Ok", "", new DialogCallBacks() {
-//                        @Override
-//                        public void getDialogEvent(String buttonPressed) {
-//
-//                        }
-//                    });
-//                    return;
-//                }
+
 
                 if (validationRule.checkEmptyString(et_pwd) == 0) {
-                    alertDialogs.alertDialog(LoginActivity.this, "Required", "Enter password.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(LoginActivity.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_password), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -82,13 +76,16 @@ public class LoginActivity extends BaseActivity {
         tv_forgot_pwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addClickEventEffet(tv_forgot_pwd);
+                Intent intent=new Intent(LoginActivity.this,ForgotPassword.class);
+                startActivityForResult(intent,1001);
             }
         });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addClickEventEffet(register);
                 Intent intent=new Intent(LoginActivity.this,RegistrationScreen.class);
                 startActivity(intent);
             }
@@ -119,10 +116,20 @@ public class LoginActivity extends BaseActivity {
                         JSONObject jsonObject = new JSONObject(dta);
                         if (jsonObject.getBoolean("status")) {
 
-                            System.out.println("Login obj===" + jsonObject);
+                            try {
+
+                                savePreferences.savePreferencesData(LoginActivity.this,jsonObject, Utilclass.loginDetail);
+                                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
 
                         } else {
-                            alertDialogs.alertDialog(LoginActivity.this, "Response", jsonObject.getString("msg"), "Ok", "", new DialogCallBacks() {
+                            alertDialogs.alertDialog(LoginActivity.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                 @Override
                                 public void getDialogEvent(String buttonPressed) {
                                 }

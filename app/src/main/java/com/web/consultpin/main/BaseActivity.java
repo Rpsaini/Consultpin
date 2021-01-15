@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.app.dialogsnpickers.AlertDialogs;
 import com.app.preferences.SavePreferences;
@@ -42,6 +43,7 @@ public class BaseActivity extends AppCompatActivity
         alertDialogs=new AlertDialogs();
         validationRule=new ValidationRule();
         changestatusBarColor(0);
+        getSupportActionBar().hide();
     }
     public void removeActionBar()
     {
@@ -78,10 +80,20 @@ public class BaseActivity extends AppCompatActivity
 
     public String getRestParamsName(String keyname)
     {
+        // {"user_id":"39","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
         try {
-            JSONObject dataObj = new JSONObject(savePreferences.reterivePreference(this, "data") + "");
+            JSONObject dataObj = new JSONObject(savePreferences.reterivePreference(this, Utilclass.loginDetail)+"");
+            JSONObject userdata=dataObj.getJSONObject("userdata");
             System.out.println("data==="+dataObj);
-            return dataObj.getString(keyname);
+            if(keyname.equalsIgnoreCase(Utilclass.token))
+            {
+                return dataObj.getString(keyname);
+            }
+            else
+            {
+                return userdata.getString(keyname);
+            }
+
         }
         catch (Exception e)
         {
@@ -116,18 +128,17 @@ public class BaseActivity extends AppCompatActivity
         },100);
     }
 
-    public void hideShowPassword(int x, EditText editText)
+    public void hideShowPassword(int x, EditText editText, ImageView imageView)
     {
         if(x==1)
         {
             editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);//show
+            imageView.setImageResource(R.drawable.ic_eye);
         }
         else
         {
             editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            imageView.setImageResource(R.drawable.ic_hide_password);
         }
-
-
-
-    }
+   }
 }

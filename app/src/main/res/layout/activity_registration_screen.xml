@@ -162,7 +162,6 @@
 
                    >
                 <fontpackageforEdittext.Regular
-
                     android:background="@drawable/edittext_bottom_drawable"
                     android:maxLength="70"
                     android:id="@+id/et_password"
@@ -178,7 +177,7 @@
                        android:id="@+id/img_eye_password"
                        android:layout_width="20dp"
                        android:layout_height="20dp"
-                       android:src="@drawable/ic_eye" />
+                       android:src="@drawable/ic_hide_password" />
 
                </RelativeLayout>
 
@@ -205,7 +204,7 @@
                         android:id="@+id/img_eye_conf_password"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_eye" />
+                        android:src="@drawable/ic_hide_password" />
 </RelativeLayout>
 
              <LinearLayout
@@ -264,8 +263,9 @@
                 </LinearLayout>
 
                 <fontspackageForTextView.Regular
+                    android:layout_marginBottom="20dp"
                     style="@style/edittext_style"
-                    android:id="@+id/register"
+                    android:id="@+id/txt_login"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="18dp"

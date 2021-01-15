@@ -76,6 +76,12 @@
     </style>
 
 
+    <style name="edit_text_skyblue_14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/buttonskyblue</item>
+    </style>
+
+
 
 
 

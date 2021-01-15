@@ -10,7 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="your_email">Username</string>
+    <string name="your_email">Email</string>
     <string name="password">password</string>
     <string name="forgot_pwd">Forgot Password</string>
     <string name="sign_in">Login</string>
@@ -43,4 +43,29 @@
     <string name="Logout">Logout</string>
     <string name="profile">Profile</string>
     <string name="mobile_number">Mobile</string>
+    <string name="enteryouremail">Please enter your registered email</string>
+    <string name="next_continue">Continue</string>
+    <string name="Required">Required</string>
+    <string name="Invalid">Invalid</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_conf_password">Enter Confirm Password</string>
+    <string name="password_invalid">Confirm Password does not matched</string>
+    <string name="ok">Ok</string>
+    <string name="entervalidemail">Enter valid Email.</string>
+    <string name="enter_firstname">Enter First Name.</string>
+    <string name="enter_lastname">Enter Last Name.</string>
+    <string name="enter_mobilenumber">Enter Mobile Number</string>
+    <string name="enter_valid_mobilenumber">Enter Valid Mobile Number</string>
+    <string name="select_term_condition">Select Terms and Conditions</string>
+    <string name="Response">Response</string>
+    <string name="enter_otp">OTP</string>
+    <string name="please_enter_otp">Please enter OTP</string>
+    <string name="next">Next</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="new_password">New Password</string>
+    <string name="enter_your_new_password">Please enter your new password</string>
+    <string name="change">Change</string>
+    <string name="invalidOtp">Entered OTP is invalid</string>
+
+
 </resources>

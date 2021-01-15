@@ -47,12 +47,56 @@ public class RegistrationScreen extends BaseActivity {
         EditText et_password =findViewById(R.id.et_password);
         EditText et_conf_password =findViewById(R.id.et_conf_password);
         CheckBox chk_termsselected =findViewById(R.id.chk_termsselected);
+        ImageView img_eye_password =findViewById(R.id.img_eye_password);
+        ImageView img_eye_conf_password =findViewById(R.id.img_eye_conf_password);
+        TextView txt_login =findViewById(R.id.txt_login);
+
+        img_eye_password.setTag("0");
+        img_eye_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+            if(v.getTag().equals("0")) {
+                img_eye_password.setTag("1");
+                hideShowPassword(1, et_password,img_eye_password);
+            }
+            else
+            {
+                img_eye_password.setTag("0");
+                hideShowPassword(0, et_password,img_eye_password);
+            }
+
+            }
+        });
+
+        img_eye_conf_password.setTag("0");
+        img_eye_conf_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(v.getTag().equals("0")) {
+                    img_eye_conf_password.setTag("1");
+                    hideShowPassword(1, et_conf_password,img_eye_conf_password);
+                }
+                else
+                {
+                    img_eye_conf_password.setTag("0");
+                    hideShowPassword(0, et_conf_password,img_eye_conf_password);
+                }
+
+            }
+        });
+
+
+
 
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                addClickEventEffet(tv_register);
                 if (validationRule.checkEmptyString(et_firstname) == 0) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Required", "Enter first name.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_firstname), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -61,7 +105,7 @@ public class RegistrationScreen extends BaseActivity {
                     return;
                 }
                 if (validationRule.checkEmptyString(et_lastname) == 0) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Required", "Enter Last name.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_lastname), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -70,7 +114,7 @@ public class RegistrationScreen extends BaseActivity {
                     return;
                 }
                 if (validationRule.checkEmptyString(et_mail) == 0) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Required", "Enter Email.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Required), getResources().getString(R.string.entervalidemail), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -79,7 +123,7 @@ public class RegistrationScreen extends BaseActivity {
                     return;
                 }
                 if (validationRule.checkEmail(et_mail) == 0) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Invalid", "Enter valid Email.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Invalid), getResources().getString(R.string.entervalidemail), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -88,7 +132,7 @@ public class RegistrationScreen extends BaseActivity {
                     return;
                 }
                 if (validationRule.checkEmptyString(ed_mobile) == 0) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Required", "Enter mobile number.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_mobilenumber), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -97,7 +141,7 @@ public class RegistrationScreen extends BaseActivity {
                     return;
                 }
                 if (validationRule.checkMobileNumber(ed_mobile, 10) == 1) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Invalid", "Enter valid mobile number.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Invalid), getResources().getString(R.string.enter_valid_mobilenumber), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -106,7 +150,7 @@ public class RegistrationScreen extends BaseActivity {
                     return;
                 }
                 if (validationRule.checkEmptyString(et_password) == 0) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Required", "Enter password.", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_password), getResources().getString(R.string.Invalid), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -115,7 +159,7 @@ public class RegistrationScreen extends BaseActivity {
                     return;
                 }
                 if (validationRule.checkPssword(et_password, et_conf_password) != 2) {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Invalid", "Confirm password is not valid", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Invalid), getResources().getString(R.string.enter_conf_password), getResources().getString(R.string.Invalid), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -125,7 +169,7 @@ public class RegistrationScreen extends BaseActivity {
                 }
                 if(!chk_termsselected.isChecked())
                 {
-                    alertDialogs.alertDialog(RegistrationScreen.this, "Invalid", "Select Terms and Conditions", "Ok", "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Invalid), getResources().getString(R.string.select_term_condition), getResources().getString(R.string.Invalid), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -140,12 +184,20 @@ public class RegistrationScreen extends BaseActivity {
         });
         rr_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                addClickEventEffet(rr_back);
                finish();
             }
         });
 
-
+        txt_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addClickEventEffet(txt_login);
+                finish();
+            }
+        });
 
 
     }
