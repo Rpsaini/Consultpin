@@ -46,6 +46,12 @@
 
     </style>
 
+    <style name="edittext_style_white16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
     <style name="edittext_style_12">
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">@color/white</item>
@@ -61,7 +67,10 @@
         <item name="android:textColor">@color/bottom_navigation_color</item>
     </style>
 
-
+    <style name="edittext_style_14_grey">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/texthintcolor</item>
+    </style>
     <style name="edittext_style_12_grey">
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">@color/texthintcolor</item>
@@ -72,7 +81,9 @@
     </style>
     <style name="edittext_style_14_black">
         <item name="android:textSize">14dp</item>
+
         <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/texthintcolor</item>
     </style>
 
 

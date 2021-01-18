@@ -66,6 +66,28 @@
     <string name="enter_your_new_password">Please enter your new password</string>
     <string name="change">Change</string>
     <string name="invalidOtp">Entered OTP is invalid</string>
+    <string name="username">Username</string>
+    <string name="profile_enable">Profile Enable</string>
+    <string name="your_professional_background">Your professional background</string>
+    <string name="Specialties">Specialties</string>
+    <string name="fee">Fees</string>
+    <string name="setappointment">Set Appointment</string>
+    <string name="event_request">Event Request</string>
+    <string name="how_would_you_describe">How would you describe yours</string>
+    <string name="example">Ex: Criminal Law Attorney</string>
+    <string name="yourprofessionalbackg">Your professional background</string>
+    <string name="takabout">Talk about your knowledge and experience</string>
+    <string name="takabout_exp">Talk about your speciality </string>
+    <string name="verified_consultant_msg">Using the select file button you can send diploma, bar association registration etc. by sending these of kind documents. You can be a Verified Consultant.</string>
+    <string name="verified_consultant">Verified Consultant</string>
+    <string name="what_is_verified_consultant">What is Verified Consultant?</string>
+    <string name="lawer_licence">Lawyer_licence.jpg</string>
+    <string name="category_selection">Category Selection</string>
+    <string name="select_category">Select Category</string>
+    <string name="select_subcategory">Select Sub Category</string>
+    <string name="select_price_tl">Select Price (TL / Hour)</string>
+    <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>
+    <string name="dummy_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500, when an unknown printer took a galley.</string>
 
 
 </resources>

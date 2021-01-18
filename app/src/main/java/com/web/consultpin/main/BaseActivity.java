@@ -43,7 +43,7 @@ public class BaseActivity extends AppCompatActivity
         alertDialogs=new AlertDialogs();
         validationRule=new ValidationRule();
         changestatusBarColor(0);
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
     }
     public void removeActionBar()
     {

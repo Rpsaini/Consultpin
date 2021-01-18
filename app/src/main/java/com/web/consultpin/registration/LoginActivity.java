@@ -121,6 +121,7 @@ public class LoginActivity extends BaseActivity {
                                 savePreferences.savePreferencesData(LoginActivity.this,jsonObject, Utilclass.loginDetail);
                                 Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
 
                             }
                             catch (Exception e)

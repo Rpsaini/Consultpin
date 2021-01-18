@@ -49,6 +49,7 @@
                      ></fontspackageForTextView.Regular>
 
                     <fontpackageforEdittext.Regular
+                        android:text="mail@gmail.com"
                         android:background="@drawable/edittext_bottom_drawable"
                         android:maxLength="70"
                         android:id="@+id/et_email"
@@ -70,6 +71,7 @@
                     android:text="@string/password"
                     ></fontspackageForTextView.Regular>
                     <fontpackageforEdittext.Regular
+                        android:text="qwerty123"
                         android:background="@drawable/edittext_bottom_drawable"
                         android:maxLength="40"
                         android:id="@+id/et_pwd"

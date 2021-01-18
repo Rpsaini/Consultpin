@@ -21,7 +21,6 @@ public class Appointment extends Fragment {
 
     public static Appointment newInstance(String param1, String param2) {
         Appointment fragment = new Appointment();
-
         return fragment;
     }
 

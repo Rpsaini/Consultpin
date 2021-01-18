@@ -2,8 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/shadow_drawable"
-    android:layout_height="65dp">
+    android:background="@color/white"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/nav_oprn_toolbar"
@@ -16,7 +16,6 @@
 
 
     <ImageView
-        android:layout_marginStart="5dp"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,40 +23,100 @@
         ></ImageView>
 
 
-    <LinearLayout
-        android:layout_marginEnd="10dp"
-        android:layout_centerVertical="true"
+<!--    <LinearLayout-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        >-->
+<!--        <ImageView-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_bell_skyeblue"-->
+<!--            ></ImageView>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="45dp"-->
+<!--            android:background="@drawable/toolbar_header_drawable"-->
+<!--            >-->
+<!--            <TextView-->
+<!--                android:gravity="center"-->
+<!--                style="@style/edittext_style_12_purple"-->
+<!--                android:paddingStart="5dp"-->
+<!--                android:paddingEnd="5dp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/become_consultant"-->
+<!--                android:drawableEnd="@drawable/ic_userimg"-->
+<!--                ></TextView>-->
+
+<!--        </RelativeLayout>-->
+<!--    </LinearLayout>-->
+
+    <RelativeLayout
+
+        android:id="@+id/rr_upper"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentEnd="true"
         >
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_bell_skyeblue"
-            ></ImageView>
+
 
         <RelativeLayout
-            android:layout_marginStart="5dp"
-            android:layout_width="120dp"
-            android:layout_height="45dp"
-            android:background="@drawable/toolbar_header_drawable"
-            >
-            <TextView
-                android:gravity="center"
-                style="@style/edittext_style_12_purple"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/become_consultant"
-                android:drawableEnd="@drawable/ic_userimg"
-                ></TextView>
+            android:layout_width="180dp"
+            android:layout_height="120dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"
+            android:background="@drawable/ic_mbl_ekran"
+            android:translationY="-20dp">
 
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+
+
+                <ImageView
+
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_bell"></ImageView>
+
+                <LinearLayout
+                    android:id="@+id/become_consultant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_path"></ImageView>
+
+                    <TextView
+                        style="@style/edittext_style_12"
+                        android:layout_width="80dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:text="@string/becom_consultant"></TextView>
+                </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
+
 
 </RelativeLayout>

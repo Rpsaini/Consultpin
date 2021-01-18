@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/profile_background"
+    tools:context=".consultant.BecomeAConsultant">
+
+    <include layout="@layout/tootlbar_with_back_button"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:orientation="vertical"
+        >
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="15dp"
+            android:text="@string/how_would_you_describe"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/edittext_style_14_black"
+            ></fontspackageForTextView.BoldMedium>
+
+
+        <fontpackageforEdittext.Regular
+            android:hint="@string/example"
+            android:layout_marginTop="15dp"
+            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:background="@drawable/roundcorner_drawable"
+            ></fontpackageforEdittext.Regular>
+
+
+
+        <fontspackageForTextView.BoldMedium
+
+            android:layout_marginTop="15dp"
+            android:text="@string/your_professional_background"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/edittext_style_14_black"
+            ></fontspackageForTextView.BoldMedium>
+
+
+        <fontpackageforEdittext.Regular
+
+            android:hint="@string/takabout"
+            android:layout_marginTop="15dp"
+            android:layout_height="120dp"
+            android:gravity="start"
+            android:padding="4dp"
+            style="@style/edittext_style_14_black"
+            android:layout_width="match_parent"
+            android:background="@drawable/roundcorner_drawable"
+            ></fontpackageforEdittext.Regular>
+
+
+
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="15dp"
+            android:text="@string/Specialties"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/edittext_style_14_black"
+            ></fontspackageForTextView.BoldMedium>
+
+
+        <fontpackageforEdittext.Regular
+            android:hint="@string/takabout_exp"
+            android:layout_marginTop="15dp"
+            android:layout_height="120dp"
+            android:gravity="start"
+            android:padding="4dp"
+            style="@style/edittext_style_14_black"
+            android:layout_width="match_parent"
+            android:background="@drawable/roundcorner_drawable"
+            ></fontpackageforEdittext.Regular>
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="15dp"
+            android:text="@string/verified_consultant"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/edittext_style_14_black"
+            ></fontspackageForTextView.BoldMedium>
+
+        <fontspackageForTextView.BoldMedium
+            android:drawablePadding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:text="@string/verified_consultant_msg"
+            android:gravity="center|left"
+            style="@style/edittext_style_12_grey"
+            ></fontspackageForTextView.BoldMedium>
+
+
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="15dp"
+            android:text="@string/what_is_verified_consultant"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/edit_text_skyblue_14"
+            ></fontspackageForTextView.BoldMedium>
+
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/roundcorner_drawable"
+            >
+
+            <fontspackageForTextView.BoldExtra
+                android:paddingStart="3dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/lawer_licence"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="@style/edittext_style_14_black"
+                ></fontspackageForTextView.BoldExtra>
+
+
+            <ImageView
+                android:src="@drawable/ic_upload"
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                >
+            </ImageView>
+
+
+
+
+        </RelativeLayout>
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="15dp"
+            android:text="@string/category_selection"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/edittext_style_14_black"
+            ></fontspackageForTextView.BoldMedium>
+
+        <fontspackageForTextView.BoldMedium
+            android:drawablePadding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:text="@string/category_selection_msg"
+            android:gravity="center|left"
+            style="@style/edittext_style_12_grey"
+            ></fontspackageForTextView.BoldMedium>
+
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/roundcorner_drawable"
+            >
+
+            <fontspackageForTextView.Regular
+                android:paddingStart="3dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/select_category"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="@style/edittext_style_14_black"
+                ></fontspackageForTextView.Regular>
+
+
+            <ImageView
+                android:src="@drawable/ic_down_arrow"
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                >
+            </ImageView>
+
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/roundcorner_drawable"
+            >
+
+            <fontspackageForTextView.Regular
+                android:paddingStart="3dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/select_subcategory"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="@style/edittext_style_14_black"
+                ></fontspackageForTextView.Regular>
+
+
+            <ImageView
+                android:src="@drawable/ic_down_arrow"
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                >
+            </ImageView>
+
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/roundcorner_drawable"
+            >
+
+            <fontspackageForTextView.Regular
+                android:paddingStart="3dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/select_price_tl"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="@style/edittext_style_14_black"
+                ></fontspackageForTextView.Regular>
+
+
+            <ImageView
+                android:src="@drawable/ic_down_arrow"
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                >
+            </ImageView>
+
+        </RelativeLayout>
+
+        <fontspackageForTextView.Regular
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/tv_sign_in"
+            android:background="@drawable/drawable_button_skyblue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/next" />
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

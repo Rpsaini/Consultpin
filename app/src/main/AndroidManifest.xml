@@ -27,14 +27,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".registration.ResetPassword"></activity>
-        <activity android:name=".registration.EnterOTP" />
-        <activity android:name=".registration.ForgotPassword" />
-        <activity android:name=".main.BaseActivity" />
-        <activity android:name=".registration.RegistrationScreen" />
-        <activity android:name=".registration.LoginActivity" />
-        <activity android:name=".settings.SettingsActivity" />
-        <activity android:name=".registration.SplashScreen">
+        <activity android:name=".consultant.BecomeAConsultant"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity
+            android:name=".registration.ResetPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registration.EnterOTP"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registration.ForgotPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.BaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registration.RegistrationScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registration.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registration.SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,6 +63,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Consultpin.NoActionBar" />
     </application>
 
