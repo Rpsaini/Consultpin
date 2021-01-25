@@ -34,18 +34,16 @@
 
 
         <fontpackageforEdittext.Regular
-            android:hint="@string/example"
-            android:layout_marginTop="15dp"
-            android:layout_height="45dp"
+            android:maxLines="1"
+            android:id="@+id/ed_indivisual"
+            style="@style/edittext_style_12_grey"
             android:layout_width="match_parent"
-            style="@style/edittext_style_14_black"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/roundcorner_drawable"
-            ></fontpackageforEdittext.Regular>
-
-
+            android:hint="@string/example"></fontpackageforEdittext.Regular>
 
         <fontspackageForTextView.BoldMedium
-
             android:layout_marginTop="15dp"
             android:text="@string/your_professional_background"
             android:layout_height="wrap_content"
@@ -55,13 +53,13 @@
 
 
         <fontpackageforEdittext.Regular
-
+            android:id="@+id/ed_taskmoreabout"
             android:hint="@string/takabout"
             android:layout_marginTop="15dp"
             android:layout_height="120dp"
             android:gravity="start"
             android:padding="4dp"
-            style="@style/edittext_style_14_black"
+            style="@style/edittext_style_12_grey"
             android:layout_width="match_parent"
             android:background="@drawable/roundcorner_drawable"
             ></fontpackageforEdittext.Regular>
@@ -79,12 +77,13 @@
 
 
         <fontpackageforEdittext.Regular
+            android:id="@+id/ed_specialist"
             android:hint="@string/takabout_exp"
             android:layout_marginTop="15dp"
             android:layout_height="120dp"
             android:gravity="start"
             android:padding="4dp"
-            style="@style/edittext_style_14_black"
+            style="@style/edittext_style_12_grey"
             android:layout_width="match_parent"
             android:background="@drawable/roundcorner_drawable"
             ></fontpackageforEdittext.Regular>
@@ -126,16 +125,18 @@
             >
 
             <fontspackageForTextView.BoldExtra
+                android:id="@+id/selected_image"
                 android:paddingStart="3dp"
                 android:layout_marginTop="15dp"
                 android:text="@string/lawer_licence"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                style="@style/edittext_style_14_black"
+                style="@style/edittext_style_12_grey"
                 ></fontspackageForTextView.BoldExtra>
 
 
             <ImageView
+                android:id="@+id/ic_upload_licence"
                 android:src="@drawable/ic_upload"
                 android:layout_height="45dp"
                 android:layout_width="wrap_content"
@@ -157,6 +158,7 @@
             ></fontspackageForTextView.BoldMedium>
 
         <fontspackageForTextView.BoldMedium
+            android:id="@+id/txt_selected_image"
             android:drawablePadding="5dp"
             android:layout_width="wrap_content"
             android:layout_centerInParent="true"
@@ -168,6 +170,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rr_select_category"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -175,16 +178,18 @@
             >
 
             <fontspackageForTextView.Regular
+                android:id="@+id/txt_select_catgory"
                 android:paddingStart="3dp"
                 android:layout_marginTop="15dp"
                 android:hint="@string/select_category"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                style="@style/edittext_style_14_black"
+                style="@style/edittext_style_12_grey"
                 ></fontspackageForTextView.Regular>
 
 
             <ImageView
+                android:paddingEnd="7dp"
                 android:src="@drawable/ic_down_arrow"
                 android:layout_height="45dp"
                 android:layout_width="wrap_content"
@@ -197,6 +202,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rr_select_sub_category"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -204,16 +210,19 @@
             >
 
             <fontspackageForTextView.Regular
+                android:id="@+id/txt_select_sub_category"
                 android:paddingStart="3dp"
                 android:layout_marginTop="15dp"
+                android:gravity="center|left"
                 android:hint="@string/select_subcategory"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                style="@style/edittext_style_14_black"
+                style="@style/edittext_style_12_grey"
                 ></fontspackageForTextView.Regular>
 
 
             <ImageView
+                android:paddingEnd="7dp"
                 android:src="@drawable/ic_down_arrow"
                 android:layout_height="45dp"
                 android:layout_width="wrap_content"
@@ -227,23 +236,28 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rr_select_price_tl"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/roundcorner_drawable"
             >
 
-            <fontspackageForTextView.Regular
+            <fontpackageforEdittext.Regular
+                android:id="@+id/txt_select_price_tl"
                 android:paddingStart="3dp"
-                android:layout_marginTop="15dp"
+                android:gravity="center|left"
                 android:hint="@string/select_price_tl"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_width="wrap_content"
-                style="@style/edittext_style_14_black"
-                ></fontspackageForTextView.Regular>
+                style="@style/edittext_style_12_grey"
+                android:background="@android:color/transparent"
+                ></fontpackageforEdittext.Regular>
 
 
             <ImageView
+                android:visibility="gone"
+                android:paddingEnd="7dp"
                 android:src="@drawable/ic_down_arrow"
                 android:layout_height="45dp"
                 android:layout_width="wrap_content"
@@ -256,7 +270,7 @@
         <fontspackageForTextView.Regular
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
-            android:id="@+id/tv_sign_in"
+            android:id="@+id/tv_next"
             android:background="@drawable/drawable_button_skyblue"
             android:layout_width="match_parent"
             android:layout_height="50dp"

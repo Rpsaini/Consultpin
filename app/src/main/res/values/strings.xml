@@ -33,6 +33,7 @@
     <string name="chat">Chat</string>
     <string name="appointment">Appointment</string>
     <string name="becom_consultant">Become Consultant</string>
+    <string name="account_info">Account Information</string>
     <string name="Favorites">Favorites</string>
     <string name="pinpara_wallet">PinPara Wallet</string>
     <string name="appointments">Appointments</string>
@@ -85,7 +86,24 @@
     <string name="category_selection">Category Selection</string>
     <string name="select_category">Select Category</string>
     <string name="select_subcategory">Select Sub Category</string>
-    <string name="select_price_tl">Select Price (TL / Hour)</string>
+    <string name="select_price_tl">Enter Price (TL / Hour)</string>
+    <string name="select_buisness">Select your buisness</string>
+    <string name="nationidproof">National Identity Number</string>
+    <string name="city">City</string>
+    <string name="Provience">Provience</string>
+    <string name="postaladdress">Postal Address</string>
+    <string name="select_your_bank">Select Your Bank</string>
+    <string name="iban">IBAN</string>
+    <string name="consultant_terms">Gizlilik Politikamız, Ödeme Platformları Kullanım Sözleşmesi, Açık Rıza Metni (KVKK)</string>
+    <string name="send">send</string>
+    <string name="waring_describe">Describe your self</string>
+    <string name="ed_taskmoreabout">Talk about yourself</string>
+    <string name="ed_specialist">Enter your specialaity </string>
+    <string name="select_any_two">Select any two </string>
+    <string name="select_any_one">Select any one </string>
+    <string name="category_count">Sub Category count could not be more than two. </string>
+    <string name="done">Done</string>
+
     <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>
     <string name="dummy_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500, when an unknown printer took a galley.</string>
 

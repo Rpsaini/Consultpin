@@ -73,7 +73,8 @@
     </style>
     <style name="edittext_style_12_grey">
         <item name="android:textSize">12dp</item>
-        <item name="android:textColor">@color/texthintcolor</item>
+        <item name="android:textColorHint">@color/texthintcolor</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="edittext_style_12_purple">
         <item name="android:textSize">12dp</item>

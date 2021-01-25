@@ -2,12 +2,14 @@ package com.web.consultpin.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,8 +21,12 @@ import com.app.vollycommunicationlib.ServerHandler;
 import com.app.vollycommunicationlib.UtilClass;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
+import com.web.consultpin.consultant.BecomeAConsultant;
 
 import org.json.JSONObject;
+
+import animationpackage.AnimationForViews;
+import animationpackage.IsAnimationEndedCallback;
 
 public class BaseActivity extends AppCompatActivity
 {
@@ -28,6 +34,8 @@ public class BaseActivity extends AppCompatActivity
     public ServerHandler serverHandler;
     public AlertDialogs alertDialogs;
     public ValidationRule validationRule;
+    public AnimationForViews animationForViews;
+    private int screenHeight,screenWidth;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -38,10 +46,12 @@ public class BaseActivity extends AppCompatActivity
 
     public void  initiateObj()
     {
+
         savePreferences=new SavePreferences();
         serverHandler=new ServerHandler();
         alertDialogs=new AlertDialogs();
         validationRule=new ValidationRule();
+        animationForViews=new AnimationForViews();
         changestatusBarColor(0);
        // getSupportActionBar().hide();
     }
@@ -141,4 +151,74 @@ public class BaseActivity extends AppCompatActivity
             imageView.setImageResource(R.drawable.ic_hide_password);
         }
    }
+
+    public void animateUp(View sourcedestinationcontainer) {
+        getScreenHeight();
+        animationForViews.handleAnimation(this, sourcedestinationcontainer, 500, screenHeight, 00, IsAnimationEndedCallback.translationY, new IsAnimationEndedCallback() {
+            @Override
+            public void getAnimationStatus(String status) {
+
+                switch (status) {
+                    case IsAnimationEndedCallback.animationCancel: {
+                        break;
+                    }
+                    case IsAnimationEndedCallback.animationEnd: {
+
+
+                        break;
+                    }
+
+                    case IsAnimationEndedCallback.animationRepeat: {
+                        break;
+                    }
+
+                    case IsAnimationEndedCallback.animationStart: {
+                        break;
+                    }
+
+                }
+            }
+        });
+    }
+
+
+    public void downSourceDestinationView(View sourcedestinationcontainer, final Dialog dialog) {
+        animationForViews.handleAnimation(this, sourcedestinationcontainer, 500, 00, screenHeight, IsAnimationEndedCallback.translationY, new IsAnimationEndedCallback() {
+            @Override
+            public void getAnimationStatus(String status) {
+
+                switch (status) {
+                    case IsAnimationEndedCallback.animationCancel: {
+                        break;
+                    }
+                    case IsAnimationEndedCallback.animationEnd: {
+
+                        if (dialog != null) {
+                            dialog.dismiss();
+                        }
+                        break;
+                    }
+
+                    case IsAnimationEndedCallback.animationRepeat: {
+                        break;
+                    }
+
+                    case IsAnimationEndedCallback.animationStart: {
+                        break;
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void getScreenHeight() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        screenHeight = displayMetrics.heightPixels;
+        screenWidth = displayMetrics.widthPixels;
+    }
+
+
 }

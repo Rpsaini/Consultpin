@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/profile_background"
+    tools:context=".consultant.AccountInformation">
+
+
+    <include layout="@layout/tootlbar_with_back_button"/>
+
+
+    <ScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        >
+        <RelativeLayout
+            android:id="@+id/rr_select_your_buisness"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/roundcorner_drawable"
+            >
+
+            <fontspackageForTextView.Regular
+                android:id="@+id/tv_your_buisness"
+                android:paddingStart="3dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/select_price_tl"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="@style/edittext_style_12_grey"
+                ></fontspackageForTextView.Regular>
+
+
+            <ImageView
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_down_arrow"
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                >
+            </ImageView>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <fontspackageForTextView.BoldMedium
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_14_black"
+                android:text="@string/first_name"
+                >
+        </fontspackageForTextView.BoldMedium>
+
+
+            <fontspackageForTextView.BoldMedium
+                android:layout_marginStart="10dp"
+
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/last_name"
+                >
+            </fontspackageForTextView.BoldMedium>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <fontpackageforEdittext.Regular
+                android:id="@+id/ed_firstname"
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/first_name"
+                android:gravity="left|center"
+                >
+            </fontpackageforEdittext.Regular>
+
+
+            <fontpackageforEdittext.Regular
+                android:id="@+id/ed_lastname"
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/last_name"
+                android:layout_marginStart="10dp"
+                android:gravity="left|center"
+                >
+            </fontpackageforEdittext.Regular>
+        </LinearLayout>
+
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/nationidproof"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <fontpackageforEdittext.Regular
+            android:id="@+id/ed_nationid_number"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/nationidproof"
+            android:gravity="left|center"
+            >
+        </fontpackageforEdittext.Regular>
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/your_email"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <fontpackageforEdittext.Regular
+            android:id="@+id/ed_email"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/your_email"
+            android:gravity="left|center"
+            >
+        </fontpackageforEdittext.Regular>
+
+        <LinearLayout
+            android:layout_marginTop="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <fontspackageForTextView.BoldMedium
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_14_black"
+                android:text="@string/city"
+                >
+            </fontspackageForTextView.BoldMedium>
+
+
+            <fontspackageForTextView.BoldMedium
+                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/Provience"
+                >
+            </fontspackageForTextView.BoldMedium>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <fontspackageForTextView.BoldMedium
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/city"
+                android:gravity="left|center"
+                >
+            </fontspackageForTextView.BoldMedium>
+
+
+            <fontspackageForTextView.BoldMedium
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/Provience"
+                android:layout_marginStart="10dp"
+                android:gravity="left|center"
+                >
+            </fontspackageForTextView.BoldMedium>
+        </LinearLayout>
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/postaladdress"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <fontspackageForTextView.BoldMedium
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/postaladdress"
+            android:gravity="left|center"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/select_your_bank"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <RelativeLayout
+            android:id="@+id/rr_select_bank"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/roundcorner_drawable"
+            >
+
+            <fontspackageForTextView.Regular
+                android:id="@+id/tv_select_bank"
+                android:paddingStart="3dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/select_your_bank"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="@style/edittext_style_12_grey"
+                ></fontspackageForTextView.Regular>
+
+
+            <ImageView
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_down_arrow"
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                >
+            </ImageView>
+
+        </RelativeLayout>
+
+
+
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/iban"
+            >
+        </fontspackageForTextView.BoldMedium>
+        <fontpackageforEdittext.Regular
+            android:id="@+id/ed_iban"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/iban"
+            android:gravity="left|center"
+            >
+        </fontpackageforEdittext.Regular>
+
+
+        <RadioButton
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/terms_radio"
+            android:text="@string/consultant_terms"
+            style="@style/edittext_style_12_grey"
+            ></RadioButton>
+
+
+        <fontspackageForTextView.Regular
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/tv_save"
+            android:background="@drawable/drawable_button_skyblue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/send" />
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

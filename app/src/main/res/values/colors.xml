@@ -20,5 +20,6 @@
     <color name="sidenavigation_upper_color">#3598E0</color>
     <color name="profile_background">#F5F5F5</color>
     <color name="profile_fee_color">#E6E6E6</color>
+    <color name="translucent_black">#80000000</color>
 
 </resources>

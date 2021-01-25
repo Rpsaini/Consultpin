@@ -27,9 +27,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".consultant.BecomeAConsultant"
+
+        <activity android:name=".consultant.AccountInformation"
             android:screenOrientation="portrait"
             ></activity>
+
+        <activity
+            android:name=".consultant.BecomeAConsultant"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".registration.ResetPassword"
             android:screenOrientation="portrait" />
@@ -65,6 +70,18 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Consultpin.NoActionBar" />
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
     </application>
 
 </manifest>
