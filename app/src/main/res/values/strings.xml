@@ -31,7 +31,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="chat">Chat</string>
-    <string name="appointment">Appointment</string>
+    <string name="appointment">Set Appointment</string>
     <string name="becom_consultant">Become Consultant</string>
     <string name="account_info">Account Information</string>
     <string name="Favorites">Favorites</string>
@@ -55,6 +55,8 @@
     <string name="entervalidemail">Enter valid Email.</string>
     <string name="enter_firstname">Enter First Name.</string>
     <string name="enter_lastname">Enter Last Name.</string>
+    <string name="enter_national_idnumber">Enter National Identity Number.</string>
+    <string name="enter_email">Enter Email Address.</string>
     <string name="enter_mobilenumber">Enter Mobile Number</string>
     <string name="enter_valid_mobilenumber">Enter Valid Mobile Number</string>
     <string name="select_term_condition">Select Terms and Conditions</string>
@@ -94,6 +96,8 @@
     <string name="postaladdress">Postal Address</string>
     <string name="select_your_bank">Select Your Bank</string>
     <string name="iban">IBAN</string>
+    <string name="enter_iban">Enter IBAN Number</string>
+    <string name="select_terms">Please select terms and condition</string>
     <string name="consultant_terms">Gizlilik Politikamız, Ödeme Platformları Kullanım Sözleşmesi, Açık Rıza Metni (KVKK)</string>
     <string name="send">send</string>
     <string name="waring_describe">Describe your self</string>
@@ -103,6 +107,21 @@
     <string name="select_any_one">Select any one </string>
     <string name="category_count">Sub Category count could not be more than two. </string>
     <string name="done">Done</string>
+    <string name="enter_cityname">Enter city name</string>
+    <string name="enter_provience">Enter provience name</string>
+    <string name="ed_postal_Address">Enter postal code</string>
+    <string name="success">Success!</string>
+    <string name="account_added">Account added Sucessfully </string>
+    <string name="companyname">Company name </string>
+    <string name="entercompanyname">Enter company name </string>
+    <string name="tax_office">Tax Office</string>
+    <string name="enter_tax_office">Enter tax Office</string>
+    <string name="tc_number">TC Identity Number</string>
+    <string name="enter_tc_number">Enter Tc Number</string>
+    <string name="datefrom">Date From</string>
+    <string name="dateend">Date To</string>
+    <string name="isweekend_off">Weekends and holidays are Included</string>
+    <string name="create_your_own_time">Create your own time</string>
 
     <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>
     <string name="dummy_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500, when an unknown printer took a galley.</string>

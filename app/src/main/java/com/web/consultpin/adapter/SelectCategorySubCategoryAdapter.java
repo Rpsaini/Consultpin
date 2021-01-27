@@ -131,17 +131,23 @@ public class SelectCategorySubCategoryAdapter extends RecyclerView.Adapter<Selec
                  holder.category_name.setText(jsonObject.getString("name"));
                  holder.category_image.setVisibility(View.GONE);
                  holder.ll_best_restaurant.setTag(position);
+                 holder.chk_selectcategory.setTag(position);
                  holder.chk_selectcategory.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                      @Override
                      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                          try {
-                             if (selectionType == 0) {
+                             if (selectionType == 0)
+                              {
+
+                                 int selection=Integer.parseInt(buttonView.getTag().toString());
+                                 selection=selection+1;
                                  if (commonChekBox != null) {
                                      commonChekBox.setChecked(false);
                                  }
                                  commonChekBox = holder.chk_selectcategory;
                                  ((AccountInformation) pActivity).tv_your_buisness.setText(jsonObject.getString("name"));
 
+                                  ((AccountInformation) pActivity).accountTypeId=selection+"";
                              } else if (selectionType == 1) {
                                  if (commonChekBox != null)
                                  {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+
+    <fontspackageForTextView.Regular
+        android:background="@drawable/roundcorner_drawable"
+        android:layout_height="35dp"
+        android:layout_width="100dp"
+        android:text="10:20"
+        style="@style/edittext_style_12_grey"
+        android:hint="@string/datefrom"
+        android:gravity="center"
+        >
+    </fontspackageForTextView.Regular>
+
+
+
+</LinearLayout>

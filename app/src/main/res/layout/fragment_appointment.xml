@@ -3,11 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/profile_background"
     tools:context=".ui.home.Chat">
 
 
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
     <fontspackageForTextView.BoldMedium
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/appointment"
@@ -16,5 +24,144 @@
         ></fontspackageForTextView.BoldMedium>
 
 
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="19dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        >
+        <fontspackageForTextView.BoldMedium
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/edittext_style_14_black"
+            android:text="@string/first_name"
+            >
+        </fontspackageForTextView.BoldMedium>
 
+
+        <fontspackageForTextView.BoldMedium
+
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/dateend"
+            >
+        </fontspackageForTextView.BoldMedium>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        >
+        <fontspackageForTextView.Regular
+            android:id="@+id/ed_firstname"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/datefrom"
+            android:gravity="left|center"
+            >
+        </fontspackageForTextView.Regular>
+
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/ed_lastname"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/dateend"
+            android:layout_marginStart="10dp"
+            android:gravity="left|center"
+            >
+        </fontspackageForTextView.Regular>
+
+
+
+    </LinearLayout>
+
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            style="@style/edittext_style_14_black"
+            android:text="@string/first_name"
+            >
+        </fontspackageForTextView.BoldMedium>
+<include layout="@layout/timing_list_row"/>
+
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:background="@color/profile_fee_color"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+            >
+            <fontspackageForTextView.BoldMedium
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:text="@string/isweekend_off"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                style="@style/edittext_style_14_black"
+                ></fontspackageForTextView.BoldMedium>
+
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_button"
+                ></ImageView>
+        </RelativeLayout>
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            style="@style/edittext_style_14_black"
+            android:text="@string/create_your_own_time"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <GridView
+            android:verticalSpacing="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:horizontalSpacing="5dp"
+            android:nestedScrollingEnabled="true"
+            android:layout_marginTop="10dp"
+            android:scrollbarThumbVertical="@android:color/transparent"
+            android:id="@+id/grid_timing"
+            android:numColumns="4"
+            android:gravity="center"
+            android:stretchMode="columnWidth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </GridView>
+
+</LinearLayout>
 </RelativeLayout>

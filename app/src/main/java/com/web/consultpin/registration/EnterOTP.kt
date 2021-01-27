@@ -146,9 +146,9 @@ class EnterOTP : BaseActivity() {
             m["device_type"] = "android"
             m["device_token"] = getDeviceToken() + ""
             val obj: MutableMap<String, String> = HashMap()
-            obj["X-API-KEY"] = getXapiKey()
-            obj["Token"] = savePreferences.reterivePreference(this, "session_token").toString() + ""
-            obj["uid"] = getRestParamsName("uid")
+//            obj["X-API-KEY"] = getXapiKey()
+//            obj["Token"] = savePreferences.reterivePreference(this, "session_token").toString() + ""
+//            obj["uid"] = getRestParamsName("uid")
             serverHandler.sendToServer(this, getApiUrl() + "forgot", m, 0, obj, 20000, R.layout.progressbar) { dta, respons ->
                 try {
                     val jsonObject = JSONObject(dta)

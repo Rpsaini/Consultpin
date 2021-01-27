@@ -219,9 +219,9 @@ public class RegistrationScreen extends BaseActivity {
             m.put("device_token", getDeviceToken()+"");
 
             final Map<String, String> obj = new HashMap<>();
-            obj.put("X-API-KEY", getXapiKey());
-            obj.put("Token", savePreferences.reterivePreference(this, "session_token") + "");
-            obj.put("uid", getRestParamsName("uid"));
+//            obj.put("X-API-KEY", getXapiKey());
+//            obj.put("Token", savePreferences.reterivePreference(this, "session_token") + "");
+//            obj.put("uid", getRestParamsName("uid"));
 
 
 

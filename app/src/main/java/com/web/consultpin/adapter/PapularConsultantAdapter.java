@@ -40,7 +40,7 @@ public class PapularConsultantAdapter extends RecyclerView.Adapter<PapularConsul
 
         LinearLayout ll_best_restaurant;
         ImageView consultant_image;
-        TextView consultant_name;
+        TextView consultant_name,specialties;
 
         public MyViewHolder(View view) {
             super(view);
@@ -49,6 +49,7 @@ public class PapularConsultantAdapter extends RecyclerView.Adapter<PapularConsul
             ll_best_restaurant = view.findViewById(R.id.ll_best_restaurant);
             consultant_name = view.findViewById(R.id.consultant_name);
             consultant_image = view.findViewById(R.id.consultant_image);
+            specialties = view.findViewById(R.id.specialties);
 
 
 
@@ -69,17 +70,22 @@ public class PapularConsultantAdapter extends RecyclerView.Adapter<PapularConsul
 
         try {
 
-//            "category_id": "31",
-//                    "category_name": "Astrology",
-//                    "category_icon": "astrology@3x1.png",
-//                    "parent_id": "0",
-//                    "status": "1"
+//            "user_id": "38",
+//                    "profile_pic": "14.png",
+//                    "experience": "This is test experience",
+//                    "specialties": "8965423210",
+//                    "rate": "221",
+//                    "email": "dev@consultpin.com",
+//                    "phone": "8965453210",
+//                    "name": "shibu Bhat",
+//                    "category_name": "test4,Sub"
 
             JSONObject jsonObject=datAr.get(position);
 
 
             holder.consultant_name.setText(jsonObject.getString("category_name"));
-            showImage(imageUrl+""+jsonObject.getString("category_icon"),holder.consultant_image);
+            holder.specialties.setText(jsonObject.getString("specialties"));
+            showImage(imageUrl+""+jsonObject.getString("profile_pic"),holder.consultant_image);
             holder.ll_best_restaurant.setTag(position);
             holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
                 @Override

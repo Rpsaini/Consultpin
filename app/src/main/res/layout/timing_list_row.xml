@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginStart="15dp"
+    android:layout_height="wrap_content">
+
+    <fontspackageForTextView.Regular
+        android:background="@drawable/roundcorner_drawable"
+        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:text="10:00-1:00"
+        style="@style/edittext_style_12_grey"
+        android:hint="@string/datefrom"
+        android:gravity="center"
+        >
+    </fontspackageForTextView.Regular>
+
+
+    <fontspackageForTextView.Regular
+        android:layout_marginStart="10dp"
+        android:background="@drawable/roundcorner_drawable"
+        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:text="14:00-20:00"
+        style="@style/edittext_style_12_grey"
+        android:hint="@string/datefrom"
+        android:gravity="center"
+        >
+    </fontspackageForTextView.Regular>
+
+
+    <fontspackageForTextView.Regular
+        android:layout_marginStart="10dp"
+        android:background="@drawable/roundcorner_drawable"
+        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:text="21:00-22:00"
+        style="@style/edittext_style_12_grey"
+        android:hint="@string/datefrom"
+        android:gravity="center"
+        >
+    </fontspackageForTextView.Regular>
+</LinearLayout>

@@ -35,7 +35,7 @@
                 android:id="@+id/tv_your_buisness"
                 android:paddingStart="3dp"
                 android:layout_marginTop="15dp"
-                android:hint="@string/select_price_tl"
+                android:hint="@string/select_buisness"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 style="@style/edittext_style_12_grey"
@@ -53,6 +53,40 @@
 
         </RelativeLayout>
 
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_company_name"
+                android:layout_marginTop="19dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+            <fontspackageForTextView.BoldMedium
+
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                style="@style/edittext_style_14_black"
+                android:text="@string/companyname"
+                >
+            </fontspackageForTextView.BoldMedium>
+
+            <fontpackageforEdittext.Regular
+                android:layout_marginTop="5dp"
+                android:id="@+id/ed_companyname"
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/entercompanyname"
+                android:gravity="left|center"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                >
+            </fontpackageforEdittext.Regular>
+
+            </LinearLayout>
 
         <LinearLayout
             android:layout_marginTop="19dp"
@@ -89,7 +123,7 @@
             android:orientation="horizontal"
             android:weightSum="2"
             >
-            <fontpackageforEdittext.Regular
+            <fontspackageForTextView.Regular
                 android:id="@+id/ed_firstname"
                 android:background="@drawable/roundcorner_drawable"
                 android:layout_height="match_parent"
@@ -99,10 +133,10 @@
                 android:hint="@string/first_name"
                 android:gravity="left|center"
                 >
-            </fontpackageforEdittext.Regular>
+            </fontspackageForTextView.Regular>
 
 
-            <fontpackageforEdittext.Regular
+            <fontspackageForTextView.Regular
                 android:id="@+id/ed_lastname"
                 android:background="@drawable/roundcorner_drawable"
                 android:layout_height="match_parent"
@@ -113,11 +147,14 @@
                 android:layout_marginStart="10dp"
                 android:gravity="left|center"
                 >
-            </fontpackageforEdittext.Regular>
+            </fontspackageForTextView.Regular>
         </LinearLayout>
 
 
+
+
         <fontspackageForTextView.BoldMedium
+            android:id="@+id/tc_number"
             android:layout_marginTop="19dp"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -126,16 +163,54 @@
             >
         </fontspackageForTextView.BoldMedium>
 
-        <fontpackageforEdittext.Regular
-            android:id="@+id/ed_nationid_number"
-            android:background="@drawable/roundcorner_drawable"
-            android:layout_height="40dp"
-            android:layout_width="match_parent"
-            style="@style/edittext_style_12_grey"
-            android:hint="@string/nationidproof"
-            android:gravity="left|center"
-            >
-        </fontpackageforEdittext.Regular>
+
+            <fontpackageforEdittext.Regular
+                android:id="@+id/ed_nationid_number"
+                style="@style/edittext_style_12_grey"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/roundcorner_drawable"
+                android:gravity="left|center"
+                android:hint="@string/nationidproof"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:singleLine="true"></fontpackageforEdittext.Regular>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_post_officenumber"
+                android:layout_marginTop="19dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                >
+
+                <fontspackageForTextView.BoldMedium
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/edittext_style_14_black"
+                    android:text="@string/tax_office"
+                    >
+                </fontspackageForTextView.BoldMedium>
+
+                <fontpackageforEdittext.Regular
+                    android:id="@+id/ed_tax_office"
+                    android:background="@drawable/roundcorner_drawable"
+                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    style="@style/edittext_style_12_grey"
+                    android:hint="@string/nationidproof"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+                    >
+                </fontpackageforEdittext.Regular>
+            </LinearLayout>
+
+
+
 
         <fontspackageForTextView.BoldMedium
             android:layout_marginTop="19dp"
@@ -146,7 +221,7 @@
             >
         </fontspackageForTextView.BoldMedium>
 
-        <fontpackageforEdittext.Regular
+        <fontspackageForTextView.Regular
             android:id="@+id/ed_email"
             android:background="@drawable/roundcorner_drawable"
             android:layout_height="40dp"
@@ -155,7 +230,7 @@
             android:hint="@string/your_email"
             android:gravity="left|center"
             >
-        </fontpackageforEdittext.Regular>
+        </fontspackageForTextView.Regular>
 
         <LinearLayout
             android:layout_marginTop="19dp"
@@ -191,7 +266,11 @@
             android:orientation="horizontal"
             android:weightSum="2"
             >
-            <fontspackageForTextView.BoldMedium
+            <fontpackageforEdittext.Regular
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:id="@+id/ed_city"
                 android:background="@drawable/roundcorner_drawable"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
@@ -199,11 +278,15 @@
                 style="@style/edittext_style_12_grey"
                 android:hint="@string/city"
                 android:gravity="left|center"
-                >
-            </fontspackageForTextView.BoldMedium>
+                />
 
 
-            <fontspackageForTextView.BoldMedium
+
+            <fontpackageforEdittext.Regular
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:id="@+id/ed_provience"
                 android:background="@drawable/roundcorner_drawable"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
@@ -213,7 +296,7 @@
                 android:layout_marginStart="10dp"
                 android:gravity="left|center"
                 >
-            </fontspackageForTextView.BoldMedium>
+            </fontpackageforEdittext.Regular>
         </LinearLayout>
 
         <fontspackageForTextView.BoldMedium
@@ -225,7 +308,11 @@
             >
         </fontspackageForTextView.BoldMedium>
 
-        <fontspackageForTextView.BoldMedium
+        <fontpackageforEdittext.Regular
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:id="@+id/ed_postal_Address"
             android:background="@drawable/roundcorner_drawable"
             android:layout_height="40dp"
             android:layout_width="match_parent"
@@ -233,7 +320,7 @@
             android:hint="@string/postaladdress"
             android:gravity="left|center"
             >
-        </fontspackageForTextView.BoldMedium>
+        </fontpackageforEdittext.Regular>
 
         <fontspackageForTextView.BoldMedium
             android:layout_marginTop="19dp"
@@ -286,6 +373,9 @@
             >
         </fontspackageForTextView.BoldMedium>
         <fontpackageforEdittext.Regular
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
             android:id="@+id/ed_iban"
             android:background="@drawable/roundcorner_drawable"
             android:layout_height="40dp"
@@ -298,7 +388,6 @@
 
 
         <RadioButton
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/terms_radio"

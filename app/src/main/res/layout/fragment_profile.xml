@@ -7,11 +7,13 @@
 
 
     <ScrollView
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         >
 
     <LinearLayout
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -19,14 +21,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="280dp"
         android:id="@+id/rr_upper"
         >
 
         <RelativeLayout
             android:background="@color/buttonskyblue"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="240dp"
             >
 
             <RelativeLayout
@@ -56,18 +58,21 @@
 
 
             <RelativeLayout
+                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:layout_centerInParent="true">
+               >
 
             <ImageView
+                android:id="@+id/img_profile"
                 android:layout_height="110dp"
                 android:layout_width="110dp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/profileavtar"
-                android:background="@color/white"
+
                 ></ImageView>
             <ImageView
+                android:id="@+id/img_edit_profile"
                 android:layout_marginEnd="20dp"
                 android:layout_height="25dp"
                 android:layout_width="25dp"
@@ -90,22 +95,23 @@
                 android:orientation="vertical"
                 android:layout_height="80dp"
                 >
-                <fontspackageForTextView.BoldExtra
+                <fontspackageForTextView.BoldMedium
+                    android:id="@+id/tv_username"
                     android:text="@string/username"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:gravity="center"
                     style="@style/edittext_style_18_black"
                     android:layout_marginTop="3dp"
-                    ></fontspackageForTextView.BoldExtra>
+                    ></fontspackageForTextView.BoldMedium>
 
-                <fontspackageForTextView.BoldExtra
+                <fontspackageForTextView.BoldMedium
                     android:text="@string/username"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:gravity="center"
                     style="@style/edittext_style_12_grey"
-                    ></fontspackageForTextView.BoldExtra>
+                    ></fontspackageForTextView.BoldMedium>
 
                 <View
                     android:layout_marginTop="3dp"
@@ -127,6 +133,7 @@
                         android:layout_weight="1"
                         >
                     <fontspackageForTextView.BoldMedium
+                        android:id="@+id/tv_usermobile"
                         android:drawablePadding="5dp"
                         android:drawableLeft="@drawable/ic_call"
                         android:layout_width="wrap_content"
@@ -146,12 +153,13 @@
                         android:layout_weight="1"
                         >
                         <fontspackageForTextView.BoldMedium
+                            android:id="@+id/tv_user_email"
                             android:drawablePadding="5dp"
                             android:drawableLeft="@drawable/ic_mail"
                             android:layout_width="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_height="wrap_content"
-                            android:text="9090909090"
+                            android:text="email"
                             android:gravity="center"
                             style="@style/edittext_style_14_grey"
                             ></fontspackageForTextView.BoldMedium>
@@ -181,13 +189,13 @@
             android:layout_height="40dp"
 
             >
-            <fontspackageForTextView.BoldExtra
+            <fontspackageForTextView.BoldMedium
             android:layout_centerVertical="true"
                 android:text="@string/profile_enable"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 style="@style/edittext_style_14_black"
-                ></fontspackageForTextView.BoldExtra>
+                ></fontspackageForTextView.BoldMedium>
 
             <ImageView
                 android:layout_centerVertical="true"
@@ -206,7 +214,7 @@
             android:layout_width="match_parent"
             android:background="@color/profile_background"
             >
-        <fontspackageForTextView.BoldExtra
+        <fontspackageForTextView.BoldMedium
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginTop="10dp"
@@ -214,17 +222,18 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             style="@style/edittext_style_14_black"
-            ></fontspackageForTextView.BoldExtra>
+            ></fontspackageForTextView.BoldMedium>
 
 
             <fontspackageForTextView.BoldMedium
+                android:id="@+id/tv_professionalbg"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:drawablePadding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_height="wrap_content"
-                android:text="@string/dummy_content"
+
                 android:gravity="center|left"
                 style="@style/edittext_style_12_grey"
                 ></fontspackageForTextView.BoldMedium>
@@ -233,7 +242,7 @@
 
 
 
-            <fontspackageForTextView.BoldExtra
+            <fontspackageForTextView.BoldMedium
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginTop="10dp"
@@ -241,17 +250,18 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 style="@style/edittext_style_14_black"
-                ></fontspackageForTextView.BoldExtra>
+                ></fontspackageForTextView.BoldMedium>
 
 
             <fontspackageForTextView.BoldMedium
+                android:id="@+id/tv_speciality"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:drawablePadding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_height="wrap_content"
-                android:text="@string/dummy_content"
+
                 android:gravity="center|left"
                 style="@style/edittext_style_12_grey"
                 ></fontspackageForTextView.BoldMedium>
@@ -279,7 +289,7 @@
 
 
                 <fontspackageForTextView.BoldMedium
-
+                     android:id="@+id/tv_fee"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"

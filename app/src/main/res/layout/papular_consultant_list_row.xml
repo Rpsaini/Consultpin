@@ -38,8 +38,19 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         >
-        <fontspackageForTextView.Regular
+        <fontspackageForTextView.BoldMedium
             android:id="@+id/consultant_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:gravity="center"
+            android:layout_gravity="center"
+            style="@style/edittext_style_14_black"
+            android:text=""
+            ></fontspackageForTextView.BoldMedium>
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/specialties"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -50,13 +61,17 @@
             ></fontspackageForTextView.Regular>
 
 
-
-
-
-
-
-
     </LinearLayout>
 
-
+<!--    <RatingBar-->
+<!--        android:id="@+id/ratingBar"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="12dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:backgroundTint="@color/teal_200"-->
+<!--        android:numStars="5"-->
+<!--        android:progressTint="@color/teal_200"-->
+<!--        android:rating="0"-->
+<!--        android:secondaryProgressTint="@android:color/transparent"-->
+<!--        android:stepSize="1" />-->
 </LinearLayout>

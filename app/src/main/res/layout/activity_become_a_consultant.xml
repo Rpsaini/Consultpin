@@ -178,12 +178,13 @@
             >
 
             <fontspackageForTextView.Regular
+                android:maxLines="1"
                 android:id="@+id/txt_select_catgory"
                 android:paddingStart="3dp"
                 android:layout_marginTop="15dp"
                 android:hint="@string/select_category"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 style="@style/edittext_style_12_grey"
                 ></fontspackageForTextView.Regular>
 
@@ -197,9 +198,6 @@
                 >
             </ImageView>
 
-
-
-
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rr_select_sub_category"
@@ -211,14 +209,13 @@
 
             <fontspackageForTextView.Regular
                 android:id="@+id/txt_select_sub_category"
-                android:paddingStart="3dp"
-                android:layout_marginTop="15dp"
+                style="@style/edittext_style_12_grey"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center|left"
                 android:hint="@string/select_subcategory"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                style="@style/edittext_style_12_grey"
-                ></fontspackageForTextView.Regular>
+
+                android:paddingStart="3dp"></fontspackageForTextView.Regular>
 
 
             <ImageView
@@ -244,8 +241,12 @@
             >
 
             <fontpackageforEdittext.Regular
+                android:inputType="numberDecimal"
                 android:id="@+id/txt_select_price_tl"
                 android:paddingStart="3dp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:gravity="center|left"
                 android:hint="@string/select_price_tl"
                 android:layout_height="45dp"

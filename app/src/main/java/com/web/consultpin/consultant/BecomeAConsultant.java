@@ -155,11 +155,13 @@ public class BecomeAConsultant extends BaseActivity {
             public void onClick(View v)
             {
                 String sub_category_id="";
-                for(int x=0;x<subcategory_id_Ar.size();x++)
+
+                for(Map.Entry<String,String> map:subcategory_id_Ar.entrySet())
                 {
-                    sub_category_id=sub_category_id+","+subcategory_id_Ar.get(x);
+                    sub_category_id=sub_category_id+","+map.getKey();
                 }
 
+                sub_category_id=sub_category_id.replaceFirst(",","");
 
                 if (validationRule.checkEmptyString(ed_indivisual) == 0) {
                     alertDialogs.alertDialog(BecomeAConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.waring_describe), getResources().getString(R.string.ok), "", new DialogCallBacks() {
@@ -229,7 +231,7 @@ public class BecomeAConsultant extends BaseActivity {
                 intent.putExtra("category_id",category_id);
                 intent.putExtra("sub_category_id",sub_category_id);
                 intent.putExtra("txt_select_price_tl",txt_select_price_tl.getText().toString());
-                startActivity(intent);
+                startActivityForResult(intent,1111);
 
             }
         });
@@ -239,7 +241,7 @@ public class BecomeAConsultant extends BaseActivity {
 
       private void selectCategory(int x)
       {
-
+          hideKeyboard(this);
           SimpleDialog simpleDialog = new SimpleDialog();
           final Dialog selectCategoryDialog = simpleDialog.simpleDailog(BecomeAConsultant.this, R.layout.select_category_dialog, new ColorDrawable(getResources().getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
           select_category_recycle=selectCategoryDialog.findViewById(R.id.select_category_recycler);
@@ -280,6 +282,7 @@ public class BecomeAConsultant extends BaseActivity {
                   }
                   if(selected_sub_category_str!=null)
                   {
+                      selected_category_str=selected_category_str.replaceFirst(",","");
                       txt_select_sub_category.setText(selected_sub_category_str + "");
                   }
 
@@ -386,7 +389,12 @@ Bitmap bmap;
 
         if (requestCode == 1001) {
             init();
-        } else {
+        }
+        if(requestCode==1111)
+        {
+            finish();
+        }
+         else {
             bmap = null;
             Uri selectedImage = null;
 
@@ -593,5 +601,8 @@ Bitmap bmap;
 
 
     }
+
+
+
 
 }

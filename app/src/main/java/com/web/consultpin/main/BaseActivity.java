@@ -2,6 +2,7 @@ package com.web.consultpin.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -36,6 +38,7 @@ public class BaseActivity extends AppCompatActivity
     public ValidationRule validationRule;
     public AnimationForViews animationForViews;
     private int screenHeight,screenWidth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -90,7 +93,8 @@ public class BaseActivity extends AppCompatActivity
 
     public String getRestParamsName(String keyname)
     {
-        // {"user_id":"39","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+        //{"userdata":{"user_id":"39","profile_pic":"http:\/\/52.66.238.215\/assets\/uploads\/default.png","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMzkiLCJmaXJzdF9uYW1lIjoiUmFtIiwibGFzdF9uYW1lIjoibGFzdG5hZSIsImVtYWlsIjoibWFpbEBnbWFpbC5jb20iLCJwaG9uZSI6Ijk3ODc5Nzg3OTciLCJjcmVhdGVkX29uIjoiMTYxMDYwODkwMiIsIkFQSV9USU1FIjoxNjExNzQ0NDMwfQ.uNpffzd0ypmpVn4SWL0d-9JnDjhdTzbJwedfGcdLjAU","image_url":"http:\/\/52.66.238.215\/assets\/uploads\/","status":true}
         try {
             JSONObject dataObj = new JSONObject(savePreferences.reterivePreference(this, Utilclass.loginDetail)+"");
             JSONObject userdata=dataObj.getJSONObject("userdata");
@@ -221,4 +225,14 @@ public class BaseActivity extends AppCompatActivity
     }
 
 
+    public  void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }

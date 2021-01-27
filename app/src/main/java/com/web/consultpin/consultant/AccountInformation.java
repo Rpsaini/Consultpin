@@ -6,32 +6,52 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.app.dialogsnpickers.DialogCallBacks;
 import com.app.dialogsnpickers.SimpleDialog;
+import com.app.vollycommunicationlib.CallBack;
+import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
+import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.SelectCategorySubCategoryAdapter;
 import com.web.consultpin.main.BaseActivity;
+import com.web.consultpin.registration.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.xml.transform.Result;
 
 public class AccountInformation extends BaseActivity {
 
     private RelativeLayout rr_select_your_buisness,rr_select_bank;
-    public   TextView tv_your_buisness,tv_select_bank;
-   private EditText ed_firstname,ed_lastname,ed_nationid_number,ed_email,ed_iban;
-   private RadioButton terms_radio;
-   private int selectionType;
-   private RecyclerView select_category_recycle;
+    public TextView tv_your_buisness,tv_select_bank,ed_firstname,ed_lastname,ed_email;
+    private EditText ed_nationid_number,ed_city,ed_provience,ed_iban,ed_postal_Address,ed_tax_office,ed_companyname;
+    private RadioButton terms_radio;
+    private int selectionType;
+    private RecyclerView select_category_recycle;
+    public String accountTypeId="";
+    private LinearLayout ll_company_name,ll_post_officenumber;
+
+
+    private TextView tc_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +60,7 @@ public class AccountInformation extends BaseActivity {
         getSupportActionBar().hide();
         initiateObj();
         init();
+
     }
 
     private void init()
@@ -54,24 +75,29 @@ public class AccountInformation extends BaseActivity {
         TextView toolbarTitle =findViewById(R.id.toolbar_title);
         toolbarTitle.setText(getResources().getString(R.string.becom_consultant));
 
-         String ed_indivisual=getIntent().getStringExtra("ed_indivisual");
-        String ed_taskmoreabout=getIntent().getStringExtra("ed_taskmoreabout");
-        String ed_specialist=getIntent().getStringExtra("ed_specialist");
-        String category_id=getIntent().getStringExtra("category_id");
-        String sub_category_id=getIntent().getStringExtra("sub_category_id");
-        String txt_select_price_tl=getIntent().getStringExtra("txt_select_price_tl");
-
-
         rr_select_your_buisness=findViewById(R.id.rr_select_your_buisness);
         tv_your_buisness=findViewById(R.id.tv_your_buisness);
         ed_firstname=findViewById(R.id.ed_firstname);
         ed_lastname=findViewById(R.id.ed_lastname);
         ed_nationid_number=findViewById(R.id.ed_nationid_number);
         ed_email=findViewById(R.id.ed_email);
+        ed_city=findViewById(R.id.ed_city);
+        ed_provience=findViewById(R.id.ed_provience);
+        ed_postal_Address=findViewById(R.id.ed_postal_Address);
+        ed_tax_office=findViewById(R.id.ed_tax_office);
+        ll_company_name=findViewById(R.id.ll_company_name);
+        ed_companyname=findViewById(R.id.ed_companyname);
+        ll_post_officenumber=findViewById(R.id.ll_post_officenumber);
+
         tv_select_bank=findViewById(R.id.tv_select_bank);
         rr_select_bank=findViewById(R.id.rr_select_bank);
         ed_iban=findViewById(R.id.ed_iban);
+        tc_number=findViewById(R.id.tc_number);
         terms_radio=findViewById(R.id.terms_radio);
+
+        ed_firstname.setText(getRestParamsName("first_name"));
+        ed_lastname.setText(getRestParamsName("last_name"));
+        ed_email.setText(getRestParamsName("email"));
 
 
         rr_select_your_buisness.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +119,228 @@ public class AccountInformation extends BaseActivity {
         findViewById(R.id.tv_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (tv_your_buisness.getText().toString().length() == 0) {
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.select_buisness), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
+                System.out.println("Account type====>"+accountTypeId);
+                if(accountTypeId.equalsIgnoreCase("2"))
+                {
+                    if (validationRule.checkEmptyString(ed_companyname) == 0) {
+                        alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.entercompanyname), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                            @Override
+                            public void getDialogEvent(String buttonPressed) {
+
+                            }
+                        });
+                        return;
+                    }
+
+                    if (validationRule.checkEmptyString(ed_tax_office) == 0) {
+                        alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_tax_office), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                            @Override
+                            public void getDialogEvent(String buttonPressed) {
+
+                            }
+                        });
+                        return;
+                    }
+                }
+
+
+
+
+                if (validationRule.checkEmptyString(ed_nationid_number) == 0)
+                {
+
+                    String msg=getResources().getString(R.string.enter_national_idnumber);
+                    if(accountTypeId.equalsIgnoreCase("2"))
+                    {
+                        msg=getResources().getString(R.string.enter_tc_number);
+                    }
+
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), msg, getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
+
+                if (validationRule.checkEmptyString(ed_city) == 0) {
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_cityname), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
+
+
+                if (validationRule.checkEmptyString(ed_provience) == 0) {
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_provience), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
+
+                if (validationRule.checkEmptyString(ed_postal_Address) == 0) {
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.ed_postal_Address), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
+                if (tv_select_bank.getText().toString().length() == 0) {
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.select_your_bank), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+                if (validationRule.checkEmptyString(ed_iban) == 0) {
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_iban), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+                if (!terms_radio.isChecked()) {
+                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Required), getResources().getString(R.string.select_terms), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
+                else
+                {
+                    Map<String,String> map =new LinkedHashMap<>();
+
+                    String ed_indivisual=getIntent().getStringExtra("ed_indivisual");
+                    String ed_taskmoreabout=getIntent().getStringExtra("ed_taskmoreabout");
+                    String ed_specialist=getIntent().getStringExtra("ed_specialist");
+                    String category_id=getIntent().getStringExtra("category_id");
+                    String sub_category_id=getIntent().getStringExtra("sub_category_id");
+                    String txt_select_price_tl=getIntent().getStringExtra("txt_select_price_tl");
+
+
+
+                    map.put("tax_office",ed_tax_office.getText().toString());
+                    map.put("company",ed_companyname.getText().toString());
+                    map.put("account_type",accountTypeId);
+                    map.put("identity",ed_nationid_number.getText().toString());
+                    map.put("bank",tv_select_bank.getText().toString());
+                    map.put("iban",ed_iban.getText().toString());
+                    map.put("title",ed_indivisual);
+                    map.put("experience",ed_taskmoreabout);
+                    map.put("specialties",ed_specialist);
+                    map.put("category_id",category_id);
+                    map.put("sub_category_id",sub_category_id);
+                    map.put("rate",txt_select_price_tl);
+                    map.put("city",ed_city.getText().toString());
+                    map.put("provience",ed_provience.getText().toString());
+                    map.put("postal_code",ed_postal_Address.getText().toString());
+                    map.put("user_id",getRestParamsName("user_id"));
+                    final Map<String, String> obj = new HashMap<>();
+                    obj.put("Authorization", getRestParamsName(Utilclass.token));
+
+                    System.out.println("Account===="+map);
+
+                    serverHandler.sendToServer(AccountInformation.this, getApiUrl() + "addcounsultant", map, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+                        @Override
+                        public void getRespone(String dta, ArrayList<Object> respons) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(dta);
+                                if (jsonObject.getBoolean("status")) {
+
+                                    try {
+                                        SimpleDialog simpleDialog = new SimpleDialog();
+                                        final Dialog selectCategoryDialog = simpleDialog.simpleDailog(AccountInformation.this, R.layout.account_added_successfully_dialog, new ColorDrawable(getResources().getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
+
+                                        TextView maintitle=selectCategoryDialog.findViewById(R.id.maintitle);
+                                        TextView subtitle=selectCategoryDialog.findViewById(R.id.subtitle);
+                                        TextView okaybtn=selectCategoryDialog.findViewById(R.id.okaybtn);
+                                        subtitle.setText(jsonObject.getString("msg"));
+                                        okaybtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent intent=new Intent();
+                                                setResult(RESULT_OK, intent);
+                                                finish();
+                                            }
+                                        });
+
+
+
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+
+                                } else {
+                                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                                        @Override
+                                        public void getDialogEvent(String buttonPressed) {
+                                        }
+                                    });
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+
+//                    category_id:1
+//                    iban:qwerty123
+//                    bank:State Bank
+//                    provience:Zirakpur
+//                    city:Zirakpur
+//                    identity:1234567890
+//                    company:Self
+//                    account_type:individual
+//                    license:123456789
+//                    specialties:8965423210
+//                    experience:This is test experience
+//                    title:dfsdf
+//                    user_id:2
+//                    sub_category_id:1
+//                    postal_code:ewerwe
+//                    rate:10
+
+
+
+
+
+                }
+
+
 
             }
         });
@@ -104,6 +352,7 @@ public class AccountInformation extends BaseActivity {
     {
         try {
 
+            hideKeyboard(this);
             SimpleDialog simpleDialog = new SimpleDialog();
             final Dialog selectCategoryDialog = simpleDialog.simpleDailog(AccountInformation.this, R.layout.select_category_dialog, new ColorDrawable(getResources().getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
             select_category_recycle = selectCategoryDialog.findViewById(R.id.select_category_recycler);
@@ -167,8 +416,35 @@ public class AccountInformation extends BaseActivity {
             tv_done.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    downSourceDestinationView(ll_relativelayout,selectCategoryDialog);
+                    if(x==0)
+                     {
+                        if(accountTypeId.equalsIgnoreCase("1"))
+                        {
+                            ll_company_name.setVisibility(View.GONE);
+                            ll_post_officenumber.setVisibility(View.GONE);
+                            tc_number.setHint(getResources().getString(R.string.enter_national_idnumber));
+                            ed_nationid_number.setHint(getResources().getString(R.string.enter_national_idnumber));
 
+                        }
+                        else if(accountTypeId.equalsIgnoreCase("2"))
+                        {
+                            ll_company_name.setVisibility(View.VISIBLE);
+                            ll_post_officenumber.setVisibility(View.VISIBLE);
+                            tc_number.setHint(getResources().getString(R.string.enter_national_idnumber));
+                            ed_nationid_number.setHint(getResources().getString(R.string.enter_national_idnumber));
+                        }
+                        else if(accountTypeId.equalsIgnoreCase("3"))
+                        {
+                            tc_number.setHint(getResources().getString(R.string.tc_number));
+                            ed_tax_office.setHint(getResources().getString(R.string.tax_office));
+                            ed_nationid_number.setHint(getResources().getString(R.string.tc_number));
+                            ll_company_name.setVisibility(View.VISIBLE);
+                            ll_post_officenumber.setVisibility(View.VISIBLE);
+
+
+                        }
+                    }
+                    downSourceDestinationView(ll_relativelayout,selectCategoryDialog);
 
                 }
             });

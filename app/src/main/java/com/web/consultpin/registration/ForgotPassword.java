@@ -75,9 +75,9 @@ public class ForgotPassword extends BaseActivity {
             m.put("device_token", getDeviceToken() + "");
 
             final Map<String, String> obj = new HashMap<>();
-            obj.put("X-API-KEY", getXapiKey());
-            obj.put("Token", savePreferences.reterivePreference(this, "session_token") + "");
-            obj.put("uid", getRestParamsName("uid"));
+//            obj.put("X-API-KEY", getXapiKey());
+//            obj.put("Token", savePreferences.reterivePreference(this, "session_token") + "");
+//            obj.put("uid", getRestParamsName("uid"));
 
 
             serverHandler.sendToServer(this, getApiUrl() + "forgot", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {

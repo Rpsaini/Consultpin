@@ -19,6 +19,7 @@ import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.CategoryAdapter;
+import com.web.consultpin.adapter.NewCategoryAdapter;
 import com.web.consultpin.adapter.PapularConsultantAdapter;
 import com.web.consultpin.registration.LoginActivity;
 
@@ -80,11 +81,30 @@ public class Home extends Fragment {
                             try {
                                 String baseUrl = jsonObject.getString("icon_base_url");
                                 JSONArray categories = jsonObject.getJSONArray("categories");
+                                JSONArray popular_consultants = jsonObject.getJSONArray("popular_consultants");
+                                JSONArray new_consultants = jsonObject.getJSONArray("new_consultants");
+
                                 ArrayList<JSONObject> catAr = new ArrayList<>();
                                 for (int x = 0; x < categories.length(); x++) {
                                     catAr.add(categories.getJSONObject(x));
                                 }
+
+                                ArrayList<JSONObject> newconsultantAr = new ArrayList<>();
+                                for (int x = 0; x < new_consultants.length(); x++) {
+                                    newconsultantAr.add(new_consultants.getJSONObject(x));
+                                }
+
+
+                                ArrayList<JSONObject> papularConsultantAr = new ArrayList<>();
+                                for (int x = 0; x < popular_consultants.length(); x++) {
+                                    papularConsultantAr.add(popular_consultants.getJSONObject(x));
+                                }
                                 initHomeCategory(baseUrl,catAr);
+                                consultantdata(baseUrl,papularConsultantAr);
+                                newConsultant(baseUrl,newconsultantAr);
+
+
+
 
 
                             } catch (Exception e) {
@@ -139,6 +159,19 @@ public class Home extends Fragment {
         recyclerview_popular_consultant.setItemAnimator(new DefaultItemAnimator());
         PapularConsultantAdapter horizontalCategoriesAdapter = new PapularConsultantAdapter(dataAr,mainActivity,imageUrl);
         recyclerview_popular_consultant.setAdapter(horizontalCategoriesAdapter);
+    }
+
+    private void newConsultant(String imageUrl,ArrayList<JSONObject> dataAr)
+    {
+        RecyclerView recyclerview_new_category =view.findViewById(R.id.recyclerview_new_category);
+
+        recyclerview_new_category.setNestedScrollingEnabled(false);
+        recyclerview_new_category.setLayoutManager(new LinearLayoutManager(mainActivity,
+                LinearLayoutManager.HORIZONTAL, false));
+        recyclerview_new_category.setHasFixedSize(true);
+        recyclerview_new_category.setItemAnimator(new DefaultItemAnimator());
+        NewCategoryAdapter horizontalCategoriesAdapter = new NewCategoryAdapter(dataAr,mainActivity,imageUrl);
+        recyclerview_new_category.setAdapter(horizontalCategoriesAdapter);
     }
 
 
