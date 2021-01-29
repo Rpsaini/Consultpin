@@ -21,14 +21,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="220dp"
         android:id="@+id/rr_upper"
         >
 
         <RelativeLayout
             android:background="@color/buttonskyblue"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="180dp"
             >
 
             <RelativeLayout
@@ -58,24 +58,25 @@
 
 
             <RelativeLayout
-                android:layout_centerInParent="true"
+               android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                >
 
             <ImageView
                 android:id="@+id/img_profile"
-                android:layout_height="110dp"
-                android:layout_width="110dp"
+                android:layout_height="100dp"
+                android:layout_width="100dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/profileavtar"
+                android:src="@drawable/man"
 
                 ></ImageView>
             <ImageView
+                android:padding="5dp"
                 android:id="@+id/img_edit_profile"
                 android:layout_marginEnd="20dp"
-                android:layout_height="25dp"
-                android:layout_width="25dp"
+                android:layout_height="35dp"
+                android:layout_width="35dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_edit"
                 ></ImageView>

@@ -1,5 +1,6 @@
 package com.web.consultpin.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,11 +16,11 @@ import com.app.vollycommunicationlib.CallBack;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.web.consultpin.consultant.EditProfileConsultant;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -70,6 +71,15 @@ private MainActivity mainActivity;
         tv_speciality=view.findViewById(R.id.tv_speciality);
         tv_fee=view.findViewById(R.id.tv_fee);
         ViewProfile();
+
+
+        img_edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mainActivity, EditProfileConsultant.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

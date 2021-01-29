@@ -72,6 +72,17 @@ public class BaseActivity extends AppCompatActivity
             getWindow().setStatusBarColor(getResources().getColor(R.color.border_color));
         }
     }
+
+    public void changestatusBarColorBlue()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.buttonskyblue, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.buttonskyblue));
+        }
+    }
+
+
     public String getAppVersion()
     {
         try {

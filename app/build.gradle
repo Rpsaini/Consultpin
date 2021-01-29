@@ -13,7 +13,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -53,7 +53,13 @@ dependencies {
     implementation 'com.github.Rpsaini:DialogsNPickers:V2.4'
     implementation 'com.github.Rpsaini:DrawableNAnimationNFonts:V1.7'
     implementation 'com.github.Rpsaini:Validations:V1.2'
-    implementation 'com.android.support:multidex:1.0.1'
+
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
 
 

@@ -185,7 +185,7 @@ public class SelectCategorySubCategoryAdapter extends RecyclerView.Adapter<Selec
             public void run() {
                 Glide.with(pActivity)
                         .load(url)
-                        .placeholder(R.drawable.profileavtar)
+                        .placeholder(R.drawable.man)
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                         .into(header_img);
             }

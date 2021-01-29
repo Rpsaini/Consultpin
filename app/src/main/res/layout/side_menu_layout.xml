@@ -199,7 +199,7 @@
 
     <fontspackageForTextView.Regular
 
-        android:id="@+id/tv_settings"
+        android:id="@+id/tv_appointmenthistory"
         android:gravity="center|left"
         android:drawablePadding="10dp"
         android:padding="10dp"

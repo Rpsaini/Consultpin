@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,6 +26,10 @@ import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.SelectCategorySubCategoryAdapter;
+import com.web.consultpin.interfaces.ApiProduction;
+import com.web.consultpin.interfaces.ImageUpload;
+import com.web.consultpin.interfaces.RxAPICallHelper;
+import com.web.consultpin.interfaces.RxAPICallback;
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.registration.LoginActivity;
 
@@ -32,12 +37,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.xml.transform.Result;
+
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class AccountInformation extends BaseActivity {
 
@@ -246,7 +258,7 @@ public class AccountInformation extends BaseActivity {
                     String category_id=getIntent().getStringExtra("category_id");
                     String sub_category_id=getIntent().getStringExtra("sub_category_id");
                     String txt_select_price_tl=getIntent().getStringExtra("txt_select_price_tl");
-
+                    String license=getIntent().getStringExtra("license");
 
 
                     map.put("tax_office",ed_tax_office.getText().toString());
@@ -268,53 +280,133 @@ public class AccountInformation extends BaseActivity {
                     final Map<String, String> obj = new HashMap<>();
                     obj.put("Authorization", getRestParamsName(Utilclass.token));
 
-                    System.out.println("Account===="+map);
+                    File file = new File(license);
+                    if (file != null) {
 
-                    serverHandler.sendToServer(AccountInformation.this, getApiUrl() + "addcounsultant", map, 0, obj, 20000, R.layout.progressbar, new CallBack() {
-                        @Override
-                        public void getRespone(String dta, ArrayList<Object> respons) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(dta);
-                                if (jsonObject.getBoolean("status")) {
+                        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), "license");
+                        MultipartBody.Part body = MultipartBody.Part.createFormData("license", file.getName(), requestBody);
 
-                                    try {
-                                        SimpleDialog simpleDialog = new SimpleDialog();
-                                        final Dialog selectCategoryDialog = simpleDialog.simpleDailog(AccountInformation.this, R.layout.account_added_successfully_dialog, new ColorDrawable(getResources().getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
+                        System.out.println("multipart ==="+body);
+                        RequestBody tax_office = RequestBody.create(MediaType.parse("text/plain"), ed_tax_office.getText().toString());
+                        RequestBody company = RequestBody.create(MediaType.parse("text/plain"), ed_companyname.getText().toString());
+                        RequestBody account_type = RequestBody.create(MediaType.parse("text/plain"), accountTypeId);
+                        RequestBody identity = RequestBody.create(MediaType.parse("text/plain"), ed_nationid_number.getText().toString());
+                        RequestBody bank = RequestBody.create(MediaType.parse("text/plain"), tv_select_bank.getText().toString());
+                        RequestBody iban = RequestBody.create(MediaType.parse("text/plain"), ed_iban.getText().toString());
+                        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), ed_indivisual);
+                        RequestBody experience = RequestBody.create(MediaType.parse("text/plain"), ed_taskmoreabout);
+                        RequestBody specialties = RequestBody.create(MediaType.parse("text/plain"), ed_specialist);
+                        RequestBody category_id_new = RequestBody.create(MediaType.parse("text/plain"), category_id);
+                        RequestBody sub_category_id_new = RequestBody.create(MediaType.parse("text/plain"), sub_category_id);
+                        RequestBody rate = RequestBody.create(MediaType.parse("text/plain"), txt_select_price_tl);
+                        RequestBody city = RequestBody.create(MediaType.parse("text/plain"), ed_city.getText().toString());
+                        RequestBody provience = RequestBody.create(MediaType.parse("text/plain"), ed_provience.getText().toString());
+                        RequestBody postal_code = RequestBody.create(MediaType.parse("text/plain"), ed_postal_Address.getText().toString());
+                        RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), getRestParamsName("user_id"));
+                        RequestBody licensenew = RequestBody.create(MediaType.parse("text/plain"), file.getName());
 
-                                        TextView maintitle=selectCategoryDialog.findViewById(R.id.maintitle);
-                                        TextView subtitle=selectCategoryDialog.findViewById(R.id.subtitle);
-                                        TextView okaybtn=selectCategoryDialog.findViewById(R.id.okaybtn);
-                                        subtitle.setText(jsonObject.getString("msg"));
-                                        okaybtn.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                Intent intent=new Intent();
-                                                setResult(RESULT_OK, intent);
-                                                finish();
-                                            }
-                                        });
+                        ImageUpload contestService = ApiProduction.getInstance(AccountInformation.this).provideService(ImageUpload.class);
+                        Observable<String> responseObservable = contestService.uploadImage(tax_office, company, account_type,
+                                identity, bank, iban, title, experience, specialties, category_id_new, sub_category_id_new, rate,
+                                city, provience, postal_code, user_id, getRestParamsName(Utilclass.token)
+                                , body);
 
 
 
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        e.printStackTrace();
-                                    }
-
-                                } else {
-                                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-                                        @Override
-                                        public void getDialogEvent(String buttonPressed) {
-                                        }
-                                    });
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                        RxAPICallHelper.call(responseObservable, new RxAPICallback<String>() {
+                            @Override
+                            public void onSuccess(String t) {
+                                System.out.println("Inside failed=====>" + t);
                             }
 
-                        }
-                    });
+                            @Override
+                            public void onFailed(Throwable throwable) {
+                                System.out.println("Inside failed=====>" + throwable.getMessage());
+                            }
+                        });
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+        }
+
+
+
+//                    map.put("tax_office",ed_tax_office.getText().toString());
+//                    map.put("company",ed_companyname.getText().toString());
+//                    map.put("account_type",accountTypeId);
+//                    map.put("identity",ed_nationid_number.getText().toString());
+//                    map.put("bank",tv_select_bank.getText().toString());
+//                    map.put("iban",ed_iban.getText().toString());
+//                    map.put("title",ed_indivisual);
+//                    map.put("experience",ed_taskmoreabout);
+//                    map.put("specialties",ed_specialist);
+//                    map.put("category_id",category_id);
+//                    map.put("sub_category_id",sub_category_id);
+//                    map.put("rate",txt_select_price_tl);
+//                    map.put("city",ed_city.getText().toString());
+//                    map.put("provience",ed_provience.getText().toString());
+//                    map.put("postal_code",ed_postal_Address.getText().toString());
+//                    map.put("user_id",getRestParamsName("user_id"));
+//                    final Map<String, String> obj = new HashMap<>();
+//                    obj.put("Authorization", getRestParamsName(Utilclass.token));
+//
+//                    System.out.println("Account===="+map);
+//
+//                    serverHandler.sendToServer(AccountInformation.this, getApiUrl() + "addcounsultant", map, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+//                        @Override
+//                        public void getRespone(String dta, ArrayList<Object> respons) {
+//                            try {
+//                                JSONObject jsonObject = new JSONObject(dta);
+//                                if (jsonObject.getBoolean("status")) {
+//
+//                                    try {
+//                                        SimpleDialog simpleDialog = new SimpleDialog();
+//                                        final Dialog selectCategoryDialog = simpleDialog.simpleDailog(AccountInformation.this, R.layout.account_added_successfully_dialog, new ColorDrawable(getResources().getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
+//
+//                                        TextView maintitle=selectCategoryDialog.findViewById(R.id.maintitle);
+//                                        TextView subtitle=selectCategoryDialog.findViewById(R.id.subtitle);
+//                                        TextView okaybtn=selectCategoryDialog.findViewById(R.id.okaybtn);
+//                                        subtitle.setText(jsonObject.getString("msg"));
+//                                        okaybtn.setOnClickListener(new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View v) {
+//                                                Intent intent=new Intent();
+//                                                setResult(RESULT_OK, intent);
+//                                                finish();
+//                                            }
+//                                        });
+//
+//
+//
+//                                    }
+//                                    catch (Exception e)
+//                                    {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                } else {
+//                                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+//                                        @Override
+//                                        public void getDialogEvent(String buttonPressed) {
+//                                        }
+//                                    });
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                        }
+//                    });
 
 
 //                    category_id:1
@@ -342,7 +434,7 @@ public class AccountInformation extends BaseActivity {
 
 
 
-            }
+            //}
         });
 
     }

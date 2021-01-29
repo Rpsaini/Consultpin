@@ -31,7 +31,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="chat">Chat</string>
-    <string name="appointment">Set Appointment</string>
+    <string name="appointment">Appointment</string>
     <string name="becom_consultant">Become Consultant</string>
     <string name="account_info">Account Information</string>
     <string name="Favorites">Favorites</string>
@@ -122,6 +122,14 @@
     <string name="dateend">Date To</string>
     <string name="isweekend_off">Weekends and holidays are Included</string>
     <string name="create_your_own_time">Create your own time</string>
+    <string name="str_name">Name</string>
+    <string name="Profession">Profession</string>
+    <string name="update">Update</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_phone">Enter phone number</string>
+    <string name="enter_proffessional_bg">Enter professional background</string>
+    <string name="enter_speciality">Enter your speciality </string>
+    <string name="enter_fee">Enter your fee </string>
 
     <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>
     <string name="dummy_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500, when an unknown printer took a galley.</string>

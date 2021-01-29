@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/profile_background"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.Profile">
+
+
+    <ScrollView
+
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/rr_upper"
+                >
+
+                <RelativeLayout
+                    android:background="@drawable/bottom_corner_drawable"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <ImageView
+                            android:id="@+id/profile_back"
+                            android:padding="8dp"
+                            android:layout_margin="5dp"
+                            android:layout_height="35dp"
+                            android:layout_width="35dp"
+                            android:src="@drawable/ic_arrow"
+                            ></ImageView>
+
+                        <fontspackageForTextView.Regular
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/profile"
+                            style="@style/edittext_style_white16"
+                            android:layout_centerInParent="true"
+
+                            ></fontspackageForTextView.Regular>
+
+                    </RelativeLayout>
+
+
+
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_detaillayout"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:layout_height="100dp"
+                    >
+                    <RelativeLayout
+                        android:layout_centerInParent="true"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_profile"
+                            android:layout_height="match_parent"
+                            android:layout_width="100dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/man"
+                            ></ImageView>
+
+                        <ImageView
+                            android:translationY="-10dp"
+                            android:translationX="-10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_menu_camera"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            app:tint="@color/border_color"></ImageView>
+             </RelativeLayout>
+
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rr_upper"
+                android:orientation="vertical"
+                >
+
+                <fontspackageForTextView.Regular
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/edittext_style_14_black"
+                    android:text="@string/str_name"
+                    android:textSize="12dp"
+                    ></fontspackageForTextView.Regular>
+
+                <fontpackageforEdittext.Regular
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/roundcorner_drawable"
+                    android:maxLength="70"
+                    android:id="@+id/et_name"
+                    style="@style/edittext_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/app_name"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress" />
+
+
+
+
+                <fontspackageForTextView.Regular
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/edittext_style_14_black"
+                    android:text="@string/Profession"
+                    android:textSize="12dp"
+                    ></fontspackageForTextView.Regular>
+
+
+                <fontpackageforEdittext.Regular
+                    android:id="@+id/ed_profession"
+                    style="@style/edittext_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/roundcorner_drawable"
+                    android:hint="@string/Profession"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
+                    android:maxLength="70" />
+
+                <fontspackageForTextView.Regular
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/edittext_style_14_black"
+                    android:text="@string/phone"
+                    android:textSize="12dp"
+                    ></fontspackageForTextView.Regular>
+
+                <fontpackageforEdittext.Regular
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/roundcorner_drawable"
+                    android:maxLength="12"
+                    android:id="@+id/ed_phone"
+                    style="@style/edittext_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/phone"
+                    android:inputType="numberDecimal" />
+
+
+
+                <fontspackageForTextView.Regular
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/edittext_style_14_black"
+                    android:text="@string/your_email"
+                    android:textSize="12dp"
+                    ></fontspackageForTextView.Regular>
+
+                <fontpackageforEdittext.Regular
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/roundcorner_drawable"
+                    android:maxLength="70"
+                    android:id="@+id/ed_email"
+                    style="@style/edittext_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/your_email"
+                    android:inputType="textEmailAddress" />
+
+
+
+
+                <View
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:background="@color/profile_fee_color"
+                    ></View>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:background="@color/profile_background"
+                    >
+                    <fontspackageForTextView.Regular
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/your_professional_background"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        style="@style/edittext_style_14_black"
+                        ></fontspackageForTextView.Regular>
+
+
+                    <fontpackageforEdittext.Regular
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/roundcorner_drawable"
+                        android:maxLength="400"
+                        android:id="@+id/ed_profession_bg"
+                        style="@style/edittext_style"
+                        android:gravity="left|top"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:hint="@string/your_email"
+                        android:inputType="textEmailAddress" />
+
+
+
+
+
+                    <fontspackageForTextView.Regular
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/Specialties"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        style="@style/edittext_style_14_black"
+                        ></fontspackageForTextView.Regular>
+
+
+                    <fontpackageforEdittext.Regular
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/roundcorner_drawable"
+                        android:maxLength="400"
+                        android:id="@+id/ed_specialist"
+                        style="@style/edittext_style"
+                        android:gravity="left|top"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:hint="@string/Specialties"
+                        android:inputType="textEmailAddress" />
+
+
+
+                    <fontspackageForTextView.Regular
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/fee"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        style="@style/edittext_style_14_black"
+                        ></fontspackageForTextView.Regular>
+
+
+                    <fontpackageforEdittext.Regular
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/roundcorner_drawable"
+                        android:maxLength="70"
+                        android:id="@+id/ed_fee"
+                        style="@style/edittext_style"
+                        android:gravity="left|top"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:hint="@string/fee"
+                        android:maxLines="1"
+                        android:imeOptions="actionDone"
+
+                        android:inputType="numberDecimal" />
+
+
+                    <fontspackageForTextView.Regular
+                        android:id="@+id/tv_update"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:layout_height="45dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp"
+                        android:textColor="@color/white"
+                        android:text="@string/update"
+                        android:background="@drawable/drawable_button_skyblue"
+                        android:textSize="12dp"
+                        ></fontspackageForTextView.Regular>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+</RelativeLayout>

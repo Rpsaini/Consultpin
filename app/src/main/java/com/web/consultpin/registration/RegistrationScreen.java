@@ -235,7 +235,15 @@ public class RegistrationScreen extends BaseActivity {
 
                             System.out.println("Restaurant obj===" + jsonObject);
 
-
+                            alertDialogs.alertDialog(RegistrationScreen.this, "Response", jsonObject.getString("msg"), "Ok", "", new DialogCallBacks() {
+                                @Override
+                                public void getDialogEvent(String buttonPressed)
+                                {
+                                    Intent intent=new Intent(RegistrationScreen.this,LoginActivity.class);
+                                    startActivity(intent);
+                                    finishAffinity();
+                                }
+                            });
 
                         } else {
                             alertDialogs.alertDialog(RegistrationScreen.this, "Response", jsonObject.getString("msg"), "Ok", "", new DialogCallBacks() {

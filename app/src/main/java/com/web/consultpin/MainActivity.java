@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.BecomeAConsultant;
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.ui.home.Appointment;
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
 
         ImageView nav_oprn_toolbar =findViewById(R.id.nav_oprn_toolbar);
 
@@ -68,6 +69,8 @@ public class MainActivity extends BaseActivity {
 //        NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationMenu();
+
+        leftsidemenuclicks();
     }
 
     @Override
@@ -187,6 +190,20 @@ public class MainActivity extends BaseActivity {
                 ((ImageView)view).setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.bottom_navigation_color), android.graphics.PorterDuff.Mode.SRC_IN);
             }
         }
+    }
+
+
+    private void leftsidemenuclicks()
+    {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+       TextView appointmentHistory =navigationView.findViewById(R.id.tv_appointmenthistory);
+       appointmentHistory.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent=new Intent(MainActivity.this, AppointmentHistory.class);
+               startActivity(intent);
+           }
+       });
     }
 
 
