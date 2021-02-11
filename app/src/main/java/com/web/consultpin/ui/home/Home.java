@@ -69,7 +69,7 @@ public class Home extends Fragment {
             m.put("device_token", mainActivity.getDeviceToken() + "");
 
             final Map<String, String> obj = new HashMap<>();
-            obj.put("Authorization", mainActivity.getRestParamsName(Utilclass.token));
+            obj.put("token", mainActivity.getRestParamsName(Utilclass.token));
 
 
             mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + "dashboard", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
@@ -77,7 +77,9 @@ public class Home extends Fragment {
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
                         JSONObject jsonObject = new JSONObject(dta);
-                        if (jsonObject.getBoolean("status")) {
+                        if (jsonObject.getBoolean("status"))
+                        {
+                            System.out.println("home dataa==="+jsonObject);
                             try {
                                 String baseUrl = jsonObject.getString("icon_base_url");
                                 JSONArray categories = jsonObject.getJSONArray("categories");

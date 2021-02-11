@@ -34,6 +34,7 @@
 
 
     <LinearLayout
+        android:layout_marginLeft="10dp"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,14 +59,14 @@
                 ></fontspackageForTextView.BoldMedium>
 
             <fontspackageForTextView.Regular
-                android:id="@+id/experiance"
+                android:id="@+id/appointment_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:gravity="center|left"
                 android:layout_gravity="center"
                 style="@style/edittext_style_12_grey"
-                android:text="Dentist,Eye Care"
+                android:text=""
                 ></fontspackageForTextView.Regular>
 
             <LinearLayout
@@ -81,7 +82,7 @@
                 android:gravity="center|left"
                 android:layout_gravity="center"
                 style="@style/edittext_style_12_grey"
-                android:text="Dentist,Eye Care"
+                android:text=""
                 ></fontspackageForTextView.Regular>
 
                 <fontspackageForTextView.BoldMedium

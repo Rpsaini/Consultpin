@@ -1,5 +1,6 @@
 package com.web.consultpin.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
+import com.web.consultpin.Utilclass;
+import com.web.consultpin.consultant.ConsultantDetailView;
+import com.web.consultpin.consultant.PapularConsultantFullListing;
 
 import org.json.JSONObject;
 
@@ -92,6 +96,9 @@ public class PapularConsultantAdapter extends RecyclerView.Adapter<PapularConsul
                 public void onClick(View v) {
 
                     try {
+                        Intent intent=new Intent(pActivity, ConsultantDetailView.class);
+                        intent.putExtra(Utilclass.consultant_id,jsonObject.getString("user_id"));
+                        pActivity.startActivity(intent);
 
                     }
                     catch (Exception e)

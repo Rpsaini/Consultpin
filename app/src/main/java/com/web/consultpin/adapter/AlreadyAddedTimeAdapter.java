@@ -17,39 +17,37 @@ import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.consultant.PapularConsultantFullListing;
+import com.web.consultpin.consultant.SetAppointMent;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTimeAdapter.MyViewHolder> {
 
     private ArrayList<JSONObject> datAr;
-    private MainActivity pActivity;
-    private String imageUrl = "";
+    private SetAppointMent pActivity;
 
 
-    public CategoryAdapter(ArrayList<JSONObject> ar, MainActivity paActiviity, String url) {
+
+    public AlreadyAddedTimeAdapter(ArrayList<JSONObject> ar, SetAppointMent paActiviity) {
         datAr = ar;
         pActivity = paActiviity;
-        imageUrl = url;
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-
-        LinearLayout ll_best_restaurant;
-        ImageView category_image;
-        TextView category_name;
+        TextView tv_selected_time;
 
         public MyViewHolder(View view) {
             super(view);
 
 
-            ll_best_restaurant = view.findViewById(R.id.ll_best_restaurant);
-            category_image = view.findViewById(R.id.category_image);
-            category_name = view.findViewById(R.id.category_name);
+
+            tv_selected_time = view.findViewById(R.id.tv_selected_time);
+
 
 
         }
@@ -59,10 +57,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.categorylist, parent, false);
+                .inflate(R.layout.timing_list_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
+
+
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
@@ -70,22 +70,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         try {
 
 
-            JSONObject jsonObject = datAr.get(position);
-            holder.category_name.setText(jsonObject.getString("category_name"));
-            showImage(imageUrl + "" + jsonObject.getString("category_icon"), holder.category_image);
-            holder.ll_best_restaurant.setTag(position);
-            holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    try {
-                        Intent intent = new Intent(pActivity, PapularConsultantFullListing.class);
-                        pActivity.startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
 
 
         } catch (Exception e) {

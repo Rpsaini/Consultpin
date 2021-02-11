@@ -112,7 +112,7 @@ private MainActivity mainActivity;
 
 
             final Map<String, String> obj = new HashMap<>();
-            obj.put("Authorization", mainActivity.getRestParamsName(Utilclass.token));
+            obj.put("token", mainActivity.getRestParamsName(Utilclass.token));
 
             System.out.println("View profile==="+m+"==="+mainActivity.getApiUrl()+"view-profile");
             mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + "view-profile", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {

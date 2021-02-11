@@ -130,6 +130,9 @@
     <string name="enter_proffessional_bg">Enter professional background</string>
     <string name="enter_speciality">Enter your speciality </string>
     <string name="enter_fee">Enter your fee </string>
+    <string name="lirasymbol">₺</string>
+    <string name="set_appointment">Appointment Request</string>
+    <string name="consultant">Consultant</string>
 
     <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>
     <string name="dummy_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500, when an unknown printer took a galley.</string>

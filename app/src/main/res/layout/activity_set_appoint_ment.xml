@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,91 +7,84 @@
     tools:context=".ui.home.Chat">
 
 
+    <include layout="@layout/tootlbar_with_back_button"/>
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-    <fontspackageForTextView.BoldMedium
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/appointment"
-        android:gravity="center"
-        style="@style/edittext_style_18_black"
-        ></fontspackageForTextView.BoldMedium>
 
 
-    <LinearLayout
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="19dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        >
-        <fontspackageForTextView.BoldMedium
+
+        <LinearLayout
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="19dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            style="@style/edittext_style_14_black"
-            android:text="@string/datefrom"
+            android:orientation="horizontal"
+            android:weightSum="2"
             >
-        </fontspackageForTextView.BoldMedium>
+            <fontspackageForTextView.BoldMedium
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_14_black"
+                android:text="@string/datefrom"
+                >
+            </fontspackageForTextView.BoldMedium>
 
 
-        <fontspackageForTextView.BoldMedium
+            <fontspackageForTextView.BoldMedium
 
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/dateend"
+                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/dateend"
+                >
+            </fontspackageForTextView.BoldMedium>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
             >
-        </fontspackageForTextView.BoldMedium>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        >
-        <fontspackageForTextView.Regular
-            android:id="@+id/ed_datefrom"
-            android:background="@drawable/roundcorner_drawable"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            style="@style/edittext_style_12_grey"
-            android:hint="@string/datefrom"
-            android:gravity="left|center"
-            >
-        </fontspackageForTextView.Regular>
+            <fontspackageForTextView.Regular
+                android:id="@+id/ed_datefrom"
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/datefrom"
+                android:gravity="left|center"
+                >
+            </fontspackageForTextView.Regular>
 
 
-        <fontspackageForTextView.Regular
-            android:id="@+id/ed_date_end"
-            android:background="@drawable/roundcorner_drawable"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            style="@style/edittext_style_12_grey"
-            android:hint="@string/dateend"
-            android:layout_marginStart="10dp"
-            android:gravity="left|center"
-            >
-        </fontspackageForTextView.Regular>
+            <fontspackageForTextView.Regular
+                android:id="@+id/ed_date_end"
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/dateend"
+                android:layout_marginStart="10dp"
+                android:gravity="left|center"
+                >
+            </fontspackageForTextView.Regular>
 
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
         <fontspackageForTextView.BoldMedium
@@ -170,5 +163,5 @@
             android:layout_height="match_parent" >
         </GridView>
 
+    </LinearLayout>
 </LinearLayout>
-</RelativeLayout>

@@ -12,6 +12,7 @@ public class Utilclass
     public static String last_name="last_name";
     public static String phone="phone";
     public static String token="token";
+    public static String consultant_id="consultant_id";
 
 
    //{"user_id":"39","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9

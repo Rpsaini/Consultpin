@@ -39,17 +39,17 @@ public class AppointmentHistory extends BaseActivity {
         TextView toolBarTitle =findViewById(R.id.toolbar_title);
         toolBarTitle.setText(getResources().getString(R.string.appointment_history));
         appointment_history_recycler =findViewById(R.id.appointment_history_recycler);
-        loadData();
+   //    loadData();
     }
 
-    private void loadData()
-    {
-        appointment_history_recycler.setNestedScrollingEnabled(false);
-        appointment_history_recycler.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false));
-        appointment_history_recycler.setHasFixedSize(true);
-        appointment_history_recycler.setItemAnimator(new DefaultItemAnimator());
-        AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(new ArrayList<>(),this,"");
-        appointment_history_recycler.setAdapter(horizontalCategoriesAdapter);
-    }
+//    private void loadData()
+//    {
+//        appointment_history_recycler.setNestedScrollingEnabled(false);
+//        appointment_history_recycler.setLayoutManager(new LinearLayoutManager(this,
+//                LinearLayoutManager.VERTICAL, false));
+//        appointment_history_recycler.setHasFixedSize(true);
+//        appointment_history_recycler.setItemAnimator(new DefaultItemAnimator());
+//        AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(new ArrayList<>(),mai,"");
+//        appointment_history_recycler.setAdapter(horizontalCategoriesAdapter);
+//    }
 }

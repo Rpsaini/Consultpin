@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.PapularConsultantFullListing;
@@ -26,11 +27,11 @@ import java.util.ArrayList;
 public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentHistoryAdapter.MyViewHolder> {
 
     private ArrayList<JSONObject> datAr;
-    private AppointmentHistory pActivity;
+    private MainActivity pActivity;
     private String imageUrl="";
 
 
-    public AppointmentHistoryAdapter(ArrayList<JSONObject> ar, AppointmentHistory paActiviity, String url) {
+    public AppointmentHistoryAdapter(ArrayList<JSONObject> ar, MainActivity paActiviity, String url) {
         datAr = ar;
         pActivity = paActiviity;
         imageUrl=url;
@@ -43,16 +44,21 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
         LinearLayout ll_best_restaurant;
         ImageView consultant_image;
-        TextView consultant_name,specialties;
+        TextView consultant_name,time_duration,appointment_time,amount;
 
         public MyViewHolder(View view) {
             super(view);
 
 
-//            ll_best_restaurant = view.findViewById(R.id.ll_best_restaurant);
-//            consultant_name = view.findViewById(R.id.consultant_name);
-//            consultant_image = view.findViewById(R.id.consultant_image);
-//            specialties = view.findViewById(R.id.specialties);
+            ll_best_restaurant = view.findViewById(R.id.ll_best_restaurant);
+            consultant_name = view.findViewById(R.id.consultant_name);
+            time_duration = view.findViewById(R.id.time_duration);
+            appointment_time = view.findViewById(R.id.appointment_time);
+            consultant_image = view.findViewById(R.id.consultant_image);
+            amount = view.findViewById(R.id.amount);
+
+
+
 
 
 
@@ -75,29 +81,28 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
 
 
-//            JSONObject jsonObject=datAr.get(position);
-//            holder.consultant_name.setText(jsonObject.getString("category_name"));
-//            holder.specialties.setText(jsonObject.getString("specialties"));
-//            showImage(imageUrl+""+jsonObject.getString("profile_pic"),holder.consultant_image);
-//            holder.ll_best_restaurant.setTag(position);
-//            holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    try {
-//
-//                    }
-//                    catch (Exception e)
-//                    {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
+            JSONObject jsonObject=datAr.get(position);
+
+            String user_name=jsonObject.getString("user_name");
+            String duration=jsonObject.getString("appointment_duration");
+            String appointmentTime=jsonObject.getString("appointment_date")+" "+jsonObject.getString("appointment_time");
+            String fee=jsonObject.getString("appointment_fee");
 
 
+            holder.appointment_time.setText(appointmentTime);
+            holder.consultant_name.setText(user_name);
+            holder.time_duration.setText(duration+" Minutes");
+            holder.amount.setText(fee+pActivity.getResources().getString(R.string.lirasymbol));
+            showImage(jsonObject.getString("profile_pic"),holder.consultant_image);
 
+//            "profile_pic": "ebdddbb0e39e0900248a01852c476d64.jpeg",
+//                    "user_name": "Gagan  sapra",
+//                    "appointment_duration": "30",
+//                    "appointment_date": "2021-02-21",
+//                    "appointment_time": "11:30:00",
+//                    "appointment_fee": "300.00"
 
-        } catch (Exception e) {
+       } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -105,7 +110,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
     @Override
     public int getItemCount() {
-        return datAr.size()+20;
+        return datAr.size();
     }
 
 

@@ -9,6 +9,7 @@
     android:layout_height="wrap_content">
 
     <fontspackageForTextView.Regular
+        android:id="@+id/tv_selected_time"
         android:background="@drawable/roundcorner_drawable"
         android:layout_height="45dp"
         android:layout_width="140dp"
@@ -20,28 +21,5 @@
     </fontspackageForTextView.Regular>
 
 
-    <fontspackageForTextView.Regular
-        android:layout_marginStart="10dp"
-        android:background="@drawable/roundcorner_drawable"
-        android:layout_height="45dp"
-        android:layout_width="140dp"
-        android:text="14:00-20:00"
-        style="@style/edittext_style_12_grey"
-        android:hint="@string/datefrom"
-        android:gravity="center"
-        >
-    </fontspackageForTextView.Regular>
 
-
-    <fontspackageForTextView.Regular
-        android:layout_marginStart="10dp"
-        android:background="@drawable/roundcorner_drawable"
-        android:layout_height="45dp"
-        android:layout_width="140dp"
-        android:text="21:00-22:00"
-        style="@style/edittext_style_12_grey"
-        android:hint="@string/datefrom"
-        android:gravity="center"
-        >
-    </fontspackageForTextView.Regular>
 </LinearLayout>

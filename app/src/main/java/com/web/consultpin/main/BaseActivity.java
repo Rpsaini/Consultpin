@@ -131,7 +131,7 @@ public class BaseActivity extends AppCompatActivity
     //Also change qr code validation url
     public String getApiUrl()
     {
-        return "http://52.66.238.215/v1/";
+        return "http://webcomclients.in/consultpindev/v1/";
     }
 
     public String getXapiKey()

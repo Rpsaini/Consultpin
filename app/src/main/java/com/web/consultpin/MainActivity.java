@@ -16,7 +16,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.BecomeAConsultant;
 import com.web.consultpin.main.BaseActivity;
-import com.web.consultpin.ui.home.Appointment;
+import com.web.consultpin.ui.home.AppointMentHistoryFrg;
+//import com.web.consultpin.ui.home.Appointment;
 import com.web.consultpin.ui.home.Chat;
 import com.web.consultpin.ui.home.Home;
 
@@ -125,7 +126,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 doBottomBarSelection(bnave_ll_appontment);
                 commonBottomBar=bnave_ll_appontment;
-                callFragment(new Appointment(),"appointment");
+                callFragment(new AppointMentHistoryFrg(),"appointment");
             }
         });
 
