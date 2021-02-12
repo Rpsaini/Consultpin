@@ -133,6 +133,20 @@
     <string name="lirasymbol">₺</string>
     <string name="set_appointment">Appointment Request</string>
     <string name="consultant">Consultant</string>
+    <string name="write_information">write information about event ...</string>
+    <string name="about_the_event">About the event</string>
+    <string name="event_date">Event date</string>
+    <string name="event_time">Event time</string>
+    <string name="saveAppointment">Save</string>
+    <string name="timing">Timing</string>
+    <string name="event_category">Event Category</string>
+    <string name="paid">Paid</string>
+    <string name="numberofparticipaint">Number of participants</string>
+    <string name="imagetitle">The image you want to use for the event</string>
+    <string name="imagelimit">The image you will submit is 400x400px to1000x1000px in the range and should not exceed 5mb</string>
+    <string name="event">Add Event</string>
+    <string name="sendrequest">Send Request</string>
+
 
     <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>
     <string name="dummy_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500, when an unknown printer took a galley.</string>

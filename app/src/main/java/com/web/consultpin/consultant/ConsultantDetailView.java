@@ -1,7 +1,5 @@
 package com.web.consultpin.consultant;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +19,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class ConsultantDetailView extends BaseActivity {
@@ -68,7 +65,7 @@ public class ConsultantDetailView extends BaseActivity {
     private void consultantDetailApi() {
         try {
             final Map<String, String> m = new HashMap<>();
-            m.put("user_id", consultant_id);
+            m.put("consultant_id", consultant_id);
 
             m.put("device_type", "android");
             m.put("device_token", getDeviceToken() + "");
@@ -147,7 +144,7 @@ public class ConsultantDetailView extends BaseActivity {
         set_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ConsultantDetailView.this, SetAppointMent.class);
+                Intent intent = new Intent(ConsultantDetailView.this, SetTimeByConsultant.class);
                 intent.putExtra(Utilclass.consultant_id, consultant_id);
                 startActivity(intent);
             }

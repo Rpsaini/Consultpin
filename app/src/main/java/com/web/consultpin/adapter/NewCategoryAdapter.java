@@ -101,7 +101,7 @@ public class NewCategoryAdapter extends RecyclerView.Adapter<NewCategoryAdapter.
 
                     try {
                         Intent intent=new Intent(pActivity, ConsultantDetailView.class);
-                        intent.putExtra(Utilclass.consultant_id,jsonObject.getString("user_id"));
+                        intent.putExtra(Utilclass.consultant_id,jsonObject.getString("consultant_id"));
                         pActivity.startActivity(intent);
 
                     }

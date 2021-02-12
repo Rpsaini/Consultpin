@@ -6,12 +6,14 @@
     android:layout_height="wrap_content">
 
     <fontspackageForTextView.Regular
+        android:id="@+id/txt_select_time"
         android:background="@drawable/roundcorner_drawable"
-        android:layout_height="35dp"
-        android:layout_width="100dp"
-        android:text="10:20"
+        android:layout_height="40dp"
+        android:layout_width="180dp"
+        android:text=""
+        android:textSize="13dp"
         style="@style/edittext_style_12_grey"
-        android:hint="@string/datefrom"
+        android:hint="00:00-00:00"
         android:gravity="center"
         >
     </fontspackageForTextView.Regular>

@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.BecomeAConsultant;
+import com.web.consultpin.consultant.EventRequestActivity;
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.ui.home.AppointMentHistoryFrg;
 //import com.web.consultpin.ui.home.Appointment;
@@ -42,7 +43,8 @@ public class MainActivity extends BaseActivity {
 //    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initiateObj();
@@ -92,8 +94,6 @@ public class MainActivity extends BaseActivity {
 
     private void navigationMenu()
     {
-
-
         callFragment(new Home(),"home");
         LinearLayout bnave_ll_home = findViewById(R.id.bnave_ll_home);
         LinearLayout bnave_ll_chat = findViewById(R.id.bnave_ll_chat);
@@ -198,6 +198,7 @@ public class MainActivity extends BaseActivity {
     {
         NavigationView navigationView = findViewById(R.id.nav_view);
        TextView appointmentHistory =navigationView.findViewById(R.id.tv_appointmenthistory);
+       TextView tv_events =navigationView.findViewById(R.id.tv_events);
        appointmentHistory.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -205,7 +206,17 @@ public class MainActivity extends BaseActivity {
                startActivity(intent);
            }
        });
+
+
+        tv_events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, EventRequestActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
 
 }

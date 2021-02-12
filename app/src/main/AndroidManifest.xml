@@ -27,7 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".consultant.SetAppointMent"></activity>
+        <activity android:name=".usersection.SetAppointmentByUser"></activity>
+        <activity android:name=".consultant.EventRequestActivity" />
+        <activity android:name=".consultant.SetTimeByConsultant" />
         <activity android:name=".consultant.ConsultantDetailView" />
         <activity android:name=".consultant.AppointmentHistory" />
         <activity android:name=".consultant.PapularConsultantFullListing" />

@@ -1,11 +1,9 @@
 package com.web.consultpin.adapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,26 +12,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.web.consultpin.MainActivity;
+import com.google.gson.JsonArray;
 import com.web.consultpin.R;
-import com.web.consultpin.consultant.PapularConsultantFullListing;
-import com.web.consultpin.consultant.SetAppointMent;
+import com.web.consultpin.consultant.SetTimeByConsultant;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTimeAdapter.MyViewHolder> {
 
-    private ArrayList<JSONObject> datAr;
-    private SetAppointMent pActivity;
+    private JSONArray datAr;
+    private SetTimeByConsultant pActivity;
+    public Map<Integer,String> preTimeMap=new HashMap<>();
 
-
-
-    public AlreadyAddedTimeAdapter(ArrayList<JSONObject> ar, SetAppointMent paActiviity) {
+    public AlreadyAddedTimeAdapter(JSONArray ar, SetTimeByConsultant paActiviity) {
         datAr = ar;
         pActivity = paActiviity;
+        preTimeMap.clear();
 
     }
 
@@ -43,9 +43,6 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
 
         public MyViewHolder(View view) {
             super(view);
-
-
-
             tv_selected_time = view.findViewById(R.id.tv_selected_time);
 
 
@@ -68,10 +65,35 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         try {
+           String timeStr=datAr.getString(position);
+           holder.tv_selected_time.setText(timeStr);
 
+           if(preTimeMap.containsKey(position))
+           {
+               holder.tv_selected_time.setBackgroundResource(R.drawable.blue_drawable);
+               holder.tv_selected_time.setTextColor(pActivity.getResources().getColor(R.color.white));
+           }
+           else
+           {
+               holder.tv_selected_time.setBackgroundResource(R.drawable.roundcorner_drawable);
+               holder.tv_selected_time.setTextColor(pActivity.getResources().getColor(R.color.black));
+           }
+           holder.tv_selected_time.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v)
+               {
+                   if(preTimeMap.containsKey(position))
+                   {
+                       preTimeMap.remove(position);
+                   }
+                   else
+                   {
+                       preTimeMap.put(position,((TextView)v).getText().toString());
+                   }
+                   notifyDataSetChanged();
 
-
-
+               }
+           });
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +103,7 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
 
     @Override
     public int getItemCount() {
-        return datAr.size();
+        return datAr.length();
     }
 
 

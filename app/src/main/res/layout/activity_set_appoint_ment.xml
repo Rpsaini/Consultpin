@@ -8,8 +8,12 @@
 
 
     <include layout="@layout/tootlbar_with_back_button"/>
-    <LinearLayout
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -57,6 +61,7 @@
             android:weightSum="2"
             >
             <fontspackageForTextView.Regular
+                android:padding="5dp"
                 android:id="@+id/ed_datefrom"
                 android:background="@drawable/roundcorner_drawable"
                 android:layout_height="match_parent"
@@ -70,6 +75,7 @@
 
 
             <fontspackageForTextView.Regular
+                android:padding="5dp"
                 android:id="@+id/ed_date_end"
                 android:background="@drawable/roundcorner_drawable"
                 android:layout_height="match_parent"
@@ -95,10 +101,12 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             style="@style/edittext_style_14_black"
-            android:text="@string/first_name"
+            android:text="@string/timing"
             >
         </fontspackageForTextView.BoldMedium>
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:id="@+id/recyclerview_alreadyAddedTime"
@@ -128,6 +136,7 @@
 
 
             <ImageView
+                android:id="@+id/img_isweekdayopen"
                 android:layout_centerVertical="true"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -156,12 +165,26 @@
             android:layout_marginTop="10dp"
             android:scrollbarThumbVertical="@android:color/transparent"
             android:id="@+id/grid_timing"
-            android:numColumns="4"
+            android:numColumns="auto_fit"
             android:gravity="center"
             android:stretchMode="columnWidth"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="250dp" >
         </GridView>
 
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_saveAppointment"
+            android:background="@drawable/drawable_button_skyblue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/saveAppointment" />
     </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
