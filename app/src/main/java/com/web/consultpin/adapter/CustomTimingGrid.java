@@ -1,5 +1,4 @@
 package com.web.consultpin.adapter;
-
 import android.app.TimePickerDialog;
 import android.content.Context;
 
@@ -22,23 +21,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-
 public class CustomTimingGrid extends BaseAdapter {
     private SetTimeByConsultant context;
-    private final ArrayList<JSONObject> gridValues;
+    private final ArrayList<String> gridValues;
     private int count = 0;
-    private String newTime = "";
+    private String newTime = "",isWeekOpen="";
+    private String dateStr;
 
-
-    public CustomTimingGrid(SetTimeByConsultant context, ArrayList<JSONObject> artistData) {
-
+    public CustomTimingGrid(SetTimeByConsultant context, ArrayList<String> artistData,String isWeekOpen,String dateStr) {
         this.context = context;
         this.gridValues = artistData;
         count = 0;
         newTime = "";
-
-
+        this.isWeekOpen=isWeekOpen;
+        this.dateStr =dateStr;
     }
 
     @Override
@@ -59,9 +55,9 @@ public class CustomTimingGrid extends BaseAdapter {
     }
 
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        LayoutInflater inflater = (LayoutInflater) context
+    public View getView(int position, View convertView, ViewGroup parent)
+      {
+          LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View gridView = null;
@@ -75,13 +71,28 @@ public class CustomTimingGrid extends BaseAdapter {
 
         try {
             final TextView txt_select_time = gridView.findViewById(R.id.txt_select_time);
-            JSONObject dataObj = gridValues.get(position);
-            if (dataObj != null) {
-                //String id = dataObj.getString("id");
-                //String timingType = dataObj.getString("timing_type");
-                String timing = dataObj.getString("timing");
-                String isWeekend = dataObj.getString("include_weekend_n_holidays");
+            String time = gridValues.get(position);
 
+            ArrayList<JSONObject> mapData=context.mainDataContainerMap.get(dateStr);
+            if(mapData!=null) {
+                for (int x = 0; x < mapData.size(); x++) {
+                    JSONObject dataObj = mapData.get(x);
+                    String isQuick = dataObj.getString("isQuick");
+                    System.out.println("Datat---" + dataObj + "===" + time);
+                    if (time != null) {
+                        if (isQuick.equalsIgnoreCase("2")) {
+                            if (time.equalsIgnoreCase(dataObj.getString("time"))) {
+
+                                context.preTimeMapCustom.put(position, time);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            if(time != null)
+            {
                 System.out.println("Premap=====" + context.preTimeMapCustom);
                 if (context.preTimeMapCustom.containsKey(position)) {
                     txt_select_time.setBackgroundResource(R.drawable.blue_drawable);
@@ -92,27 +103,28 @@ public class CustomTimingGrid extends BaseAdapter {
                 }
 
 
-                txt_select_time.setText(timing);
-                if (isWeekend.equalsIgnoreCase("1")) {
+                txt_select_time.setText(time);
+                if(isWeekOpen.equalsIgnoreCase("0"))
+                {
                     txt_select_time.setAlpha(.5f);
-                } else {
+                }
+                else {
                     txt_select_time.setAlpha(1f);
-
-
                     txt_select_time.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v)
                           {
+                            System.out.println("Map data==="+context.preTimeMapCustom);
                             if(context.preTimeMapCustom.containsKey(position))
                             {
                                 context.preTimeMapCustom.remove(position);
-                                notifyDataSetChanged();
                             }
                             else
                             {
-                                context.preTimeMapCustom.put(position, txt_select_time.getText().toString());
-                                notifyDataSetChanged();
+                              context.preTimeMapCustom.put(position, txt_select_time.getText().toString());
                             }
+                             context.notifyMap(context.preTimeMapAlready,"already");
+                              notifyDataSetChanged();
                           }
                     });
                 }
@@ -123,13 +135,8 @@ public class CustomTimingGrid extends BaseAdapter {
                 txt_select_time.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        txt_select_time.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                        addOrEditTime(txt_select_time, "Start Time", true, -1);
 
-                                addOrEditTime(txt_select_time, "Start Time", true, -1);
-                            }
-                        });
                     }
                 });
             }
@@ -159,24 +166,16 @@ public class CustomTimingGrid extends BaseAdapter {
                 if (count == 2) {
                     try {
                         if (isAddOrEdit) {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("timing", newTime.substring(1, newTime.length()));
-                            jsonObject.put("include_weekend_n_holidays", "0");
                             context.customTimeArray.remove(context.customTimeArray.size() - 1);
-                            context.customTimeArray.add(jsonObject);
-                            context.viewTimingGrid(context.customTimeArray);
-
+                            context.customTimeArray.add(newTime.substring(1, newTime.length()));
+                            context.viewTimingGrid(context.customTimeArray,context.include_weekend_n_holidays,dateStr);
                             context.preTimeMapCustom.put(position, newTime);
-
-
-                        } else
+                          }
+                         else
                             {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("timing", newTime.substring(1, newTime.length()));
-                            jsonObject.put("include_weekend_n_holidays", "0");
                             context.customTimeArray.remove(context.customTimeArray.size() - 1);
-                            context.customTimeArray.set(position, jsonObject);
-                            context.viewTimingGrid(context.customTimeArray);
+                            context.customTimeArray.set(position, newTime.substring(1, newTime.length()));
+                            context.viewTimingGrid(context.customTimeArray,context.include_weekend_n_holidays,dateStr);
 
                         }
                     } catch (Exception e) {

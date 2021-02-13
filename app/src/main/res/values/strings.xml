@@ -146,6 +146,11 @@
     <string name="imagelimit">The image you will submit is 400x400px to1000x1000px in the range and should not exceed 5mb</string>
     <string name="event">Add Event</string>
     <string name="sendrequest">Send Request</string>
+    <string name="selecttime">Select your appointment time.</string>
+    <string name="wouldyouliketosave">Would you like to save this time?.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="action">Action</string>
 
 
     <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>

@@ -28,19 +28,17 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
 
     private JSONArray datAr;
     private SetTimeByConsultant pActivity;
-    public Map<Integer,String> preTimeMap=new HashMap<>();
+
 
     public AlreadyAddedTimeAdapter(JSONArray ar, SetTimeByConsultant paActiviity) {
         datAr = ar;
         pActivity = paActiviity;
-        preTimeMap.clear();
+
 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
         TextView tv_selected_time;
-
         public MyViewHolder(View view) {
             super(view);
             tv_selected_time = view.findViewById(R.id.tv_selected_time);
@@ -67,8 +65,8 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
         try {
            String timeStr=datAr.getString(position);
            holder.tv_selected_time.setText(timeStr);
-
-           if(preTimeMap.containsKey(position))
+            System.out.println("map--->in="+pActivity.preTimeMapAlready);
+           if(pActivity.preTimeMapAlready.containsKey(position))
            {
                holder.tv_selected_time.setBackgroundResource(R.drawable.blue_drawable);
                holder.tv_selected_time.setTextColor(pActivity.getResources().getColor(R.color.white));
@@ -82,14 +80,17 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
                @Override
                public void onClick(View v)
                {
-                   if(preTimeMap.containsKey(position))
+                   System.out.println("map--->"+pActivity.preTimeMapAlready);
+                   if(pActivity.preTimeMapAlready.containsKey(position))
                    {
-                       preTimeMap.remove(position);
+                       pActivity.preTimeMapAlready.remove(position);
                    }
                    else
                    {
-                       preTimeMap.put(position,((TextView)v).getText().toString());
+                       pActivity.preTimeMapAlready.put(position,holder.tv_selected_time.getText()+"");
+
                    }
+                   pActivity.notifyMap(pActivity.preTimeMapCustom,"custom");
                    notifyDataSetChanged();
 
                }
@@ -107,7 +108,8 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
     }
 
 
-    private void showImage(final String url, final ImageView header_img) {
+    private void showImage(final String url, final ImageView header_img)
+    {
         pActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

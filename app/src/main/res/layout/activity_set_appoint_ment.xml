@@ -67,7 +67,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                style="@style/edittext_style_12_grey"
+                style="@style/edittext_style_14_black"
                 android:hint="@string/datefrom"
                 android:gravity="left|center"
                 >
@@ -81,7 +81,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                style="@style/edittext_style_12_grey"
+                style="@style/edittext_style_14_black"
                 android:hint="@string/dateend"
                 android:layout_marginStart="10dp"
                 android:gravity="left|center"
@@ -156,6 +156,50 @@
             >
         </fontspackageForTextView.BoldMedium>
 
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <ImageView
+                android:layout_marginLeft="30dp"
+
+                android:rotation="180"
+                android:id="@+id/img_prev"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_next"
+                android:layout_centerVertical="true"
+                ></ImageView>
+
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0000:00:00 to 0000:00:00"
+                android:layout_centerInParent="true"
+                ></TextView>
+
+            <ImageView
+                android:layout_marginRight="30dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/img_next"
+                android:padding="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_next"
+                android:layout_centerVertical="true"
+                ></ImageView>
+
+
+        </RelativeLayout>
+
         <GridView
             android:verticalSpacing="5dp"
             android:layout_marginStart="10dp"
@@ -169,7 +213,7 @@
             android:gravity="center"
             android:stretchMode="columnWidth"
             android:layout_width="match_parent"
-            android:layout_height="250dp" >
+            android:layout_height="200dp" >
         </GridView>
 
         <fontspackageForTextView.Regular
