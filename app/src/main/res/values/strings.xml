@@ -147,7 +147,7 @@
     <string name="event">Add Event</string>
     <string name="sendrequest">Send Request</string>
     <string name="selecttime">Select your appointment time.</string>
-    <string name="wouldyouliketosave">Would you like to save this time?.</string>
+    <string name="wouldyouliketosave">Save this time slot before to go next.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="action">Action</string>

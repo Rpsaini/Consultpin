@@ -9,7 +9,7 @@
 
     <include layout="@layout/tootlbar_with_back_button"/>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -52,8 +52,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -61,6 +61,8 @@
             android:weightSum="2"
             >
             <fontspackageForTextView.Regular
+                android:drawableRight="@drawable/ic_monthlycalendar"
+                android:drawablePadding="5dp"
                 android:padding="5dp"
                 android:id="@+id/ed_datefrom"
                 android:background="@drawable/roundcorner_drawable"
@@ -75,6 +77,9 @@
 
 
             <fontspackageForTextView.Regular
+
+                android:drawableRight="@drawable/ic_monthlycalendar"
+                android:drawablePadding="5dp"
                 android:padding="5dp"
                 android:id="@+id/ed_date_end"
                 android:background="@drawable/roundcorner_drawable"
@@ -94,8 +99,8 @@
 
 
         <fontspackageForTextView.BoldMedium
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="19dp"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -124,8 +129,8 @@
 
             >
             <fontspackageForTextView.BoldMedium
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_centerVertical="true"
                 android:text="@string/isweekend_off"
                 android:layout_height="wrap_content"
@@ -136,6 +141,7 @@
 
 
             <ImageView
+                android:layout_marginRight="10dp"
                 android:id="@+id/img_isweekdayopen"
                 android:layout_centerVertical="true"
                 android:layout_height="wrap_content"
@@ -180,6 +186,8 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:padding="5dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0000:00:00 to 0000:00:00"
@@ -220,15 +228,15 @@
             android:id="@+id/tv_saveAppointment"
             android:background="@drawable/drawable_button_skyblue"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             android:gravity="center"
             android:textColor="@color/white"
             android:text="@string/saveAppointment" />
     </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

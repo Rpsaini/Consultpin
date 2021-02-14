@@ -25,16 +25,16 @@ public class CustomTimingGrid extends BaseAdapter {
     private SetTimeByConsultant context;
     private final ArrayList<String> gridValues;
     private int count = 0;
-    private String newTime = "",isWeekOpen="";
-    private String dateStr;
+    private String newTime ="";
+    //private String dateStr;
 
-    public CustomTimingGrid(SetTimeByConsultant context, ArrayList<String> artistData,String isWeekOpen,String dateStr) {
+    public CustomTimingGrid(SetTimeByConsultant context, ArrayList<String> artistData) {
         this.context = context;
         this.gridValues = artistData;
         count = 0;
         newTime = "";
-        this.isWeekOpen=isWeekOpen;
-        this.dateStr =dateStr;
+//        this.isWeekOpen=isWeekOpen;
+       // this.dateStr =dateStr;
     }
 
     @Override
@@ -73,12 +73,11 @@ public class CustomTimingGrid extends BaseAdapter {
             final TextView txt_select_time = gridView.findViewById(R.id.txt_select_time);
             String time = gridValues.get(position);
 
-            ArrayList<JSONObject> mapData=context.mainDataContainerMap.get(dateStr);
+            ArrayList<JSONObject> mapData=context.mainDataContainerMap.get(context.txt_date.getText().toString());
             if(mapData!=null) {
                 for (int x = 0; x < mapData.size(); x++) {
                     JSONObject dataObj = mapData.get(x);
                     String isQuick = dataObj.getString("isQuick");
-                    System.out.println("Datat---" + dataObj + "===" + time);
                     if (time != null) {
                         if (isQuick.equalsIgnoreCase("2")) {
                             if (time.equalsIgnoreCase(dataObj.getString("time"))) {
@@ -104,7 +103,8 @@ public class CustomTimingGrid extends BaseAdapter {
 
 
                 txt_select_time.setText(time);
-                if(isWeekOpen.equalsIgnoreCase("0"))
+                System.out.println("Is week open==="+context.include_weekend_n_holidays);
+                if(context.include_weekend_n_holidays.equalsIgnoreCase("0"))
                 {
                     txt_select_time.setAlpha(.5f);
                 }
@@ -124,7 +124,7 @@ public class CustomTimingGrid extends BaseAdapter {
                               context.preTimeMapCustom.put(position, txt_select_time.getText().toString());
                             }
                              context.notifyMap(context.preTimeMapAlready,"already");
-                              notifyDataSetChanged();
+                             notifyDataSetChanged();
                           }
                     });
                 }
@@ -168,16 +168,19 @@ public class CustomTimingGrid extends BaseAdapter {
                         if (isAddOrEdit) {
                             context.customTimeArray.remove(context.customTimeArray.size() - 1);
                             context.customTimeArray.add(newTime.substring(1, newTime.length()));
-                            context.viewTimingGrid(context.customTimeArray,context.include_weekend_n_holidays,dateStr);
                             context.preTimeMapCustom.put(position, newTime);
+
+                            context.viewTimingGrid(context.customTimeArray);
+
                           }
                          else
                             {
                             context.customTimeArray.remove(context.customTimeArray.size() - 1);
                             context.customTimeArray.set(position, newTime.substring(1, newTime.length()));
-                            context.viewTimingGrid(context.customTimeArray,context.include_weekend_n_holidays,dateStr);
+                            context.viewTimingGrid(context.customTimeArray);
 
                         }
+                         System.out.println("Isedit or not==="+isAddOrEdit);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

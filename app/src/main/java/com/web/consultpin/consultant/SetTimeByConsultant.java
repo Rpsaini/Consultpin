@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.app.dialogsnpickers.DialogCallBacks;
 import com.app.vollycommunicationlib.CallBack;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.AlreadyAddedTimeAdapter;
@@ -51,14 +52,12 @@ public class SetTimeByConsultant extends BaseActivity {
     ImageView toolbar_back_arrow, img_prev, img_next;
     AlreadyAddedTimeAdapter horizontalCategoriesAdapter;
     CustomTimingGrid customTimingGrid;
-    private TextView txt_date;
+    public TextView txt_date;
 
     Map<String, JSONObject> datesMap = new HashMap<>();
     List<String> datesStringAr = new ArrayList<String>();
 
-    public Map<String,ArrayList<JSONObject>> mainDataContainerMap=new HashMap<>();
-
-
+    public Map<String, ArrayList<JSONObject>> mainDataContainerMap = new HashMap<>();
 
 
     @Override
@@ -124,7 +123,7 @@ public class SetTimeByConsultant extends BaseActivity {
         ed_datefrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           startDate((TextView) v);
+                startDate((TextView) v);
             }
         });
 
@@ -145,14 +144,19 @@ public class SetTimeByConsultant extends BaseActivity {
                 } else {
                     include_weekend_n_holidays = "1";
                     img_isweekdayopen.setImageResource(R.drawable.ic_button);
+
                 }
+
+                tv_saveAppointment.setAlpha(1f);
+                tv_saveAppointment.setEnabled(true);
+
+
             }
         });
 
         tv_saveAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 saveTiming("nothing");
             }
         });
@@ -163,85 +167,44 @@ public class SetTimeByConsultant extends BaseActivity {
             public void onClick(View v) {
 
 
-                if (indexCount < datesStringAr.size() - 1)
-                 {
-                  if(preTimeMapAlready.size()==0&&preTimeMapCustom.size()==0)
-                  {
-                      alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.selecttime), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-                          @Override
-                          public void getDialogEvent(String buttonPressed)
-                          {
+                if (indexCount < datesStringAr.size() - 1) {
 
-                          }
-                      });
-                  }
-                  else {
+                        papulateDataMap(datesStringAr.get(indexCount));
+                        indexCount++;
+                        String nextDate = datesStringAr.get(indexCount).toString();
+                        JSONObject dataObj = datesMap.get(nextDate);
+                        txt_date.setText(nextDate + "");
+                        parseJsonArrayNSetGridData();
+//                        parseJsonArrayNSetGridData(dataObj);
 
-                      alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.wouldyouliketosave), getResources().getString(R.string.yes),  "", new DialogCallBacks() {
-                          @Override
-                          public void getDialogEvent(String buttonPressed)
-                          {
-//                              if(buttonPressed.equalsIgnoreCase("yes"))
-//                              {
-//                                  saveTiming("next");
-//                              }
-//                              else
-//                              {
-                                 if(customTimeArray.size()==0) {
-                                     papulateDataMap(datesStringAr.get(indexCount));
-                                     indexCount++;
-                                     String nextDate = datesStringAr.get(indexCount).toString();
-                                     JSONObject dataObj = datesMap.get(nextDate);
-                                     txt_date.setText(nextDate + "");
-                                     parseJsonArrayNSetGridData(dataObj, nextDate);
-
-                              }
-
-                          }
-                      });
-
-
-                  }
-                }
+                   }
             }
+
         });
 
         img_prev.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if(indexCount > 1)
-                 {
-//                    if(preTimeMapAlready.size()==0&&preTimeMapCustom.size()==0)
-//                    {
-//                        alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.selecttime), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-//                            @Override
-//                            public void getDialogEvent(String buttonPressed)
-//                            {
-//
-//                            }
-//                        });
-//                    }
-//                    else
-//                      {
-//                        papulateDataMap(datesStringAr.get(indexCount));
-                        indexCount--;
-                        String prevDate = datesStringAr.get(indexCount).toString();
-                        JSONObject dataObj = datesMap.get(prevDate);
-                        txt_date.setText(prevDate);
-                        parseJsonArrayNSetGridData(dataObj,prevDate);
-                        getAlreadyAddedTime();
-                //    }
+            public void onClick(View v) {
+                if (indexCount > 1) {
+
+                    indexCount--;
+                    String prevDate = datesStringAr.get(indexCount).toString();
+                    //JSONObject dataObj = datesMap.get(prevDate);
+                    txt_date.setText(prevDate);
+//                    parseJsonArrayNSetGridData(dataObj);
+                    parseJsonArrayNSetGridData();
+                    getAlreadyAddedTime();
+                    //    }
                 }
             }
         });
     }
 
-    public void viewTimingGrid(ArrayList<String> dataAr, String isWeekOpen,String dateStr) {
+    public void viewTimingGrid(ArrayList<String> dataAr) {
 
         GridView grid_timing = findViewById(R.id.grid_timing);
         dataAr.add(null);
-        customTimingGrid = new CustomTimingGrid(this, customTimeArray, isWeekOpen,dateStr);
+        customTimingGrid = new CustomTimingGrid(this, customTimeArray);
         grid_timing.setAdapter(customTimingGrid);
     }
 
@@ -273,14 +236,14 @@ public class SetTimeByConsultant extends BaseActivity {
     }
 
 
-    private void showAlreadyAddedTime(JSONArray commonTime) {
+    private void showAlreadyAddedTime(JSONArray commonTime, String dateStr) {
         RecyclerView recyclerview_alreadyAddedTime = findViewById(R.id.recyclerview_alreadyAddedTime);
         recyclerview_alreadyAddedTime.setNestedScrollingEnabled(false);
         recyclerview_alreadyAddedTime.setLayoutManager(new LinearLayoutManager(SetTimeByConsultant.this,
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerview_alreadyAddedTime.setHasFixedSize(true);
         recyclerview_alreadyAddedTime.setItemAnimator(new DefaultItemAnimator());
-        horizontalCategoriesAdapter = new AlreadyAddedTimeAdapter(commonTime, this);
+        horizontalCategoriesAdapter = new AlreadyAddedTimeAdapter(commonTime, this, dateStr);
         recyclerview_alreadyAddedTime.setAdapter(horizontalCategoriesAdapter);
     }
 
@@ -311,48 +274,44 @@ public class SetTimeByConsultant extends BaseActivity {
 
                             try {
                                 JSONObject data = jsonObject.getJSONObject("data");
-                                JSONArray quickAr=data.getJSONArray("quick_time_list");
-                                showAlreadyAddedTime(quickAr);
+                                JSONArray quickAr = data.getJSONArray("quick_time_list");
+                                showAlreadyAddedTime(quickAr, ed_datefrom.getText().toString());
 
                                 JSONArray appointment_timeAr = data.getJSONArray("appointment_time");
                                 JSONObject gdataOb = new JSONObject();
-                                for(int x = 0; x < appointment_timeAr.length(); x++)
+                                for (int x = 0; x < appointment_timeAr.length(); x++)
                                 {
                                     JSONObject dataObj = appointment_timeAr.getJSONObject(x);
                                     gdataOb = dataObj;
                                     datesMap.put(dataObj.getString("start_date"), dataObj);
 
+                                    String timingStr = dataObj.getString("timing");
+                                    String timing_type = dataObj.getString("timing_type");
+                                    String include_weekend_n_holidays = dataObj.getString("include_weekend_n_holidays");
+                                    String start_date = dataObj.getString("start_date");
 
-                                    String timingStr=dataObj.getString("timing");
-                                    String timing_type=dataObj.getString("timing_type");
-                                    String start_date=dataObj.getString("start_date");
-
-                                    JSONArray timeAR=new JSONArray(timingStr);
-                                    ArrayList<JSONObject> quickCustomJAr=new ArrayList<>();
-                                    for(int y=0;y<timeAR.length();y++)
-                                    {
+                                    JSONArray timeAR = new JSONArray(timingStr);
+                                    ArrayList<JSONObject> quickCustomJAr = new ArrayList<>();
+                                    for (int y = 0; y < timeAR.length(); y++) {
                                         JSONObject jsonData = new JSONObject();
                                         jsonData.put("isQuick", timing_type);
                                         jsonData.put("time", timeAR.getString(y));
+                                        jsonData.put("timing", timingStr);
+                                        jsonData.put("include_weekend_n_holidays",include_weekend_n_holidays);
                                         quickCustomJAr.add(jsonData);
                                     }
-                                    mainDataContainerMap.put(start_date,quickCustomJAr);
+                                    mainDataContainerMap.put(start_date, quickCustomJAr);
 
                                 }
 
 
+                                System.out.println("Map data====" + mainDataContainerMap);
+//                                parseJsonArrayNSetGridData(gdataOb);
+                                parseJsonArrayNSetGridData();
 
-
-                                System.out.println("Map data===="+mainDataContainerMap);
-
-
-
-                                parseJsonArrayNSetGridData(gdataOb,ed_datefrom.getText().toString());
-
-                            } catch (Exception e)
-                             {
+                            } catch (Exception e) {
                                 e.printStackTrace();
-                             }
+                            }
 
                         } else {
                             alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
@@ -379,93 +338,101 @@ public class SetTimeByConsultant extends BaseActivity {
 
     private void saveTiming(final String typeStr) {
 
-        try
+        try {
+                final Map<String, String> m = new HashMap<>();
+                m.put("start_date", txt_date.getText().toString());
+                m.put("end_date", txt_date.getText().toString());
+                m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
+
+                m.put("include_weekend_n_holidays", include_weekend_n_holidays);
+                String timings = "";
+
+                preTimeMapCustom.remove(-1);
+                JSONArray SavedArray = new JSONArray();
+                for (Map.Entry<Integer, String> map : preTimeMapCustom.entrySet()) {
+                    SavedArray.put(map.getValue());
+                    m.put("timing_type", "2");
+                }
+
+                for (Map.Entry<Integer, String> map : preTimeMapAlready.entrySet()) {
+                    SavedArray.put(map.getValue());
+                    m.put("timing_type", "1");
+                }
+                m.put("timing", SavedArray + "");
+
+
+                m.put("device_type", "android");
+                m.put("device_token", getDeviceToken() + "");
+
+                final Map<String, String> obj = new HashMap<>();
+                obj.put("token", getRestParamsName(Utilclass.token));
+
+
+
+
+    System.out.println("Before to save Consultant===" + m);
+
+            if(SavedArray.length()==0)
             {
-            final Map<String, String> m = new HashMap<>();
-            m.put("start_date", txt_date.getText().toString());
-            m.put("end_date", txt_date.getText().toString());
-            m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
-
-            m.put("include_weekend_n_holidays", include_weekend_n_holidays);
-            String timings = "";
-
-            preTimeMapCustom.remove(-1);
-            JSONArray SavedArray=new JSONArray();
-            for (Map.Entry<Integer, String> map : preTimeMapCustom.entrySet()) {
-                SavedArray.put(map.getValue());
-                m.put("timing_type", "2");
+                alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.selecttime), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                    @Override
+                    public void getDialogEvent(String buttonPressed) {
+                    }
+                });
+                return;
             }
 
-           for (Map.Entry<Integer, String> map : preTimeMapAlready.entrySet()) {
-                    SavedArray.put(map.getValue());
-               m.put("timing_type", "1");
-                }
-            m.put("timing", SavedArray+"");
-
-
-            m.put("device_type", "android");
-            m.put("device_token", getDeviceToken() + "");
-
-            final Map<String, String> obj = new HashMap<>();
-            obj.put("token", getRestParamsName(Utilclass.token));
-
-
-            System.out.println("Before to save Consultant===" + m);
-
-            serverHandler.sendToServer(this, getApiUrl() + "set-appointment-time", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
-                @Override
-                public void getRespone(String dta, ArrayList<Object> respons) {
+             serverHandler.sendToServer(this, getApiUrl() + "set-appointment-time", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+        @Override
+        public void getRespone(String dta, ArrayList<Object> respons) {
+            try {
+                JSONObject jsonObject = new JSONObject(dta);
+                if (jsonObject.getBoolean("status")) {
                     try {
-                        JSONObject jsonObject = new JSONObject(dta);
-                        if (jsonObject.getBoolean("status")) {
-                            try {
 
-                                if(typeStr.equalsIgnoreCase("next"))
-                                {
-//                                    papulateDataMap(datesStringAr.get(indexCount));
-//                                    indexCount++;
-//                                    String nextDate = datesStringAr.get(indexCount).toString();
-//                                    JSONObject dataObj = datesMap.get(nextDate);
-//                                    txt_date.setText(nextDate+"");
-//                                    parseJsonArrayNSetGridData(dataObj,nextDate);
-                                    customTimeArray.clear();
-                                }
-
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        } else {
-                            alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-                                @Override
-                                public void getDialogEvent(String buttonPressed) {
-                                }
-                            });
+                        if (typeStr.equalsIgnoreCase("next")) {
+                            customTimeArray.clear();
                         }
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
+                } else {
+                    alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+                        }
+                    });
                 }
-            });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+    });
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
     }
 
 
-    public void notifyMap(Map<Integer, String> map,String type) {
-        map.clear();
-        if(type.equalsIgnoreCase("custom"))
-        {
+    public void notifyMap(Map<Integer, String> map, String type) {
+
+        System.out.println("Type====>>>" + type + "===" + mainDataContainerMap);
+        if (type.equalsIgnoreCase("custom")) {
+            preTimeMapCustom.clear();
+//            mainDataContainerMap.remove(txt_date.getText().toString());
+            mainDataContainerMap.put(txt_date.getText().toString(), new ArrayList<JSONObject>());
             customTimingGrid.notifyDataSetChanged();
-        }
-        else if(type.equalsIgnoreCase("already"))
-        {
+        } else if (type.equalsIgnoreCase("already")) {
+            preTimeMapAlready.clear();
+            mainDataContainerMap.put(txt_date.getText().toString(), new ArrayList<JSONObject>());
             horizontalCategoriesAdapter.notifyDataSetChanged();
         }
     }
@@ -511,106 +478,143 @@ public class SetTimeByConsultant extends BaseActivity {
     }
 
 
-    private void parseJsonArrayNSetGridData(JSONObject customObj,String dateStr)
-    {
+    private void parseJsonArrayNSetGridData() {
         try {
             customTimeArray.clear();
             preTimeMapCustom.clear();
             preTimeMapAlready.clear();
-            if(horizontalCategoriesAdapter!=null) {
+            if (horizontalCategoriesAdapter != null) {
                 horizontalCategoriesAdapter.notifyDataSetChanged();
             }
-            if (customObj != null) {
-                if (customObj.has("timing")) {
+            ArrayList<JSONObject> customObjAr=mainDataContainerMap.get(txt_date.getText().toString());
+
+            if(customObjAr!=null) {
+                JSONObject customObj = customObjAr.get(0);
+                if (customObj != null) {
+
                     String timingStr = customObj.getString("timing");
                     JSONArray timingAr = new JSONArray(timingStr);
                     include_weekend_n_holidays = customObj.getString("include_weekend_n_holidays");
 
+                    checkWeeend();
+
                     for (int x = 0; x < timingAr.length(); x++) {
                         customTimeArray.add(timingAr.getString(x));
                     }
+
                 }
             }
-            viewTimingGrid(customTimeArray, include_weekend_n_holidays,dateStr);
+
+
+
+//
+//            if (customObj != null)
+//            {
+//                if (customObj.has("timing")) {
+//                    String timingStr = customObj.getString("timing");
+//                    JSONArray timingAr = new JSONArray(timingStr);
+//                    include_weekend_n_holidays = customObj.getString("include_weekend_n_holidays");
+//
+//                    checkWeeend();
+//
+//                    for (int x = 0; x < timingAr.length(); x++) {
+//                        customTimeArray.add(timingAr.getString(x));
+//                    }
+//                }
+//            }
+            viewTimingGrid(customTimeArray);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    private void papulateDataMap(String currentDat)
+    private void checkWeeend()
     {
-        ArrayList<JSONObject> AlreadydataAr=new ArrayList<>();
-        if(mainDataContainerMap.containsKey(currentDat))
-        {
-            AlreadydataAr=mainDataContainerMap.get(currentDat);
+
+        try {
+            ArrayList<JSONObject> dataObAr = mainDataContainerMap.get(txt_date.getText().toString());
+            System.out.println("Data ob---" + dataObAr);
+
+            if (dataObAr != null) {
+                JSONObject jObj = dataObAr.get(0);
+                if (jObj != null) {
+                    include_weekend_n_holidays = jObj.getString("include_weekend_n_holidays");
+                }
+            }
+
+            if (include_weekend_n_holidays.equalsIgnoreCase("1")) {
+                img_isweekdayopen.setImageResource(R.drawable.ic_button);
+                tv_saveAppointment.setAlpha(1f);
+                tv_saveAppointment.setEnabled(true);
+            } else {
+
+                img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
+                tv_saveAppointment.setAlpha(.5f);
+                tv_saveAppointment.setEnabled(false);
+            }
         }
-        for(Map.Entry<Integer,String> preMap:preTimeMapAlready.entrySet())
+        catch (Exception e)
         {
+            e.printStackTrace();
+        }
+    }
+
+    private void papulateDataMap(String currentDat) {
+        ArrayList<JSONObject> AlreadydataAr = new ArrayList<>();
+        if (mainDataContainerMap.containsKey(currentDat)) {
+            AlreadydataAr = mainDataContainerMap.get(currentDat);
+        }
+        for (Map.Entry<Integer, String> preMap : preTimeMapAlready.entrySet()) {
             try {
-                JSONObject jsonData=new JSONObject();
-                jsonData.put("isQuick","1");
-                jsonData.put("time",preMap.getValue());
+                JSONObject jsonData = new JSONObject();
+                jsonData.put("isQuick", "1");
+                jsonData.put("time", preMap.getValue());
                 AlreadydataAr.add(jsonData);
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        mainDataContainerMap.put(currentDat,AlreadydataAr);
+        mainDataContainerMap.put(currentDat, AlreadydataAr);
 
 //==================================
-        ArrayList<JSONObject> customDateAr=new ArrayList<>();
-        if(mainDataContainerMap.containsKey(currentDat))
-        {
-            customDateAr=mainDataContainerMap.get(currentDat);
+        ArrayList<JSONObject> customDateAr = new ArrayList<>();
+        if (mainDataContainerMap.containsKey(currentDat)) {
+            customDateAr = mainDataContainerMap.get(currentDat);
         }
-        for(Map.Entry<Integer,String> customeMAp:preTimeMapCustom.entrySet())
-        {
-            if(customeMAp.getKey()>0) {
+        for (Map.Entry<Integer, String> customeMAp : preTimeMapCustom.entrySet()) {
+            if (customeMAp.getKey() > 0) {
                 try {
                     JSONObject jsonData = new JSONObject();
                     jsonData.put("isQuick", "1");
                     jsonData.put("time", customeMAp.getValue());
                     customDateAr.add(jsonData);
                     System.out.println("customeMAp====" + customeMAp.getKey() + "===" + customeMAp.getValue());
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-        mainDataContainerMap.put(currentDat,customDateAr);
+        mainDataContainerMap.put(currentDat, customDateAr);
 
 
+        for (Map.Entry<String, ArrayList<JSONObject>> mapData : mainDataContainerMap.entrySet()) {
 
-        for(Map.Entry<String,ArrayList<JSONObject>> mapData:mainDataContainerMap.entrySet())
-        {
+            System.out.println("Dates====" + mapData.getKey());
+            ArrayList<JSONObject> dataObje = mapData.getValue();
 
-            System.out.println("Dates===="+mapData.getKey());
-            ArrayList<JSONObject> dataObje=mapData.getValue();
-
-            for(int x=0;x<dataObje.size();x++)
-            {
+            for (int x = 0; x < dataObje.size(); x++) {
                 try {
                     JSONObject jObj = dataObje.get(x);
-                    System.out.println("Daytes Key==="+jObj.getString("isQuick")+"==="+jObj.getString("time"));
-                }
-                catch (Exception e)
-                {
+                    System.out.println("Daytes Key===" + jObj.getString("isQuick") + "===" + jObj.getString("time"));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
     }
-
-
-
-
 
 
 }

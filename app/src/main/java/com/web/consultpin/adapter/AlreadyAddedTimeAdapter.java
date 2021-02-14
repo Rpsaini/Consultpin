@@ -28,11 +28,13 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
 
     private JSONArray datAr;
     private SetTimeByConsultant pActivity;
+   // private String dateStr="";
 
 
-    public AlreadyAddedTimeAdapter(JSONArray ar, SetTimeByConsultant paActiviity) {
+    public AlreadyAddedTimeAdapter(JSONArray ar, SetTimeByConsultant paActiviity,String dateStr) {
         datAr = ar;
         pActivity = paActiviity;
+       // this.dateStr=dateStr;
 
 
     }
@@ -66,6 +68,22 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
            String timeStr=datAr.getString(position);
            holder.tv_selected_time.setText(timeStr);
             System.out.println("map--->in="+pActivity.preTimeMapAlready);
+
+             ArrayList<JSONObject> mapData=pActivity.mainDataContainerMap.get(pActivity.txt_date.getText().toString());
+            if(mapData!=null) {
+                for (int x = 0; x < mapData.size(); x++) {
+                    JSONObject dataObj = mapData.get(x);
+                    String isQuick = dataObj.getString("isQuick");
+                    if (timeStr != null) {
+                        if (isQuick.equalsIgnoreCase("1")) {
+                            if (timeStr.equalsIgnoreCase(dataObj.getString("time"))) {
+                                pActivity.preTimeMapAlready.put(position, timeStr);
+                            }
+                        }
+                    }
+                }
+            }
+
            if(pActivity.preTimeMapAlready.containsKey(position))
            {
                holder.tv_selected_time.setBackgroundResource(R.drawable.blue_drawable);
