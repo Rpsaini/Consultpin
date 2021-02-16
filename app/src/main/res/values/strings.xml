@@ -151,6 +151,24 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="action">Action</string>
+    <string name="videochat">Video Call</string>
+    <string name="appointment_duration">Appointment Duration</string>
+    <string name="appointment_dur_des">The duration of your meeting with our consultant</string>
+    <string name="appointment_date">Appointment Date</string>
+    <string name="appointment_time">Appointment Time</string>
+    <string name="appointment_request">Appointment Request</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="Completed">Completed</string>
+    <string name="Approved">Approved</string>
+    <string name="Rejected">Rejected</string>
+    <string name="Cancelled">Cancelled</string>
+    <string name="pending">Pending</string>
+    <string name="startVideoCall">Start Video Call</string>
+
+    <string name="accept_confirmation">Would you like to Accept this appointment ?</string>
+    <string name="reject_confirmation">Would you like to Reject this appointment ?</string>
+    <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 
 
     <string name="category_selection_msg">The category you selected during the verification process can be checked by us and changed to a more suitable category</string>

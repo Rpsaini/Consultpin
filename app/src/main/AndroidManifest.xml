@@ -17,6 +17,11 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <uses-feature android:name="android.hardware.audio.pro" />
+    <uses-feature android:name="android.hardware.microphone" />
 
     <application
         android:name=".main.MyApplication"
@@ -27,7 +32,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".usersection.SetAppointmentByUser"></activity>
+        <activity android:name=".jitsi.MAinJistsiActivity"></activity>
+        <activity android:name=".initiatecall.InitiateCallWebview" />
+        <activity android:name=".consultant.DetailPageForBooking" />
+        <activity android:name=".usersection.SetAppointmentByUser" />
         <activity android:name=".consultant.EventRequestActivity" />
         <activity android:name=".consultant.SetTimeByConsultant" />
         <activity android:name=".consultant.ConsultantDetailView" />

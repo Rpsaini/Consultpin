@@ -13,6 +13,9 @@ public class Utilclass
     public static String phone="phone";
     public static String token="token";
     public static String consultant_id="consultant_id";
+    public static String videocall="videocall";
+    public static String appointment_id="appointment_id";
+    public static String room_id="";
 
 
    //{"user_id":"39","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9

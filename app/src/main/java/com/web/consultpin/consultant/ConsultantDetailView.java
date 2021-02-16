@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.main.BaseActivity;
+import com.web.consultpin.usersection.SetAppointmentByUser;
 
 import org.json.JSONObject;
 
@@ -45,6 +46,7 @@ public class ConsultantDetailView extends BaseActivity {
 
     private void init() {
         consultant_id = getIntent().getStringExtra(Utilclass.consultant_id);
+
         toolbar_back_arrow = findViewById(R.id.toolbar_back_arrow);
         txt_price = findViewById(R.id.txt_price);
         txt_consultantname = findViewById(R.id.txt_consultantname);
@@ -65,7 +67,7 @@ public class ConsultantDetailView extends BaseActivity {
     private void consultantDetailApi() {
         try {
             final Map<String, String> m = new HashMap<>();
-            m.put("consultant_id", consultant_id);
+            m.put("consultant_id", getIntent().getStringExtra(Utilclass.user_id));
 
             m.put("device_type", "android");
             m.put("device_token", getDeviceToken() + "");
@@ -91,10 +93,11 @@ public class ConsultantDetailView extends BaseActivity {
 
                                 txt_consultantname.setText(dataObj.getString("name"));
                                 txt_speciality.setText(dataObj.getString("category_name"));
-//                              txt_rating.setText(dataObj.getString(""));
-//                              txt_review.setText(dataObj.getString(""));
+                                txt_rating.setText("4.5/5");
+                                txt_review.setText("122 Reviews");
                                 txt_detail.setText(dataObj.getString("experience"));
 
+                                txt_price.setText("10 "+getResources().getString(R.string.lirasymbol));
                                 img_consultant = findViewById(R.id.img_consultant);
                                 toolbar_title = findViewById(R.id.toolbar_title);
                                 toolbar_title.setText(getResources().getString(R.string.consultant));
@@ -144,7 +147,7 @@ public class ConsultantDetailView extends BaseActivity {
         set_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ConsultantDetailView.this, SetTimeByConsultant.class);
+                Intent intent = new Intent(ConsultantDetailView.this, SetAppointmentByUser.class);
                 intent.putExtra(Utilclass.consultant_id, consultant_id);
                 startActivity(intent);
             }

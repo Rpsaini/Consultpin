@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.dialogsnpickers.DialogCallBacks;
@@ -62,14 +63,25 @@ private MainActivity mainActivity;
 
     private void init()
     {
-        img_profile=view.findViewById(R.id.img_profile);
-        tv_username=view.findViewById(R.id.tv_username);
-        tv_usermobile=view.findViewById(R.id.tv_usermobile);
-        tv_user_email=view.findViewById(R.id.tv_user_email);
-        img_edit_profile=view.findViewById(R.id.img_edit_profile);
-        tv_professionalbg=view.findViewById(R.id.tv_professionalbg);
-        tv_speciality=view.findViewById(R.id.tv_speciality);
-        tv_fee=view.findViewById(R.id.tv_fee);
+
+       String userId= mainActivity.getRestParamsName(Utilclass.user_id);
+        String consultantId= mainActivity.getRestParamsName(Utilclass.consultant_id);
+       final LinearLayout ll_consultant_layout =view.findViewById(R.id.ll_consultant_layout);
+        img_profile = view.findViewById(R.id.img_profile);
+        tv_username = view.findViewById(R.id.tv_username);
+        tv_usermobile = view.findViewById(R.id.tv_usermobile);
+        tv_user_email = view.findViewById(R.id.tv_user_email);
+        img_edit_profile = view.findViewById(R.id.img_edit_profile);
+        tv_professionalbg = view.findViewById(R.id.tv_professionalbg);
+        tv_speciality = view.findViewById(R.id.tv_speciality);
+        tv_fee = view.findViewById(R.id.tv_fee);
+        if(consultantId.equalsIgnoreCase("0")) {
+            ll_consultant_layout.setVisibility(View.GONE);
+        }
+        else
+        {
+            ll_consultant_layout.setVisibility(View.VISIBLE);
+        }
         ViewProfile();
 
 
@@ -108,7 +120,7 @@ private MainActivity mainActivity;
             final Map<String, String> m = new HashMap<>();
             m.put("device_type", "android");
             m.put("device_token", mainActivity.getDeviceToken() + "");
-            m.put("user_id", mainActivity.getRestParamsName("user_id"));
+            m.put("consultant_id", mainActivity.getRestParamsName("user_id"));
 
 
             final Map<String, String> obj = new HashMap<>();
@@ -130,9 +142,15 @@ private MainActivity mainActivity;
                                 tv_username.setText(data.getString("name"));
                                 tv_usermobile.setText(data.getString("phone"));
                                 tv_user_email.setText(data.getString("email"));
-                                tv_speciality.setText(data.getString("category_name"));
-                                tv_professionalbg.setText(data.getString("experience"));
-                                tv_fee.setText(data.getString("rate")+"TL");
+                                if(data.has("category_name")) {
+                                    tv_speciality.setText(data.getString("category_name"));
+                                }
+                                if(data.has("experience")) {
+                                    tv_professionalbg.setText(data.getString("experience"));
+                                }
+                                if(data.has("rate")) {
+                                    tv_fee.setText(data.getString("rate") + "TL");
+                                }
                                 int lastIndex=mainActivity.getRestParamsName("profile_pic").lastIndexOf("/");
                                 String imageUrl=mainActivity.getRestParamsName("profile_pic").substring(0,lastIndex);
                                 showImage(imageUrl+"/"+data.getString("profile_pic"),img_profile);

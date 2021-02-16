@@ -65,8 +65,21 @@ public class AppointMentHistoryFrg extends Fragment {
 
 
         try {
+            String id="";
+            String consultantId=mainActivity.getRestParamsName(Utilclass.consultant_id);
+            String userid=mainActivity.getRestParamsName(Utilclass.user_id);
+            String commonId="";
+            if(consultantId.equalsIgnoreCase("0"))
+            {
+                commonId=userid;
+            }
+            else
+            {
+                commonId=consultantId;
+            }
+
             final Map<String, String> m = new HashMap<>();
-            m.put("user_id", mainActivity.getRestParamsName("user_id"));
+            m.put("user_id", commonId);
             m.put("device_type", "android");
             m.put("device_token", mainActivity.getDeviceToken()+"");
 

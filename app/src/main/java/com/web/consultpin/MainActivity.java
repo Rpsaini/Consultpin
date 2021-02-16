@@ -126,6 +126,9 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 doBottomBarSelection(bnave_ll_appontment);
                 commonBottomBar=bnave_ll_appontment;
+
+
+
                 callFragment(new AppointMentHistoryFrg(),"appointment");
             }
         });

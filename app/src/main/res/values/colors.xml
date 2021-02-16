@@ -23,6 +23,9 @@
     <color name="translucent_black">#80000000</color>
     <color name="golden_color">#F9BF01</color>
     <color name="category_listing_bg">#F9F9F9</color>
+    <color name="green_color">#08A54B</color>
+    <color name="red_color">#DB3D02</color>
+    <color name="yellow_color">#EFC014</color>
 
 
 </resources>
