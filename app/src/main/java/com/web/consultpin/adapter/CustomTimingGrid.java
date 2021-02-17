@@ -80,8 +80,8 @@ public class CustomTimingGrid extends BaseAdapter {
                     String isQuick = dataObj.getString("isQuick");
                     if (time != null) {
                         if (isQuick.equalsIgnoreCase("2")) {
-                            if (time.equalsIgnoreCase(dataObj.getString("time"))) {
-
+                            if(time.equalsIgnoreCase(dataObj.getString("time")))
+                            {
                                 context.preTimeMapCustom.put(position, time);
                             }
                         }
@@ -92,7 +92,7 @@ public class CustomTimingGrid extends BaseAdapter {
 
             if(time != null)
             {
-                System.out.println("Premap=====" + context.preTimeMapCustom);
+
                 if (context.preTimeMapCustom.containsKey(position)) {
                     txt_select_time.setBackgroundResource(R.drawable.blue_drawable);
                     txt_select_time.setTextColor(context.getResources().getColor(R.color.white));

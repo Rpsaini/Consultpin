@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.app.dialogsnpickers.DialogCallBacks;
 import com.app.vollycommunicationlib.CallBack;
 import com.bumptech.glide.Glide;
@@ -21,6 +23,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.transform.Result;
 
 public class ConsultantDetailView extends BaseActivity {
     String consultant_id = "";
@@ -149,7 +153,7 @@ public class ConsultantDetailView extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ConsultantDetailView.this, SetAppointmentByUser.class);
                 intent.putExtra(Utilclass.consultant_id, consultant_id);
-                startActivity(intent);
+                startActivityForResult(intent,Utilclass.appointmentRequsestcode);
             }
         });
     }
@@ -165,5 +169,18 @@ public class ConsultantDetailView extends BaseActivity {
                         .into(header_img);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        System.out.println("Dataa bacl===="+requestCode);
+        if(requestCode==Utilclass.appointmentRequsestcode)
+        {
+            Intent intent=new Intent();
+            setResult(RESULT_OK,intent);
+            finish();
+        }
     }
 }

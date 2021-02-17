@@ -165,6 +165,12 @@
     <string name="Cancelled">Cancelled</string>
     <string name="pending">Pending</string>
     <string name="startVideoCall">Start Video Call</string>
+    <string name="add_comment">Add Comment</string>
+    <string name="add_comment_msg">Enter brief description</string>
+    <string name="select_time_inter">Select duration of meeting</string>
+    <string name="select_time">Select appointment time</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_appointment">Would you like to cancel this appointment.</string>
 
     <string name="accept_confirmation">Would you like to Accept this appointment ?</string>
     <string name="reject_confirmation">Would you like to Reject this appointment ?</string>

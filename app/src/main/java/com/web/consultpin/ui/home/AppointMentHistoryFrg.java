@@ -1,7 +1,9 @@
 package com.web.consultpin.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,25 +71,32 @@ public class AppointMentHistoryFrg extends Fragment {
             String consultantId=mainActivity.getRestParamsName(Utilclass.consultant_id);
             String userid=mainActivity.getRestParamsName(Utilclass.user_id);
             String commonId="";
+            final Map<String, String> m = new HashMap<>();
+            String apiname="get-user-appointment-history";
             if(consultantId.equalsIgnoreCase("0"))
             {
-                commonId=userid;
+                 commonId=userid;
+                 apiname="get-user-appointment-history";
+                 m.put("user_id", commonId);
+
             }
             else
             {
-                commonId=consultantId;
+                 commonId=consultantId;
+                 apiname="get-consultant-appointment-requests";
+                 m.put("consultant_id", commonId);
             }
 
-            final Map<String, String> m = new HashMap<>();
-            m.put("user_id", commonId);
-            m.put("device_type", "android");
+           m.put("device_type", "android");
             m.put("device_token", mainActivity.getDeviceToken()+"");
 
             final Map<String, String> obj = new HashMap<>();
             obj.put("token", mainActivity.getRestParamsName(Utilclass.token)+"");
 
+            System.out.println("Consultant id==="+m);
 
-            mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + "get-user-appointment-history", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+
+            mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + apiname, m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
@@ -143,4 +152,11 @@ public class AppointMentHistoryFrg extends Fragment {
         AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(dataAr,mainActivity,"");
         recyclerview_appointmenthistory.setAdapter(horizontalCategoriesAdapter);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("Appointment request====>"+requestCode);
+    }
+
+
 }

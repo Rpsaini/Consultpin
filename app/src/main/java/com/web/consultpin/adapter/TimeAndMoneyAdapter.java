@@ -1,12 +1,11 @@
 package com.web.consultpin.adapter;
 
-//public class TimeAndMoneyAdapter {
-//}
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,12 +31,15 @@ public class TimeAndMoneyAdapter extends RecyclerView.Adapter<TimeAndMoneyAdapte
 
     private ArrayList<String> datAr;
     private SetAppointmentByUser pActivity;
-    // private String dateStr="";
+    LinearLayout commonLAyout;
+    TextView commonTextView;
+
 
 
     public TimeAndMoneyAdapter(ArrayList<String> ar, SetAppointmentByUser paActiviity) {
         datAr = ar;
         pActivity = paActiviity;
+
         // this.dateStr=dateStr;
 
 
@@ -45,12 +47,11 @@ public class TimeAndMoneyAdapter extends RecyclerView.Adapter<TimeAndMoneyAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_selected_time;
+        private LinearLayout ll_time_selection;
         public MyViewHolder(View view) {
             super(view);
             tv_selected_time = view.findViewById(R.id.tv_selected_time);
-
-
-
+            ll_time_selection = view.findViewById(R.id.ll_time_selection);
         }
     }
 
@@ -71,38 +72,37 @@ public class TimeAndMoneyAdapter extends RecyclerView.Adapter<TimeAndMoneyAdapte
         try {
             String timeStr=datAr.get(position);
             holder.tv_selected_time.setText(timeStr);
-//            System.out.println("map--->in="+pActivity.preTimeMapAlready);
+
+            System.out.println("time money layout==="+commonLAyout);
+            if(commonLAyout!=null)
+             {
+                holder.ll_time_selection.setBackgroundResource(R.drawable.blue_drawable);
+                 commonTextView.setTextColor(pActivity.getColor(R.color.white));
+             }
+
+            holder.ll_time_selection.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    System.out.println("time money layout==="+commonLAyout);
+
+                    if(commonLAyout!=null)
+                    {
+                        commonLAyout.setBackgroundResource(R.drawable.roundcorner_drawable);
+                        commonTextView.setTextColor(pActivity.getColor(R.color.black));
+                    }
+                    holder.ll_time_selection.setBackgroundResource(R.drawable.blue_drawable);
+                    commonLAyout=holder.ll_time_selection;
+                    commonTextView=holder.tv_selected_time;
+                    holder.tv_selected_time.setTextColor(pActivity.getColor(R.color.white));
+                    pActivity.timeDuration=holder.tv_selected_time.getText().toString();
+                    commonTextView.setTextColor(pActivity.getColor(R.color.white));
+                    System.out.println("time money layout==="+commonLAyout);
+                }
+            });
 
 
-//            if(pActivity.preTimeMapAlready.containsKey(position))
-//            {
-//                holder.tv_selected_time.setBackgroundResource(R.drawable.blue_drawable);
-//                holder.tv_selected_time.setTextColor(pActivity.getResources().getColor(R.color.white));
-//            }
-//            else
-//            {
-//                holder.tv_selected_time.setBackgroundResource(R.drawable.roundcorner_drawable);
-//                holder.tv_selected_time.setTextColor(pActivity.getResources().getColor(R.color.black));
-//            }
-//            holder.tv_selected_time.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v)
-//                {
-//                    System.out.println("map--->"+pActivity.preTimeMapAlready);
-//                    if(pActivity.preTimeMapAlready.containsKey(position))
-//                    {
-//                        pActivity.preTimeMapAlready.remove(position);
-//                    }
-//                    else
-//                    {
-//                        pActivity.preTimeMapAlready.put(position,holder.tv_selected_time.getText()+"");
-//
-//                    }
-//                    pActivity.notifyMap(pActivity.preTimeMapCustom,"custom");
-//                    notifyDataSetChanged();
-//
-//                }
-//            });
+
 
         } catch (Exception e) {
             e.printStackTrace();

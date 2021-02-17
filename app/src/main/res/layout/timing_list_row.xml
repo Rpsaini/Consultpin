@@ -5,12 +5,13 @@
     android:orientation="horizontal"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="8dp"
-
+    android:background="@drawable/roundcorner_drawable"
+    android:id="@+id/ll_time_selection"
     android:layout_height="wrap_content">
 
     <fontspackageForTextView.Regular
         android:id="@+id/tv_selected_time"
-        android:background="@drawable/roundcorner_drawable"
+
         android:layout_height="45dp"
         android:layout_width="120dp"
         android:text="10:00-1:00"

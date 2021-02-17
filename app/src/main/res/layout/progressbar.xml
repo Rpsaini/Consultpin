@@ -9,8 +9,8 @@
     <ProgressBar
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/buttonskyblue"
-        android:progressBackgroundTint="@color/buttonskyblue"
+        android:indeterminateTint="@color/buttonspurple"
+        android:progressBackgroundTint="@color/buttonspurple"
         android:padding="10dp"
         android:layout_height="30dp"
         android:layout_width="30dp"

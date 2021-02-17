@@ -15,7 +15,10 @@ public class Utilclass
     public static String consultant_id="consultant_id";
     public static String videocall="videocall";
     public static String appointment_id="appointment_id";
-    public static String room_id="";
+    public static String imageUrl="imageUrl";
+    public static int appointmentRequsestcode=1000;
+
+
 
 
    //{"user_id":"39","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9

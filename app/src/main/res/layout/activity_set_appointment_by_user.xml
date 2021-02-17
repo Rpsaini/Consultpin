@@ -30,21 +30,19 @@
                 >
             </fontspackageForTextView.BoldMedium>
 
-            <fontspackageForTextView.Regular
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:id="@+id/ed_datefrom"
-                android:background="@drawable/roundcorner_drawable"
-                android:layout_height="100dp"
-                android:layout_width="match_parent"
+
+            <fontpackageforEdittext.Regular
+                android:id="@+id/ed_description"
                 style="@style/edittext_style_14_black"
-                android:hint="@string/datefrom"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/roundcorner_drawable"
                 android:gravity="left|top"
+                android:hint="@string/add_comment"
+                android:padding="5dp"
 
-                >
-            </fontspackageForTextView.Regular>
-
-
+                ></fontpackageforEdittext.Regular>
 
             <fontspackageForTextView.BoldMedium
                 android:layout_marginTop="19dp"
@@ -93,7 +91,7 @@
                 ></CalendarView>
 
             <fontspackageForTextView.BoldMedium
-                android:layout_marginTop="19dp"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 style="@style/edittext_style_14_black"
@@ -103,18 +101,16 @@
 
             <GridView
                 android:verticalSpacing="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+
                 android:horizontalSpacing="5dp"
                 android:nestedScrollingEnabled="true"
-                android:layout_marginTop="10dp"
                 android:scrollbarThumbVertical="@android:color/transparent"
                 android:id="@+id/grid_timing"
                 android:numColumns="4"
                 android:gravity="center"
                 android:stretchMode="columnWidth"
                 android:layout_width="match_parent"
-                android:layout_height="400dp" >
+                android:layout_height="200dp" >
             </GridView>
 
             <fontspackageForTextView.Regular

@@ -58,7 +58,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         ImageView consultant_image;
         TextView consultant_name, time_duration, appointment_time, amount;
 
-        TextView txt_reject, txt_accept, appointment_status;
+        TextView txt_reject, txt_accept, appointment_status,txt_cancel;
 
 
         public MyViewHolder(View view) {
@@ -74,6 +74,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             txt_accept = view.findViewById(R.id.txt_accept);
             txt_reject = view.findViewById(R.id.txt_reject);
             ll_status = view.findViewById(R.id.ll_status);
+            txt_cancel = view.findViewById(R.id.txt_cancel);
             appointment_status = view.findViewById(R.id.appointment_status);
 
 
@@ -108,36 +109,87 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
 
             //0 pending  1 apporved,2 rejected,3 cancelled,4 completed
-            if (appointment_status.equalsIgnoreCase("0")) {
-                holder.ll_status.setVisibility(View.VISIBLE);
-                holder.appointment_status.setText(pActivity.getString(R.string.pending));
-            } else {
-                holder.ll_status.setVisibility(View.GONE);
-                if (appointment_status.equalsIgnoreCase("1")) {
-                    holder.appointment_status.setText(pActivity.getString(R.string.Approved));
-                    holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
-                    holder.ll_status.setVisibility(View.INVISIBLE);
-                    holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+
+            if(pActivity.getRestParamsName(Utilclass.consultant_id).equalsIgnoreCase("0"))
+            {
+                if (appointment_status.equalsIgnoreCase("0"))
+                {
+                    holder.ll_status.setVisibility(View.GONE);
+                    holder.appointment_status.setText(pActivity.getString(R.string.pending));
+                    holder.txt_cancel.setVisibility(View.VISIBLE);
+
+                    holder.txt_cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url);
-
-
+                            showConfirmDialog(appointment_id, pActivity.getResources().getString(R.string.cancel_appointment), "3", position);
                         }
                     });
-                } else if (appointment_status.equalsIgnoreCase("2")) {
-                    holder.appointment_status.setText(pActivity.getString(R.string.Rejected));
-                    holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.yellow_color));
-                } else if (appointment_status.equalsIgnoreCase("3")) {
-                    holder.appointment_status.setText(pActivity.getString(R.string.Cancelled));
-                    holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.red_color));
-                } else if (appointment_status.equalsIgnoreCase("5")) {
-                    holder.appointment_status.setText(pActivity.getString(R.string.Completed));
-                    holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                }
+                else {
+                    holder.ll_status.setVisibility(View.GONE);
+                    holder.txt_cancel.setVisibility(View.GONE);
+                    if (appointment_status.equalsIgnoreCase("1")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Approved));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                        holder.ll_status.setVisibility(View.INVISIBLE);
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url);
+
+
+                            }
+                        });
+                    } else if (appointment_status.equalsIgnoreCase("2")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Rejected));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.yellow_color));
+                    } else if (appointment_status.equalsIgnoreCase("3")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Cancelled));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.red_color));
+                    } else if (appointment_status.equalsIgnoreCase("5")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Completed));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                    }
                 }
 
-
             }
+            else
+            {
+                if (appointment_status.equalsIgnoreCase("0"))
+                {
+                    holder.ll_status.setVisibility(View.VISIBLE);
+                    holder.txt_cancel.setVisibility(View.GONE);
+                    holder.appointment_status.setText(pActivity.getString(R.string.pending));
+                }
+                else {
+                    holder.ll_status.setVisibility(View.GONE);
+                    holder.txt_cancel.setVisibility(View.GONE);
+                    if(appointment_status.equalsIgnoreCase("1")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Approved));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                        holder.ll_status.setVisibility(View.INVISIBLE);
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url);
+
+
+                            }
+                        });
+                    } else if (appointment_status.equalsIgnoreCase("2")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Rejected));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.yellow_color));
+                    } else if (appointment_status.equalsIgnoreCase("3")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Cancelled));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.red_color));
+                    } else if (appointment_status.equalsIgnoreCase("5")) {
+                        holder.appointment_status.setText(pActivity.getString(R.string.Completed));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                    }
+                }
+            }
+
 
             holder.appointment_time.setText(appointmentTime);
             holder.consultant_name.setText(user_name);
@@ -274,6 +326,8 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
     private void showUserDetails(String username, String userimage, String fee, String appointmentId, String consultant_id, String videocallUrl) {
         try {
+
+
             SimpleDialog simpleDialog = new SimpleDialog();
             Dialog dialog = simpleDialog.simpleDailog(pActivity, R.layout.dialog_call_initiate, new ColorDrawable(android.graphics.Color.TRANSPARENT), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
             ImageView img_hide = dialog.findViewById(R.id.img_hide);
@@ -304,8 +358,11 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                     intent.putExtra(Utilclass.appointment_id, appointmentId);
                     intent.putExtra(Utilclass.consultant_id, consultant_id);
                     intent.putExtra(Utilclass.videocall, videocallUrl);
+                    intent.putExtra(Utilclass.first_name, username);
+                    intent.putExtra(Utilclass.imageUrl, userimage);
 
-                    pActivity.startActivity(intent);
+                    pActivity.startActivityForResult(intent,Utilclass.appointmentRequsestcode);
+                    dialog.dismiss();
 
                 }
             });

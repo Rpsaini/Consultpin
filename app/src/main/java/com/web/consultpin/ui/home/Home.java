@@ -166,7 +166,6 @@ public class Home extends Fragment {
     private void newConsultant(String imageUrl,ArrayList<JSONObject> dataAr)
     {
         RecyclerView recyclerview_new_category =view.findViewById(R.id.recyclerview_new_category);
-
         recyclerview_new_category.setNestedScrollingEnabled(false);
         recyclerview_new_category.setLayoutManager(new LinearLayoutManager(mainActivity,
                 LinearLayoutManager.HORIZONTAL, false));

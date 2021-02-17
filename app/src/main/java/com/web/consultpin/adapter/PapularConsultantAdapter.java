@@ -40,15 +40,12 @@ public class PapularConsultantAdapter extends RecyclerView.Adapter<PapularConsul
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
-
         LinearLayout ll_best_restaurant;
         ImageView consultant_image;
         TextView consultant_name,specialties;
 
         public MyViewHolder(View view) {
             super(view);
-
 
             ll_best_restaurant = view.findViewById(R.id.ll_best_restaurant);
             consultant_name = view.findViewById(R.id.consultant_name);
@@ -99,7 +96,7 @@ public class PapularConsultantAdapter extends RecyclerView.Adapter<PapularConsul
                         Intent intent=new Intent(pActivity, ConsultantDetailView.class);
                         intent.putExtra(Utilclass.user_id,jsonObject.getString("user_id"));
                         intent.putExtra(Utilclass.consultant_id,jsonObject.getString("consultant_id"));
-                        pActivity.startActivity(intent);
+                         pActivity.startActivityForResult(intent,Utilclass.appointmentRequsestcode);
 
                     }
                     catch (Exception e)
