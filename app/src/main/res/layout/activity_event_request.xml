@@ -103,7 +103,7 @@
 
 
             <fontspackageForTextView.Regular
-                android:drawablePadding="5dp"
+                android:padding="5dp"
                 android:drawableRight="@drawable/ic_clockcircularoutline"
                 android:layout_marginEnd="10dp"
                 android:id="@+id/ed_date_end"
@@ -143,8 +143,8 @@
             android:gravity="center|left"
             style="@style/edittext_style"
             android:padding="5dp"
-            android:drawableTint="@color/black"
-            android:drawableRight="@android:drawable/arrow_down_float"
+            android:drawableTint="@color/texthintcolor"
+            android:drawableRight="@drawable/down_arrow"
             android:background="@drawable/roundcorner_drawable"
             ></fontspackageForTextView.Regular>
 
@@ -237,7 +237,7 @@
             </fontspackageForTextView.BoldMedium>
 
             <fontpackageforEdittext.Regular
-                android:id="@+id/ed_numberofdays"
+                android:id="@+id/ed_numberofparticipaints"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
@@ -265,18 +265,18 @@
             android:background="@drawable/roundcorner_drawable"
             >
 
-            <fontspackageForTextView.BoldExtra
+            <fontspackageForTextView.Regular
                 android:id="@+id/selected_image"
                 style="@style/edittext_style_12_grey"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_height="match_parent"
+                 android:gravity="center|left"
                 android:padding="5dp"
-                android:text="@string/lawer_licence"></fontspackageForTextView.BoldExtra>
+                android:hint="@string/lawer_licence"></fontspackageForTextView.Regular>
 
 
             <ImageView
-                android:id="@+id/ic_upload_licence"
+                android:id="@+id/ic_upload_eventphoto"
                 android:src="@drawable/ic_upload"
                 android:layout_height="45dp"
                 android:layout_width="wrap_content"

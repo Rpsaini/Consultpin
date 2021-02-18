@@ -162,51 +162,52 @@
             >
         </fontspackageForTextView.BoldMedium>
 
-        <RelativeLayout
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
+<!--        <RelativeLayout-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@color/white"-->
 
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            >
-            <ImageView
-                android:layout_marginLeft="30dp"
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            >-->
+<!--            <ImageView-->
+<!--                android:layout_marginLeft="30dp"-->
 
-                android:rotation="180"
-                android:id="@+id/img_prev"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_next"
-                android:layout_centerVertical="true"
-                ></ImageView>
+<!--                android:rotation="180"-->
+<!--                android:id="@+id/img_prev"-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:src="@drawable/ic_next"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                ></ImageView>-->
 
-            <TextView
-                android:id="@+id/txt_date"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:padding="5dp"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0000:00:00 to 0000:00:00"
-                android:layout_centerInParent="true"
-                ></TextView>
+<!--            <TextView-->
+<!--                android:id="@+id/txt_date"-->
+<!--                android:layout_marginLeft="30dp"-->
+<!--                android:layout_marginRight="30dp"-->
+<!--                android:padding="5dp"-->
+<!--                android:textSize="16dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="0000:00:00 to 0000:00:00"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                ></TextView>-->
 
-            <ImageView
-                android:layout_marginRight="30dp"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/img_next"
-                android:padding="5dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_next"
-                android:layout_centerVertical="true"
-                ></ImageView>
+<!--            <ImageView-->
+<!--                android:layout_marginRight="30dp"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:id="@+id/img_next"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:src="@drawable/ic_next"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                ></ImageView>-->
 
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
         <GridView
             android:verticalSpacing="5dp"
@@ -217,11 +218,11 @@
             android:layout_marginTop="10dp"
             android:scrollbarThumbVertical="@android:color/transparent"
             android:id="@+id/grid_timing"
-            android:numColumns="auto_fit"
+            android:numColumns="4"
             android:gravity="center"
             android:stretchMode="columnWidth"
             android:layout_width="match_parent"
-            android:layout_height="200dp" >
+            android:layout_height="250dp" >
         </GridView>
 
         <fontspackageForTextView.Regular

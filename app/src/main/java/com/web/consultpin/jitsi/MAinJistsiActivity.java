@@ -17,6 +17,7 @@ import com.web.consultpin.Utilclass;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetActivityInterface;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
+import org.jitsi.meet.sdk.JitsiMeetUserInfo;
 import org.jitsi.meet.sdk.JitsiMeetViewListener;
 
 import java.net.URL;
@@ -50,10 +51,18 @@ public class MAinJistsiActivity extends AppCompatActivity  implements JitsiMeetA
                 int length=videoCall.length();
                 String roomid= videoCall.substring(lastindex,length);
                 System.out.println("room_id==="+roomid);
+
+                Bundle bundle=new Bundle();
+                bundle.putString("displayName",getIntent().getStringExtra(Utilclass.first_name));
+                bundle.putString("email","");
+                bundle.putString("avatarURL",getIntent().getStringExtra(Utilclass.imageUrl));
+
+                System.out.println("User name====>"+getIntent().getStringExtra(Utilclass.first_name));
                 try {
                     JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                             .setServerURL(new URL("https://jitsi.piehash.online/"))
                             .setRoom(roomid)
+                            .setUserInfo(new JitsiMeetUserInfo(bundle))
                             .setAudioMuted(false)
                             .setVideoMuted(false)
                             .setAudioOnly(false)

@@ -35,7 +35,7 @@ public interface ImageUpload {
                                            @Part("provience") RequestBody provience,
                                            @Part("postal_code") RequestBody postal_code,
                                            @Part("user_id") RequestBody user_id,
-                                           @Header("Authorization") String authHeader,
+                                           @Header("token") String authHeader,
 
                                            @Part MultipartBody.Part image
 

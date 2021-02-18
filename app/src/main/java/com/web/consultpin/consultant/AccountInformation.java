@@ -277,8 +277,8 @@ public class AccountInformation extends BaseActivity {
                     map.put("provience",ed_provience.getText().toString());
                     map.put("postal_code",ed_postal_Address.getText().toString());
                     map.put("user_id",getRestParamsName("user_id"));
-                    final Map<String, String> obj = new HashMap<>();
-                    obj.put("Authorization", getRestParamsName(Utilclass.token));
+//                    final Map<String, String> obj = new HashMap<>();
+//                    obj.put("token", getRestParamsName(Utilclass.token));
 
                     File file = new File(license);
                     if (file != null) {
@@ -325,116 +325,12 @@ public class AccountInformation extends BaseActivity {
                             }
                         });
 
-
-
-
-
-
-
                     }
 
-
-
-
-
-        }
-
-
-
-//                    map.put("tax_office",ed_tax_office.getText().toString());
-//                    map.put("company",ed_companyname.getText().toString());
-//                    map.put("account_type",accountTypeId);
-//                    map.put("identity",ed_nationid_number.getText().toString());
-//                    map.put("bank",tv_select_bank.getText().toString());
-//                    map.put("iban",ed_iban.getText().toString());
-//                    map.put("title",ed_indivisual);
-//                    map.put("experience",ed_taskmoreabout);
-//                    map.put("specialties",ed_specialist);
-//                    map.put("category_id",category_id);
-//                    map.put("sub_category_id",sub_category_id);
-//                    map.put("rate",txt_select_price_tl);
-//                    map.put("city",ed_city.getText().toString());
-//                    map.put("provience",ed_provience.getText().toString());
-//                    map.put("postal_code",ed_postal_Address.getText().toString());
-//                    map.put("user_id",getRestParamsName("user_id"));
-//                    final Map<String, String> obj = new HashMap<>();
-//                    obj.put("Authorization", getRestParamsName(Utilclass.token));
-//
-//                    System.out.println("Account===="+map);
-//
-//                    serverHandler.sendToServer(AccountInformation.this, getApiUrl() + "addcounsultant", map, 0, obj, 20000, R.layout.progressbar, new CallBack() {
-//                        @Override
-//                        public void getRespone(String dta, ArrayList<Object> respons) {
-//                            try {
-//                                JSONObject jsonObject = new JSONObject(dta);
-//                                if (jsonObject.getBoolean("status")) {
-//
-//                                    try {
-//                                        SimpleDialog simpleDialog = new SimpleDialog();
-//                                        final Dialog selectCategoryDialog = simpleDialog.simpleDailog(AccountInformation.this, R.layout.account_added_successfully_dialog, new ColorDrawable(getResources().getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
-//
-//                                        TextView maintitle=selectCategoryDialog.findViewById(R.id.maintitle);
-//                                        TextView subtitle=selectCategoryDialog.findViewById(R.id.subtitle);
-//                                        TextView okaybtn=selectCategoryDialog.findViewById(R.id.okaybtn);
-//                                        subtitle.setText(jsonObject.getString("msg"));
-//                                        okaybtn.setOnClickListener(new View.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(View v) {
-//                                                Intent intent=new Intent();
-//                                                setResult(RESULT_OK, intent);
-//                                                finish();
-//                                            }
-//                                        });
-//
-//
-//
-//                                    }
-//                                    catch (Exception e)
-//                                    {
-//                                        e.printStackTrace();
-//                                    }
-//
-//                                } else {
-//                                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-//                                        @Override
-//                                        public void getDialogEvent(String buttonPressed) {
-//                                        }
-//                                    });
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        }
-//                    });
-
-
-//                    category_id:1
-//                    iban:qwerty123
-//                    bank:State Bank
-//                    provience:Zirakpur
-//                    city:Zirakpur
-//                    identity:1234567890
-//                    company:Self
-//                    account_type:individual
-//                    license:123456789
-//                    specialties:8965423210
-//                    experience:This is test experience
-//                    title:dfsdf
-//                    user_id:2
-//                    sub_category_id:1
-//                    postal_code:ewerwe
-//                    rate:10
-
-
-
-
+                  }
 
                 }
 
-
-
-            //}
         });
 
     }

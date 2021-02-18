@@ -26,7 +26,7 @@ public class ApiProduction {
 
 
         return new Retrofit.Builder()
-                .baseUrl("http://52.66.238.215/v1/")
+                .baseUrl("http://webcomclients.in/consultpindev/v1/")
                 .client(OkHttpProduction.getOkHttpClient(context, true))
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

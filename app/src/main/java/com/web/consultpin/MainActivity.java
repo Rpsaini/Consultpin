@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.BecomeAConsultant;
 import com.web.consultpin.consultant.EventRequestActivity;
+import com.web.consultpin.consultant.SetTimeByConsultant;
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.ui.home.AppointMentHistoryFrg;
 //import com.web.consultpin.ui.home.Appointment;
@@ -63,14 +64,9 @@ public class MainActivity extends BaseActivity {
                 drawer.openDrawer(Gravity.LEFT);
             }
         });
+        Intent intent=new Intent(MainActivity.this, SetTimeByConsultant.class);
+        startActivity(intent);
 
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-//                .setDrawerLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationMenu();
 

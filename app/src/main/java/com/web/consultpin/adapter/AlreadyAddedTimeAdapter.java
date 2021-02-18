@@ -69,20 +69,20 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
            holder.tv_selected_time.setText(timeStr);
             System.out.println("map--->in="+pActivity.preTimeMapAlready);
 
-             ArrayList<JSONObject> mapData=pActivity.mainDataContainerMap.get(pActivity.txt_date.getText().toString());
-            if(mapData!=null) {
-                for (int x = 0; x < mapData.size(); x++) {
-                    JSONObject dataObj = mapData.get(x);
-                    String isQuick = dataObj.getString("isQuick");
-                    if (timeStr != null) {
-                        if (isQuick.equalsIgnoreCase("1")) {
-                            if (timeStr.equalsIgnoreCase(dataObj.getString("time"))) {
-                                pActivity.preTimeMapAlready.put(position, timeStr);
-                            }
-                        }
-                    }
-                }
-            }
+//             ArrayList<JSONObject> mapData=pActivity.mainDataContainerMap.get(pActivity.txt_date.getText().toString());
+//            if(mapData!=null) {
+//                for (int x = 0; x < mapData.size(); x++) {
+//                    JSONObject dataObj = mapData.get(x);
+//                    String isQuick = dataObj.getString("isQuick");
+//                    if (timeStr != null) {
+//                        if (isQuick.equalsIgnoreCase("1")) {
+//                            if (timeStr.equalsIgnoreCase(dataObj.getString("time"))) {
+//                                pActivity.preTimeMapAlready.put(position, timeStr);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 
            if(pActivity.preTimeMapAlready.containsKey(position))
            {
@@ -108,7 +108,7 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
                        pActivity.preTimeMapAlready.put(position,holder.tv_selected_time.getText()+"");
 
                    }
-                   pActivity.notifyMap(pActivity.preTimeMapCustom,"custom");
+                 pActivity.notifyMap(pActivity.preTimeMapCustom,"custom");
                    notifyDataSetChanged();
 
                }

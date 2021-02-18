@@ -121,7 +121,7 @@ public class BecomeAConsultant extends BaseActivity {
         ic_upload_licence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialogs.alertDialog(BecomeAConsultant.this, "Choose", "Choose Image either from camera or from gallary?", "Camera", "Gallary", new DialogCallBacks() {
+                alertDialogs.alertDialog(BecomeAConsultant.this, getResources().getString(R.string.choose), getResources().getString(R.string.img_sel_msg), getResources().getString(R.string.camera), getResources().getString(R.string.camera), new DialogCallBacks() {
                     @Override
                     public void getDialogEvent(String buttonPressed) {
                         if (buttonPressed.equalsIgnoreCase("Camera")) {
@@ -303,7 +303,7 @@ public class BecomeAConsultant extends BaseActivity {
               m.put("device_token", getDeviceToken()+"");
 
               final Map<String, String> obj = new HashMap<>();
-              obj.put("Authorization", getRestParamsName(Utilclass.token));
+              obj.put("token", getRestParamsName(Utilclass.token));
 
 
               serverHandler.sendToServer(this, getApiUrl() + "categories", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
@@ -623,7 +623,6 @@ public class BecomeAConsultant extends BaseActivity {
     }
 
     private Bitmap bmap;
-
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
         System.out.println("inside============" + requestCode + "===" + resultCode);
@@ -637,7 +636,6 @@ public class BecomeAConsultant extends BaseActivity {
                     try {
 
                         bmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
-
                         Uri uri = getImageUri(this, bmap);
                         selectedPath = getRealPathFromURI(uri);
                         selected_image.setText(selectedPath);
@@ -739,7 +737,7 @@ public class BecomeAConsultant extends BaseActivity {
         if (writeExternal != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
-        if (!listPermissionsNeeded.isEmpty()) {
+        if(!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this,
                     listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 1);
             return 1;

@@ -35,27 +35,33 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class SetTimeByConsultant extends BaseActivity {
     private TextView ed_datefrom, ed_date_end;
     public ArrayList<String> customTimeArray = new ArrayList<>();
     ImageView img_isweekdayopen;
     public String include_weekend_n_holidays = "1", timing_type = "1";//quicktime 1   custom 2
-    public Map<Integer, String> preTimeMapCustom = new HashMap<>();
-    public Map<Integer, String> preTimeMapAlready = new HashMap<>();
+    public LinkedHashMap<Integer, String> preTimeMapCustom = new LinkedHashMap<>();
+    public LinkedHashMap<Integer, String> preTimeMapAlready = new LinkedHashMap<>();
     public TextView tv_saveAppointment;
-    ImageView toolbar_back_arrow, img_prev, img_next;
+    ImageView toolbar_back_arrow;
     AlreadyAddedTimeAdapter horizontalCategoriesAdapter;
     CustomTimingGrid customTimingGrid;
-    public TextView txt_date;
+//    public TextView txt_date;
 
     Map<String, JSONObject> datesMap = new HashMap<>();
     List<String> datesStringAr = new ArrayList<String>();
+
 
     public Map<String, ArrayList<JSONObject>> mainDataContainerMap = new HashMap<>();
 
@@ -69,16 +75,30 @@ public class SetTimeByConsultant extends BaseActivity {
         init();
         getTodayTiming();
         getAlreadyAddedTime();
+        getTimeInterval();
     }
 
+    private void getTimeInterval() {
+        String[] quarterHours = {"00", "15", "30", "45"};
+        ArrayList<String> times = new ArrayList<String>(); // <-- List instead of array
+
+        for (int i = 0; i < 24; i++) {
+            for (int j = 0; j < 4; j++) {
+                String time = i + ":" + quarterHours[j];
+                if (i < 10) {
+                    time = "0" + time;
+                }
+                times.add(time); // <-- no need to care about indexes
+                //System.out.println("Time interval====>"+time);
+            }
+            viewTimingGrid(times);
+        }
+    }
 
     private void init() {
 
         toolbar_back_arrow = findViewById(R.id.toolbar_back_arrow);
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        img_prev = findViewById(R.id.img_prev);
-        txt_date = findViewById(R.id.txt_date);
-        img_next = findViewById(R.id.img_next);
 
         toolbar_title.setText(getResources().getString(R.string.set_appointment));
 
@@ -92,7 +112,7 @@ public class SetTimeByConsultant extends BaseActivity {
 
     }
 
-    int indexCount = 1;
+
 
     private void getTodayTiming() {
 
@@ -103,8 +123,6 @@ public class SetTimeByConsultant extends BaseActivity {
             String todayString = formatter.format(todayDate);
             ed_datefrom.setText(todayString);
             ed_date_end.setText(todayString);
-            txt_date.setText(ed_datefrom.getText().toString());
-            getDatesBetweenTWoDates(todayString, todayString);
 
         } catch (Exception e) {
             System.out.println("Message====" + e.getMessage());
@@ -136,8 +154,7 @@ public class SetTimeByConsultant extends BaseActivity {
 
         img_isweekdayopen.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 if (include_weekend_n_holidays.equalsIgnoreCase("1")) {
                     include_weekend_n_holidays = "0";
                     img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
@@ -157,54 +174,17 @@ public class SetTimeByConsultant extends BaseActivity {
         tv_saveAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveTiming("nothing");
+                saveTiming();
             }
         });
 
 
-        img_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                if (indexCount < datesStringAr.size() - 1) {
-
-                        papulateDataMap(datesStringAr.get(indexCount));
-                        indexCount++;
-                        String nextDate = datesStringAr.get(indexCount).toString();
-                        JSONObject dataObj = datesMap.get(nextDate);
-                        txt_date.setText(nextDate + "");
-                        parseJsonArrayNSetGridData();
-//                        parseJsonArrayNSetGridData(dataObj);
-
-                   }
-            }
-
-        });
-
-        img_prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (indexCount > 1) {
-
-                    indexCount--;
-                    String prevDate = datesStringAr.get(indexCount).toString();
-                    //JSONObject dataObj = datesMap.get(prevDate);
-                    txt_date.setText(prevDate);
-//                    parseJsonArrayNSetGridData(dataObj);
-                    parseJsonArrayNSetGridData();
-                    getAlreadyAddedTime();
-                    //    }
-                }
-            }
-        });
     }
 
     public void viewTimingGrid(ArrayList<String> dataAr) {
 
         GridView grid_timing = findViewById(R.id.grid_timing);
-        dataAr.add(null);
-        customTimingGrid = new CustomTimingGrid(this, customTimeArray);
+        customTimingGrid = new CustomTimingGrid(this, dataAr);
         grid_timing.setAdapter(customTimingGrid);
     }
 
@@ -225,7 +205,7 @@ public class SetTimeByConsultant extends BaseActivity {
                         textView.setText(year + "-"
                                 + (monthOfYear + 1) + "-" + dayOfMonth);
 
-                        getDatesBetweenTWoDates(ed_datefrom.getText().toString(), ed_date_end.getText().toString());
+                        //getDatesBetweenTWoDates(ed_datefrom.getText().toString(), ed_date_end.getText().toString());
 
 
                     }
@@ -252,8 +232,8 @@ public class SetTimeByConsultant extends BaseActivity {
         try {
             mainDataContainerMap.clear();
             final Map<String, String> m = new HashMap<>();
-            m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
-//          m.put("consultant_id", "46");
+//            m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
+            m.put("consultant_id", "3");
             m.put("start_date", ed_datefrom.getText().toString());
             m.put("end_date", ed_date_end.getText().toString());
 
@@ -279,8 +259,7 @@ public class SetTimeByConsultant extends BaseActivity {
 
                                 JSONArray appointment_timeAr = data.getJSONArray("appointment_time");
                                 JSONObject gdataOb = new JSONObject();
-                                for (int x = 0; x < appointment_timeAr.length(); x++)
-                                {
+                                for (int x = 0; x < appointment_timeAr.length(); x++) {
                                     JSONObject dataObj = appointment_timeAr.getJSONObject(x);
                                     gdataOb = dataObj;
                                     datesMap.put(dataObj.getString("start_date"), dataObj);
@@ -297,7 +276,7 @@ public class SetTimeByConsultant extends BaseActivity {
                                         jsonData.put("isQuick", timing_type);
                                         jsonData.put("time", timeAR.getString(y));
                                         jsonData.put("timing", timingStr);
-                                        jsonData.put("include_weekend_n_holidays",include_weekend_n_holidays);
+                                        jsonData.put("include_weekend_n_holidays", include_weekend_n_holidays);
                                         quickCustomJAr.add(jsonData);
                                     }
                                     mainDataContainerMap.put(start_date, quickCustomJAr);
@@ -307,7 +286,7 @@ public class SetTimeByConsultant extends BaseActivity {
 
                                 System.out.println("Map data====" + mainDataContainerMap);
 //                                parseJsonArrayNSetGridData(gdataOb);
-                                parseJsonArrayNSetGridData();
+                                //    parseJsonArrayNSetGridData();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -336,44 +315,84 @@ public class SetTimeByConsultant extends BaseActivity {
     }
 
 
-    private void saveTiming(final String typeStr) {
+    private void saveTiming() {
 
         try {
-                final Map<String, String> m = new HashMap<>();
-                m.put("start_date", txt_date.getText().toString());
-                m.put("end_date", txt_date.getText().toString());
-                m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
 
-                m.put("include_weekend_n_holidays", include_weekend_n_holidays);
-                String timings = "";
-
-                preTimeMapCustom.remove(-1);
-                JSONArray SavedArray = new JSONArray();
-                for (Map.Entry<Integer, String> map : preTimeMapCustom.entrySet()) {
-                    SavedArray.put(map.getValue());
-                    m.put("timing_type", "2");
-                }
-
-                for (Map.Entry<Integer, String> map : preTimeMapAlready.entrySet()) {
-                    SavedArray.put(map.getValue());
-                    m.put("timing_type", "1");
-                }
-                m.put("timing", SavedArray + "");
-
-
-                m.put("device_type", "android");
-                m.put("device_token", getDeviceToken() + "");
-
-                final Map<String, String> obj = new HashMap<>();
-                obj.put("token", getRestParamsName(Utilclass.token));
-
-
-
-
-    System.out.println("Before to save Consultant===" + m);
-
-            if(SavedArray.length()==0)
+            if (preTimeMapCustom.size() > 0 && preTimeMapCustom.size() % 2 != 0)
             {
+                alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.selectvalidTimepair), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                    @Override
+                    public void getDialogEvent(String buttonPressed) {
+                    }
+                });
+                return;
+            }
+
+            final Map<String, String> m = new HashMap<>();
+            m.put("start_date", ed_datefrom.getText().toString());
+            m.put("end_date", ed_date_end.getText().toString());
+            m.put("consultant_id", "3");//getIntent().getStringExtra(Utilclass.consultant_id));
+            m.put("include_weekend_n_holidays", include_weekend_n_holidays);
+
+
+
+            Set<Integer> keyset =preTimeMapCustom.keySet();
+            Iterator<Integer> intItr=keyset.iterator();
+            List<Integer> intList = new ArrayList<Integer>();
+            while (intItr.hasNext())
+            {
+                intList.add(intItr.next());
+            }
+
+            Collections.sort(intList, new Comparator<Integer>() {
+
+                public int compare(Integer o1, Integer o2) {
+                    // for Accending order
+                    return o1 - o2;
+                }
+            });
+
+
+            JSONArray SavedArray = new JSONArray();
+            int paircount = 0;
+            String pairStr = "";
+            for (int x=0;x<intList.size();x++)
+            {
+                pairStr = pairStr + "-" + preTimeMapCustom.get(intList.get(x));
+                if (paircount == 1)
+                {
+                    pairStr=pairStr.replaceFirst("-","");
+                    SavedArray.put(pairStr);
+                    m.put("timing_type", "2");
+                    paircount = -1;
+                    pairStr="";
+                }
+                paircount++;
+            }
+
+
+            //sort key
+
+
+            for (Map.Entry<Integer, String> map : preTimeMapAlready.entrySet()) {
+                SavedArray.put(map.getValue());
+                m.put("timing_type", "1");
+            }
+            m.put("timing", SavedArray+"");
+
+
+            m.put("device_type", "android");
+            m.put("device_token", getDeviceToken() + "");
+
+            final Map<String, String> obj = new HashMap<>();
+            obj.put("token", getRestParamsName(Utilclass.token));
+
+
+            System.out.println("Before to save Consultant===" + m);
+
+
+            if (SavedArray.length() == 0) {
                 alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.selecttime), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                     @Override
                     public void getDialogEvent(String buttonPressed) {
@@ -382,129 +401,124 @@ public class SetTimeByConsultant extends BaseActivity {
                 return;
             }
 
-             serverHandler.sendToServer(this, getApiUrl() + "set-appointment-time", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
-        @Override
-        public void getRespone(String dta, ArrayList<Object> respons) {
-            try {
-                JSONObject jsonObject = new JSONObject(dta);
-                if (jsonObject.getBoolean("status")) {
+            serverHandler.sendToServer(this, getApiUrl() + "set-appointment-time", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+                @Override
+                public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
+                        JSONObject jsonObject = new JSONObject(dta);
+                        if (jsonObject.getBoolean("status")) {
+                            try {
 
-                        if (typeStr.equalsIgnoreCase("next")) {
-                            customTimeArray.clear();
+                                alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                                    @Override
+                                    public void getDialogEvent(String buttonPressed) {
+                                    }
+                                });
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                                @Override
+                                public void getDialogEvent(String buttonPressed) {
+                                }
+                            });
                         }
-
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                } else {
-                    alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-                        @Override
-                        public void getDialogEvent(String buttonPressed) {
-                        }
-                    });
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            });
 
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    });
-
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
     }
 
 
     public void notifyMap(Map<Integer, String> map, String type) {
-
-        System.out.println("Type====>>>" + type + "===" + mainDataContainerMap);
         if (type.equalsIgnoreCase("custom")) {
             preTimeMapCustom.clear();
-//            mainDataContainerMap.remove(txt_date.getText().toString());
-            mainDataContainerMap.put(txt_date.getText().toString(), new ArrayList<JSONObject>());
             customTimingGrid.notifyDataSetChanged();
         } else if (type.equalsIgnoreCase("already")) {
             preTimeMapAlready.clear();
-            mainDataContainerMap.put(txt_date.getText().toString(), new ArrayList<JSONObject>());
             horizontalCategoriesAdapter.notifyDataSetChanged();
         }
     }
 
 
-    private void getDatesBetweenTWoDates(String s, String e) {
-        try {
-            List<Date> dates = new ArrayList<Date>();
-            datesMap.clear();
-            DateFormat formatter;
-            formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date startDate = null;
-            Date endDate = null;
-            try {
-                startDate = (Date) formatter.parse(s);
-                endDate = (Date) formatter.parse(e);
-            } catch (ParseException em) {
-                em.printStackTrace();
-            }
+//    private void getDatesBetweenTWoDates(String s, String e) {
+//        try {
+//            List<Date> dates = new ArrayList<Date>();
+//            datesMap.clear();
+//            DateFormat formatter;
+//            formatter = new SimpleDateFormat("yyyy-MM-dd");
+//            Date startDate = null;
+//            Date endDate = null;
+//            try {
+//                startDate = (Date) formatter.parse(s);
+//                endDate = (Date) formatter.parse(e);
+//            } catch (ParseException em) {
+//                em.printStackTrace();
+//            }
+//
+//            long interval = 24 * 1000 * 60 * 60; // 1 hour in millis
+//            long endTime = endDate.getTime(); // create your endtime here, possibly using Calendar or Date
+//            long curTime = startDate.getTime();
+//            while (curTime <= endTime) {
+//
+//                dates.add(new Date(curTime));
+//                curTime += interval;
+//            }
+//            for (int i = 0; i < dates.size(); i++) {
+//                Date lDate = (Date) dates.get(i);
+//                String ds = formatter.format(lDate);
+//                System.out.println(" Date is ..." + ds);
+//                datesMap.put(ds, new JSONObject());
+//                datesStringAr.add(ds);
+//            }
+//
+//            if (datesMap.size() > 0) {
+//                getAlreadyAddedTime();
+//            }
+//        } catch (Exception em) {
+//            em.printStackTrace();
+//        }
+//    }
 
-            long interval = 24 * 1000 * 60 * 60; // 1 hour in millis
-            long endTime = endDate.getTime(); // create your endtime here, possibly using Calendar or Date
-            long curTime = startDate.getTime();
-            while (curTime <= endTime) {
 
-                dates.add(new Date(curTime));
-                curTime += interval;
-            }
-            for (int i = 0; i < dates.size(); i++) {
-                Date lDate = (Date) dates.get(i);
-                String ds = formatter.format(lDate);
-                System.out.println(" Date is ..." + ds);
-                datesMap.put(ds, new JSONObject());
-                datesStringAr.add(ds);
-            }
-
-            if (datesMap.size() > 0) {
-                getAlreadyAddedTime();
-            }
-        } catch (Exception em) {
-            em.printStackTrace();
-        }
-    }
-
-
-    private void parseJsonArrayNSetGridData() {
-        try {
-            customTimeArray.clear();
-            preTimeMapCustom.clear();
-            preTimeMapAlready.clear();
-            if (horizontalCategoriesAdapter != null) {
-                horizontalCategoriesAdapter.notifyDataSetChanged();
-            }
-            ArrayList<JSONObject> customObjAr=mainDataContainerMap.get(txt_date.getText().toString());
-
-            if(customObjAr!=null) {
-                JSONObject customObj = customObjAr.get(0);
-                if (customObj != null) {
-
-                    String timingStr = customObj.getString("timing");
-                    JSONArray timingAr = new JSONArray(timingStr);
-                    include_weekend_n_holidays = customObj.getString("include_weekend_n_holidays");
-
-                    checkWeeend();
-
-                    for (int x = 0; x < timingAr.length(); x++) {
-                        customTimeArray.add(timingAr.getString(x));
-                    }
-
-                }
-            }
-
+//    private void parseJsonArrayNSetGridData() {
+//        try {
+//            customTimeArray.clear();
+//            preTimeMapCustom.clear();
+//            preTimeMapAlready.clear();
+//            if (horizontalCategoriesAdapter != null) {
+//                horizontalCategoriesAdapter.notifyDataSetChanged();
+//            }
+//            ArrayList<JSONObject> customObjAr=mainDataContainerMap.get(txt_date.getText().toString());
+//
+//            if(customObjAr!=null) {
+//                JSONObject customObj = customObjAr.get(0);
+//                if (customObj != null) {
+//
+//                    String timingStr = customObj.getString("timing");
+//                    JSONArray timingAr = new JSONArray(timingStr);
+//                    include_weekend_n_holidays = customObj.getString("include_weekend_n_holidays");
+//
+//                    checkWeeend();
+//
+//                    for (int x = 0; x < timingAr.length(); x++) {
+//                        customTimeArray.add(timingAr.getString(x));
+//                    }
+//
+//                }
+//            }
 
 
 //
@@ -522,43 +536,44 @@ public class SetTimeByConsultant extends BaseActivity {
 //                    }
 //                }
 //            }
-            viewTimingGrid(customTimeArray);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
+    //    viewTimingGrid(customTimeArray);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
-    private void checkWeeend()
-    {
-
-        try {
-            ArrayList<JSONObject> dataObAr = mainDataContainerMap.get(txt_date.getText().toString());
-            System.out.println("Data ob---" + dataObAr);
-
-            if (dataObAr != null) {
-                JSONObject jObj = dataObAr.get(0);
-                if (jObj != null) {
-                    include_weekend_n_holidays = jObj.getString("include_weekend_n_holidays");
-                }
-            }
-
-            if (include_weekend_n_holidays.equalsIgnoreCase("1")) {
-                img_isweekdayopen.setImageResource(R.drawable.ic_button);
-                tv_saveAppointment.setAlpha(1f);
-                tv_saveAppointment.setEnabled(true);
-            } else {
-
-                img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
-                tv_saveAppointment.setAlpha(.5f);
-                tv_saveAppointment.setEnabled(false);
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+//    private void checkWeeend()
+//    {
+//
+//        try {
+//            ArrayList<JSONObject> dataObAr = mainDataContainerMap.get(txt_date.getText().toString());
+//            System.out.println("Data ob---" + dataObAr);
+//
+//            if (dataObAr != null) {
+//                JSONObject jObj = dataObAr.get(0);
+//                if (jObj != null) {
+//                    include_weekend_n_holidays = jObj.getString("include_weekend_n_holidays");
+//                }
+//            }
+//
+//            if (include_weekend_n_holidays.equalsIgnoreCase("1")) {
+//                img_isweekdayopen.setImageResource(R.drawable.ic_button);
+//                tv_saveAppointment.setAlpha(1f);
+//                tv_saveAppointment.setEnabled(true);
+//            } else {
+//
+//                img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
+//                tv_saveAppointment.setAlpha(.5f);
+//                tv_saveAppointment.setEnabled(false);
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void papulateDataMap(String currentDat) {
         ArrayList<JSONObject> AlreadydataAr = new ArrayList<>();

@@ -33,15 +33,33 @@
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
         <activity android:name=".jitsi.MAinJistsiActivity"></activity>
-        <activity android:name=".initiatecall.InitiateCallWebview" />
-        <activity android:name=".consultant.DetailPageForBooking" />
-        <activity android:name=".usersection.SetAppointmentByUser" />
-        <activity android:name=".consultant.EventRequestActivity" />
-        <activity android:name=".consultant.SetTimeByConsultant" />
-        <activity android:name=".consultant.ConsultantDetailView" />
-        <activity android:name=".consultant.AppointmentHistory" />
-        <activity android:name=".consultant.PapularConsultantFullListing" />
-        <activity android:name=".consultant.EditProfileConsultant" />
+        <activity android:name=".initiatecall.InitiateCallWebview"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".consultant.DetailPageForBooking"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".usersection.SetAppointmentByUser"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".consultant.EventRequestActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".consultant.SetTimeByConsultant"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".consultant.ConsultantDetailView"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".consultant.AppointmentHistory"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".consultant.PapularConsultantFullListing"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".consultant.EditProfileConsultant"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".consultant.AccountInformation"
             android:screenOrientation="portrait" />
@@ -74,7 +92,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

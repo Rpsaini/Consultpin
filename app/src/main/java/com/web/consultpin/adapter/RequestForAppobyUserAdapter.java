@@ -25,12 +25,12 @@ import java.util.Map;
 public class RequestForAppobyUserAdapter extends BaseAdapter {
     private SetAppointmentByUser context;
     private final ArrayList<JSONObject> gridValues;
-    private Map<String, String> reservedMap;
+    private Map<String, Boolean> reservedMap;
     private LinearLayout ll_timing_common;
     private TextView commonTextView;
 
 
-    public RequestForAppobyUserAdapter(SetAppointmentByUser context, ArrayList<JSONObject> artistData, Map<String, String> reservedMap) {
+    public RequestForAppobyUserAdapter(SetAppointmentByUser context, ArrayList<JSONObject> artistData, Map<String, Boolean> reservedMap) {
         this.context = context;
         this.gridValues = artistData;
         this.reservedMap = reservedMap;
@@ -74,9 +74,43 @@ public class RequestForAppobyUserAdapter extends BaseAdapter {
 
 
 
+
+
             if(reservedMap.containsKey(dataObj.getString("timing")))
             {
-                ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
+                if(reservedMap.get(dataObj.getString("timing")))
+                {
+                    ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
+                }
+                else
+                {
+                    if(ll_timing_common!=null)
+                    {
+                        ll_timing_common.setBackgroundResource(R.drawable.blue_drawable);
+                        commonTextView.setTextColor(context.getResources().getColor(R.color.white));
+                    }
+
+                    ll_timing.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            if(ll_timing_common!=null)
+                            {
+                                ll_timing_common.setBackgroundResource(R.drawable.roundcorner_drawable);
+                                commonTextView.setTextColor(context.getResources().getColor(R.color.black));
+                            }
+
+                            ll_timing.setBackgroundResource(R.drawable.blue_drawable);
+                            txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
+                            ll_timing_common=ll_timing;
+                            commonTextView=txt_select_time;
+                            context.timeSlot=txt_select_time.getText()+"";
+
+
+                        }
+                    });
+                }
+
             }
             else
               {
