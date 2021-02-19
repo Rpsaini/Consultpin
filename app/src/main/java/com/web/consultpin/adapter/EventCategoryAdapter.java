@@ -1,7 +1,6 @@
 package com.web.consultpin.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +10,18 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.web.consultpin.R;
-import com.web.consultpin.consultant.EventRequestActivity;
+import com.web.consultpin.events.AddEventsFragment;
+import com.web.consultpin.events.EventRequestActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.util.ArrayList;
-
 
 
 public class EventCategoryAdapter extends RecyclerView.Adapter<EventCategoryAdapter.MyViewHolder> {
     private EventRequestActivity ira1;
     private JSONArray moviesList;
     Context mContext;
-
+    private AddEventsFragment addEventsFragment;
 
 
 
@@ -32,21 +30,20 @@ public class EventCategoryAdapter extends RecyclerView.Adapter<EventCategoryAdap
         TextView txt_reason;
         LinearLayout ll_selectReason;
 
+
         public MyViewHolder(View view) {
             super(view);
             txt_reason = view.findViewById(R.id.txt_reason);
             ll_selectReason = view.findViewById(R.id.ll_selectReason);
 
-
-
-
         }
     }
 
 
-    public EventCategoryAdapter(JSONArray moviesList, EventRequestActivity ct) {
+    public EventCategoryAdapter(JSONArray moviesList, EventRequestActivity ct, AddEventsFragment addEventsFragment) {
         this.moviesList = moviesList;
         this.ira1 = ct;
+        this.addEventsFragment=addEventsFragment;
 
 
     }
@@ -70,28 +67,9 @@ public class EventCategoryAdapter extends RecyclerView.Adapter<EventCategoryAdap
                 @Override
                 public void onClick(View v) {
                     try {
-//                        if(type==0)
-//                        {
-//                            ira1.selected_reason_Id=pos.getString("Id");
-//                            TextView txt_showselected_reason = ira1.findViewById(R.id.txt_showselected_reason);
-//                            txt_showselected_reason.setText(pos.getString("Title"));
-//                        }
-//                        else
-//                        {   ira1.selected_reference=pos.getString("Id");
-//                            TextView txt_showselected_reference = ira1.findViewById(R.id.txt_showselected_reference);
-//                            txt_showselected_reference.setText(pos.getString("Title"));
-//                            if(pos.getString("Title").equalsIgnoreCase("Other"))
-//                            {
-//                                ira1.ll_if_other.setVisibility(View.VISIBLE);
-//                            }
-//                            else
-//                            {
-//                                ira1.ll_if_other.setVisibility(View.GONE);
-//                            }
-//
-//                        }
-//
-//                        ira1.downSourceDestinationView(ira1.downView,ira1.reasonDialog);
+
+                        addEventsFragment.event_cat_id=v.getTag()+"";
+                        addEventsFragment.downView();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -77,7 +77,7 @@ public class BecomeAConsultant extends BaseActivity {
     public Map<String,String> subcategory_id_Ar;
     private   RecyclerView select_category_recycle;
     private int selectionType=0;
-    private String selectedPath;
+    private String selectedPath="";
 
 
 
@@ -222,6 +222,17 @@ public class BecomeAConsultant extends BaseActivity {
                     return;
                 }
 
+                if(selectedPath.length()==0)
+                {
+                    alertDialogs.alertDialog(BecomeAConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.select_licence_image), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
 
 
                 Intent intent=new Intent(BecomeAConsultant.this, AccountInformation.class);
@@ -358,23 +369,6 @@ public class BecomeAConsultant extends BaseActivity {
 
 
 
-//
-//
-//    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-//    private void selectImage(int actionCode) {
-//        if (checkAndRequestPermissions() == 0) {
-//            if (actionCode == 0) {
-//                dispatchTakePictureIntent();
-//            } else if (actionCode == 1) {
-//                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-//                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//
-//                startActivityForResult(pickPhoto, actionCode);
-//            }
-//        } else if (checkAndRequestPermissions() == 1) {
-//            //  showtoast.showToast(PersonalDetails.this, "Go to  Cabs App settings and enable required Permission");
-//        }
-//    }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -382,230 +376,6 @@ public class BecomeAConsultant extends BaseActivity {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
-//
-//Bitmap bmap;
-//    public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
-//        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-//        if(requestCode == 1001)
-//         {
-//            init();
-//         }
-//        if(requestCode==1111)
-//        {
-//            finish();
-//        }
-//         else {
-//            bmap = null;
-//            Uri selectedImage = null;
-//
-//           // if (resultCode != RESULT_CANCELED)
-//            {
-//                System.out.println("inside resualt code==="+requestCode+"=="+resultCode);
-//                switch (requestCode)
-//                {
-//                    case 0:
-//                        try
-//                        {
-////                            System.out.println("selfie==="+user_profile_img);
-//                            bmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
-//
-////                            user_profile_img.setImageBitmap(bmap);
-//                            System.out.println("selefie===>"+bmap);
-//                            selectedPath = getRealPathFromURI(getImageUri(this, bmap));
-//                            selected_image.setText(selectedPath);
-//
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                        break;
-//                    case 1:
-//
-//                            if (imageReturnedIntent != null) {
-//                                try {
-//                                    selectedImage = imageReturnedIntent.getData();
-//                                    selectedPath = getRealPathFromURI(selectedImage);
-//                                    InputStream image_stream = getContentResolver().openInputStream(selectedImage);
-//                                    bmap = BitmapFactory.decodeStream(image_stream);
-//                                    System.out.println("selefie===>"+bmap);
-//                                    selected_image.setText(selectedPath);
-////                                  user_profile_img.setImageBitmap(bmap);
-//
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//
-//                        break;
-//                }
-//
-//            }
-//        }
-//    }
-
-//    private int checkAndRequestPermissions() {
-//
-//        int permissionCAMERA = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
-//        int readExternal = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-//        int writeExternal = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        List<String> listPermissionsNeeded = new ArrayList<>();
-//        if (permissionCAMERA != PackageManager.PERMISSION_GRANTED) {
-//            listPermissionsNeeded.add(android.Manifest.permission.CAMERA);
-//        }
-//        if (readExternal != PackageManager.PERMISSION_GRANTED) {
-//            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-//        }
-//        if (writeExternal != PackageManager.PERMISSION_GRANTED) {
-//            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        }
-//        if (!listPermissionsNeeded.isEmpty()) {
-//            ActivityCompat.requestPermissions(this,
-//                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 1);
-//            return 1;
-//        }
-//
-//        return 0;
-//    }
-
-
-//    public String getRealPathFromURI(Uri uri) {
-//        String[] projection = {MediaStore.Images.Media.DATA};
-//        @SuppressWarnings("deprecation")
-//        Cursor cursor = managedQuery(uri, projection, null, null, null);
-//        int column_index = cursor
-//                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//        cursor.moveToFirst();
-//        return cursor.getString(column_index);
-//    }
-
-
-//    String mCurrentPhotoPath;
-//
-//    private File createImageFile() throws IOException {
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File image = File.createTempFile(
-//                imageFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                storageDir      /* directory */
-//        );
-//        mCurrentPhotoPath = image.getAbsolutePath();
-//        return image;
-//    }
-//
-//    static final int REQUEST_TAKE_PHOTO = 0;
-//    Uri photoURI;
-
-
-//    private void dispatchTakePictureIntent() {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            File photoFile = null;
-//            try {
-//                photoFile = createImageFile();
-//            } catch (IOException ex) {
-//                System.out.println("inside exception===" + ex.getMessage());
-//
-//            }
-//            if (photoFile != null) {
-//
-//                photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
-//                        BuildConfig.APPLICATION_ID + ".provider", photoFile);
-//
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-//                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-//                    takePictureIntent.setClipData(ClipData.newRawUri("", photoURI));
-//                    takePictureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                }
-//                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-//            }
-//        }
-//    }
-
-
-//    class UploadVideo extends AsyncTask<Void, Void, String> {
-//        ProgressDialog uploading;
-//        String path1 = "", imageType1 = "";
-//        private Map<String, String> mapData;
-//
-//
-//        public UploadVideo(String path, String imageType, Map<String, String> mapData) {
-//            path1 = path;
-//            imageType1 = imageType;
-//            this.mapData = mapData;
-//
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            uploading = ProgressDialog.show(BecomeAConsultant.this, "Uploading....", "Please wait...", false, false);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            super.onPostExecute(s);
-//            uploading.dismiss();
-//            try {
-//
-//                System.out.println("inside response===" + s);
-//                if (s.equalsIgnoreCase("500")) {
-//                    Toast.makeText(BecomeAConsultant.this, "This file is not supported.Please select another image", Toast.LENGTH_LONG).show();
-//
-//                } else {
-//                    final JSONObject obj = new JSONObject(s);
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                String status = obj.get("status") + "";
-//                                if (status.equalsIgnoreCase("true")) {
-//
-//
-//                                    savePreferences.savePreferencesData(BecomeAConsultant.this, obj.getJSONObject("data") + "", "data");
-//                                    //{"status":true,"msg":"Your profile is updated successfully!","code":200,"data":{"first_name":"aman","email":"amitk@gmail.com","profile_image":"http:\/\/webcomclients.in\/quickmenu-api\/assets\/images\/users\/profile_1600410452_IMG-20200916-WA0003_233.jpgprofile_image_","gender":"Male","dob":"2020-09-18"}}
-//                                    alertDialogs.alertDialog(BecomeAConsultant.this, "Response", obj.getString("msg"), "Ok", "", new DialogCallBacks() {
-//                                        @Override
-//                                        public void getDialogEvent(String buttonPressed) {
-//                                            init();
-//                                        }
-//                                    });
-//
-//                                } else {
-//                                    alertDialogs.alertDialog(BecomeAConsultant.this, "Response", obj.getString("error"), "Ok", "", new DialogCallBacks() {
-//                                        @Override
-//                                        public void getDialogEvent(String buttonPressed) {
-//                                        }
-//                                    });
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    });
-//
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        @Override
-//        protected String doInBackground(Void... params) {
-////            Upload u = new Upload();
-////            String msg = u.uploadVideo(path1, "", ProfileScreen.this, getApiUrl() + "update-profile", "profile_image", mapData);
-//            return "";
-//        }
-
-
-    //}
-
-
-
-
-
-    //============
 
 
 
@@ -628,7 +398,8 @@ public class BecomeAConsultant extends BaseActivity {
         System.out.println("inside============" + requestCode + "===" + resultCode);
         bmap = null;
         Uri selectedImage = null;
-        if (resultCode != RESULT_CANCELED) {
+        if (resultCode != RESULT_CANCELED)
+        {
             switch (requestCode) {
                 case 0:
 //                 if(imageReturnedIntent != null)
@@ -663,9 +434,21 @@ public class BecomeAConsultant extends BaseActivity {
                         }
                     }
                     break;
+
+                case 1111:
+                {
+                    Intent intent=new Intent();
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }
             }
 
-            // new ConvertImage().execute();
+        }
+      else  if(requestCode==1111)
+        {
+            Intent intent=new Intent();
+            setResult(RESULT_OK,intent);
+            finish();
         }
     }
 
@@ -745,6 +528,8 @@ public class BecomeAConsultant extends BaseActivity {
 
         return 0;
     }
+
+
 
 
 }

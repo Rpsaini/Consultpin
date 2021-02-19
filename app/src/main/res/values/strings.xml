@@ -181,7 +181,10 @@
     <string name="choose">Choose</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="chooseimage">Choose time</string>
+    <string name="selecteventtime">Select event time.</string>
     <string name="img_sel_msg">"Choose Image either from camera or from gallary?</string>
+    <string name="select_licence_image">"Select license Image.</string>
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 
 

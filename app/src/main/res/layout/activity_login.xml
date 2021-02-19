@@ -49,7 +49,7 @@
                      ></fontspackageForTextView.Regular>
 
                     <fontpackageforEdittext.Regular
-                         android:text="testuser@gmail.com"
+                         android:text="testandroid@gmail.com"
                         android:background="@drawable/edittext_bottom_drawable"
                         android:maxLength="70"
                         android:id="@+id/et_email"
@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="@string/password"
-                        android:text="12345678"
+                        android:text="qwerty123"
                         android:inputType="textPassword" />
 
 

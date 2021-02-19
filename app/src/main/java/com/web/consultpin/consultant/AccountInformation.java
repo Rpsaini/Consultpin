@@ -50,6 +50,7 @@ import io.reactivex.disposables.Disposable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class AccountInformation extends BaseActivity {
 
@@ -250,7 +251,7 @@ public class AccountInformation extends BaseActivity {
 
                 else
                 {
-                    Map<String,String> map =new LinkedHashMap<>();
+                  //  Map<String,String> map =new LinkedHashMap<>();
 
                     String ed_indivisual=getIntent().getStringExtra("ed_indivisual");
                     String ed_taskmoreabout=getIntent().getStringExtra("ed_taskmoreabout");
@@ -261,32 +262,22 @@ public class AccountInformation extends BaseActivity {
                     String license=getIntent().getStringExtra("license");
 
 
-                    map.put("tax_office",ed_tax_office.getText().toString());
-                    map.put("company",ed_companyname.getText().toString());
-                    map.put("account_type",accountTypeId);
-                    map.put("identity",ed_nationid_number.getText().toString());
-                    map.put("bank",tv_select_bank.getText().toString());
-                    map.put("iban",ed_iban.getText().toString());
-                    map.put("title",ed_indivisual);
-                    map.put("experience",ed_taskmoreabout);
-                    map.put("specialties",ed_specialist);
-                    map.put("category_id",category_id);
-                    map.put("sub_category_id",sub_category_id);
-                    map.put("rate",txt_select_price_tl);
-                    map.put("city",ed_city.getText().toString());
-                    map.put("provience",ed_provience.getText().toString());
-                    map.put("postal_code",ed_postal_Address.getText().toString());
-                    map.put("user_id",getRestParamsName("user_id"));
-//                    final Map<String, String> obj = new HashMap<>();
-//                    obj.put("token", getRestParamsName(Utilclass.token));
+
 
                     File file = new File(license);
                     if (file != null) {
 
-                        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), "license");
+//                        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), "license");
+//                        MultipartBody.Part body = MultipartBody.Part.createFormData("license", file.getName(), requestBody);
+
+
+                        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
                         MultipartBody.Part body = MultipartBody.Part.createFormData("license", file.getName(), requestBody);
+                        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
 
                         System.out.println("multipart ==="+body);
+
                         RequestBody tax_office = RequestBody.create(MediaType.parse("text/plain"), ed_tax_office.getText().toString());
                         RequestBody company = RequestBody.create(MediaType.parse("text/plain"), ed_companyname.getText().toString());
                         RequestBody account_type = RequestBody.create(MediaType.parse("text/plain"), accountTypeId);
@@ -303,25 +294,47 @@ public class AccountInformation extends BaseActivity {
                         RequestBody provience = RequestBody.create(MediaType.parse("text/plain"), ed_provience.getText().toString());
                         RequestBody postal_code = RequestBody.create(MediaType.parse("text/plain"), ed_postal_Address.getText().toString());
                         RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), getRestParamsName("user_id"));
-                        RequestBody licensenew = RequestBody.create(MediaType.parse("text/plain"), file.getName());
 
                         ImageUpload contestService = ApiProduction.getInstance(AccountInformation.this).provideService(ImageUpload.class);
-                        Observable<String> responseObservable = contestService.uploadImage(tax_office, company, account_type,
+                        Observable<ResponseBody> responseObservable = contestService.uploadImage(tax_office, company, account_type,
                                 identity, bank, iban, title, experience, specialties, category_id_new, sub_category_id_new, rate,
                                 city, provience, postal_code, user_id, getRestParamsName(Utilclass.token)
-                                , body);
+                                , body,filename);
 
-
-
-                        RxAPICallHelper.call(responseObservable, new RxAPICallback<String>() {
+                    RxAPICallHelper.call(responseObservable, new RxAPICallback<ResponseBody>()
+                        {
                             @Override
-                            public void onSuccess(String t) {
-                                System.out.println("Inside failed=====>" + t);
+                            public void onSuccess(ResponseBody t)
+                            {
+                                try {
+
+                                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.choose), "Your consultant request saved successfully.", "ok", "", new DialogCallBacks() {
+                                        @Override
+                                        public void getDialogEvent(String buttonPressed) {
+                                            if (buttonPressed.equalsIgnoreCase("ok")) {
+                                               Intent intent=new Intent();
+                                               setResult(RESULT_OK,intent);
+                                               finish();
+                                            }
+                                        }
+                                    });
+
+                                }
+                                catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+
                             }
 
                             @Override
                             public void onFailed(Throwable throwable) {
-                                System.out.println("Inside failed=====>" + throwable.getMessage());
+                                alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.choose), "Your consultant request not saved .", "ok", "", new DialogCallBacks() {
+                                    @Override
+                                    public void getDialogEvent(String buttonPressed) {
+
+                                    }
+                                });
                             }
                         });
 

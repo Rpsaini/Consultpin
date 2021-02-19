@@ -64,6 +64,7 @@ public class MAinJistsiActivity extends AppCompatActivity  implements JitsiMeetA
                             .setRoom(roomid)
                             .setUserInfo(new JitsiMeetUserInfo(bundle))
                             .setAudioMuted(false)
+                            .setSubject(getIntent().getStringExtra(Utilclass.first_name))
                             .setVideoMuted(false)
                             .setAudioOnly(false)
                             .setWelcomePageEnabled(false)

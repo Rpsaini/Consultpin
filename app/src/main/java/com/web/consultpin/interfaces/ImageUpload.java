@@ -3,12 +3,15 @@ package com.web.consultpin.interfaces;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.consultant.AccountInformation;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -18,7 +21,7 @@ public interface ImageUpload {
 
     @Multipart
     @POST("addcounsultant")
-    Observable<String> uploadImage(
+    Observable<ResponseBody> uploadImage(
                                            @Part("tax_office") RequestBody tax_office,
                                            @Part("company") RequestBody company,
                                            @Part("account_type") RequestBody account_type,
@@ -36,19 +39,13 @@ public interface ImageUpload {
                                            @Part("postal_code") RequestBody postal_code,
                                            @Part("user_id") RequestBody user_id,
                                            @Header("token") String authHeader,
-
-                                           @Part MultipartBody.Part image
+                                           @Part MultipartBody.Part image,
+                                           @Part("license") RequestBody license
 
                                           );
 
 
 
 
-
-//                    obj.put("Authorization", getRestParamsName(Utilclass.token));
-//
-//                    System.out.println("Account===="+map);
-//
-//                    serverHandler.sendToServer(AccountInformation .this, getApiUrl() + "addcounsultant"
 
 }
