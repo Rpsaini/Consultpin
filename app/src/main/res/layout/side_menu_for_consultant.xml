@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_addappointment"
+            android:drawablePadding="10dp"
+            android:gravity="center|left"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_appointment"
+            style="@style/edittext_style_14_black"
+            android:text="@string/appointment"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+
+        <fontspackageForTextView.Regular
+
+            android:id="@+id/tv_setAppointment"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_history"
+            style="@style/edittext_style_14_black"
+            android:text="@string/setappointment"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_events"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_help"
+            style="@style/edittext_style_14_black"
+            android:text="@string/event"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_favorite"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_favorite"
+            style="@style/edittext_style_14_black"
+            android:text="@string/Favorites"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+
+
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_reservation"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_wallet"
+            style="@style/edittext_style_14_black"
+            android:text="@string/pinpara_wallet"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+
+
+
+
+
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_help"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_help"
+            style="@style/edittext_style_14_black"
+            android:text="@string/help"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+
+
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_aboutus"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_about_us"
+            style="@style/edittext_style_14_black"
+            android:text="@string/about_us"
+
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/tv_privacy"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_star"
+            style="@style/edittext_style_14_black"
+            android:text="@string/rate_us"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color"
+            ></View>
+
+        <fontspackageForTextView.Regular
+            android:visibility="gone"
+            android:id="@+id/tv_rateus"
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_star"
+            style="@style/edittext_style_14_black"
+            android:text="@string/Logout"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            ></fontspackageForTextView.Regular>
+
+    </LinearLayout>
+</LinearLayout>

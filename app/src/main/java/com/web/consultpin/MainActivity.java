@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.navigation.NavigationView;
 
 import com.web.consultpin.consultant.AppointmentHistory;
@@ -22,6 +25,7 @@ import com.web.consultpin.ui.home.Chat;
 import com.web.consultpin.ui.home.Home;
 
 import com.web.consultpin.ui.home.Profile;
+import com.web.consultpin.usersection.UserEventHistory;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -33,68 +37,60 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends BaseActivity {
 
     private LinearLayout commonBottomBar;
-//    private AppBarConfiguration mAppBarConfiguration;
+
+    DrawerLayout drawer;
+    private Fragment commonFragments;
+    private String frgtag="";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initiateObj();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
 
 
-        ImageView nav_oprn_toolbar =findViewById(R.id.nav_oprn_toolbar);
-
+        ImageView nav_oprn_toolbar = findViewById(R.id.nav_oprn_toolbar);
         nav_oprn_toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawer.openDrawer(Gravity.LEFT);
             }
         });
-        Intent intent=new Intent(MainActivity.this, SetTimeByConsultant.class);
-        startActivity(intent);
 
 
         navigationMenu();
 
-        leftsidemenuclicks();
+        switchUser();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-      //  getMenuInflater().inflate(R.menu.main, menu);
+        //  getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-//    @Override
-//    public boolean onSupportNavigateUp()
-//    {
-////        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-////        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-////                || super.onSupportNavigateUp();
-//    }
 
+    private void navigationMenu() {
 
-    private void navigationMenu()
-    {
-        callFragment(new Home(),"home");
+        callFragment(new Home(), "home");
         LinearLayout bnave_ll_home = findViewById(R.id.bnave_ll_home);
         LinearLayout bnave_ll_chat = findViewById(R.id.bnave_ll_chat);
         LinearLayout bnave_ll_appontment = findViewById(R.id.bnave_ll_appontment);
         LinearLayout bnave_ll_profile = findViewById(R.id.bnave_ll_profile);
-        commonBottomBar=bnave_ll_home;
+
+        commonBottomBar = bnave_ll_home;
         doBottomBarSelection(bnave_ll_home);
         bnave_ll_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doBottomBarSelection(bnave_ll_home);
-                commonBottomBar=bnave_ll_home;
-                callFragment(new Home(),"home");
+                commonBottomBar = bnave_ll_home;
+                callFragment(new Home(), "home");
             }
         });
 
@@ -103,8 +99,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 doBottomBarSelection(bnave_ll_chat);
-                commonBottomBar=bnave_ll_chat;
-                callFragment(new Chat(),"chat");
+                commonBottomBar = bnave_ll_chat;
+                callFragment(new Chat(), "chat");
             }
         });
 
@@ -113,11 +109,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 doBottomBarSelection(bnave_ll_appontment);
-                commonBottomBar=bnave_ll_appontment;
-
-
-
-                callFragment(new AppointMentHistoryFrg(),"appointment");
+                commonBottomBar = bnave_ll_appontment;
+                callFragment(new AppointMentHistoryFrg(), "appointment");
             }
         });
 
@@ -125,8 +118,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 doBottomBarSelection(bnave_ll_profile);
-                commonBottomBar=bnave_ll_profile;
-                callFragment(new Profile(),"profile");
+                commonBottomBar = bnave_ll_profile;
+                callFragment(new Profile(), "profile");
             }
         });
 
@@ -134,52 +127,67 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.become_consultant).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, BecomeAConsultant.class);
+                Intent intent = new Intent(MainActivity.this, BecomeAConsultant.class);
                 startActivity(intent);
             }
         });
 
     }
-    private void callFragment(Fragment fragment,String tag)
-    {
+
+    private void callFragment(Fragment fragment, String tag) {
+        this.commonFragments=fragment;
+        this.frgtag=tag;
+
+        Fragment frg=null;
+        if(fragment instanceof Home)
+        {
+            frg=new Home();
+        }
+        else if(fragment instanceof Chat)
+        {
+            frg=new Chat();
+        }
+        else if(fragment instanceof AppointMentHistoryFrg)
+        {
+            frg=new AppointMentHistoryFrg();
+        }
+        else if(fragment instanceof Profile)
+        {
+            frg=new Profile();
+        }
+
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.replace(R.id.ll_fragment_container, fragment, tag);
+        fragmentTransaction.replace(R.id.ll_fragment_container, frg, tag);
         fragmentTransaction.commit();
 
     }
 
-    private void doBottomBarSelection(LinearLayout bnave_ll_home)
-    {
+    private void doBottomBarSelection(LinearLayout bnave_ll_home) {
         unselectBottomBar();
-        int childCount=bnave_ll_home.getChildCount();
-        for(int x=0;x<childCount;x++)
-        {
-            View view=bnave_ll_home.getChildAt(x);
-            if(view instanceof TextView)
-            {
-                ((TextView)view).setTextColor(getResources().getColor(R.color.buttonskyblue));
+        int childCount = bnave_ll_home.getChildCount();
+        for (int x = 0; x < childCount; x++) {
+            View view = bnave_ll_home.getChildAt(x);
+            if (view instanceof TextView) {
+                ((TextView) view).setTextColor(getResources().getColor(R.color.buttonskyblue));
             }
-            if(view instanceof ImageView)
-            {
-                ((ImageView)view).setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.buttonskyblue), android.graphics.PorterDuff.Mode.SRC_IN);
+            if (view instanceof ImageView) {
+                ((ImageView) view).setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.buttonskyblue), android.graphics.PorterDuff.Mode.SRC_IN);
             }
         }
     }
-    private void unselectBottomBar()
-    {
-        int childCount=commonBottomBar.getChildCount();
-        for(int x=0;x<childCount;x++)
-        {
-            View view=commonBottomBar.getChildAt(x);
-            if(view instanceof TextView)
-            {
-                ((TextView)view).setTextColor(getResources().getColor(R.color.bottom_navigation_color));
+
+    private void unselectBottomBar() {
+        int childCount = commonBottomBar.getChildCount();
+        for (int x = 0; x < childCount; x++) {
+            View view = commonBottomBar.getChildAt(x);
+            if (view instanceof TextView) {
+                ((TextView) view).setTextColor(getResources().getColor(R.color.bottom_navigation_color));
             }
-            if(view instanceof ImageView)
-            {
-                ((ImageView)view).setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.bottom_navigation_color), android.graphics.PorterDuff.Mode.SRC_IN);
+            if (view instanceof ImageView) {
+                ((ImageView) view).setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.bottom_navigation_color), android.graphics.PorterDuff.Mode.SRC_IN);
             }
         }
     }
@@ -188,26 +196,142 @@ public class MainActivity extends BaseActivity {
     private void leftsidemenuclicks()
     {
         NavigationView navigationView = findViewById(R.id.nav_view);
-       TextView appointmentHistory =navigationView.findViewById(R.id.tv_appointmenthistory);
-       TextView tv_events =navigationView.findViewById(R.id.tv_events);
-       appointmentHistory.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent=new Intent(MainActivity.this, AppointmentHistory.class);
-               startActivity(intent);
-           }
-       });
+        TextView tv_events = navigationView.findViewById(R.id.tv_events);
+        TextView addAppointment = findViewById(R.id.tv_setAppointment);
+        View view_line = findViewById(R.id.view_line);
 
+        if (!Utilclass.isConsultantModeOn)
+        {
+            tv_events.setText(getResources().getString(R.string.view_events));
+            addAppointment.setVisibility(View.GONE);
+            view_line.setVisibility(View.GONE);
 
-        tv_events.setOnClickListener(new View.OnClickListener() {
+            tv_events.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawer.closeDrawer(Gravity.LEFT);
+                    Intent intent = new Intent(MainActivity.this, UserEventHistory.class);
+                    startActivity(intent);
+                }
+            });
+
+        } else {
+            addAppointment.setVisibility(View.VISIBLE);
+            view_line.setVisibility(View.VISIBLE);
+            tv_events.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawer.closeDrawer(Gravity.LEFT);
+                    Intent intent = new Intent(MainActivity.this, EventRequestActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+        }
+
+        findViewById(R.id.tv_addappointment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, EventRequestActivity.class);
+                drawer.closeDrawer(Gravity.LEFT);
+                LinearLayout bnave_ll_appontment = findViewById(R.id.bnave_ll_appontment);
+                doBottomBarSelection(bnave_ll_appontment);
+                commonBottomBar = bnave_ll_appontment;
+                callFragment(new AppointMentHistoryFrg(), "appointment");
+            }
+        });
+
+
+        addAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.closeDrawer(Gravity.LEFT);
+                Intent intent = new Intent(MainActivity.this, SetTimeByConsultant.class);
                 startActivity(intent);
             }
         });
+
+
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        switchUser();
+    }
+
+
+    private void switchUser() {
+        leftsidemenuclicks();
+        int consultanmtId = Integer.parseInt(getRestParamsName(Utilclass.consultant_id));
+        ImageView img_switch_to_user = findViewById(R.id.img_switch_to_user);
+        TextView txt_switch_to_user = findViewById(R.id.txt_switch_to_user);
+        LinearLayout ll_switch_to_user = findViewById(R.id.ll_switch_to_user);
+        LinearLayout become_consultant = findViewById(R.id.become_consultant);
+
+        setSideMenuForUser();
+
+        if (consultanmtId == 0) {
+            Utilclass.isConsultantModeOn = false;
+            ll_switch_to_user.setVisibility(View.GONE);
+            become_consultant.setVisibility(View.VISIBLE);
+        } else {
+            Utilclass.isConsultantModeOn = true;
+            ll_switch_to_user.setVisibility(View.VISIBLE);
+            become_consultant.setVisibility(View.GONE);
+            txt_switch_to_user.setText(getResources().getString(R.string.switchtouser));
+            img_switch_to_user.setImageResource(R.drawable.ic_button);
+            img_switch_to_user.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Utilclass.isConsultantModeOn) {
+                        txt_switch_to_user.setText(getResources().getString(R.string.switchtoconsultant));
+                        img_switch_to_user.setImageResource(R.drawable.ic_unselect_button);
+                        Utilclass.isConsultantModeOn = false;
+                    } else {
+                        txt_switch_to_user.setText(getResources().getString(R.string.switchtouser));
+                        img_switch_to_user.setImageResource(R.drawable.ic_button);
+                        Utilclass.isConsultantModeOn = true;
+                    }
+
+
+                    callFragment(commonFragments,frgtag);
+
+                    leftsidemenuclicks();
+
+                }
+            });
+        }
+    }
+
+
+    private void setSideMenuForUser() {
+        TextView nav_name = findViewById(R.id.nav_name);
+        ImageView rr_homenav = findViewById(R.id.rr_homenav);
+        ImageView profileimage = findViewById(R.id.profileimage);
+
+        showImage(getRestParamsName("profile_pic"), rr_homenav);
+        showImage(getRestParamsName("profile_pic"), profileimage);
+
+        nav_name.setText(getRestParamsName("first_name") + getRestParamsName("last_name"));
+
+    }
+
+    private void showImage(final String url, final ImageView header_img) {
+        System.out.println("Image url==" + url);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(MainActivity.this)
+                        .load(url)
+                        .placeholder(R.drawable.profileavtar)
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                        .into(header_img);
+            }
+        });
+
+
+    }
 
 
 }

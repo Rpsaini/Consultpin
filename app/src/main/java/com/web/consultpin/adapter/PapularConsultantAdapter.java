@@ -84,7 +84,7 @@ public class PapularConsultantAdapter extends RecyclerView.Adapter<PapularConsul
             JSONObject jsonObject=datAr.get(position);
 
 
-            holder.consultant_name.setText(jsonObject.getString("category_name"));
+            holder.consultant_name.setText(jsonObject.getString("name"));
             holder.specialties.setText(jsonObject.getString("specialties"));
             showImage(imageUrl+""+jsonObject.getString("profile_pic"),holder.consultant_image);
             holder.ll_best_restaurant.setTag(position);

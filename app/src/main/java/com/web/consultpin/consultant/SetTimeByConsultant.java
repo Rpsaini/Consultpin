@@ -100,7 +100,7 @@ public class SetTimeByConsultant extends BaseActivity {
         toolbar_back_arrow = findViewById(R.id.toolbar_back_arrow);
         TextView toolbar_title = findViewById(R.id.toolbar_title);
 
-        toolbar_title.setText(getResources().getString(R.string.set_appointment));
+        toolbar_title.setText(getResources().getString(R.string.set_appointment_time));
 
         ed_datefrom = findViewById(R.id.ed_datefrom);
         ed_date_end = findViewById(R.id.ed_date_end);
@@ -232,8 +232,7 @@ public class SetTimeByConsultant extends BaseActivity {
         try {
             mainDataContainerMap.clear();
             final Map<String, String> m = new HashMap<>();
-//            m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
-            m.put("consultant_id", "3");
+            m.put("consultant_id", getRestParamsName(Utilclass.consultant_id));
             m.put("start_date", ed_datefrom.getText().toString());
             m.put("end_date", ed_date_end.getText().toString());
 
@@ -285,8 +284,7 @@ public class SetTimeByConsultant extends BaseActivity {
 
 
                                 System.out.println("Map data====" + mainDataContainerMap);
-//                                parseJsonArrayNSetGridData(gdataOb);
-                                //    parseJsonArrayNSetGridData();
+
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -332,7 +330,7 @@ public class SetTimeByConsultant extends BaseActivity {
             final Map<String, String> m = new HashMap<>();
             m.put("start_date", ed_datefrom.getText().toString());
             m.put("end_date", ed_date_end.getText().toString());
-            m.put("consultant_id", "3");//getIntent().getStringExtra(Utilclass.consultant_id));
+            m.put("consultant_id", getRestParamsName(Utilclass.consultant_id));
             m.put("include_weekend_n_holidays", include_weekend_n_holidays);
 
 
@@ -411,7 +409,9 @@ public class SetTimeByConsultant extends BaseActivity {
 
                                 alertDialogs.alertDialog(SetTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                     @Override
-                                    public void getDialogEvent(String buttonPressed) {
+                                    public void getDialogEvent(String buttonPressed)
+                                    {
+                                        finish();
                                     }
                                 });
 
@@ -452,184 +452,6 @@ public class SetTimeByConsultant extends BaseActivity {
         }
     }
 
-
-//    private void getDatesBetweenTWoDates(String s, String e) {
-//        try {
-//            List<Date> dates = new ArrayList<Date>();
-//            datesMap.clear();
-//            DateFormat formatter;
-//            formatter = new SimpleDateFormat("yyyy-MM-dd");
-//            Date startDate = null;
-//            Date endDate = null;
-//            try {
-//                startDate = (Date) formatter.parse(s);
-//                endDate = (Date) formatter.parse(e);
-//            } catch (ParseException em) {
-//                em.printStackTrace();
-//            }
-//
-//            long interval = 24 * 1000 * 60 * 60; // 1 hour in millis
-//            long endTime = endDate.getTime(); // create your endtime here, possibly using Calendar or Date
-//            long curTime = startDate.getTime();
-//            while (curTime <= endTime) {
-//
-//                dates.add(new Date(curTime));
-//                curTime += interval;
-//            }
-//            for (int i = 0; i < dates.size(); i++) {
-//                Date lDate = (Date) dates.get(i);
-//                String ds = formatter.format(lDate);
-//                System.out.println(" Date is ..." + ds);
-//                datesMap.put(ds, new JSONObject());
-//                datesStringAr.add(ds);
-//            }
-//
-//            if (datesMap.size() > 0) {
-//                getAlreadyAddedTime();
-//            }
-//        } catch (Exception em) {
-//            em.printStackTrace();
-//        }
-//    }
-
-
-//    private void parseJsonArrayNSetGridData() {
-//        try {
-//            customTimeArray.clear();
-//            preTimeMapCustom.clear();
-//            preTimeMapAlready.clear();
-//            if (horizontalCategoriesAdapter != null) {
-//                horizontalCategoriesAdapter.notifyDataSetChanged();
-//            }
-//            ArrayList<JSONObject> customObjAr=mainDataContainerMap.get(txt_date.getText().toString());
-//
-//            if(customObjAr!=null) {
-//                JSONObject customObj = customObjAr.get(0);
-//                if (customObj != null) {
-//
-//                    String timingStr = customObj.getString("timing");
-//                    JSONArray timingAr = new JSONArray(timingStr);
-//                    include_weekend_n_holidays = customObj.getString("include_weekend_n_holidays");
-//
-//                    checkWeeend();
-//
-//                    for (int x = 0; x < timingAr.length(); x++) {
-//                        customTimeArray.add(timingAr.getString(x));
-//                    }
-//
-//                }
-//            }
-
-
-//
-//            if (customObj != null)
-//            {
-//                if (customObj.has("timing")) {
-//                    String timingStr = customObj.getString("timing");
-//                    JSONArray timingAr = new JSONArray(timingStr);
-//                    include_weekend_n_holidays = customObj.getString("include_weekend_n_holidays");
-//
-//                    checkWeeend();
-//
-//                    for (int x = 0; x < timingAr.length(); x++) {
-//                        customTimeArray.add(timingAr.getString(x));
-//                    }
-//                }
-//            }
-
-    //    viewTimingGrid(customTimeArray);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-//    private void checkWeeend()
-//    {
-//
-//        try {
-//            ArrayList<JSONObject> dataObAr = mainDataContainerMap.get(txt_date.getText().toString());
-//            System.out.println("Data ob---" + dataObAr);
-//
-//            if (dataObAr != null) {
-//                JSONObject jObj = dataObAr.get(0);
-//                if (jObj != null) {
-//                    include_weekend_n_holidays = jObj.getString("include_weekend_n_holidays");
-//                }
-//            }
-//
-//            if (include_weekend_n_holidays.equalsIgnoreCase("1")) {
-//                img_isweekdayopen.setImageResource(R.drawable.ic_button);
-//                tv_saveAppointment.setAlpha(1f);
-//                tv_saveAppointment.setEnabled(true);
-//            } else {
-//
-//                img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
-//                tv_saveAppointment.setAlpha(.5f);
-//                tv_saveAppointment.setEnabled(false);
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-
-    private void papulateDataMap(String currentDat) {
-        ArrayList<JSONObject> AlreadydataAr = new ArrayList<>();
-        if (mainDataContainerMap.containsKey(currentDat)) {
-            AlreadydataAr = mainDataContainerMap.get(currentDat);
-        }
-        for (Map.Entry<Integer, String> preMap : preTimeMapAlready.entrySet()) {
-            try {
-                JSONObject jsonData = new JSONObject();
-                jsonData.put("isQuick", "1");
-                jsonData.put("time", preMap.getValue());
-                AlreadydataAr.add(jsonData);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        mainDataContainerMap.put(currentDat, AlreadydataAr);
-
-//==================================
-        ArrayList<JSONObject> customDateAr = new ArrayList<>();
-        if (mainDataContainerMap.containsKey(currentDat)) {
-            customDateAr = mainDataContainerMap.get(currentDat);
-        }
-        for (Map.Entry<Integer, String> customeMAp : preTimeMapCustom.entrySet()) {
-            if (customeMAp.getKey() > 0) {
-                try {
-                    JSONObject jsonData = new JSONObject();
-                    jsonData.put("isQuick", "1");
-                    jsonData.put("time", customeMAp.getValue());
-                    customDateAr.add(jsonData);
-                    System.out.println("customeMAp====" + customeMAp.getKey() + "===" + customeMAp.getValue());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        mainDataContainerMap.put(currentDat, customDateAr);
-
-
-        for (Map.Entry<String, ArrayList<JSONObject>> mapData : mainDataContainerMap.entrySet()) {
-
-            System.out.println("Dates====" + mapData.getKey());
-            ArrayList<JSONObject> dataObje = mapData.getValue();
-
-            for (int x = 0; x < dataObje.size(); x++) {
-                try {
-                    JSONObject jObj = dataObje.get(x);
-                    System.out.println("Daytes Key===" + jObj.getString("isQuick") + "===" + jObj.getString("time"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
 
 }

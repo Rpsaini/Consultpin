@@ -285,7 +285,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center|left"
                     android:padding="5dp"
-                    android:hint="@string/lawer_licence"></fontspackageForTextView.Regular>
+                    android:hint="@string/event_image"></fontspackageForTextView.Regular>
 
 
                 <ImageView

@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.dialogsnpickers.DialogCallBacks;
@@ -152,7 +153,10 @@ public class SetAppointmentByUser extends BaseActivity {
                                 showAlreadyAddedTime(data);
 
 
+
                                 JSONArray appointmentArray = dataObj.getJSONArray("appointment_time");
+                                if(appointmentArray.length()>0)
+                                {
                                 JSONObject appointmentData = appointmentArray.getJSONObject(0);
                                 String isWeekendoff = appointmentData.getString("include_weekend_n_holidays");
 
@@ -165,29 +169,26 @@ public class SetAppointmentByUser extends BaseActivity {
                                     String timeStr = timeArray.getString(x);
                                     String[] timeSplitAr = timeStr.split("-");
 
-                                    for (int y = 0; y < timeSplitAr.length; y++)
-                                    {
+                                    for (int y = 0; y < timeSplitAr.length; y++) {
 
-                                        String timeSlot=timeSplitAr[y];
+                                        String timeSlot = timeSplitAr[y];
 
 
-                                        if (jsonArrayReservedTime.length() > 0)
-                                        {
+                                        if (jsonArrayReservedTime.length() > 0) {
                                             JSONObject reservedTime = jsonArrayReservedTime.getJSONObject(0);
                                             String appointment_duration = reservedTime.getString("appointment_duration");
                                             String[] splittedAr = reservedTime.getString("appointment_time").split(",");
 
-                                            for(int z=0;z<splittedAr.length;z++)
-                                            {
-                                                String reservedtime=splittedAr[z];
+                                            for (int z = 0; z < splittedAr.length; z++) {
+                                                String reservedtime = splittedAr[z];
                                                 String reservetimeAfterAddingMinutes = addTime(reservedtime, Integer.parseInt(appointment_duration));
 
-                                                boolean bool=checkTimeIsExistBeetWeenTwoTimes(reservedtime,reservetimeAfterAddingMinutes,timeSlot);
+                                                boolean bool = checkTimeIsExistBeetWeenTwoTimes(reservedtime, reservetimeAfterAddingMinutes, timeSlot);
 
 
-                                                System.out.println("Reservetime====>"+reservedtime+"==="+reservetimeAfterAddingMinutes);
+                                                System.out.println("Reservetime====>" + reservedtime + "===" + reservetimeAfterAddingMinutes);
 
-                                                if(bool) {
+                                                if (bool) {
                                                     reservedTimeMap.put(timeSlot, bool);
                                                 }
 
@@ -199,42 +200,25 @@ public class SetAppointmentByUser extends BaseActivity {
                                         jsonObject1.put("timing", timeSplitAr[y]);
                                         jsonObject1.put("include_weekend_n_holidays", isWeekendoff);
                                         timeMainAr.add(jsonObject1);
-
-
+                                    }
 
                                     }
+                                    RelativeLayout relativeLayout =findViewById(R.id.rr_nodata_view);
+                                    relativeLayout.setVisibility(View.GONE);
+
+                                    viewTimingGrid(timeMainAr, reservedTimeMap);
+                                }
+                                else {
+                                    RelativeLayout relativeLayout =findViewById(R.id.rr_nodata_view);
+                                    relativeLayout.setVisibility(View.VISIBLE);
+
+
                                 }
 
                                 System.out.println("Reserved time map===="+reservedTimeMap);
 
-                                //Map<String,Boolean> finalReservermap=new fin
-
-                                //reserve time=====
 
 
-//                                if (jsonArrayReservedTime.length() > 0) {
-//                                    JSONObject reservedTime = jsonArrayReservedTime.getJSONObject(0);
-//                                    String appointment_duration = reservedTime.getString("appointment_duration");
-//
-//                                    String reservetimeStr = reservedTime.getString("appointment_time");
-//
-//                                    String[] splittedAr = reservetimeStr.split(",");
-//                                    for (int x = 0; x < splittedAr.length; x++)
-//                                    {
-//                                        String newTime = addTime(splittedAr[x], Integer.parseInt(appointment_duration));
-//
-//                                        System.out.println("new timeee====="+splittedAr[x]+"====="+newTime);
-//                                        boolean bool=checkTimeIsExistBeetWeenTwoTimes(splittedAr[x],newTime);
-//                                        System.out.println("new time===>"+bool);
-//                                        // reservedTimeMap.put(splittedAr[x], splittedAr[x]);
-//                                       // reservedTimeMap.put(newTime, newTime);
-//
-//
-//                                    }
-//
-////                                    System.out.println("Reserved time====" + reservedTimeMap);
-//                                }
-                                viewTimingGrid(timeMainAr, reservedTimeMap);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

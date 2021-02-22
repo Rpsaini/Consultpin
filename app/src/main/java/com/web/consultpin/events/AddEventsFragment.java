@@ -158,11 +158,15 @@ public class AddEventsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isPaid == 0) {
-                    img_ispaid.setImageResource(R.drawable.ic_unselect_button);
-                    isPaid = 0;
-                } else {
                     img_ispaid.setImageResource(R.drawable.ic_button);
+                    ed_paid_fee.setEnabled(true);
                     isPaid = 1;
+                } else {
+                    img_ispaid.setImageResource(R.drawable.ic_unselect_button);
+                    ed_paid_fee.setEnabled(false);
+                    ed_paid_fee.setText("");
+
+                    isPaid = 0;
                 }
 
             }
@@ -279,6 +283,7 @@ public class AddEventsFragment extends Fragment {
             final Map<String, String> obj = new HashMap<>();
             obj.put("token", eventRequestActivity.getRestParamsName(Utilclass.token));
 
+            System.out.println("Bevfor ==="+obj);
             eventRequestActivity.serverHandler.sendToServer(eventRequestActivity, eventRequestActivity.getApiUrl() + "get-event-categories", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {
@@ -511,7 +516,7 @@ public class AddEventsFragment extends Fragment {
         RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
 
 
-        RequestBody consultant_id = RequestBody.create(MediaType.parse("text/plain"), "3");
+        RequestBody consultant_id = RequestBody.create(MediaType.parse("text/plain"), eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), ed_about_event.getText().toString());
         RequestBody event_date = RequestBody.create(MediaType.parse("text/plain"), ed_datefrom.getText().toString());
         RequestBody event_time = RequestBody.create(MediaType.parse("text/plain"), ed_date_end.getText().toString());
@@ -536,29 +541,17 @@ public class AddEventsFragment extends Fragment {
                 eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), "Event request saved successfully.", "ok", "", new DialogCallBacks() {
                     @Override
                     public void getDialogEvent(String buttonPressed) {
-                        if (buttonPressed.equalsIgnoreCase("ok")) {
-                          //  viewPager.setCurrentItem(1);
+                        if (buttonPressed.equalsIgnoreCase("ok"))
+                        {
                             eventRequestActivity.viewPager.setCurrentItem(1);
-
                         }
                     }
                 });
-
-                try {
-                    JSONObject jsonObject=new JSONObject(t.toString());
-                    System.out.println("Jsondata===="+jsonObject);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-
-
-
             }
 
             @Override
-            public void onFailed(Throwable throwable) {
+            public void onFailed(Throwable throwable)
+            {
                 System.out.println("Inside failed=====>" + throwable.getMessage());
                 eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), "Event request not saved.", "ok", "", new DialogCallBacks() {
                     @Override

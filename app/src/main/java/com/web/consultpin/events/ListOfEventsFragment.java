@@ -1,5 +1,6 @@
 package com.web.consultpin.events;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,20 +13,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.app.dialogsnpickers.DialogCallBacks;
+import com.app.vollycommunicationlib.CallBack;
+import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
+import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.EventHistoryAdapter;
+import com.web.consultpin.interfaces.ResponsInterface;
+import com.web.consultpin.registration.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ListOfEventsFragment extends Fragment {
 private View view;
 private EventRequestActivity eventRequestActivity;
 
-    public ListOfEventsFragment() {
-        // Required empty public constructor
+    public ListOfEventsFragment()
+    {
+
+    }
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && isResumed()) {
+            System.out.println("List fragment called===>>>");
+            getEventList();
+        }
     }
 
     public static ListOfEventsFragment newInstance(String param1, String param2) {
@@ -35,24 +54,24 @@ private EventRequestActivity eventRequestActivity;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-
     }
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          view=inflater.inflate(R.layout.fragment_list_of_events, container, false);
         eventRequestActivity= (EventRequestActivity) getActivity();
-        ArrayList<JSONObject> list=new ArrayList<>();
-        for(int x=0;x<10;x++)
-        {
-            list.add(new JSONObject());
-        }
-        init(list);
+
         return  view;
     }
+
 
     private void init(ArrayList<JSONObject> dataAr)
     {
@@ -76,5 +95,72 @@ private EventRequestActivity eventRequestActivity;
         event_history_recycler.setItemAnimator(new DefaultItemAnimator());
         event_history_recycler.setAdapter(mAdapter);
     }
+
+    private void getEventList()
+    {
+        try {
+            final Map<String, String> m = new HashMap<>();
+
+            System.out.println("Consultant id===>"+eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
+            if(Utilclass.isConsultantModeOn) {
+                m.put("consultant_id", eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
+            }
+            else
+            {
+                m.put("consultant_id", "0");
+
+            }
+            m.put("device_type", "android");
+            m.put("device_token", eventRequestActivity.getDeviceToken() + "");
+
+
+            final Map<String, String> obj = new HashMap<>();
+            obj.put("token", eventRequestActivity.getRestParamsName(Utilclass.token));
+
+
+            System.out.println("before===="+m);
+
+            eventRequestActivity.serverHandler.sendToServer(eventRequestActivity, eventRequestActivity.getApiUrl() + "event-list", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+                @Override
+                public void getRespone(String dta, ArrayList<Object> respons) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(dta);
+                        if (jsonObject.getBoolean("status")) {
+                            try {
+
+                                JSONArray dataAr=jsonObject.getJSONArray("data");
+                                ArrayList<JSONObject> dataObjAr=new ArrayList<>();
+                                for(int x=0;x<dataAr.length();x++)
+                                {
+                                    dataObjAr.add(dataAr.getJSONObject(x));
+                                }
+                                init(dataObjAr);
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, eventRequestActivity.getResources().getString(R.string.Response), jsonObject.getString("msg"), eventRequestActivity.getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                                @Override
+                                public void getDialogEvent(String buttonPressed) {
+                                }
+                            });
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

@@ -99,19 +99,25 @@
                 >
             </fontspackageForTextView.BoldMedium>
 
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                >
+            <include layout="@layout/no_data_found"/>
             <GridView
-                android:verticalSpacing="5dp"
-
+                android:id="@+id/grid_timing"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
                 android:horizontalSpacing="5dp"
                 android:nestedScrollingEnabled="true"
-                android:scrollbarThumbVertical="@android:color/transparent"
-                android:id="@+id/grid_timing"
                 android:numColumns="4"
-                android:gravity="center"
+                android:scrollbarThumbVertical="@android:color/transparent"
                 android:stretchMode="columnWidth"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" >
-            </GridView>
+                android:verticalSpacing="5dp"></GridView>
+            </LinearLayout>
+
 
             <fontspackageForTextView.Regular
                 android:id="@+id/tv_saveAppointment"

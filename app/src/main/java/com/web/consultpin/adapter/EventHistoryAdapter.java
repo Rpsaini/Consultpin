@@ -55,7 +55,7 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
         LinearLayout ll_list_of_event;
         ImageView event_image;
-        TextView event_name, event_fee, event_number_of_user, event_time;
+        TextView event_name, event_fee, event_number_of_user, appointment_time;
 
 
         public MyViewHolder(View view) {
@@ -67,7 +67,10 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             event_fee = view.findViewById(R.id.event_fee);
             event_image = view.findViewById(R.id.event_image);
             event_number_of_user = view.findViewById(R.id.event_number_of_user);
-            event_time = view.findViewById(R.id.event_time);
+            appointment_time = view.findViewById(R.id.appointment_time);
+
+
+
 
 
 
@@ -90,6 +93,19 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
 
             JSONObject jsonObject = datAr.get(position);
+
+
+
+
+
+            holder.event_name.setText(jsonObject.getString("description"));
+            holder.event_fee.setText(jsonObject.getString("event_fee")+pActivity.getResources().getString(R.string.lirasymbol));
+            holder.event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint)+"  :  "+jsonObject.getString("number_of_participants"));
+            holder.appointment_time.setText(jsonObject.getString("event_date")+" "+jsonObject.getString("event_time"));
+            showImage(jsonObject.getString("banner"),holder.event_image);
+
+
+
 //            final String appointment_id = jsonObject.getString("appointment_id");
 //            String user_name = jsonObject.getString("user_name");
 //            String duration = jsonObject.getString("appointment_duration");

@@ -110,6 +110,7 @@ public class BaseActivity extends AppCompatActivity
             JSONObject dataObj = new JSONObject(savePreferences.reterivePreference(this, Utilclass.loginDetail)+"");
             JSONObject userdata=dataObj.getJSONObject("userdata");
             System.out.println("data==="+dataObj);
+            System.out.println("keyname==="+keyname);
             if(keyname.equalsIgnoreCase(Utilclass.token))
             {
                 return dataObj.getString(keyname);

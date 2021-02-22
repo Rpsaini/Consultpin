@@ -110,7 +110,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
             //0 pending  1 apporved,2 rejected,3 cancelled,4 completed
 
-            if(pActivity.getRestParamsName(Utilclass.consultant_id).equalsIgnoreCase("0"))
+            if(!Utilclass.isConsultantModeOn)
             {
                 if (appointment_status.equalsIgnoreCase("0"))
                 {

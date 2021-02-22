@@ -70,6 +70,7 @@ import okhttp3.RequestBody;
 
 public class EventRequestActivity extends BaseActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,9 +78,10 @@ public class EventRequestActivity extends BaseActivity {
         initiateObj();
         getSupportActionBar().hide();
 
+
         addEventsPager();
 
-      TextView  toolbar_title = findViewById(R.id.toolbar_title);
+        TextView toolbar_title = findViewById(R.id.toolbar_title);
         toolbar_title.setText(getResources().getString(R.string.event_request));
         findViewById(R.id.toolbar_back_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,18 +90,18 @@ public class EventRequestActivity extends BaseActivity {
             }
         });
     }
-   public   ViewPager viewPager;
-    private void addEventsPager()
-    {
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layout);
+
+    public ViewPager viewPager;
+
+    private void addEventsPager() {
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("ADD"));
         tabLayout.addTab(tabLayout.newTab().setText("LIST"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-         viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = (ViewPager) findViewById(R.id.pager);
 
-        EventsPagingAdapter adapter = new EventsPagingAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
+        EventsPagingAdapter adapter = new EventsPagingAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -108,10 +110,12 @@ public class EventRequestActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-            }
+       }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.app.dialogsnpickers.DialogCallBacks;
 import com.app.vollycommunicationlib.CallBack;
@@ -31,8 +32,9 @@ import java.util.Map;
 
 public class AppointMentHistoryFrg extends Fragment {
 
-   private MainActivity mainActivity;
-   private View view;
+    private MainActivity mainActivity;
+    private View view;
+
     public AppointMentHistoryFrg() {
         // Required empty public constructor
     }
@@ -55,66 +57,61 @@ public class AppointMentHistoryFrg extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view=inflater.inflate(R.layout.fragment_appoint_ment_history_frg, container, false);
-        mainActivity=(MainActivity) getActivity();
+        view = inflater.inflate(R.layout.fragment_appoint_ment_history_frg, container, false);
+        mainActivity = (MainActivity) getActivity();
         getAppointmentHistory();
         return view;
     }
 
 
-    private  void getAppointmentHistory()
-    {
+    private void getAppointmentHistory() {
 
 
         try {
-            String id="";
-            String consultantId=mainActivity.getRestParamsName(Utilclass.consultant_id);
-            String userid=mainActivity.getRestParamsName(Utilclass.user_id);
-            String commonId="";
+            String id = "";
+            String consultantId = mainActivity.getRestParamsName(Utilclass.consultant_id);
+            String userid = mainActivity.getRestParamsName(Utilclass.user_id);
+            String commonId = "";
             final Map<String, String> m = new HashMap<>();
-            String apiname="get-user-appointment-history";
-            if(consultantId.equalsIgnoreCase("0"))
+            String apiname = "";
+            if (!Utilclass.isConsultantModeOn)
             {
-                 commonId=userid;
-                 apiname="get-user-appointment-history";
-                 m.put("user_id", commonId);
+                commonId = userid;
+                apiname = "get-user-appointment-history";
+                m.put("user_id", commonId);
 
-            }
-            else
-            {
-                 commonId=consultantId;
-                 apiname="get-consultant-appointment-requests";
-                 m.put("consultant_id", commonId);
+            } else {
+                commonId = consultantId;
+                apiname = "get-consultant-appointments";
+                m.put("consultant_id", commonId);
             }
 
-           m.put("device_type", "android");
-            m.put("device_token", mainActivity.getDeviceToken()+"");
+            m.put("device_type", "android");
+            m.put("request_type", "history");
+            m.put("device_token", mainActivity.getDeviceToken() + "");
 
             final Map<String, String> obj = new HashMap<>();
-            obj.put("token", mainActivity.getRestParamsName(Utilclass.token)+"");
+            obj.put("token", mainActivity.getRestParamsName(Utilclass.token) + "");
 
-            System.out.println("Consultant id==="+m);
+            System.out.println("Consultant id===" + m + "====" + mainActivity.getApiUrl() + apiname);
 
 
             mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + apiname, m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
-                        System.out.println("Appointment data==="+dta);
+                        System.out.println("Appointment data===" + dta);
                         JSONObject jsonObject = new JSONObject(dta);
                         if (jsonObject.getBoolean("status")) {
 
                             try {
-                             JSONArray dataAr=jsonObject.getJSONArray("data");
-                             ArrayList<JSONObject> historyBookingAr=new ArrayList<>();
-                             for(int x=0;x<dataAr.length();x++)
-                             {
-                                 historyBookingAr.add(dataAr.getJSONObject(x));
-                             }
+                                JSONArray dataAr = jsonObject.getJSONArray("data");
+                                ArrayList<JSONObject> historyBookingAr = new ArrayList<>();
+                                for (int x = 0; x < dataAr.length(); x++) {
+                                    historyBookingAr.add(dataAr.getJSONObject(x));
+                                }
                                 showAppointmentData(historyBookingAr);
-                            }
-                            catch (Exception e)
-                            {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -138,24 +135,34 @@ public class AppointMentHistoryFrg extends Fragment {
         }
 
 
-
     }
 
-    private void showAppointmentData(ArrayList<JSONObject> dataAr)
-    {
-        RecyclerView recyclerview_appointmenthistory =view.findViewById(R.id.recyclerview_appointmenthistory);
+    private void showAppointmentData(ArrayList<JSONObject> dataAr) {
+        RecyclerView recyclerview_appointmenthistory = view.findViewById(R.id.recyclerview_appointmenthistory);
+
+        RelativeLayout relativeLayout = view.findViewById(R.id.rr_nodata_view);
+        if (dataAr.size() == 0) {
+            relativeLayout.setVisibility(View.VISIBLE);
+            recyclerview_appointmenthistory.setVisibility(View.GONE);
+        } else {
+            relativeLayout.setVisibility(View.GONE);
+            recyclerview_appointmenthistory.setVisibility(View.VISIBLE);
+        }
+
+
         recyclerview_appointmenthistory.setNestedScrollingEnabled(false);
         recyclerview_appointmenthistory.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
         recyclerview_appointmenthistory.setHasFixedSize(true);
         recyclerview_appointmenthistory.setItemAnimator(new DefaultItemAnimator());
-        AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(dataAr,mainActivity,"");
+        AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(dataAr, mainActivity, "");
         recyclerview_appointmenthistory.setAdapter(horizontalCategoriesAdapter);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("Appointment request====>"+requestCode);
+        System.out.println("Appointment request====>" + requestCode);
     }
 
 
