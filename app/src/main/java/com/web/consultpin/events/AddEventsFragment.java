@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.ClipData;
 import android.content.Context;
@@ -75,7 +76,7 @@ public class AddEventsFragment extends Fragment {
     private View view;
     EditText ed_about_event;
     TextView ed_datefrom;
-    TextView ed_date_end;
+    TextView ed_date_end,ed_time_start,ed_end_time;
     TextView txt_event_category;
     ImageView img_ispaid, ic_upload_eventphoto;
     EditText ed_paid_fee;
@@ -120,7 +121,14 @@ public class AddEventsFragment extends Fragment {
 
         ed_about_event = view.findViewById(R.id.ed_about_event);
         ed_datefrom = view.findViewById(R.id.ed_datefrom);
+
         ed_date_end = view.findViewById(R.id.ed_date_end);
+
+
+        ed_time_start = view.findViewById(R.id.ed_time_start);
+        ed_end_time = view.findViewById(R.id.ed_end_time);
+
+
         txt_event_category = view.findViewById(R.id.txt_event_category);
         img_ispaid = view.findViewById(R.id.img_ispaid);
         ed_paid_fee = view.findViewById(R.id.ed_paid_fee);
@@ -140,6 +148,22 @@ public class AddEventsFragment extends Fragment {
 
         ed_date_end.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View v)
+            {
+                startDate((TextView) v);
+
+            }
+        });
+
+        ed_time_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               showHourPicker((TextView) v);
+            }
+        });
+
+        ed_end_time.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 showHourPicker((TextView) v);
             }
@@ -148,9 +172,7 @@ public class AddEventsFragment extends Fragment {
         txt_event_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showCategoryDialog(categoryArray);
-
             }
         });
 
@@ -194,8 +216,7 @@ public class AddEventsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                if (eventRequestActivity.validationRule.checkEmptyString(ed_about_event) == 0) {
+                if(eventRequestActivity.validationRule.checkEmptyString(ed_about_event) == 0) {
                     eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), getResources().getString(R.string.enter_event_detail), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
@@ -203,15 +224,27 @@ public class AddEventsFragment extends Fragment {
                     });
                     return;
                 }
-                if (ed_date_end.getText().toString().length() == 0) {
-                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.selecteventtime), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+
+                if (ed_time_start.length() == 0) {
+                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.select_start_time), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
                         }
                     });
                     return;
                 }
-                if (eventRequestActivity.validationRule.checkEmptyString(ed_numberofparticipaints) == 0) {
+
+
+                if (ed_end_time.getText().toString().length() == 0) {
+                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.select_end_time), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+                        }
+                    });
+                    return;
+                }
+
+                if(eventRequestActivity.validationRule.checkEmptyString(ed_numberofparticipaints) == 0) {
                     eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), getResources().getString(R.string.numberofdays), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
@@ -220,8 +253,8 @@ public class AddEventsFragment extends Fragment {
                     return;
                 }
 
-
-                if (eventRequestActivity.validationRule.checkEmptyString(ed_paid_fee) == 0) {
+                if(eventRequestActivity.validationRule.checkEmptyString(ed_paid_fee) == 0)
+                {
                     eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), getResources().getString(R.string.enter_event_fee), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
@@ -242,11 +275,12 @@ public class AddEventsFragment extends Fragment {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String todayString = formatter.format(todayDate);
             ed_datefrom.setText(todayString);
-
-
-        } catch (Exception e) {
+            ed_date_end.setText(todayString);
+            }
+         catch (Exception e)
+          {
             System.out.println("Message====" + e.getMessage());
-        }
+          }
 
     }
 
@@ -293,10 +327,7 @@ public class AddEventsFragment extends Fragment {
                         if (jsonObject.getBoolean("status")) {
 
                             try {
-
                                 categoryArray = jsonObject.getJSONArray("data");
-
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -314,9 +345,8 @@ public class AddEventsFragment extends Fragment {
 
                 }
             });
-
-
-        } catch (Exception e) {
+           }
+        catch(Exception e) {
             e.printStackTrace();
         }
 
@@ -326,7 +356,8 @@ public class AddEventsFragment extends Fragment {
     Dialog designDialog;
     RelativeLayout downView;
 
-    private void showCategoryDialog(JSONArray dataAr) {
+    private void showCategoryDialog(JSONArray dataAr)
+       {
         final SimpleDialog simpleDialog = new SimpleDialog();
         designDialog = simpleDialog.simpleDailog(eventRequestActivity, R.layout.category_layout, new ColorDrawable(getResources().getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
         downView = designDialog.findViewById(R.id.ll_relativelayout);
@@ -345,7 +376,6 @@ public class AddEventsFragment extends Fragment {
             }
         });
         eventRequestActivity.animateUp(downView);
-
 
         RecyclerView recyclerViewForTransferReason = designDialog.findViewById(R.id.recycler_view_for_reason);
         EventCategoryAdapter categoryAdapter = new EventCategoryAdapter(dataAr, eventRequestActivity,this);
@@ -375,14 +405,14 @@ public class AddEventsFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        System.out.println("inside============" + requestCode + "===" + resultCode);
+       // System.out.println("inside============" + requestCode + "===" + resultCode);
         bmap = null;
         Uri selectedImage = null;
         if (resultCode != eventRequestActivity.RESULT_CANCELED) {
             switch (requestCode) {
                 case 0:
 //                 if(imageReturnedIntent != null)
-                {
+                   {
                     try {
 
                         bmap = MediaStore.Images.Media.getBitmap(eventRequestActivity.getContentResolver(), photoURI);
@@ -509,35 +539,46 @@ public class AddEventsFragment extends Fragment {
     }
 
     private void saveEvent() {
-        File file = new File(selectedPath);
-
-        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("banner", file.getName(), requestBody);
-        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
-
-
+        Observable<ResponseBody> responseObservable=null;
+        AddEventInterface contestService = ApiProduction.getInstance(eventRequestActivity).provideService(AddEventInterface.class);
         RequestBody consultant_id = RequestBody.create(MediaType.parse("text/plain"), eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), ed_about_event.getText().toString());
-        RequestBody event_date = RequestBody.create(MediaType.parse("text/plain"), ed_datefrom.getText().toString());
-        RequestBody event_time = RequestBody.create(MediaType.parse("text/plain"), ed_date_end.getText().toString());
+        RequestBody event_date = RequestBody.create(MediaType.parse("text/plain"), ed_datefrom.getText().toString()+" "+ed_time_start.getText().toString());
+        RequestBody event_time = RequestBody.create(MediaType.parse("text/plain"), ed_date_end.getText().toString()+" "+ed_end_time.getText().toString());
         RequestBody is_paid = RequestBody.create(MediaType.parse("text/plain"), isPaid + "");
         RequestBody number_of_participants = RequestBody.create(MediaType.parse("text/plain"), ed_numberofparticipaints.getText().toString());
         RequestBody category_id = RequestBody.create(MediaType.parse("text/plain"), event_cat_id + "");
         RequestBody event_fee = RequestBody.create(MediaType.parse("text/plain"), ed_paid_fee.getText().toString());
+       if(selectedPath.length()>0)
+       {
+           File file = new File(selectedPath);
+           RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+           MultipartBody.Part body = MultipartBody.Part.createFormData("banner", file.getName(), requestBody);
+           RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+           responseObservable = contestService.saveEvent(consultant_id, description, event_date,
+                   event_time, is_paid, number_of_participants, category_id, event_fee, eventRequestActivity.getRestParamsName(Utilclass.token)
+                   , body, filename);
+
+       }
+       else
+       {
+          responseObservable = contestService.saveEventWithotimage(consultant_id, description, event_date,
+                   event_time, is_paid, number_of_participants, category_id, event_fee, eventRequestActivity.getRestParamsName(Utilclass.token)
+                   );
+       }
 
 
-        AddEventInterface contestService = ApiProduction.getInstance(eventRequestActivity).provideService(AddEventInterface.class);
-        Observable<ResponseBody> responseObservable = contestService.saveEvent(consultant_id, description, event_date,
-                event_time, is_paid, number_of_participants, category_id, event_fee, eventRequestActivity.getRestParamsName(Utilclass.token)
-                , body, filename);
 
-        System.out.println("Response===" + consultant_id + "===" + description + "===" + event_date + "==" + event_time + "===" + is_paid + "===" + number_of_participants + "===" + category_id + "===" + event_fee);
 
+        //System.out.println("Response===" + consultant_id + "===" + description + "===" + event_date + "==" + event_time + "===" + is_paid + "===" + number_of_participants + "===" + category_id + "===" + event_fee);
+        ProgressDialog progressDialog=new ProgressDialog(eventRequestActivity);
+       progressDialog.setTitle("Please wait..");
+        progressDialog.show();
         RxAPICallHelper.call(responseObservable, new RxAPICallback<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody t) {
-                System.out.println("Inside Success=====>" + t.toString());
-
+                progressDialog.dismiss();
                 eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), "Event request saved successfully.", "ok", "", new DialogCallBacks() {
                     @Override
                     public void getDialogEvent(String buttonPressed) {
@@ -552,13 +593,12 @@ public class AddEventsFragment extends Fragment {
             @Override
             public void onFailed(Throwable throwable)
             {
+                progressDialog.dismiss();
                 System.out.println("Inside failed=====>" + throwable.getMessage());
                 eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), "Event request not saved.", "ok", "", new DialogCallBacks() {
                     @Override
                     public void getDialogEvent(String buttonPressed) {
                         if (buttonPressed.equalsIgnoreCase("ok")) {
-
-
                         }
                     }
                 });

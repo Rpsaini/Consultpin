@@ -135,12 +135,15 @@
     <string name="consultant">Consultant</string>
     <string name="write_information">write information about event ...</string>
     <string name="about_the_event">About the event</string>
-    <string name="event_date">Event date</string>
+    <string name="event_date">Event start date</string>
+    <string name="event_end_date">Event end date</string>
     <string name="event_time">Event time</string>
     <string name="saveAppointment">Save</string>
     <string name="timing">Timing</string>
     <string name="event_category">Event Category</string>
     <string name="paid">Paid</string>
+    <string name="event_start_time">Event start time</string>
+    <string name="event_end_time">Event end time</string>
     <string name="numberofparticipaint">Number of participants</string>
     <string name="imagetitle">The image you want to use for the event</string>
     <string name="imagelimit">The image you will submit is 400x400px to1000x1000px in the range and should not exceed 5mb</string>
@@ -191,6 +194,8 @@
     <string name="switchtoconsultant">"Switch to consultant</string>
     <string name="view_events">"View events"</string>
     <string name="set_appointment_time">"Set Appointment Time"</string>
+    <string name="select_start_time">"Select event start time"</string>
+    <string name="select_end_time">"Select event end time"</string>
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 
 

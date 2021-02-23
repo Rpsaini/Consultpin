@@ -43,9 +43,11 @@
                 android:padding="5dp"
                 ></fontpackageforEdittext.Regular>
 
+
+
             <LinearLayout
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="19dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,12 +65,11 @@
 
 
                 <fontspackageForTextView.BoldMedium
-
                     android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="@string/event_time"
+                    android:text="@string/event_end_date"
                     >
                 </fontspackageForTextView.BoldMedium>
             </LinearLayout>
@@ -102,9 +103,83 @@
 
                 <fontspackageForTextView.Regular
                     android:padding="5dp"
-                    android:drawableRight="@drawable/ic_clockcircularoutline"
+                    android:drawableRight="@drawable/ic_monthlycalendar"
                     android:layout_marginEnd="10dp"
                     android:id="@+id/ed_date_end"
+                    android:background="@drawable/roundcorner_drawable"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    style="@style/edittext_style_12_grey"
+                    android:hint="@string/event_end_date"
+                    android:layout_marginStart="10dp"
+                    android:gravity="left|center"
+                    >
+                </fontspackageForTextView.Regular>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="19dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+                <fontspackageForTextView.BoldMedium
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    style="@style/edittext_style_14_black"
+                    android:text="@string/event_start_time"
+                    >
+                </fontspackageForTextView.BoldMedium>
+
+
+                <fontspackageForTextView.BoldMedium
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/event_end_time"
+                    >
+                </fontspackageForTextView.BoldMedium>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+                <fontspackageForTextView.Regular
+                    android:layout_marginRight="10dp"
+                    android:drawableRight="@drawable/ic_clockcircularoutline"
+                    android:id="@+id/ed_time_start"
+                    android:background="@drawable/roundcorner_drawable"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    style="@style/edittext_style_12_grey"
+                    android:hint="@string/event_date"
+                    android:drawablePadding="5dp"
+                    android:padding="5dp"
+                    android:gravity="left|center"
+
+                    >
+                </fontspackageForTextView.Regular>
+
+
+                <fontspackageForTextView.Regular
+                    android:padding="5dp"
+                    android:drawableRight="@drawable/ic_clockcircularoutline"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/ed_end_time"
                     android:background="@drawable/roundcorner_drawable"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"

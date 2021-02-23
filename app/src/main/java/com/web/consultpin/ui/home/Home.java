@@ -106,9 +106,6 @@ public class Home extends Fragment {
                                 newConsultant(baseUrl,newconsultantAr);
 
 
-
-
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -138,7 +135,6 @@ public class Home extends Fragment {
     private void initHomeCategory(String imageUrl,ArrayList<JSONObject> dataAr)
     {
         RecyclerView categoryRecycle =view.findViewById(R.id.recyclerview_popular_cat);
-
         categoryRecycle.setNestedScrollingEnabled(false);
         categoryRecycle.setLayoutManager(new LinearLayoutManager(mainActivity,
                 LinearLayoutManager.HORIZONTAL, false));

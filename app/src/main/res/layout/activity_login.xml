@@ -57,6 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="@string/your_email"
+                        android:text="testandroid@gmail.com"
                         android:inputType="textEmailAddress" />
 
 
@@ -70,6 +71,7 @@
                     android:textColor="@color/helpertextcolor"
                     android:text="@string/password"
                     ></fontspackageForTextView.Regular>
+
                     <fontpackageforEdittext.Regular
                         android:background="@drawable/edittext_bottom_drawable"
                         android:maxLength="40"
@@ -78,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="@string/password"
-
+                        android:text="qwerty123"
                         android:inputType="textPassword" />
 
 

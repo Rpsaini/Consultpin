@@ -166,6 +166,7 @@
             android:gravity="center|left"
             android:drawablePadding="10dp"
             android:padding="10dp"
+            android:drawableTint="@color/buttonskyblue"
             android:drawableLeft="@drawable/ic_star"
             style="@style/edittext_style_14_black"
             android:text="@string/rate_us"
@@ -175,24 +176,19 @@
 
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_color"
-            ></View>
 
-        <fontspackageForTextView.Regular
-            android:visibility="gone"
-            android:id="@+id/tv_rateus"
-            android:gravity="center|left"
-            android:drawablePadding="10dp"
-            android:padding="10dp"
-            android:drawableLeft="@drawable/ic_star"
-            style="@style/edittext_style_14_black"
-            android:text="@string/Logout"
-            android:layout_height="50dp"
-            android:layout_width="match_parent"
-            ></fontspackageForTextView.Regular>
+<!--        <fontspackageForTextView.Regular-->
+<!--            android:visibility=""-->
+<!--            android:id="@+id/tv_rateus"-->
+<!--            android:gravity="center|left"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:drawableLeft="@drawable/ic_star"-->
+<!--            style="@style/edittext_style_14_black"-->
+<!--            android:text="@string/Logout"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            ></fontspackageForTextView.Regular>-->
 
     </LinearLayout>
 </LinearLayout>

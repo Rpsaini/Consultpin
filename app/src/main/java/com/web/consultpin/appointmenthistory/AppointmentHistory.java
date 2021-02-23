@@ -1,9 +1,7 @@
-package com.web.consultpin.ui.home;
+package com.web.consultpin.appointmenthistory;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +17,6 @@ import com.app.vollycommunicationlib.CallBack;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
-import com.web.consultpin.adapter.AlreadyAddedTimeAdapter;
 import com.web.consultpin.adapter.AppointmentHistoryAdapter;
 
 import org.json.JSONArray;
@@ -29,21 +26,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class AppointMentHistoryFrg extends Fragment {
-
-    private MainActivity mainActivity;
-    private View view;
-
-    public AppointMentHistoryFrg() {
+public class AppointmentHistory extends Fragment {
+private View view;
+private MainActivity mainActivity;
+    public AppointmentHistory() {
         // Required empty public constructor
     }
 
-    public static AppointMentHistoryFrg newInstance(String param1, String param2) {
-        AppointMentHistoryFrg fragment = new AppointMentHistoryFrg();
-        Bundle args = new Bundle();
 
-        fragment.setArguments(args);
+    public static AppointmentHistory newInstance(String param1, String param2) {
+        AppointmentHistory fragment = new AppointmentHistory();
+
         return fragment;
     }
 
@@ -57,24 +50,22 @@ public class AppointMentHistoryFrg extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_appoint_ment_history_frg, container, false);
-        mainActivity = (MainActivity) getActivity();
+        view=inflater.inflate(R.layout.fragment_appointment_history, container, false);
+        mainActivity=(MainActivity)getActivity();
         getAppointmentHistory();
         return view;
     }
 
-
     private void getAppointmentHistory() {
-
-
-        try {
+        try
+        {
             String id = "";
             String consultantId = mainActivity.getRestParamsName(Utilclass.consultant_id);
             String userid = mainActivity.getRestParamsName(Utilclass.user_id);
             String commonId = "";
             final Map<String, String> m = new HashMap<>();
             String apiname = "";
-            if (!Utilclass.isConsultantModeOn)
+            if(!Utilclass.isConsultantModeOn)
             {
                 commonId = userid;
                 apiname = "get-user-appointment-history";
@@ -158,12 +149,4 @@ public class AppointMentHistoryFrg extends Fragment {
         AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(dataAr, mainActivity, "");
         recyclerview_appointmenthistory.setAdapter(horizontalCategoriesAdapter);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("Appointment request====>" + requestCode);
-    }
-
-
 }

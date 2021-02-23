@@ -21,8 +21,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-
 public class EventsPagingAdapter extends FragmentStatePagerAdapter {
     private EventRequestActivity eventRequestActivity;
     int mNumOfTabs;

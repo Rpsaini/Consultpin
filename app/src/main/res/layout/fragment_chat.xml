@@ -7,13 +7,14 @@
     android:orientation="vertical"
     tools:context=".ui.home.Chat">
 
+    <include layout="@layout/no_data_found"/>
+   <androidx.recyclerview.widget.RecyclerView
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+       android:id="@+id/recycler_chat_view"
+    >
 
-    <fontspackageForTextView.BoldMedium
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/chat"
-        android:gravity="center"
-        style="@style/edittext_style_18_black"
-        ></fontspackageForTextView.BoldMedium>
+</androidx.recyclerview.widget.RecyclerView>
+
 
 </RelativeLayout>

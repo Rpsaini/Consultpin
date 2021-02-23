@@ -14,12 +14,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.navigation.NavigationView;
 
-import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.BecomeAConsultant;
 import com.web.consultpin.events.EventRequestActivity;
 import com.web.consultpin.consultant.SetTimeByConsultant;
 import com.web.consultpin.main.BaseActivity;
-import com.web.consultpin.ui.home.AppointMentHistoryFrg;
+import com.web.consultpin.appointmenthistory.AppointMentHistoryFrg;
 //import com.web.consultpin.ui.home.Appointment;
 import com.web.consultpin.ui.home.Chat;
 import com.web.consultpin.ui.home.Home;
@@ -33,7 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
-
+//cTrf8iWVRnCYhbhAY2d3bn:APA91bGxxQOpA6FoDgO7VpEphA3xg-mlNzzDtL-TgP--E0_WnK-kRXyomuF3OUOVFuCoAh7EuRXgCMFFSMzz9uXU4kjegRFzrW5nnkX0cdPpsZzLqNvwzuHfj6seK8__VxRwY9dOzlk4
 public class MainActivity extends BaseActivity {
 
     private LinearLayout commonBottomBar;
@@ -134,7 +133,8 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    private void callFragment(Fragment fragment, String tag) {
+    private void callFragment(Fragment fragment, String tag)
+    {
         this.commonFragments=fragment;
         this.frgtag=tag;
 
@@ -257,7 +257,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        switchUser();
+
     }
 
 
@@ -288,6 +288,7 @@ public class MainActivity extends BaseActivity {
                         txt_switch_to_user.setText(getResources().getString(R.string.switchtoconsultant));
                         img_switch_to_user.setImageResource(R.drawable.ic_unselect_button);
                         Utilclass.isConsultantModeOn = false;
+
                     } else {
                         txt_switch_to_user.setText(getResources().getString(R.string.switchtouser));
                         img_switch_to_user.setImageResource(R.drawable.ic_button);

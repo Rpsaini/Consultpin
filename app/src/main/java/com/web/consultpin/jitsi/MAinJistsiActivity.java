@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.dropbox.core.v2.sharing.InviteeInfo;
 import com.facebook.react.modules.core.PermissionListener;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
@@ -25,7 +27,8 @@ import java.util.Map;
 
 import okhttp3.internal.Util;
 
-public class MAinJistsiActivity extends AppCompatActivity  implements JitsiMeetActivityInterface, JitsiMeetViewListener {
+public class MAinJistsiActivity extends AppCompatActivity  implements JitsiMeetActivityInterface, JitsiMeetViewListener
+  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +47,12 @@ public class MAinJistsiActivity extends AppCompatActivity  implements JitsiMeetA
 
         findViewById(R.id.txt_startvideocall).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+             {
                 String videoCall=getIntent().getStringExtra(Utilclass.videocall);
-                System.out.println("Video Call url---"+videoCall);
                 int lastindex=videoCall.lastIndexOf("/");
                 int length=videoCall.length();
                 String roomid= videoCall.substring(lastindex,length);
-                System.out.println("room_id==="+roomid);
 
                 Bundle bundle=new Bundle();
                 bundle.putString("displayName",getIntent().getStringExtra(Utilclass.first_name));
@@ -68,8 +70,11 @@ public class MAinJistsiActivity extends AppCompatActivity  implements JitsiMeetA
                             .setVideoMuted(false)
                             .setAudioOnly(false)
                             .setWelcomePageEnabled(false)
+                            .setFeatureFlag("invite.enabled",false)
+                            .setFeatureFlag("conference-timer.enabled",true)
+                            .setFeatureFlag("invite.enabled",false)
                             .build();
-                    JitsiMeetActivity.launch(MAinJistsiActivity.this, options);
+                       JitsiMeetActivity.launch(MAinJistsiActivity.this, options);
                 }
                 catch (Exception e)
                 {
@@ -105,22 +110,26 @@ public class MAinJistsiActivity extends AppCompatActivity  implements JitsiMeetA
     @Override
     public void requestPermissions(String[] strings, int i, PermissionListener permissionListener) {
         System.out.println("Conferencing request permission===="+strings);
+        Toast.makeText(MAinJistsiActivity.this,"Request permissions",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onConferenceJoined(Map<String, Object> map) {
         System.out.println("Conferencing joined data===="+map);
+        Toast.makeText(MAinJistsiActivity.this,"OnConference joined",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onConferenceTerminated(Map<String, Object> map)
     {
         System.out.println("Conferencing end data===="+map);
+        Toast.makeText(MAinJistsiActivity.this,"OnConference Terminated",Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void onConferenceWillJoin(Map<String, Object> map) {
         System.out.println("Conferencing will join===="+map);
+        Toast.makeText(MAinJistsiActivity.this,"OnConference willjoined",Toast.LENGTH_LONG).show();
     }
 }

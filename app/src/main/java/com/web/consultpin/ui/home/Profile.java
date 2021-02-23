@@ -75,7 +75,7 @@ private MainActivity mainActivity;
         tv_professionalbg = view.findViewById(R.id.tv_professionalbg);
         tv_speciality = view.findViewById(R.id.tv_speciality);
         tv_fee = view.findViewById(R.id.tv_fee);
-        if(consultantId.equalsIgnoreCase("0")) {
+        if(!Utilclass.isConsultantModeOn) {
             ll_consultant_layout.setVisibility(View.GONE);
         }
         else

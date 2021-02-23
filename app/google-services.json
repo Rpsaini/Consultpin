@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "882616723901",
+    "project_id": "consultpin-3d7bf",
+    "storage_bucket": "consultpin-3d7bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882616723901:android:ca1c3f43ebf75d0f0ecad4",
+        "android_client_info": {
+          "package_name": "com.web.consultpin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882616723901-m3go2l0dgtt2qk96ek80iv8ce8o79g0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.web.consultpin",
+            "certificate_hash": "038349bf67aae968bc227570b924b125e4e27abe"
+          }
+        },
+        {
+          "client_id": "882616723901-2nie550s8reo5ksa9t2qkkc3b6sa8tc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg_h_zrmQSXyonSUxF5pSrMYvf2-ZiLaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882616723901-2nie550s8reo5ksa9t2qkkc3b6sa8tc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

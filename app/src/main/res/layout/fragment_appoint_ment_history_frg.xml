@@ -3,13 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.AppointMentHistoryFrg">
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".appointmenthistory.AppointMentHistoryFrg">
 
-    <include layout="@layout/no_data_found"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_height="match_parent"
+
+
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:id="@+id/recyclerview_appointmenthistory"
-        ></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="45dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:elevation="0dp"
+        app:tabTextColor="@color/black"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Base.Widget.Design.TabLayout"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tab_layout"/>
+
+
 
 </LinearLayout>
