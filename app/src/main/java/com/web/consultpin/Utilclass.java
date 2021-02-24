@@ -18,6 +18,7 @@ public class Utilclass
     public static String imageUrl="imageUrl";
     public static int appointmentRequsestcode=1000;
     public static boolean isConsultantModeOn=true;
+    public static String consultant_data="consultant_data";
 
 
 

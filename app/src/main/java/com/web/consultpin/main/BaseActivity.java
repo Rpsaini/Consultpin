@@ -105,7 +105,8 @@ public class BaseActivity extends AppCompatActivity
     public String getRestParamsName(String keyname)
     {
 
-        //{"userdata":{"user_id":"39","profile_pic":"http:\/\/52.66.238.215\/assets\/uploads\/default.png","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMzkiLCJmaXJzdF9uYW1lIjoiUmFtIiwibGFzdF9uYW1lIjoibGFzdG5hZSIsImVtYWlsIjoibWFpbEBnbWFpbC5jb20iLCJwaG9uZSI6Ijk3ODc5Nzg3OTciLCJjcmVhdGVkX29uIjoiMTYxMDYwODkwMiIsIkFQSV9USU1FIjoxNjExNzQ0NDMwfQ.uNpffzd0ypmpVn4SWL0d-9JnDjhdTzbJwedfGcdLjAU","image_url":"http:\/\/52.66.238.215\/assets\/uploads\/","status":true}
+        //{"userdata":{"user_id":"39","profile_pic":"http:\/\/52.66.238.215\/assets\/uploads\/default.png",
+        // "email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMzkiLCJmaXJzdF9uYW1lIjoiUmFtIiwibGFzdF9uYW1lIjoibGFzdG5hZSIsImVtYWlsIjoibWFpbEBnbWFpbC5jb20iLCJwaG9uZSI6Ijk3ODc5Nzg3OTciLCJjcmVhdGVkX29uIjoiMTYxMDYwODkwMiIsIkFQSV9USU1FIjoxNjExNzQ0NDMwfQ.uNpffzd0ypmpVn4SWL0d-9JnDjhdTzbJwedfGcdLjAU","image_url":"http:\/\/52.66.238.215\/assets\/uploads\/","status":true}
         try {
             JSONObject dataObj = new JSONObject(savePreferences.reterivePreference(this, Utilclass.loginDetail)+"");
             JSONObject userdata=dataObj.getJSONObject("userdata");

@@ -99,16 +99,13 @@
                             android:layout_alignParentEnd="true"
                             app:tint="@color/border_color"></ImageView>
              </RelativeLayout>
-
-
-
                 </LinearLayout>
-
-
             </RelativeLayout>
 
 
             <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/rr_upper"
@@ -116,26 +113,23 @@
                 >
 
                 <fontspackageForTextView.Regular
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
                     android:layout_marginTop="50dp"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     style="@style/edittext_style_14_black"
-                    android:text="@string/str_name"
+                    android:text="@string/first_name"
                     android:textSize="12dp"
                     ></fontspackageForTextView.Regular>
 
                 <fontpackageforEdittext.Regular
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
+                     android:layout_marginTop="5dp"
                     android:background="@drawable/roundcorner_drawable"
                     android:maxLength="70"
-                    android:id="@+id/et_name"
+                    android:id="@+id/ed_firstname"
                     style="@style/edittext_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="@string/app_name"
+                    android:hint="@string/first_name"
                     android:maxLines="1"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress" />
@@ -144,90 +138,136 @@
 
 
                 <fontspackageForTextView.Regular
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="19dp"
+                    android:layout_marginTop="20dp"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     style="@style/edittext_style_14_black"
-                    android:text="@string/Profession"
-                    android:textSize="12dp"
-                    ></fontspackageForTextView.Regular>
-
-
-                <fontpackageforEdittext.Regular
-                    android:id="@+id/ed_profession"
-                    style="@style/edittext_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/roundcorner_drawable"
-                    android:hint="@string/Profession"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:imeOptions="actionDone"
-                    android:maxLength="70" />
-
-                <fontspackageForTextView.Regular
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    style="@style/edittext_style_14_black"
-                    android:text="@string/phone"
+                    android:text="@string/last_name"
                     android:textSize="12dp"
                     ></fontspackageForTextView.Regular>
 
                 <fontpackageforEdittext.Regular
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/roundcorner_drawable"
-                    android:maxLength="12"
-                    android:id="@+id/ed_phone"
-                    style="@style/edittext_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="@string/phone"
-                    android:inputType="numberDecimal" />
-
-
-
-                <fontspackageForTextView.Regular
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    style="@style/edittext_style_14_black"
-                    android:text="@string/your_email"
-                    android:textSize="12dp"
-                    ></fontspackageForTextView.Regular>
-
-                <fontpackageforEdittext.Regular
-                    android:maxLines="1"
-                    android:imeOptions="actionDone"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/roundcorner_drawable"
                     android:maxLength="70"
-                    android:id="@+id/ed_email"
+                    android:id="@+id/ed_lastname"
                     style="@style/edittext_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="@string/your_email"
+                    android:hint="@string/first_name"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
                     android:inputType="textEmailAddress" />
 
 
 
+<!--                <fontspackageForTextView.Regular-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    style="@style/edittext_style_14_black"-->
+<!--                    android:text="@string/your_email"-->
+<!--                    android:textSize="12dp"-->
+<!--                    ></fontspackageForTextView.Regular>-->
 
-                <View
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:background="@color/profile_fee_color"
-                    ></View>
+<!--                <fontpackageforEdittext.Regular-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:background="@drawable/roundcorner_drawable"-->
+<!--                    android:maxLength="70"-->
+<!--                    android:id="@+id/ed_email"-->
+<!--                    style="@style/edittext_style"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:hint="@string/your_email"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:inputType="textEmailAddress" />-->
+
+
+
+<!--                <fontspackageForTextView.Regular-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:layout_marginTop="19dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    style="@style/edittext_style_14_black"-->
+<!--                    android:text="@string/Profession"-->
+<!--                    android:textSize="12dp"-->
+<!--                    ></fontspackageForTextView.Regular>-->
+
+
+<!--                <fontpackageforEdittext.Regular-->
+<!--                    android:id="@+id/ed_profession"-->
+<!--                    style="@style/edittext_style"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:background="@drawable/roundcorner_drawable"-->
+<!--                    android:hint="@string/Profession"-->
+<!--                    android:inputType="textEmailAddress"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:maxLength="70" />-->
+
+<!--                <fontspackageForTextView.Regular-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:layout_marginTop="19dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    style="@style/edittext_style_14_black"-->
+<!--                    android:text="@string/phone"-->
+<!--                    android:textSize="12dp"-->
+<!--                    ></fontspackageForTextView.Regular>-->
+
+<!--                <fontpackageforEdittext.Regular-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:background="@drawable/roundcorner_drawable"-->
+<!--                    android:maxLength="12"-->
+<!--                    android:id="@+id/ed_phone"-->
+<!--                    style="@style/edittext_style"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:hint="@string/phone"-->
+<!--                    android:inputType="numberDecimal" />-->
+
+
+
+<!--                <fontspackageForTextView.Regular-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:layout_marginTop="19dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    style="@style/edittext_style_14_black"-->
+<!--                    android:text="@string/your_email"-->
+<!--                    android:textSize="12dp"-->
+<!--                    ></fontspackageForTextView.Regular>-->
+
+<!--                <fontpackageforEdittext.Regular-->
+<!--                    android:maxLines="1"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:background="@drawable/roundcorner_drawable"-->
+<!--                    android:maxLength="70"-->
+<!--                    android:id="@+id/ed_email"-->
+<!--                    style="@style/edittext_style"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:hint="@string/your_email"-->
+<!--                    android:inputType="textEmailAddress" />-->
+
+
+
+
+
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -235,65 +275,64 @@
                     android:layout_width="match_parent"
                     android:background="@color/profile_background"
                     >
+<!--                    <fontspackageForTextView.Regular-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:text="@string/your_professional_background"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        style="@style/edittext_style_14_black"-->
+<!--                        ></fontspackageForTextView.Regular>-->
+
+
+<!--                    <fontpackageforEdittext.Regular-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/roundcorner_drawable"-->
+<!--                        android:maxLength="400"-->
+<!--                        android:id="@+id/ed_profession_bg"-->
+<!--                        style="@style/edittext_style"-->
+<!--                        android:gravity="left|top"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:hint="@string/your_email"-->
+<!--                        android:inputType="textEmailAddress" />-->
+
+
+
+
+
+<!--                    <fontspackageForTextView.Regular-->
+<!--                        android:layout_marginStart="25dp"-->
+<!--                        android:layout_marginEnd="25dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:text="@string/Specialties"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        style="@style/edittext_style_14_black"-->
+<!--                        ></fontspackageForTextView.Regular>-->
+
+
+<!--                    <fontpackageforEdittext.Regular-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/roundcorner_drawable"-->
+<!--                        android:maxLength="400"-->
+<!--                        android:id="@+id/ed_specialist"-->
+<!--                        style="@style/edittext_style"-->
+<!--                        android:gravity="left|top"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:hint="@string/Specialties"-->
+<!--                        android:inputType="textEmailAddress" />-->
+
+
+
                     <fontspackageForTextView.Regular
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/your_professional_background"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        style="@style/edittext_style_14_black"
-                        ></fontspackageForTextView.Regular>
-
-
-                    <fontpackageforEdittext.Regular
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/roundcorner_drawable"
-                        android:maxLength="400"
-                        android:id="@+id/ed_profession_bg"
-                        style="@style/edittext_style"
-                        android:gravity="left|top"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:hint="@string/your_email"
-                        android:inputType="textEmailAddress" />
-
-
-
-
-
-                    <fontspackageForTextView.Regular
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/Specialties"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        style="@style/edittext_style_14_black"
-                        ></fontspackageForTextView.Regular>
-
-
-                    <fontpackageforEdittext.Regular
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/roundcorner_drawable"
-                        android:maxLength="400"
-                        android:id="@+id/ed_specialist"
-                        style="@style/edittext_style"
-                        android:gravity="left|top"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:hint="@string/Specialties"
-                        android:inputType="textEmailAddress" />
-
-
-
-                    <fontspackageForTextView.Regular
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:id="@+id/txt_fee_lable"
                         android:layout_marginTop="10dp"
                         android:text="@string/fee"
                         android:layout_height="wrap_content"
@@ -303,19 +342,17 @@
 
 
                     <fontpackageforEdittext.Regular
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="5dp"
                         android:background="@drawable/roundcorner_drawable"
                         android:maxLength="70"
                         android:id="@+id/ed_fee"
                         style="@style/edittext_style"
-                        android:gravity="left|top"
+                        android:gravity="left|center"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:hint="@string/fee"
                         android:maxLines="1"
                         android:imeOptions="actionDone"
-
                         android:inputType="numberDecimal" />
 
 

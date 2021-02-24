@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.navigation.NavigationView;
 
 import com.web.consultpin.consultant.BecomeAConsultant;
+import com.web.consultpin.consultant.EditTimeByConsultant;
 import com.web.consultpin.events.EventRequestActivity;
 import com.web.consultpin.consultant.SetTimeByConsultant;
 import com.web.consultpin.main.BaseActivity;
@@ -75,6 +76,10 @@ public class MainActivity extends BaseActivity {
 
 
     private void navigationMenu() {
+
+
+        Intent intent=new Intent(MainActivity.this, EditTimeByConsultant.class);
+        startActivity(intent);
 
         callFragment(new Home(), "home");
         LinearLayout bnave_ll_home = findViewById(R.id.bnave_ll_home);

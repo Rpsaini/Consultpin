@@ -32,7 +32,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".usersection.UserEventHistory"></activity>
+        <activity android:name=".consultant.EditTimeByConsultant"></activity>
+        <activity android:name=".usersection.UserEventHistory" />
         <activity android:name=".jitsi.MAinJistsiActivity" />
         <activity
             android:name=".initiatecall.InitiateCallWebview"
@@ -112,7 +113,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
 
         <service
             android:name=".fcm.MessagingService"

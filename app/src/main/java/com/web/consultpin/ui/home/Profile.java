@@ -21,6 +21,8 @@ import com.web.consultpin.consultant.EditProfileConsultant;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
+import com.web.consultpin.consultant.SetTimeByConsultant;
+import com.web.consultpin.events.EventRequestActivity;
 
 import org.json.JSONObject;
 
@@ -32,7 +34,7 @@ public class Profile extends Fragment {
 
 private View view;
 private ImageView img_profile,img_edit_profile;
-private TextView tv_username,tv_usermobile,tv_user_email,tv_professionalbg,tv_speciality,tv_fee;
+private TextView tv_username,tv_usermobile,tv_user_email,tv_professionalbg,tv_speciality,tv_fee,txt_setappointment,txt_event_request;
 private MainActivity mainActivity;
     public Profile() {
         // Required empty public constructor
@@ -63,10 +65,9 @@ private MainActivity mainActivity;
 
     private void init()
     {
-
-       String userId= mainActivity.getRestParamsName(Utilclass.user_id);
+        String userId= mainActivity.getRestParamsName(Utilclass.user_id);
         String consultantId= mainActivity.getRestParamsName(Utilclass.consultant_id);
-       final LinearLayout ll_consultant_layout =view.findViewById(R.id.ll_consultant_layout);
+        final LinearLayout ll_consultant_layout =view.findViewById(R.id.ll_consultant_layout);
         img_profile = view.findViewById(R.id.img_profile);
         tv_username = view.findViewById(R.id.tv_username);
         tv_usermobile = view.findViewById(R.id.tv_usermobile);
@@ -75,21 +76,40 @@ private MainActivity mainActivity;
         tv_professionalbg = view.findViewById(R.id.tv_professionalbg);
         tv_speciality = view.findViewById(R.id.tv_speciality);
         tv_fee = view.findViewById(R.id.tv_fee);
-        if(!Utilclass.isConsultantModeOn) {
+        txt_setappointment = view.findViewById(R.id.txt_setappointment);
+        txt_event_request = view.findViewById(R.id.txt_event_request);
+
+        if(!Utilclass.isConsultantModeOn)
+        {
             ll_consultant_layout.setVisibility(View.GONE);
         }
         else
         {
             ll_consultant_layout.setVisibility(View.VISIBLE);
+            img_edit_profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mainActivity, EditProfileConsultant.class);
+                    startActivity(intent);
+                }
+            });
         }
         ViewProfile();
-
-
-        img_edit_profile.setOnClickListener(new View.OnClickListener() {
+        txt_setappointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mainActivity, EditProfileConsultant.class);
+                Intent intent=new Intent(mainActivity, SetTimeByConsultant.class);
                 startActivity(intent);
+
+            }
+        });
+
+        txt_event_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mainActivity, EventRequestActivity.class);
+                startActivity(intent);
+
             }
         });
     }
@@ -120,7 +140,8 @@ private MainActivity mainActivity;
             final Map<String, String> m = new HashMap<>();
             m.put("device_type", "android");
             m.put("device_token", mainActivity.getDeviceToken() + "");
-            m.put("consultant_id", mainActivity.getRestParamsName("user_id"));
+            m.put("consultant_id", mainActivity.getRestParamsName(Utilclass.consultant_id));
+            m.put("user_id", mainActivity.getRestParamsName(Utilclass.user_id));
 
 
             final Map<String, String> obj = new HashMap<>();
@@ -137,24 +158,25 @@ private MainActivity mainActivity;
                             try
                             {
 
-                                JSONObject data=jsonObject.getJSONObject("data");
+                                JSONObject userdata=jsonObject.getJSONObject("data").getJSONObject("user_data");
+                                JSONObject consultant_data=jsonObject.getJSONObject("data").getJSONObject("consultant_data");
 
-                                tv_username.setText(data.getString("name"));
-                                tv_usermobile.setText(data.getString("phone"));
-                                tv_user_email.setText(data.getString("email"));
-                                if(data.has("category_name")) {
-                                    tv_speciality.setText(data.getString("category_name"));
+                                tv_username.setText(userdata.getString("first_name")+" "+userdata.getString("first_name"));
+                                tv_usermobile.setText(userdata.getString("phone"));
+                                tv_user_email.setText(userdata.getString("email"));
+                                if(userdata.has("category_name")) {
+                                    tv_speciality.setText(userdata.getString("category_name"));
                                 }
-                                if(data.has("experience")) {
-                                    tv_professionalbg.setText(data.getString("experience"));
+                                if(userdata.has("experience")) {
+                                    tv_professionalbg.setText(userdata.getString("experience"));
                                 }
-                                if(data.has("rate")) {
-                                    tv_fee.setText(data.getString("rate") + "TL");
+                                if(userdata.has("rate")) {
+                                    tv_fee.setText(userdata.getString("rate") + "TL");
                                 }
                                 int lastIndex=mainActivity.getRestParamsName("profile_pic").lastIndexOf("/");
                                 String imageUrl=mainActivity.getRestParamsName("profile_pic").substring(0,lastIndex);
-                                showImage(imageUrl+"/"+data.getString("profile_pic"),img_profile);
-
+                                showImage(imageUrl+"/"+userdata.getString("profile_pic"),img_profile);
+                                mainActivity.savePreferences.savePreferencesData(mainActivity,consultant_data,Utilclass.consultant_data);
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -178,4 +200,5 @@ private MainActivity mainActivity;
             e.printStackTrace();
         }
     }
+
 }

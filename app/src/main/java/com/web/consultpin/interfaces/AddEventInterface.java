@@ -49,4 +49,34 @@ public interface AddEventInterface {
 
     );
 
+
+    @Multipart
+    @POST("updateprofile")
+    Observable<ResponseBody> saveProfileWithImage(
+            @Part("consultant_id") RequestBody consultant_id,
+            @Part("user_id") RequestBody user_id,
+            @Part("name") RequestBody description,
+            @Part("surname") RequestBody event_date,
+            @Part("fee") RequestBody event_time,
+            @Part("type") RequestBody type,
+            @Header("token") String authHeader,
+            @Part MultipartBody.Part image,
+            @Part("profile_pic") RequestBody name
+
+    );
+    @Multipart
+    @POST("updateprofile")
+    Observable<ResponseBody> saveProfileWithoutImage(
+            @Part("consultant_id") RequestBody consultant_id,
+            @Part("user_id") RequestBody user_id,
+            @Part("name") RequestBody description,
+            @Part("surname") RequestBody event_date,
+            @Part("fee") RequestBody event_time,
+            @Part("type") RequestBody type,
+            @Header("token") String authHeader
+        );
+
+
+
+
 }
