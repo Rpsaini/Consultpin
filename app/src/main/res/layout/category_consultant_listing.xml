@@ -7,7 +7,7 @@
     android:weightSum="1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_best_restaurant"
+    android:id="@+id/ll_category_listing"
     android:background="@color/category_listing_bg"
     android:layout_height="wrap_content">
 
@@ -34,6 +34,7 @@
 
 
     <LinearLayout
+        android:layout_marginLeft="10dp"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,6 +103,7 @@
                     app:tint="@color/golden_color"></ImageView>
 
                 <fontspackageForTextView.BoldMedium
+                    android:id="@+id/txt_rate_count"
                     android:paddingStart="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,6 +112,7 @@
                     ></fontspackageForTextView.BoldMedium>
 
                 <fontspackageForTextView.BoldMedium
+                    android:id="@+id/txt_review_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/edittext_style_10_bottomnav"

@@ -22,6 +22,8 @@
     <string name="con_password">Confirm Password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="logout_text">Are you sure want to logout ?</string>
     <string name="become_consultant">Become a consultant</string>
     <string name="search">Search Consultant or Category</string>
     <string name="papular_cat">Popular Categories</string>

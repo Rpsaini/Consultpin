@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".usersection.UserEventHistory">
     <include layout="@layout/toolbar_without_shadow"/>
-    <LinearLayout
-       android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ll_container"
-        android:orientation="vertical"
-        ></LinearLayout>
+    <include layout="@layout/no_data_found"/>
+    <androidx.recyclerview.widget.RecyclerView
+     android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/user_event_history"
+        ></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

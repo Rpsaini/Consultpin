@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.dialogsnpickers.AlertDialogs;
 import com.app.dialogsnpickers.DialogCallBacks;
 import com.app.dialogsnpickers.SimpleDialog;
 import com.app.vollycommunicationlib.CallBack;
@@ -38,11 +40,11 @@ import java.util.Map;
 public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapter.MyViewHolder> {
 
     private ArrayList<JSONObject> datAr;
-    private EventRequestActivity pActivity;
+    private AppCompatActivity pActivity;
     private String imageUrl = "";
 
 
-    public EventHistoryAdapter(ArrayList<JSONObject> ar, EventRequestActivity paActiviity) {
+    public EventHistoryAdapter(ArrayList<JSONObject> ar, AppCompatActivity paActiviity) {
         datAr = ar;
         pActivity = paActiviity;
 
@@ -60,8 +62,6 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
         public MyViewHolder(View view) {
             super(view);
-
-
             ll_list_of_event = view.findViewById(R.id.ll_list_of_event);
             event_name = view.findViewById(R.id.event_name);
             event_fee = view.findViewById(R.id.event_fee);
@@ -69,11 +69,6 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             event_number_of_user = view.findViewById(R.id.event_number_of_user);
             appointment_time = view.findViewById(R.id.appointment_time);
             txt_cancel = view.findViewById(R.id.txt_cancel);
-
-
-
-
-
 
         }
     }
@@ -98,14 +93,14 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             holder.event_name.setText(jsonObject.getString("description"));
             holder.event_fee.setText(jsonObject.getString("event_fee")+pActivity.getResources().getString(R.string.lirasymbol));
             holder.event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint)+"  :  "+jsonObject.getString("number_of_participants"));
-            holder.appointment_time.setText(jsonObject.getString("event_date")+" "+jsonObject.getString("event_time"));
+            holder.appointment_time.setText(jsonObject.getString("start_date")+" to  "+jsonObject.getString("end_date"));
             showImage(jsonObject.getString("banner"),holder.event_image);
 
 
             holder.txt_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pActivity.alertDialogs.alertDialog(pActivity, pActivity.getString(R.string.choose), "Choose Image either from camera or from gallary?", "Camera", "Gallary", new DialogCallBacks() {
+                    new AlertDialogs().alertDialog(pActivity, pActivity.getString(R.string.choose), "Choose Image either from camera or from gallary?", "Camera", "Gallary", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 

@@ -19,6 +19,7 @@ public class Utilclass
     public static int appointmentRequsestcode=1000;
     public static boolean isConsultantModeOn=true;
     public static String consultant_data="consultant_data";
+    public static String category_id="category_id";
 
 
 

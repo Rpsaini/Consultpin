@@ -95,7 +95,7 @@ public class EditTimeByConsultant extends BaseActivity {
                 }
                 else
                 {
-                    isWeekendoff="1";
+                    isWeekendoff="0";
                     img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
                 }
             }
@@ -110,6 +110,7 @@ public class EditTimeByConsultant extends BaseActivity {
     private void viewTimingGrid(ArrayList<String> timingAr, Map<String, Boolean> reservedTimeMap) {
         GridView grid_timing = findViewById(R.id.grid_timing);
         System.out.println("Reserve time map==="+reservedTimeMap);
+
         grid_timing.setAdapter(new EditTimeGridAdapter(this, timingAr, reservedTimeMap,alreadySettedMap));
     }
 
@@ -337,15 +338,7 @@ public class EditTimeByConsultant extends BaseActivity {
 //                    });
 //                    return;
 //                }
-//                if (timeSlot.length() == 0) {
-//                    alertDialogs.alertDialog(EditTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.select_time), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-//                        @Override
-//                        public void getDialogEvent(String buttonPressed) {
-//
-//                        }
-//                    });
-//                    return;
-//                }
+
 
                 saveTiming();
 
@@ -354,77 +347,6 @@ public class EditTimeByConsultant extends BaseActivity {
 
     }
 
-
-//    private void saveAppointment() {
-//
-//
-//        try {
-//            String[] slotAr = timeDuration.split("/");
-//            System.out.println("Time interval====>" + timeDuration);
-//            String duration = slotAr[0].split(" ")[0];
-//            String fee = slotAr[1].split(" ")[0];
-//
-//            final Map<String, String> m = new HashMap<>();
-//            m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
-//            m.put("user_id", getRestParamsName(Utilclass.user_id));
-//            m.put("description", ed_description.getText().toString());
-//            m.put("appointment_duration", duration);
-//            m.put("appointment_date", date);
-//            m.put("appointment_time", timeSlot);
-//            m.put("appointment_fee", fee + "");
-//
-//
-//            m.put("device_type", "android");
-//            m.put("device_token", getDeviceToken() + "");
-//
-//            final Map<String, String> obj = new HashMap<>();
-//            obj.put("token", getRestParamsName(Utilclass.token));
-//
-//
-//            System.out.println("Before to save appointment===" + m);
-//
-//
-//            serverHandler.sendToServer(this, getApiUrl() + "create-appointment-request", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
-//                @Override
-//                public void getRespone(String dta, ArrayList<Object> respons) {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(dta);
-//                        if (jsonObject.getBoolean("status")) {
-//                            try {
-//
-//                                alertDialogs.alertDialog(EditTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-//                                    @Override
-//                                    public void getDialogEvent(String buttonPressed) {
-//                                        Intent intent = new Intent();
-//                                        setResult(RESULT_OK, intent);
-//                                        finish();
-//                                    }
-//                                });
-//
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        } else {
-//                            alertDialogs.alertDialog(EditTimeByConsultant.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-//                                @Override
-//                                public void getDialogEvent(String buttonPressed) {
-//                                }
-//                            });
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            });
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
     private void saveTiming() {
 

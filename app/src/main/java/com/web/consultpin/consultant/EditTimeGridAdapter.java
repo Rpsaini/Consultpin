@@ -21,7 +21,7 @@ public class EditTimeGridAdapter extends BaseAdapter {
     private EditTimeByConsultant context;
     private final ArrayList<String> gridValues;
     private Map<String, Boolean> reservedMap,alreadysettedMap;
-    private LinearLayout ll_timing_common;
+
 
 
 
@@ -71,50 +71,60 @@ public class EditTimeGridAdapter extends BaseAdapter {
 
             if(alreadysettedMap.containsKey(time))
             {
-//                context.preTimeMapCustom.put(position,txt_select_time.getText()+"");
-                ll_timing.setBackgroundResource(R.drawable.blue_drawable);
-                txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
+
+                System.out.println("Reserve time---"+reservedMap+"==="+time);
+//                if(reservedMap.containsKey(time))
+//                {
+//                    ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
+//                }
+//                else
+//                {
+                    ll_timing.setBackgroundResource(R.drawable.blue_drawable);
+                    txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
+                    context.preTimeMapCustom.put(position,time);
+               // }
+
             }
             else
             {
-                ll_timing_common.setBackgroundResource(R.drawable.roundcorner_drawable);
+                ll_timing.setBackgroundResource(R.drawable.roundcorner_drawable);
                 txt_select_time.setTextColor(context.getResources().getColor(R.color.black));
             }
 
-            if(reservedMap.containsKey(time))
-            {
-                if(reservedMap.get(time))
-                {
-                    ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
-                }
-                else
-                {
-                    ll_timing.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if(!context.preTimeMapCustom.containsKey(position))
-                            {
-                                context.preTimeMapCustom.put(position,txt_select_time.getText()+"");
-                                ll_timing.setBackgroundResource(R.drawable.blue_drawable);
-                                txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
-                            }
-                            else
-                            {
-                                context.preTimeMapCustom.remove(position);
-                                ll_timing_common.setBackgroundResource(R.drawable.roundcorner_drawable);
-                                txt_select_time.setTextColor(context.getResources().getColor(R.color.black));
-                            }
-
-
-                            ll_timing_common=ll_timing;
-                            context.timeSlot=txt_select_time.getText()+"";
-                        }
-                    });
-                }
-
-            }
-            else
-            {
+//            if(reservedMap.containsKey(time))
+//            {
+//                if(reservedMap.get(time))
+//                {
+//                    ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
+//                }
+//                else
+//                {
+//                    ll_timing.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if(!context.preTimeMapCustom.containsKey(position))
+//                            {
+//                                context.preTimeMapCustom.put(position,txt_select_time.getText()+"");
+//                                ll_timing.setBackgroundResource(R.drawable.blue_drawable);
+//                                txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
+//                            }
+//                            else
+//                            {
+//                                context.preTimeMapCustom.remove(position);
+//                                ll_timing_common.setBackgroundResource(R.drawable.roundcorner_drawable);
+//                                txt_select_time.setTextColor(context.getResources().getColor(R.color.black));
+//                            }
+//
+//
+//                            ll_timing_common=ll_timing;
+//                            context.timeSlot=txt_select_time.getText()+"";
+//                        }
+//                    });
+//                }
+//
+//            }
+//            else
+             {
 
                 ll_timing.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -129,15 +139,10 @@ public class EditTimeGridAdapter extends BaseAdapter {
                         else
                         {
                             context.preTimeMapCustom.remove(position);
-                            ll_timing_common.setBackgroundResource(R.drawable.roundcorner_drawable);
+                            ll_timing.setBackgroundResource(R.drawable.roundcorner_drawable);
                             txt_select_time.setTextColor(context.getResources().getColor(R.color.black));
                         }
-
-                        ll_timing_common=ll_timing;
-                        context.timeSlot=txt_select_time.getText()+"";
-
-
-                    }
+                     }
                 });
             }
 

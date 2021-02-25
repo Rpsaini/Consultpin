@@ -3,6 +3,7 @@ package com.web.consultpin.events;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.EventHistoryAdapter;
 import com.web.consultpin.interfaces.ResponsInterface;
 import com.web.consultpin.registration.LoginActivity;
+import com.web.consultpin.usersection.UserEventHistory;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,12 +33,10 @@ import java.util.Map;
 
 public class ListOfEventsFragment extends Fragment {
 private View view;
+//private EventRequestActivity eventRequestActivity;
 private EventRequestActivity eventRequestActivity;
 
-    public ListOfEventsFragment()
-    {
 
-    }
 
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -47,11 +47,6 @@ private EventRequestActivity eventRequestActivity;
         }
     }
 
-    public static ListOfEventsFragment newInstance(String param1, String param2) {
-        ListOfEventsFragment fragment = new ListOfEventsFragment();
-
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -67,7 +62,9 @@ private EventRequestActivity eventRequestActivity;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          view=inflater.inflate(R.layout.fragment_list_of_events, container, false);
-        eventRequestActivity= (EventRequestActivity) getActivity();
+          eventRequestActivity= (EventRequestActivity) getActivity();
+
+
 
         return  view;
     }
@@ -75,7 +72,6 @@ private EventRequestActivity eventRequestActivity;
 
     private void init(ArrayList<JSONObject> dataAr)
     {
-
         RecyclerView event_history_recycler =view.findViewById(R.id.event_history_recycler);
         RelativeLayout relativeLayout =view.findViewById(R.id.rr_nodata_view);
         if(dataAr.size()==0)
@@ -89,6 +85,7 @@ private EventRequestActivity eventRequestActivity;
             event_history_recycler.setVisibility(View.VISIBLE);
         }
         EventHistoryAdapter mAdapter = new EventHistoryAdapter(dataAr,eventRequestActivity);
+
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         event_history_recycler.setLayoutManager(horizontalLayoutManagaer);
@@ -100,22 +97,11 @@ private EventRequestActivity eventRequestActivity;
     {
         try {
             final Map<String, String> m = new HashMap<>();
-
-            System.out.println("Consultant id===>"+eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
-            if(Utilclass.isConsultantModeOn) {
-                m.put("consultant_id", eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
-            }
-            else
-            {
-                m.put("consultant_id", "0");
-
-            }
-            m.put("device_type", "android");
-            m.put("device_token", eventRequestActivity.getDeviceToken() + "");
-
-
+            m.put("consultant_id", eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
             final Map<String, String> obj = new HashMap<>();
-            obj.put("token", eventRequestActivity.getRestParamsName(Utilclass.token));
+            obj.put("token",eventRequestActivity.getRestParamsName(Utilclass.token));
+
+
 
 
             System.out.println("before===="+m);

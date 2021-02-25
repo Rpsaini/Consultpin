@@ -148,7 +148,7 @@ private MainActivity mainActivity;
             obj.put("token", mainActivity.getRestParamsName(Utilclass.token));
 
             System.out.println("View profile==="+m+"==="+mainActivity.getApiUrl()+"view-profile");
-            mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + "view-profile", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+            mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + "get-profile", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
@@ -164,18 +164,18 @@ private MainActivity mainActivity;
                                 tv_username.setText(userdata.getString("first_name")+" "+userdata.getString("first_name"));
                                 tv_usermobile.setText(userdata.getString("phone"));
                                 tv_user_email.setText(userdata.getString("email"));
-                                if(userdata.has("category_name")) {
-                                    tv_speciality.setText(userdata.getString("category_name"));
+
+                                if(consultant_data.has("specialties")) {
+                                    tv_speciality.setText(consultant_data.getString("specialties"));
                                 }
-                                if(userdata.has("experience")) {
-                                    tv_professionalbg.setText(userdata.getString("experience"));
+                                if(consultant_data.has("experience")) {
+                                    tv_professionalbg.setText(consultant_data.getString("experience"));
                                 }
-                                if(userdata.has("rate")) {
-                                    tv_fee.setText(userdata.getString("rate") + "TL");
+                                if(consultant_data.has("rate")) {
+                                    tv_fee.setText(consultant_data.getString("rate") + "TL");
                                 }
-                                int lastIndex=mainActivity.getRestParamsName("profile_pic").lastIndexOf("/");
-                                String imageUrl=mainActivity.getRestParamsName("profile_pic").substring(0,lastIndex);
-                                showImage(imageUrl+"/"+userdata.getString("profile_pic"),img_profile);
+
+                                showImage(userdata.getString("profile_pic"),img_profile);
                                 mainActivity.savePreferences.savePreferencesData(mainActivity,consultant_data,Utilclass.consultant_data);
 
                             } catch (Exception e) {

@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
+import com.web.consultpin.Utilclass;
 import com.web.consultpin.consultant.PapularConsultantFullListing;
 
 import org.json.JSONObject;
@@ -80,6 +81,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
                     try {
                         Intent intent = new Intent(pActivity, PapularConsultantFullListing.class);
+                        intent.putExtra(Utilclass.category_id,jsonObject.getString("category_id"));
                         pActivity.startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();

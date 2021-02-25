@@ -1,6 +1,7 @@
 package com.web.consultpin;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.dialogsnpickers.DialogCallBacks;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
@@ -21,6 +23,7 @@ import com.web.consultpin.consultant.SetTimeByConsultant;
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.appointmenthistory.AppointMentHistoryFrg;
 //import com.web.consultpin.ui.home.Appointment;
+import com.web.consultpin.registration.SplashScreen;
 import com.web.consultpin.ui.home.Chat;
 import com.web.consultpin.ui.home.Home;
 
@@ -33,6 +36,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+
+import org.w3c.dom.Text;
+
 //cTrf8iWVRnCYhbhAY2d3bn:APA91bGxxQOpA6FoDgO7VpEphA3xg-mlNzzDtL-TgP--E0_WnK-kRXyomuF3OUOVFuCoAh7EuRXgCMFFSMzz9uXU4kjegRFzrW5nnkX0cdPpsZzLqNvwzuHfj6seK8__VxRwY9dOzlk4
 public class MainActivity extends BaseActivity {
 
@@ -136,6 +142,8 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+
     }
 
     private void callFragment(Fragment fragment, String tag)
@@ -204,6 +212,7 @@ public class MainActivity extends BaseActivity {
         TextView tv_events = navigationView.findViewById(R.id.tv_events);
         TextView addAppointment = findViewById(R.id.tv_setAppointment);
         View view_line = findViewById(R.id.view_line);
+        TextView tv_logout = findViewById(R.id.tv_logout);
 
         if (!Utilclass.isConsultantModeOn)
         {
@@ -255,15 +264,45 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        tv_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                alertDialogs.alertDialog(MainActivity.this, getResources().getString(R.string.logout), getResources().getString(R.string.logout_text), getResources().getString(R.string.yes), getResources().getString(R.string.no), new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                            if(buttonPressed.equalsIgnoreCase(getResources().getString(R.string.yes)))
+                            {
+                                logout();
+                            }
+                        }
+                    });
+            }
+        });
+
+
+    }
+
+    public void logout()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.app_name), MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+        editor.apply();
+
+        savePreferences.savePreferencesData(this,"done","tutorial");
+        Intent intent = new Intent(MainActivity.this, SplashScreen.class);
+        startActivity(intent);
+        finishAffinity();
+
+
 
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
 
 
     private void switchUser() {
