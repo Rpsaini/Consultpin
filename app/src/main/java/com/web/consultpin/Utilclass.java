@@ -20,10 +20,11 @@ public class Utilclass
     public static boolean isConsultantModeOn=true;
     public static String consultant_data="consultant_data";
     public static String category_id="category_id";
+    public static String appointment_date="appointment_date";
+    public static String history="history";
+    public static String upcoming="upcoming";
 
 
 
-
-   //{"user_id":"39","email":"mail@gmail.com","first_name":"Ram","last_name":"lastnae","phone":"9787978797"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 
 }

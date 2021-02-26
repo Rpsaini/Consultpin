@@ -84,8 +84,7 @@ public class MainActivity extends BaseActivity {
     private void navigationMenu() {
 
 
-        Intent intent=new Intent(MainActivity.this, EditTimeByConsultant.class);
-        startActivity(intent);
+
 
         callFragment(new Home(), "home");
         LinearLayout bnave_ll_home = findViewById(R.id.bnave_ll_home);

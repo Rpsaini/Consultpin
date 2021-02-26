@@ -39,6 +39,7 @@ public class UserEventHistory extends BaseActivity {
         getSupportActionBar().hide();
 
         backActions();
+        getEventList();
     }
     private void backActions()
     {

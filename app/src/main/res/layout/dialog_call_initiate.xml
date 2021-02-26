@@ -29,8 +29,8 @@
         <ImageView
             android:src="@drawable/man"
             android:id="@+id/txt_user_profile_img"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             ></ImageView>
@@ -47,15 +47,49 @@
                ></fontspackageForTextView.BoldMedium>
 
 
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <fontspackageForTextView.Regular
+                android:id="@+id/time_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:gravity="center|left"
+                android:layout_gravity="center"
+                style="@style/edittext_style_12_grey"
+                android:text=""
+                ></fontspackageForTextView.Regular>
+
+            <fontspackageForTextView.BoldMedium
+                android:id="@+id/txt_fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:gravity="center|left"
+                android:layout_gravity="center"
+                style="@style/edit_text_skyblue_14"
+                android:text="10tl"
+                ></fontspackageForTextView.BoldMedium>
+        </LinearLayout>
+
         <fontspackageForTextView.Regular
-            android:textColor="@color/buttonskyblue"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="Fee"
+            android:text="time"
             android:textSize="14dp"
-            android:id="@+id/txt_fee"
+            android:id="@+id/txt_date"
+            android:drawableTint="@color/texthintcolor"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/edit"
             ></fontspackageForTextView.Regular>
 
 

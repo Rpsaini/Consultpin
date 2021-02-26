@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".events.AddEventsFragment">
 
 
@@ -226,14 +227,18 @@
                     ></fontspackageForTextView.Regular>
 
                 <ImageView
+                    android:layout_marginRight="5dp"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/down_arrow"
+                    app:tint="@color/texthintcolor"
                     android:padding="4dp"
                     ></ImageView>
             </RelativeLayout>
+
+
 
             <fontspackageForTextView.BoldMedium
                 android:layout_marginLeft="15dp"
@@ -296,7 +301,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/roundcorner_drawable"
                     android:gravity="left|center"
-                    android:hint="fee"
+                    android:hint="0"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal"
                     android:maxLines="1"

@@ -68,7 +68,7 @@ private MainActivity mainActivity;
             if(!Utilclass.isConsultantModeOn)
             {
                 commonId = userid;
-                apiname = "get-user-appointment-history";
+                apiname = "get-user-appointments";
                 m.put("user_id", commonId);
 
             } else {
@@ -146,7 +146,7 @@ private MainActivity mainActivity;
                 LinearLayoutManager.VERTICAL, false));
         recyclerview_appointmenthistory.setHasFixedSize(true);
         recyclerview_appointmenthistory.setItemAnimator(new DefaultItemAnimator());
-        AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(dataAr, mainActivity, "");
+        AppointmentHistoryAdapter horizontalCategoriesAdapter = new AppointmentHistoryAdapter(dataAr, mainActivity, Utilclass.history);
         recyclerview_appointmenthistory.setAdapter(horizontalCategoriesAdapter);
     }
 }

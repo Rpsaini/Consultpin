@@ -42,7 +42,6 @@ private EventRequestActivity eventRequestActivity;
         super.setUserVisibleHint(isVisibleToUser);
 
         if (isVisibleToUser && isResumed()) {
-            System.out.println("List fragment called===>>>");
             getEventList();
         }
     }

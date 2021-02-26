@@ -17,12 +17,16 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.JsonArray;
 import com.web.consultpin.R;
 import com.web.consultpin.consultant.SetTimeByConsultant;
+import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.usersection.SetAppointmentByUser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,12 +40,10 @@ public class TimeAndMoneyAdapter extends RecyclerView.Adapter<TimeAndMoneyAdapte
 
 
 
+
     public TimeAndMoneyAdapter(ArrayList<String> ar, SetAppointmentByUser paActiviity) {
         datAr = ar;
         pActivity = paActiviity;
-
-        // this.dateStr=dateStr;
-
 
     }
 
@@ -73,10 +75,11 @@ public class TimeAndMoneyAdapter extends RecyclerView.Adapter<TimeAndMoneyAdapte
             String timeStr=datAr.get(position);
             holder.tv_selected_time.setText(timeStr);
 
-            System.out.println("time money layout==="+commonLAyout);
+
+
             if(commonLAyout!=null)
              {
-                holder.ll_time_selection.setBackgroundResource(R.drawable.blue_drawable);
+                 holder.ll_time_selection.setBackgroundResource(R.drawable.blue_drawable);
                  commonTextView.setTextColor(pActivity.getColor(R.color.white));
              }
 

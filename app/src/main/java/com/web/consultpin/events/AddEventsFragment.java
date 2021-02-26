@@ -49,6 +49,7 @@ import com.web.consultpin.interfaces.AddEventInterface;
 import com.web.consultpin.interfaces.ApiProduction;
 import com.web.consultpin.interfaces.RxAPICallHelper;
 import com.web.consultpin.interfaces.RxAPICallback;
+import com.web.consultpin.main.BaseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -245,7 +246,7 @@ public class AddEventsFragment extends Fragment {
                 }
 
                 if(eventRequestActivity.validationRule.checkEmptyString(ed_numberofparticipaints) == 0) {
-                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), getResources().getString(R.string.numberofdays), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.numberofdays), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
                         }
@@ -255,9 +256,21 @@ public class AddEventsFragment extends Fragment {
 
                 if(eventRequestActivity.validationRule.checkEmptyString(ed_paid_fee) == 0)
                 {
-                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Response), getResources().getString(R.string.enter_event_fee), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.enter_event_fee), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
+                        }
+                    });
+                    return;
+                }
+
+                if(!BaseActivity.compareTwoDates(ed_datefrom.getText().toString()+" "+ed_time_start.getText().toString(),ed_date_end.getText().toString()+" "+ed_end_time.getText().toString()))
+                {
+                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.date_validation), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed)
+                        {
+
                         }
                     });
                     return;

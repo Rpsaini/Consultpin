@@ -62,16 +62,16 @@ public class SetAppointmentByUser extends BaseActivity {
     }
 
 
-
     private void init() {
-         ed_description = findViewById(R.id.ed_description);
-         date_cal_view = findViewById(R.id.date_cal_view);
-         tv_saveAppointment = findViewById(R.id.tv_saveAppointment);
-         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-         date = sdf.format(date_cal_view.getDate());
-         ImageView toolbar_back_arrow = findViewById(R.id.toolbar_back_arrow);
-         TextView toolbar_title = findViewById(R.id.toolbar_title);
-         toolbar_title.setText(getResources().getString(R.string.set_appointment));
+        ed_description = findViewById(R.id.ed_description);
+        date_cal_view = findViewById(R.id.date_cal_view);
+        tv_saveAppointment = findViewById(R.id.tv_saveAppointment);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        date = sdf.format(date_cal_view.getDate());
+        ImageView toolbar_back_arrow = findViewById(R.id.toolbar_back_arrow);
+        TextView toolbar_title = findViewById(R.id.toolbar_title);
+        toolbar_title.setText(getResources().getString(R.string.set_appointment));
+
 
         toolbar_back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,10 +91,12 @@ public class SetAppointmentByUser extends BaseActivity {
 
     }
 
+    GridView grid_timing;
+
     private void viewTimingGrid(ArrayList<JSONObject> timingAr, Map<String, Boolean> reservedTimeMap) {
 
-        GridView grid_timing = findViewById(R.id.grid_timing);
-        grid_timing.setAdapter(new RequestForAppobyUserAdapter(this, timingAr, reservedTimeMap));
+        grid_timing = findViewById(R.id.grid_timing);
+        grid_timing.setAdapter(new RequestForAppobyUserAdapter(this, timingAr, reservedTimeMap,date));
     }
 
     private void showAlreadyAddedTime(ArrayList<String> data) {
@@ -145,85 +147,70 @@ public class SetAppointmentByUser extends BaseActivity {
 
 
                                 ArrayList<String> data = new ArrayList<>();
-                                data.add("15 min/" + (quaterFee) +" "+getResources().getString(R.string.lirasymbol));
-                                data.add("30 min/" + (halfHour) + " "+getResources().getString(R.string.lirasymbol));
-                                data.add("60 min/" + (oneHourfee) +" "+ getResources().getString(R.string.lirasymbol));
+                                data.add("15 min/" + (quaterFee) + " " + getResources().getString(R.string.lirasymbol));
+                                data.add("30 min/" + (halfHour) + " " + getResources().getString(R.string.lirasymbol));
+                                data.add("60 min/" + (oneHourfee) + " " + getResources().getString(R.string.lirasymbol));
 
 
                                 showAlreadyAddedTime(data);
 
 
-
                                 JSONArray appointmentArray = dataObj.getJSONArray("appointment_time");
-                                if(appointmentArray.length()>0)
-                                {
-                                JSONObject appointmentData = appointmentArray.getJSONObject(0);
-                                String isWeekendoff = appointmentData.getString("include_weekend_n_holidays");
+                                if (appointmentArray.length() > 0) {
+                                    JSONObject appointmentData = appointmentArray.getJSONObject(0);
+                                    String isWeekendoff = appointmentData.getString("include_weekend_n_holidays");
 
-                                JSONArray timeArray = new JSONArray(appointmentData.getString("timing"));
-                                JSONArray jsonArrayReservedTime = dataObj.getJSONArray("reserved_times");
-                                ArrayList<JSONObject> timeMainAr = new ArrayList<>();
-                                int counter=0;
-                                for (int x = 0; x < timeArray.length(); x++)
-                                {
-                                    String timeStr = timeArray.getString(x);
-                                    String[] timeSplitAr = timeStr.split("-");
+                                    JSONArray timeArray = new JSONArray(appointmentData.getString("timing"));
+                                    JSONArray jsonArrayReservedTime = dataObj.getJSONArray("reserved_times");
+                                    ArrayList<JSONObject> timeMainAr = new ArrayList<>();
+                                    int counter = 0;
+                                    for (int x = 0; x < timeArray.length(); x++) {
+                                        String timeStr = timeArray.getString(x);
+                                        String[] timeSplitAr = timeStr.split("-");
 
-                                    for (int y = 0; y < timeSplitAr.length; y++) {
+                                        for (int y = 0; y < timeSplitAr.length; y++) {
 
-                                        String timeSlot = timeSplitAr[y];
+                                            String timeSlot = timeSplitAr[y];
+                                            if (jsonArrayReservedTime.length() > 0) {
+                                                JSONObject reservedTime = jsonArrayReservedTime.getJSONObject(0);
+                                                String appointment_duration = reservedTime.getString("appointment_duration");
+                                                String[] splittedAr = reservedTime.getString("appointment_time").split(",");
 
-
-                                        if (jsonArrayReservedTime.length() > 0) {
-                                            JSONObject reservedTime = jsonArrayReservedTime.getJSONObject(0);
-                                            String appointment_duration = reservedTime.getString("appointment_duration");
-                                            String[] splittedAr = reservedTime.getString("appointment_time").split(",");
-
-                                            for (int z = 0; z < splittedAr.length; z++) {
-                                                String reservedtime = splittedAr[z];
-                                                String reservetimeAfterAddingMinutes = addTime(reservedtime, Integer.parseInt(appointment_duration));
-
-                                                boolean bool = checkTimeIsExistBeetWeenTwoTimes(reservedtime, reservetimeAfterAddingMinutes, timeSlot);
-
-
-                                                System.out.println("Reservetime====>" + reservedtime + "===" + reservetimeAfterAddingMinutes);
-
-                                                if (bool) {
-                                                    reservedTimeMap.put(timeSlot, bool);
+                                                for (int z = 0; z < splittedAr.length; z++) {
+                                                    String reservedtime = splittedAr[z];
+                                                    String reservetimeAfterAddingMinutes = addTime(reservedtime, Integer.parseInt(appointment_duration));
+                                                    boolean bool = checkTimeIsExistBeetWeenTwoTimes(reservedtime, reservetimeAfterAddingMinutes, timeSlot);
+                                                    System.out.println("Reservetime====>" + reservedtime + "===" + reservetimeAfterAddingMinutes);
+                                                    if(bool)
+                                                    {
+                                                        reservedTimeMap.put(timeSlot, bool);
+                                                    }
                                                 }
-
-
                                             }
+
+                                            JSONObject jsonObject1 = new JSONObject();
+                                            jsonObject1.put("timing", timeSplitAr[y]);
+                                            jsonObject1.put("include_weekend_n_holidays", isWeekendoff);
+                                            timeMainAr.add(jsonObject1);
                                         }
 
-                                        JSONObject jsonObject1 = new JSONObject();
-                                        jsonObject1.put("timing", timeSplitAr[y]);
-                                        jsonObject1.put("include_weekend_n_holidays", isWeekendoff);
-                                        timeMainAr.add(jsonObject1);
                                     }
-
-                                    }
-                                    RelativeLayout relativeLayout =findViewById(R.id.rr_nodata_view);
-                                    relativeLayout.setVisibility(View.GONE);
-
                                     viewTimingGrid(timeMainAr, reservedTimeMap);
-                                }
-                                else {
-                                    RelativeLayout relativeLayout =findViewById(R.id.rr_nodata_view);
-                                    relativeLayout.setVisibility(View.VISIBLE);
-
-
+                                    showData();
+                                } else {
+                                    nodataFound();
                                 }
 
-                                System.out.println("Reserved time map===="+reservedTimeMap);
-
+                                System.out.println("Reserved time map====" + reservedTimeMap);
 
 
                             } catch (Exception e) {
                                 e.printStackTrace();
+                                nodataFound();
                             }
 
                         } else {
+                            nodataFound();
                             alertDialogs.alertDialog(SetAppointmentByUser.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                 @Override
                                 public void getDialogEvent(String buttonPressed) {
@@ -244,6 +231,19 @@ public class SetAppointmentByUser extends BaseActivity {
 
     }
 
+    private void nodataFound() {
+        RelativeLayout relativeLayout = findViewById(R.id.rr_nodata_view);
+        relativeLayout.setVisibility(View.VISIBLE);
+        grid_timing.setVisibility(View.GONE);
+        tv_saveAppointment.setVisibility(View.GONE);
+    }
+
+    private void showData() {
+        RelativeLayout relativeLayout = findViewById(R.id.rr_nodata_view);
+        relativeLayout.setVisibility(View.GONE);
+        grid_timing.setVisibility(View.VISIBLE);
+        tv_saveAppointment.setVisibility(View.VISIBLE);
+    }
 
     private String addTime(String myTime, int interval) {
         try {
@@ -260,21 +260,18 @@ public class SetAppointmentByUser extends BaseActivity {
     }
 
 
-    private boolean checkTimeIsExistBeetWeenTwoTimes(String startTime,String endTime,String midtime)
-    {
+    private boolean checkTimeIsExistBeetWeenTwoTimes(String startTime, String endTime, String midtime) {
         try {
-            startTime=startTime+":00";
-            endTime=endTime+":00";
-            midtime=midtime+":10";
+            startTime = startTime + ":00";
+            endTime = endTime + ":00";
+            midtime = midtime + ":00";
 
-            System.out.println("Start end mid time===="+startTime+"=="+endTime+"==="+midtime);
+
             Date time1 = new SimpleDateFormat("HH:mm:ss").parse(startTime);
             Calendar calendar1 = Calendar.getInstance();
-//            calendar1.add(Calendar.MINUTE, -1);
+//          calendar1.add(Calendar.MINUTE, -1);
             calendar1.setTime(time1);
             calendar1.add(Calendar.DATE, 1);
-
-
 
 
 //            String string2 = "14:49:00";
@@ -290,16 +287,18 @@ public class SetAppointmentByUser extends BaseActivity {
             calendar3.add(Calendar.DATE, 1);
 
             Date x = calendar3.getTime();
-            if (x.after(calendar1.getTime()) && x.before(calendar2.getTime())) {
-                //checkes whether the current time is between 14:49:00 and 20:11:13.
-                //System.out.println(true);
-                System.out.println("Inside true=====>true");
+            if (x.after(calendar1.getTime()) && x.before(calendar2.getTime()))
+            {
+
                 return true;
 
             }
-            else
+             if (x.equals(calendar1.getTime()) || x.equals(calendar2.getTime()))
             {
-                System.out.println("Inside true=====>false");
+                return true;
+            }
+
+            else {
                 return false;
             }
         } catch (ParseException e) {
@@ -310,21 +309,34 @@ public class SetAppointmentByUser extends BaseActivity {
     }
 
 
-
     EditText ed_description;
+
     private void getFiledsData() {
 
         date_cal_view.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                date = year + "-" + month + "-" + day;
+
+                month = month + 1;
+                String newMonth = month + "", newDaye = day + "";
+                if (month <= 9) {
+                    newMonth = "0" + month;
+                }
+                if (day <= 9) {
+                    newDaye = "0" + day;
+                }
+                date = year + "-" + newMonth + "-" + newDaye;
+                getAlreadyAddedTime();
             }
         });
 
 
         tv_saveAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
+
                 if (validationRule.checkEmptyString(ed_description) == 0) {
                     alertDialogs.alertDialog(SetAppointmentByUser.this, getResources().getString(R.string.Required), getResources().getString(R.string.add_comment_msg), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
@@ -361,26 +373,22 @@ public class SetAppointmentByUser extends BaseActivity {
     }
 
 
-    private void saveAppointment()
-    {
+    private void saveAppointment() {
 
 
         try {
-            String [] slotAr=timeDuration.split("/");
-            System.out.println("Time interval====>"+timeDuration);
-             String duration=slotAr[0].split(" ")[0];
-             String fee=slotAr[1].split(" ")[0];
+            String[] slotAr = timeDuration.split("/");
+            String duration = slotAr[0].split(" ")[0];
+            String fee = slotAr[1].split(" ")[0];
 
             final Map<String, String> m = new HashMap<>();
             m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
             m.put("user_id", getRestParamsName(Utilclass.user_id));
             m.put("description", ed_description.getText().toString());
-            m.put("appointment_duration",duration);
+            m.put("appointment_duration", duration);
             m.put("appointment_date", date);
-            m.put("appointment_time", timeSlot);
-            m.put("appointment_fee", fee+"");
-
-
+            m.put("appointment_time", timeSlot + ":00");
+            m.put("appointment_fee", fee + "");
 
 
             m.put("device_type", "android");
@@ -403,10 +411,9 @@ public class SetAppointmentByUser extends BaseActivity {
 
                                 alertDialogs.alertDialog(SetAppointmentByUser.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                     @Override
-                                    public void getDialogEvent(String buttonPressed)
-                                    {
-                                        Intent intent=new Intent();
-                                        setResult(RESULT_OK,intent);
+                                    public void getDialogEvent(String buttonPressed) {
+                                        Intent intent = new Intent();
+                                        setResult(RESULT_OK, intent);
                                         finish();
                                     }
                                 });
@@ -428,7 +435,6 @@ public class SetAppointmentByUser extends BaseActivity {
 
                 }
             });
-
 
 
         } catch (Exception e) {

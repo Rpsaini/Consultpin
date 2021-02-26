@@ -63,46 +63,60 @@ public class EditTimeByConsultant extends BaseActivity {
         init();
         getFiledsData();
         getTimeInterval();
-
-    }
+     }
 
 
     private void init() {
 
-        date_cal_view = findViewById(R.id.date_cal_view);
-        img_isweekdayopen = findViewById(R.id.img_isweekdayopen);
-        tv_saveAppointment = findViewById(R.id.tv_saveAppointment);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        date = sdf.format(date_cal_view.getDate());
+        try {
 
-        ImageView toolbar_back_arrow = findViewById(R.id.toolbar_back_arrow);
-        TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText(getResources().getString(R.string.set_appointment));
-        toolbar_back_arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
-        img_isweekdayopen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isWeekendoff.equalsIgnoreCase("0"))
-                {
-                    isWeekendoff="1";
-                    img_isweekdayopen.setImageResource(R.drawable.ic_button);
+            String appointmentDate = getIntent().getStringExtra(Utilclass.appointment_date);
+            String[] appointStr = appointmentDate.split(" ");
+//            System.out.println("Appointment dat---" + appointStr[0] + "===" + appointStr[1]);
+            date=appointStr[0];
+            date_cal_view = findViewById(R.id.date_cal_view);
+
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date = (Date) formatter.parse(appointmentDate);
+            long mills = date.getTime();
+            date_cal_view.setDate(mills);
+
+
+            img_isweekdayopen = findViewById(R.id.img_isweekdayopen);
+            tv_saveAppointment = findViewById(R.id.tv_saveAppointment);
+
+
+            ImageView toolbar_back_arrow = findViewById(R.id.toolbar_back_arrow);
+            TextView toolbar_title = findViewById(R.id.toolbar_title);
+            toolbar_title.setText(getResources().getString(R.string.set_appointment));
+            toolbar_back_arrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
                 }
-                else
-                {
-                    isWeekendoff="0";
-                    img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
+            });
+
+            img_isweekdayopen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isWeekendoff.equalsIgnoreCase("0")) {
+                        isWeekendoff = "1";
+                        img_isweekdayopen.setImageResource(R.drawable.ic_button);
+                    } else {
+                        isWeekendoff = "0";
+                        img_isweekdayopen.setImageResource(R.drawable.ic_unselect_button);
+                    }
                 }
-            }
-        });
+            });
 
-        getAlreadyAddedTime();
-
+            getAlreadyAddedTime();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
@@ -265,7 +279,7 @@ public class EditTimeByConsultant extends BaseActivity {
         try {
             startTime = startTime + ":00";
             endTime = endTime + ":00";
-            midtime = midtime + ":10";
+            midtime = midtime + ":00";
 
             System.out.println("Start end mid time====" + startTime + "==" + endTime + "===" + midtime);
             Date time1 = new SimpleDateFormat("HH:mm:ss").parse(startTime);
@@ -289,7 +303,13 @@ public class EditTimeByConsultant extends BaseActivity {
             if (x.after(calendar1.getTime()) && x.before(calendar2.getTime())) {
                 return true;
 
-            } else {
+            }
+            if (x.equals(calendar1.getTime()) || x.equals(calendar2.getTime())) {
+                return true;
+
+            }
+
+            else {
 
                 return false;
             }
@@ -413,10 +433,6 @@ public class EditTimeByConsultant extends BaseActivity {
 
             final Map<String, String> obj = new HashMap<>();
             obj.put("token", getRestParamsName(Utilclass.token));
-
-
-            System.out.println("Before to save Consultant===" + m);
-
 
             if (SavedArray.length() == 0) {
                 alertDialogs.alertDialog(EditTimeByConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.selecttime), getResources().getString(R.string.ok), "", new DialogCallBacks() {

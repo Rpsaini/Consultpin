@@ -12,6 +12,7 @@ import android.widget.TimePicker;
 
 import com.web.consultpin.R;
 import com.web.consultpin.consultant.SetTimeByConsultant;
+import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.usersection.SetAppointmentByUser;
 
 import org.json.JSONObject;
@@ -28,12 +29,14 @@ public class RequestForAppobyUserAdapter extends BaseAdapter {
     private Map<String, Boolean> reservedMap;
     private LinearLayout ll_timing_common;
     private TextView commonTextView;
+    private String date="";
 
 
-    public RequestForAppobyUserAdapter(SetAppointmentByUser context, ArrayList<JSONObject> artistData, Map<String, Boolean> reservedMap) {
+    public RequestForAppobyUserAdapter(SetAppointmentByUser context, ArrayList<JSONObject> artistData, Map<String, Boolean> reservedMap,String date) {
         this.context = context;
         this.gridValues = artistData;
         this.reservedMap = reservedMap;
+        this.date=date;
     }
 
     @Override
@@ -72,15 +75,53 @@ public class RequestForAppobyUserAdapter extends BaseAdapter {
             LinearLayout ll_timing = gridView.findViewById(R.id.ll_timing);
             txt_select_time.setText(dataObj.getString("timing"));
 
+            System.out.println("Timmm===>"+dataObj.getString("timing"));
 
+            Date currentTime = Calendar.getInstance().getTime();
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String nowTime=simpleDateFormat.format(currentTime);
 
-
-
-            if(reservedMap.containsKey(dataObj.getString("timing")))
+            if(BaseActivity.compareTwoDates(date+" "+dataObj.getString("timing")+":00",nowTime))
             {
-                if(reservedMap.get(dataObj.getString("timing")))
+                ll_timing.setAlpha(.3f);
+            }
+            else
+            {
+                if(reservedMap.containsKey(dataObj.getString("timing")))
                 {
-                    ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
+                    if(reservedMap.get(dataObj.getString("timing")))
+                    {
+                        ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
+                    }
+                    else
+                    {
+                        if(ll_timing_common!=null)
+                        {
+                            ll_timing_common.setBackgroundResource(R.drawable.blue_drawable);
+                            commonTextView.setTextColor(context.getResources().getColor(R.color.white));
+                        }
+
+                        ll_timing.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                if(ll_timing_common!=null)
+                                {
+                                    ll_timing_common.setBackgroundResource(R.drawable.roundcorner_drawable);
+                                    commonTextView.setTextColor(context.getResources().getColor(R.color.black));
+                                }
+
+                                ll_timing.setBackgroundResource(R.drawable.blue_drawable);
+                                txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
+                                ll_timing_common=ll_timing;
+                                commonTextView=txt_select_time;
+                                context.timeSlot=txt_select_time.getText()+"";
+
+
+                            }
+                        });
+                    }
+
                 }
                 else
                 {
@@ -110,36 +151,11 @@ public class RequestForAppobyUserAdapter extends BaseAdapter {
                         }
                     });
                 }
-
             }
-            else
-              {
-                  if(ll_timing_common!=null)
-                  {
-                      ll_timing_common.setBackgroundResource(R.drawable.blue_drawable);
-                      commonTextView.setTextColor(context.getResources().getColor(R.color.white));
-                  }
-
-                  ll_timing.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View v) {
-
-                          if(ll_timing_common!=null)
-                          {
-                              ll_timing_common.setBackgroundResource(R.drawable.roundcorner_drawable);
-                              commonTextView.setTextColor(context.getResources().getColor(R.color.black));
-                          }
-
-                          ll_timing.setBackgroundResource(R.drawable.blue_drawable);
-                          txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
-                          ll_timing_common=ll_timing;
-                          commonTextView=txt_select_time;
-                          context.timeSlot=txt_select_time.getText()+"";
 
 
-                      }
-                  });
-             }
+
+
 
 
 

@@ -1,4 +1,5 @@
 package com.web.consultpin.adapter;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
+import com.web.consultpin.consultant.AccountInformation;
 import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.PapularConsultantFullListing;
 import com.web.consultpin.events.EventRequestActivity;
@@ -47,9 +50,6 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
     public EventHistoryAdapter(ArrayList<JSONObject> ar, AppCompatActivity paActiviity) {
         datAr = ar;
         pActivity = paActiviity;
-
-
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -57,7 +57,7 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
         LinearLayout ll_list_of_event;
         ImageView event_image;
-        TextView event_name, event_fee, event_number_of_user, appointment_time,txt_cancel;
+        TextView event_name, event_fee, event_number_of_user, appointment_time, txt_cancel;
 
 
         public MyViewHolder(View view) {
@@ -86,29 +86,22 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         try {
-
-
             JSONObject jsonObject = datAr.get(position);
-
             holder.event_name.setText(jsonObject.getString("description"));
-            holder.event_fee.setText(jsonObject.getString("event_fee")+pActivity.getResources().getString(R.string.lirasymbol));
-            holder.event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint)+"  :  "+jsonObject.getString("number_of_participants"));
-            holder.appointment_time.setText(jsonObject.getString("start_date")+" to  "+jsonObject.getString("end_date"));
-            showImage(jsonObject.getString("banner"),holder.event_image);
+            holder.event_fee.setText(jsonObject.getString("event_fee") + pActivity.getResources().getString(R.string.lirasymbol));
+            holder.event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint) + "  :  " + jsonObject.getString("number_of_participants"));
+            holder.appointment_time.setText(jsonObject.getString("start_date") + " to  " + jsonObject.getString("end_date"));
+            showImage(jsonObject.getString("banner"), holder.event_image);
 
 
-            holder.txt_cancel.setOnClickListener(new View.OnClickListener() {
+            holder.ll_list_of_event.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    new AlertDialogs().alertDialog(pActivity, pActivity.getString(R.string.choose), "Choose Image either from camera or from gallary?", "Camera", "Gallary", new DialogCallBacks() {
-                        @Override
-                        public void getDialogEvent(String buttonPressed) {
+                public void onClick(View v)
+                {
 
-                        }
-                    });
-                }
+                    showDialog(jsonObject);
+                  }
             });
-
 
 
         } catch (Exception e) {
@@ -135,9 +128,39 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             }
         });
 
-
     }
 
+    private void showDialog(JSONObject jsonObject) {
+        try {
+
+            SimpleDialog simpleDialog = new SimpleDialog();
+            final Dialog eventDetaildialog = simpleDialog.simpleDailog(pActivity, R.layout.event_list_dialog, new ColorDrawable(pActivity.getColor(R.color.translucent_black)), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
+
+            ImageView img_hideview = eventDetaildialog.findViewById(R.id.img_cross);
+
+            TextView event_name = eventDetaildialog.findViewById(R.id.event_name);
+            TextView event_fee = eventDetaildialog.findViewById(R.id.event_fee);
+            ImageView event_image = eventDetaildialog.findViewById(R.id.event_image);
+            TextView event_number_of_user = eventDetaildialog.findViewById(R.id.event_number_of_user);
+            TextView appointment_time = eventDetaildialog.findViewById(R.id.appointment_time);
+
+            event_name.setText(jsonObject.getString("description"));
+            event_fee.setText(jsonObject.getString("event_fee") + pActivity.getResources().getString(R.string.lirasymbol));
+            event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint) + "  :  " + jsonObject.getString("number_of_participants"));
+            appointment_time.setText(jsonObject.getString("start_date") + " to  " + jsonObject.getString("end_date"));
+            showImage(jsonObject.getString("banner"), event_image);
+
+
+            img_hideview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    eventDetaildialog.dismiss();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
