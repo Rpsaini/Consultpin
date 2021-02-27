@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IInterface;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
@@ -32,6 +33,7 @@ import com.web.consultpin.main.BaseActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class SetAppointmentByUser extends BaseActivity {
 
     TextView tv_saveAppointment;
     CalendarView date_cal_view;
+    ArrayList<JSONObject> allTimeIntervalAr=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,7 @@ public class SetAppointmentByUser extends BaseActivity {
         listeners();
         getAlreadyAddedTime();
 
+
     }
 
 
@@ -97,6 +101,8 @@ public class SetAppointmentByUser extends BaseActivity {
 
         grid_timing = findViewById(R.id.grid_timing);
         grid_timing.setAdapter(new RequestForAppobyUserAdapter(this, timingAr, reservedTimeMap,date));
+        showData(timingAr);
+
     }
 
     private void showAlreadyAddedTime(ArrayList<String> data) {
@@ -136,6 +142,7 @@ public class SetAppointmentByUser extends BaseActivity {
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
                         System.out.println("Appointment data===" + dta);
+                        allTimeIntervalAr.clear();
                         JSONObject jsonObject = new JSONObject(dta);
                         if (jsonObject.getBoolean("status")) {
                             try {
@@ -162,55 +169,59 @@ public class SetAppointmentByUser extends BaseActivity {
 
                                     JSONArray timeArray = new JSONArray(appointmentData.getString("timing"));
                                     JSONArray jsonArrayReservedTime = dataObj.getJSONArray("reserved_times");
-                                    ArrayList<JSONObject> timeMainAr = new ArrayList<>();
+                                   // ArrayList<JSONObject> timeMainAr = new ArrayList<>();
                                     int counter = 0;
                                     for (int x = 0; x < timeArray.length(); x++) {
                                         String timeStr = timeArray.getString(x);
                                         String[] timeSplitAr = timeStr.split("-");
 
-                                        for (int y = 0; y < timeSplitAr.length; y++) {
 
-                                            String timeSlot = timeSplitAr[y];
-                                            if (jsonArrayReservedTime.length() > 0) {
-                                                JSONObject reservedTime = jsonArrayReservedTime.getJSONObject(0);
-                                                String appointment_duration = reservedTime.getString("appointment_duration");
-                                                String[] splittedAr = reservedTime.getString("appointment_time").split(",");
-
-                                                for (int z = 0; z < splittedAr.length; z++) {
-                                                    String reservedtime = splittedAr[z];
-                                                    String reservetimeAfterAddingMinutes = addTime(reservedtime, Integer.parseInt(appointment_duration));
-                                                    boolean bool = checkTimeIsExistBeetWeenTwoTimes(reservedtime, reservetimeAfterAddingMinutes, timeSlot);
-                                                    System.out.println("Reservetime====>" + reservedtime + "===" + reservetimeAfterAddingMinutes);
-                                                    if(bool)
-                                                    {
-                                                        reservedTimeMap.put(timeSlot, bool);
-                                                    }
-                                                }
-                                            }
-
-                                            JSONObject jsonObject1 = new JSONObject();
-                                            jsonObject1.put("timing", timeSplitAr[y]);
-                                            jsonObject1.put("include_weekend_n_holidays", isWeekendoff);
-                                            timeMainAr.add(jsonObject1);
-                                        }
+                                        String startTime = date+" "+timeSplitAr[0];
+                                        String endTime = date+" "+timeSplitAr[1];
+                                        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                        getTimeIntervals(timeSplitAr[0],sim.parse(startTime), sim.parse(endTime),isWeekendoff);
 
                                     }
-                                    viewTimingGrid(timeMainAr, reservedTimeMap);
-                                    showData();
+
+
+                                    if (jsonArrayReservedTime.length() > 0)
+                                     {
+                                        for (int x = 0; x < allTimeIntervalAr.size(); x++) {
+                                            JSONObject allTimeAdded = allTimeIntervalAr.get(x);
+                                            String time = allTimeAdded.getString("timing");
+                                            JSONObject reservedTime = jsonArrayReservedTime.getJSONObject(0);
+                                            String[] splittedAr = reservedTime.getString("appointment_time").split(",");
+                                            for (int z = 0; z < splittedAr.length; z++)
+                                                 {
+                                                    String reservedtime = splittedAr[z];
+                                                     System.out.println("Reserve timee==x="+reservedtime);
+                                                     String appointment_duration = reservedTime.getString("appointment_duration");
+                                                    String reservetimeAfterAddingMinutes = addTime(reservedtime, Integer.parseInt(appointment_duration));
+                                                    boolean bool = checkTimeIsExistBeetWeenTwoTimes(reservedtime, reservetimeAfterAddingMinutes, time);
+                                                    if(bool)
+                                                    {
+                                                        reservedTimeMap.put(time, bool);
+                                                    }
+                                                }
+                                        }
+                                    }
+
+                                         System.out.println("Reserve time data==="+reservedTimeMap);
+
+
+
+                                        viewTimingGrid(allTimeIntervalAr, reservedTimeMap);
+
                                 } else {
-                                    nodataFound();
+                                    viewTimingGrid(new ArrayList<>(), reservedTimeMap);
                                 }
-
-                                System.out.println("Reserved time map====" + reservedTimeMap);
-
-
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                nodataFound();
+                                viewTimingGrid(new ArrayList<>(), reservedTimeMap);
                             }
 
                         } else {
-                            nodataFound();
+                            viewTimingGrid(new ArrayList<>(), reservedTimeMap);
                             alertDialogs.alertDialog(SetAppointmentByUser.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                 @Override
                                 public void getDialogEvent(String buttonPressed) {
@@ -231,18 +242,25 @@ public class SetAppointmentByUser extends BaseActivity {
 
     }
 
-    private void nodataFound() {
-        RelativeLayout relativeLayout = findViewById(R.id.rr_nodata_view);
-        relativeLayout.setVisibility(View.VISIBLE);
-        grid_timing.setVisibility(View.GONE);
-        tv_saveAppointment.setVisibility(View.GONE);
-    }
 
-    private void showData() {
+
+    private void showData(ArrayList<JSONObject> dataAr)
+    {
         RelativeLayout relativeLayout = findViewById(R.id.rr_nodata_view);
-        relativeLayout.setVisibility(View.GONE);
-        grid_timing.setVisibility(View.VISIBLE);
-        tv_saveAppointment.setVisibility(View.VISIBLE);
+        if(dataAr.size()==0)
+        {
+            relativeLayout.setVisibility(View.VISIBLE);
+            grid_timing.setVisibility(View.GONE);
+            tv_saveAppointment.setVisibility(View.GONE);
+        }
+        else
+        {
+            relativeLayout.setVisibility(View.GONE);
+            grid_timing.setVisibility(View.VISIBLE);
+            tv_saveAppointment.setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     private String addTime(String myTime, int interval) {
@@ -267,6 +285,7 @@ public class SetAppointmentByUser extends BaseActivity {
             midtime = midtime + ":00";
 
 
+            System.out.println("Start==end--mid===="+startTime+"=="+endTime+"=="+midtime);
             Date time1 = new SimpleDateFormat("HH:mm:ss").parse(startTime);
             Calendar calendar1 = Calendar.getInstance();
 //          calendar1.add(Calendar.MINUTE, -1);
@@ -280,7 +299,7 @@ public class SetAppointmentByUser extends BaseActivity {
             calendar2.setTime(time2);
             calendar2.add(Calendar.DATE, 1);
 
-//            String someRandomTime = "01:02:00";
+
             Date d = new SimpleDateFormat("HH:mm:ss").parse(midtime);
             Calendar calendar3 = Calendar.getInstance();
             calendar3.setTime(d);
@@ -373,7 +392,8 @@ public class SetAppointmentByUser extends BaseActivity {
     }
 
 
-    private void saveAppointment() {
+    private void saveAppointment()
+    {
 
 
         try {
@@ -390,16 +410,13 @@ public class SetAppointmentByUser extends BaseActivity {
             m.put("appointment_time", timeSlot + ":00");
             m.put("appointment_fee", fee + "");
 
-
             m.put("device_type", "android");
             m.put("device_token", getDeviceToken() + "");
 
             final Map<String, String> obj = new HashMap<>();
             obj.put("token", getRestParamsName(Utilclass.token));
 
-
             System.out.println("Before to save appointment===" + m);
-
 
             serverHandler.sendToServer(this, getApiUrl() + "create-appointment-request", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
@@ -407,8 +424,8 @@ public class SetAppointmentByUser extends BaseActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(dta);
                         if (jsonObject.getBoolean("status")) {
-                            try {
-
+                            try
+                             {
                                 alertDialogs.alertDialog(SetAppointmentByUser.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                     @Override
                                     public void getDialogEvent(String buttonPressed) {
@@ -440,7 +457,47 @@ public class SetAppointmentByUser extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void getTimeIntervals(String startAdd,Date startTime,Date EndTime,String isWeekendoff)
+    {
+        System.out.println("Start dataaa===?"+startTime+"=="+EndTime);
+
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(startTime);
+            if(BaseActivity.compareTwoDates(date+" "+startAdd+":00",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime())))
+            {
+                JSONObject jsonPreobj = new JSONObject();
+                jsonPreobj.put("timing", startAdd);
+                jsonPreobj.put("include_weekend_n_holidays", isWeekendoff);
+                allTimeIntervalAr.add(jsonPreobj);
+            }
+
+            while (cal.getTime().before(EndTime))
+            {
+                cal.add(Calendar.MINUTE, 15);
+                JSONObject jsonObject1 = new JSONObject();
+                String time=new java.sql.Time(cal.getTimeInMillis())+"";
+                time=time.substring(0,time.lastIndexOf(":"));
+                jsonObject1.put("timing", time);
+                jsonObject1.put("include_weekend_n_holidays", isWeekendoff);
+
+                if(BaseActivity.compareTwoDates(date+" "+time+":00",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime())))
+                {
+                    System.out.println("Timmm===>>>>"+time);
+                    allTimeIntervalAr.add(jsonObject1);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+
+        }
 
     }
+
 
 }

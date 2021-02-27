@@ -101,10 +101,6 @@ private EventRequestActivity eventRequestActivity;
             obj.put("token",eventRequestActivity.getRestParamsName(Utilclass.token));
 
 
-
-
-            System.out.println("before===="+m);
-
             eventRequestActivity.serverHandler.sendToServer(eventRequestActivity, eventRequestActivity.getApiUrl() + "event-list", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {

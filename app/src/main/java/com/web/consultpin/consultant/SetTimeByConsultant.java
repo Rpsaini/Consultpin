@@ -250,17 +250,16 @@ public class SetTimeByConsultant extends BaseActivity {
                         System.out.println("Appointment data===" + dta);
                         JSONObject jsonObject = new JSONObject(dta);
                         if (jsonObject.getBoolean("status")) {
-
                             try {
                                 JSONObject data = jsonObject.getJSONObject("data");
                                 JSONArray quickAr = data.getJSONArray("quick_time_list");
                                 showAlreadyAddedTime(quickAr, ed_datefrom.getText().toString());
 
                                 JSONArray appointment_timeAr = data.getJSONArray("appointment_time");
-                                JSONObject gdataOb = new JSONObject();
+//                                JSONObject gdataOb = new JSONObject();
                                 for (int x = 0; x < appointment_timeAr.length(); x++) {
                                     JSONObject dataObj = appointment_timeAr.getJSONObject(x);
-                                    gdataOb = dataObj;
+//                                    gdataOb = dataObj;
                                     datesMap.put(dataObj.getString("start_date"), dataObj);
 
                                     String timingStr = dataObj.getString("timing");
@@ -281,11 +280,7 @@ public class SetTimeByConsultant extends BaseActivity {
                                     mainDataContainerMap.put(start_date, quickCustomJAr);
 
                                 }
-
-
                                 System.out.println("Map data====" + mainDataContainerMap);
-
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -332,8 +327,6 @@ public class SetTimeByConsultant extends BaseActivity {
             m.put("end_date", ed_date_end.getText().toString());
             m.put("consultant_id", getRestParamsName(Utilclass.consultant_id));
             m.put("include_weekend_n_holidays", include_weekend_n_holidays);
-
-
 
             Set<Integer> keyset =preTimeMapCustom.keySet();
             Iterator<Integer> intItr=keyset.iterator();

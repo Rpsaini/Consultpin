@@ -199,6 +199,7 @@
     <string name="select_start_time">"Select event start time"</string>
     <string name="select_end_time">"Select event end time"</string>
     <string name="date_validation">"Start date can not be grater than End date."</string>
+    <string name="favorite_consultants">"favourite consultants"</string>
 
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 

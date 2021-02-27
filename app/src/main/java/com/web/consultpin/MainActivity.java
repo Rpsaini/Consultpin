@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import com.web.consultpin.consultant.BecomeAConsultant;
 import com.web.consultpin.consultant.EditTimeByConsultant;
+import com.web.consultpin.consultant.ListFavouritesdata;
 import com.web.consultpin.events.EventRequestActivity;
 import com.web.consultpin.consultant.SetTimeByConsultant;
 import com.web.consultpin.main.BaseActivity;
@@ -143,6 +144,7 @@ public class MainActivity extends BaseActivity {
 
 
 
+
     }
 
     private void callFragment(Fragment fragment, String tag)
@@ -212,6 +214,7 @@ public class MainActivity extends BaseActivity {
         TextView addAppointment = findViewById(R.id.tv_setAppointment);
         View view_line = findViewById(R.id.view_line);
         TextView tv_logout = findViewById(R.id.tv_logout);
+        TextView tv_favorite = findViewById(R.id.tv_favorite);
 
         if (!Utilclass.isConsultantModeOn)
         {
@@ -266,8 +269,6 @@ public class MainActivity extends BaseActivity {
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 alertDialogs.alertDialog(MainActivity.this, getResources().getString(R.string.logout), getResources().getString(R.string.logout_text), getResources().getString(R.string.yes), getResources().getString(R.string.no), new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
@@ -278,11 +279,20 @@ public class MainActivity extends BaseActivity {
                             }
                         }
                     });
+              }
+          });
+
+
+        tv_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                drawer.closeDrawer(Gravity.LEFT);
+                Intent intent=new Intent(MainActivity.this, ListFavouritesdata.class);
+                startActivity(intent);
             }
         });
-
-
-    }
+      }
 
     public void logout()
     {
@@ -304,7 +314,8 @@ public class MainActivity extends BaseActivity {
 
 
 
-    private void switchUser() {
+    private void switchUser()
+     {
         leftsidemenuclicks();
         int consultanmtId = Integer.parseInt(getRestParamsName(Utilclass.consultant_id));
         ImageView img_switch_to_user = findViewById(R.id.img_switch_to_user);

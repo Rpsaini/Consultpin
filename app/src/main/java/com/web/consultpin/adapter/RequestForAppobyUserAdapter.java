@@ -75,19 +75,8 @@ public class RequestForAppobyUserAdapter extends BaseAdapter {
             LinearLayout ll_timing = gridView.findViewById(R.id.ll_timing);
             txt_select_time.setText(dataObj.getString("timing"));
 
-            System.out.println("Timmm===>"+dataObj.getString("timing"));
 
-            Date currentTime = Calendar.getInstance().getTime();
-            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String nowTime=simpleDateFormat.format(currentTime);
-
-            if(BaseActivity.compareTwoDates(date+" "+dataObj.getString("timing")+":00",nowTime))
-            {
-                ll_timing.setAlpha(.3f);
-            }
-            else
-            {
-                if(reservedMap.containsKey(dataObj.getString("timing")))
+            if(reservedMap.containsKey(dataObj.getString("timing")))
                 {
                     if(reservedMap.get(dataObj.getString("timing")))
                     {
@@ -151,14 +140,6 @@ public class RequestForAppobyUserAdapter extends BaseAdapter {
                         }
                     });
                 }
-            }
-
-
-
-
-
-
-
         }
         catch (Exception e) {
             e.printStackTrace();
