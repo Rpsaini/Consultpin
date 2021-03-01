@@ -16,7 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.JsonArray;
 import com.web.consultpin.R;
-import com.web.consultpin.consultant.SetTimeByConsultant;
+
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.usersection.SetAppointmentByUser;
 

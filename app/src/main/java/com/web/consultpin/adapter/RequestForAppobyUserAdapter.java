@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.web.consultpin.R;
-import com.web.consultpin.consultant.SetTimeByConsultant;
+
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.usersection.SetAppointmentByUser;
 
@@ -81,6 +81,7 @@ public class RequestForAppobyUserAdapter extends BaseAdapter {
                     if(reservedMap.get(dataObj.getString("timing")))
                     {
                         ll_timing.setBackgroundResource(R.drawable.red_border_drawable);
+                        commonTextView.setTextColor(context.getResources().getColor(R.color.black));
                     }
                     else
                     {

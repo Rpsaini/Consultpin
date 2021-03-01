@@ -14,7 +14,9 @@ import android.widget.TimePicker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.web.consultpin.R;
-import com.web.consultpin.consultant.SetTimeByConsultant;
+import com.web.consultpin.consultant.AddTimeByConsultantFrg;
+
+import com.web.consultpin.consultant.TimeManagement;
 
 import org.json.JSONObject;
 
@@ -23,19 +25,19 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 public class CustomTimingGrid extends BaseAdapter {
-    private SetTimeByConsultant context;
+    private TimeManagement timeManagement;
     private final ArrayList<String> gridValues;
     private int count = 0;
     private String newTime ="";
-    //private Map<String,String> selectedTimeMap=new HashMap<>();
+    private AddTimeByConsultantFrg addTimeByConsultantFrg;
 
-    public CustomTimingGrid(SetTimeByConsultant context, ArrayList<String> artistData) {
-        this.context = context;
+    public CustomTimingGrid(TimeManagement context, ArrayList<String> artistData, AddTimeByConsultantFrg addTimeByConsultantFrg) {
+        this.timeManagement = context;
         this.gridValues = artistData;
         count = 0;
         newTime = "";
-//        this.isWeekOpen=isWeekOpen;
-       // this.dateStr =dateStr;
+        this.addTimeByConsultantFrg=addTimeByConsultantFrg;
+
     }
 
     @Override
@@ -58,12 +60,12 @@ public class CustomTimingGrid extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent)
       {
-          LayoutInflater inflater = (LayoutInflater) context
+          LayoutInflater inflater = (LayoutInflater) timeManagement
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View gridView = null;
         if (convertView == null) {
-            gridView = new View(context);
+            gridView = new View(timeManagement);
             gridView = inflater.inflate(R.layout.custom_timing_grid, null);
         } else {
 
@@ -77,16 +79,16 @@ public class CustomTimingGrid extends BaseAdapter {
             txt_select_time.setText(time);
 
 
-              if(context.preTimeMapCustom.containsKey(position))
+              if(timeManagement.preTimeMapCustom.containsKey(position))
                     {
                         ll_timingrow.setBackgroundResource(R.drawable.blue_drawable);
-                       txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
+                       txt_select_time.setTextColor(timeManagement.getResources().getColor(R.color.white));
 
                     }
                     else
                     {
                         ll_timingrow.setBackgroundResource(R.drawable.roundcorner_drawable);
-                       txt_select_time.setTextColor(context.getResources().getColor(R.color.black));
+                       txt_select_time.setTextColor(timeManagement.getResources().getColor(R.color.black));
 
                     }
 
@@ -94,21 +96,21 @@ public class CustomTimingGrid extends BaseAdapter {
                 @Override
                 public void onClick(View v)
                 {
-                    if(context.preTimeMapCustom.containsKey(txt_select_time.getText().toString()))
+                    if(timeManagement.preTimeMapCustom.containsKey(txt_select_time.getText().toString()))
                     {
                         ll_timingrow.setBackgroundResource(R.drawable.roundcorner_drawable);
-                        txt_select_time.setTextColor(context.getResources().getColor(R.color.black));
-                        context.preTimeMapCustom.remove(position);
+                        txt_select_time.setTextColor(timeManagement.getResources().getColor(R.color.black));
+                        timeManagement.preTimeMapCustom.remove(position);
                     }
                     else
                     {
                         ll_timingrow.setBackgroundResource(R.drawable.blue_drawable);
-                        txt_select_time.setTextColor(context.getResources().getColor(R.color.white));
-                        context.preTimeMapCustom.put(position,txt_select_time.getText().toString());
+                        txt_select_time.setTextColor(timeManagement.getResources().getColor(R.color.white));
+                        timeManagement.preTimeMapCustom.put(position,txt_select_time.getText().toString());
                     }
 
-                    System.out.println("premap==="+context.preTimeMapCustom);
-                    context.notifyMap(context.preTimeMapAlready,"already");
+                    System.out.println("premap==="+timeManagement.preTimeMapCustom);
+                    addTimeByConsultantFrg.notifyMap(timeManagement.preTimeMapAlready,"already");
                     notifyDataSetChanged();
                 }
             });

@@ -22,14 +22,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
-import com.web.consultpin.consultant.AppointmentHistory;
-import com.web.consultpin.consultant.EditTimeByConsultant;
-import com.web.consultpin.consultant.PapularConsultantFullListing;
-import com.web.consultpin.initiatecall.InitiateCallWebview;
+import com.web.consultpin.consultant.TimeManagement;
 import com.web.consultpin.jitsi.MAinJistsiActivity;
 //import com.web.consultpin.initiatecall.InitiateCallWebview;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -365,7 +361,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             txt_date.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(pActivity, EditTimeByConsultant.class);
+                    Intent intent=new Intent(pActivity, TimeManagement.class);
                     intent.putExtra(Utilclass.appointment_date,txt_date.getText().toString());
                     pActivity.startActivity(intent);
                     dialog.dismiss();

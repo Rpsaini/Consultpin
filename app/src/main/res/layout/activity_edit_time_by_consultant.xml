@@ -4,118 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/profile_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.Chat">
 
+    <include layout="@layout/toolbar_without_shadow"/>
 
-    <include layout="@layout/tootlbar_with_back_button"/>
 
-    <ScrollView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <LinearLayout
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+        android:layout_height="45dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:elevation="0dp"
+        app:tabTextColor="@color/black"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Base.Widget.Design.TabLayout"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_marginTop="15dp"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tab_layout"/>
 
 
 
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:background="@color/profile_fee_color"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
 
-                >
-                <fontspackageForTextView.BoldMedium
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_centerVertical="true"
-                    android:text="@string/isweekend_off"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:gravity="left"
-                    style="@style/edittext_style_14_black"
-                    ></fontspackageForTextView.BoldMedium>
-
-
-                <ImageView
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/img_isweekdayopen"
-                    android:layout_centerVertical="true"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_button"
-                    ></ImageView>
-            </RelativeLayout>
-
-            <fontspackageForTextView.BoldMedium
-                android:paddingStart="10dp"
-                android:layout_marginTop="19dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                style="@style/edittext_style_14_black"
-                android:text="@string/appointment_date"
-                >
-            </fontspackageForTextView.BoldMedium>
-
-            <CalendarView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/date_cal_view"
-                ></CalendarView>
-
-            <fontspackageForTextView.BoldMedium
-                android:translationY="-40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                style="@style/edittext_style_14_black"
-                android:text="@string/appointment_time"
-                >
-            </fontspackageForTextView.BoldMedium>
-
-            <LinearLayout
-                android:translationY="-40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:orientation="vertical"
-                >
-                <GridView
-                    android:id="@+id/grid_timing"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:gravity="center"
-                    android:horizontalSpacing="5dp"
-                    android:nestedScrollingEnabled="true"
-                    android:numColumns="4"
-                    android:scrollbarThumbVertical="@android:color/transparent"
-                    android:stretchMode="columnWidth"
-                    android:verticalSpacing="5dp"></GridView>
-            </LinearLayout>
-
-
-            <fontspackageForTextView.Regular
-                android:id="@+id/tv_saveAppointment"
-                android:background="@drawable/drawable_button_skyblue"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:text="@string/appointment_request" />
-        </LinearLayout>
-
-    </ScrollView>
 </LinearLayout>

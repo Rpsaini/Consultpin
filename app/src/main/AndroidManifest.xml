@@ -33,7 +33,7 @@
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
         <activity android:name=".consultant.ListFavouritesdata"></activity>
-        <activity android:name=".consultant.EditTimeByConsultant" />
+        <activity android:name=".consultant.TimeManagement" />
         <activity android:name=".usersection.UserEventHistory" />
         <activity android:name=".jitsi.MAinJistsiActivity" />
         <activity

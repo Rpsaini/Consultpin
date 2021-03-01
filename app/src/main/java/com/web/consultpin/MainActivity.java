@@ -17,15 +17,16 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.navigation.NavigationView;
 
 import com.web.consultpin.consultant.BecomeAConsultant;
-import com.web.consultpin.consultant.EditTimeByConsultant;
 import com.web.consultpin.consultant.ListFavouritesdata;
+import com.web.consultpin.consultant.TimeManagement;
 import com.web.consultpin.events.EventRequestActivity;
-import com.web.consultpin.consultant.SetTimeByConsultant;
+
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.appointmenthistory.AppointMentHistoryFrg;
 //import com.web.consultpin.ui.home.Appointment;
 import com.web.consultpin.registration.SplashScreen;
 import com.web.consultpin.ui.home.Chat;
+import com.web.consultpin.ui.home.ConsultantHome;
 import com.web.consultpin.ui.home.Home;
 
 import com.web.consultpin.ui.home.Profile;
@@ -37,8 +38,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
-
-import org.w3c.dom.Text;
 
 //cTrf8iWVRnCYhbhAY2d3bn:APA91bGxxQOpA6FoDgO7VpEphA3xg-mlNzzDtL-TgP--E0_WnK-kRXyomuF3OUOVFuCoAh7EuRXgCMFFSMzz9uXU4kjegRFzrW5nnkX0cdPpsZzLqNvwzuHfj6seK8__VxRwY9dOzlk4
 public class MainActivity extends BaseActivity {
@@ -100,7 +99,15 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 doBottomBarSelection(bnave_ll_home);
                 commonBottomBar = bnave_ll_home;
-                callFragment(new Home(), "home");
+                if(Utilclass.isConsultantModeOn)
+                {
+                    callFragment(new ConsultantHome(), "chome");
+                }
+                else
+                {
+                    callFragment(new Home(), "home");
+                }
+
             }
         });
 
@@ -161,6 +168,10 @@ public class MainActivity extends BaseActivity {
         {
             frg=new Chat();
         }
+        else if(fragment instanceof ConsultantHome)
+        {
+            frg=new ConsultantHome();
+        }
         else if(fragment instanceof AppointMentHistoryFrg)
         {
             frg=new AppointMentHistoryFrg();
@@ -216,6 +227,7 @@ public class MainActivity extends BaseActivity {
         TextView tv_logout = findViewById(R.id.tv_logout);
         TextView tv_favorite = findViewById(R.id.tv_favorite);
 
+
         if (!Utilclass.isConsultantModeOn)
         {
             tv_events.setText(getResources().getString(R.string.view_events));
@@ -261,7 +273,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 drawer.closeDrawer(Gravity.LEFT);
-                Intent intent = new Intent(MainActivity.this, SetTimeByConsultant.class);
+                Intent intent = new Intent(MainActivity.this, TimeManagement.class);
                 startActivity(intent);
             }
         });
@@ -292,6 +304,8 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+
       }
 
     public void logout()
@@ -338,7 +352,8 @@ public class MainActivity extends BaseActivity {
             img_switch_to_user.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Utilclass.isConsultantModeOn) {
+                    if (Utilclass.isConsultantModeOn)
+                    {
                         txt_switch_to_user.setText(getResources().getString(R.string.switchtoconsultant));
                         img_switch_to_user.setImageResource(R.drawable.ic_unselect_button);
                         Utilclass.isConsultantModeOn = false;
@@ -351,7 +366,6 @@ public class MainActivity extends BaseActivity {
 
 
                     callFragment(commonFragments,frgtag);
-
                     leftsidemenuclicks();
 
                 }

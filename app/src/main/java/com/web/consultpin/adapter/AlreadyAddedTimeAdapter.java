@@ -14,7 +14,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.JsonArray;
 import com.web.consultpin.R;
-import com.web.consultpin.consultant.SetTimeByConsultant;
+import com.web.consultpin.consultant.AddTimeByConsultantFrg;
+import com.web.consultpin.consultant.EditProfileConsultant;
+import com.web.consultpin.consultant.EditTimeByConsultantFrg;
+
+import com.web.consultpin.consultant.TimeManagement;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,14 +31,14 @@ import java.util.Map;
 public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTimeAdapter.MyViewHolder> {
 
     private JSONArray datAr;
-    private SetTimeByConsultant pActivity;
-   // private String dateStr="";
+    private TimeManagement pActivity;
+   private AddTimeByConsultantFrg editProfileConsultant;
 
 
-    public AlreadyAddedTimeAdapter(JSONArray ar, SetTimeByConsultant paActiviity,String dateStr) {
+    public AlreadyAddedTimeAdapter(JSONArray ar, TimeManagement paActiviity, String dateStr, AddTimeByConsultantFrg editProfileConsultantT) {
         datAr = ar;
         pActivity = paActiviity;
-       // this.dateStr=dateStr;
+       this.editProfileConsultant=editProfileConsultantT;
 
 
     }
@@ -69,20 +73,7 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
            holder.tv_selected_time.setText(timeStr);
             System.out.println("map--->in="+pActivity.preTimeMapAlready);
 
-//             ArrayList<JSONObject> mapData=pActivity.mainDataContainerMap.get(pActivity.txt_date.getText().toString());
-//            if(mapData!=null) {
-//                for (int x = 0; x < mapData.size(); x++) {
-//                    JSONObject dataObj = mapData.get(x);
-//                    String isQuick = dataObj.getString("isQuick");
-//                    if (timeStr != null) {
-//                        if (isQuick.equalsIgnoreCase("1")) {
-//                            if (timeStr.equalsIgnoreCase(dataObj.getString("time"))) {
-//                                pActivity.preTimeMapAlready.put(position, timeStr);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+
 
            if(pActivity.preTimeMapAlready.containsKey(position))
            {
@@ -108,7 +99,7 @@ public class AlreadyAddedTimeAdapter extends RecyclerView.Adapter<AlreadyAddedTi
                        pActivity.preTimeMapAlready.put(position,holder.tv_selected_time.getText()+"");
 
                    }
-                 pActivity.notifyMap(pActivity.preTimeMapCustom,"custom");
+                 editProfileConsultant.notifyMap(pActivity.preTimeMapCustom,"custom");
                    notifyDataSetChanged();
 
                }

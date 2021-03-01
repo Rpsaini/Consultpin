@@ -107,17 +107,17 @@
                 android:orientation="vertical"
                 >
             <include layout="@layout/no_data_found"/>
-            <GridView
+            <com.web.consultpin.consultant.MyGridView
                 android:id="@+id/grid_timing"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:horizontalSpacing="5dp"
                 android:nestedScrollingEnabled="true"
                 android:numColumns="4"
                 android:scrollbarThumbVertical="@android:color/transparent"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="5dp"></GridView>
+                android:verticalSpacing="5dp"></com.web.consultpin.consultant.MyGridView>
             </LinearLayout>
 
 

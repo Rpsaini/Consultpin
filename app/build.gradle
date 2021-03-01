@@ -67,6 +67,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging'
 
+    implementation  'sun.bob:mcalendarview:1.0.0'
+//    implementation 'com.applandeo:material-calendar-view:1.0.1'
+
 
 }
 apply plugin: 'com.android.application'

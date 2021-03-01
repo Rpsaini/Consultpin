@@ -27,7 +27,7 @@ import com.web.consultpin.adapter.AlreadyAddedTimeAdapter;
 import com.web.consultpin.adapter.CustomTimingGrid;
 import com.web.consultpin.adapter.RequestForAppobyUserAdapter;
 import com.web.consultpin.adapter.TimeAndMoneyAdapter;
-import com.web.consultpin.consultant.SetTimeByConsultant;
+
 import com.web.consultpin.main.BaseActivity;
 
 import org.json.JSONArray;
@@ -136,7 +136,6 @@ public class SetAppointmentByUser extends BaseActivity {
 
             System.out.println("Appointment before===" + m);
 
-
             serverHandler.sendToServer(this, getApiUrl() + "get-appointment-time", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {
@@ -169,8 +168,7 @@ public class SetAppointmentByUser extends BaseActivity {
 
                                     JSONArray timeArray = new JSONArray(appointmentData.getString("timing"));
                                     JSONArray jsonArrayReservedTime = dataObj.getJSONArray("reserved_times");
-                                   // ArrayList<JSONObject> timeMainAr = new ArrayList<>();
-                                    int counter = 0;
+
                                     for (int x = 0; x < timeArray.length(); x++) {
                                         String timeStr = timeArray.getString(x);
                                         String[] timeSplitAr = timeStr.split("-");
@@ -184,6 +182,7 @@ public class SetAppointmentByUser extends BaseActivity {
                                     }
 
 
+                                    System.out.println("All time interval==="+allTimeIntervalAr.size());
                                     if (jsonArrayReservedTime.length() > 0)
                                      {
                                         for (int x = 0; x < allTimeIntervalAr.size(); x++) {
@@ -407,7 +406,7 @@ public class SetAppointmentByUser extends BaseActivity {
             m.put("description", ed_description.getText().toString());
             m.put("appointment_duration", duration);
             m.put("appointment_date", date);
-            m.put("appointment_time", timeSlot + ":00");
+            m.put("appointment_time", timeSlot);
             m.put("appointment_fee", fee + "");
 
             m.put("device_type", "android");

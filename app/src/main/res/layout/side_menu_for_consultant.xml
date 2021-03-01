@@ -61,10 +61,12 @@
             android:drawableLeft="@drawable/ic_help"
             style="@style/edittext_style_14_black"
             android:text="@string/event"
-
             android:layout_height="50dp"
             android:layout_width="match_parent"
             ></fontspackageForTextView.Regular>
+
+
+
 
         <View
             android:layout_width="match_parent"

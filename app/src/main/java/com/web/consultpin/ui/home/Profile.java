@@ -21,7 +21,8 @@ import com.web.consultpin.consultant.EditProfileConsultant;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
-import com.web.consultpin.consultant.SetTimeByConsultant;
+
+import com.web.consultpin.consultant.TimeManagement;
 import com.web.consultpin.events.EventRequestActivity;
 
 import org.json.JSONObject;
@@ -98,7 +99,7 @@ private MainActivity mainActivity;
         txt_setappointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mainActivity, SetTimeByConsultant.class);
+                Intent intent=new Intent(mainActivity, TimeManagement.class);
                 startActivity(intent);
 
             }

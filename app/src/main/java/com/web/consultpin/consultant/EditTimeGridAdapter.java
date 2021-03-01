@@ -9,22 +9,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.web.consultpin.R;
-import com.web.consultpin.usersection.SetAppointmentByUser;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class EditTimeGridAdapter extends BaseAdapter {
 
-    private EditTimeByConsultant context;
-    private final ArrayList<String> gridValues;
+    private TimeManagement context;
+    private final ArrayList<JSONObject> gridValues;
     private Map<String, Boolean> reservedMap, alreadysettedMap;
 
 
-    public EditTimeGridAdapter(EditTimeByConsultant context, ArrayList<String> artistData, Map<String, Boolean> reservedMap, Map<String, Boolean> alreadysettedMap) {
+    public EditTimeGridAdapter(TimeManagement context, ArrayList<JSONObject> artistData, Map<String, Boolean> reservedMap, Map<String, Boolean> alreadysettedMap) {
         this.context = context;
         this.gridValues = artistData;
         this.reservedMap = reservedMap;
@@ -62,9 +60,10 @@ public class EditTimeGridAdapter extends BaseAdapter {
         }
 
         try {
-            String time = gridValues.get(position);
+            JSONObject timeObj = gridValues.get(position);
             TextView txt_select_time = gridView.findViewById(R.id.txt_select_time);
             LinearLayout ll_timing = gridView.findViewById(R.id.ll_timing);
+            String time=timeObj.getString("timing");
             txt_select_time.setText(time);
 
 
