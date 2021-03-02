@@ -43,7 +43,6 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends BaseActivity {
 
     private LinearLayout commonBottomBar;
-
     DrawerLayout drawer;
     private Fragment commonFragments;
     private String frgtag="";
@@ -162,7 +161,15 @@ public class MainActivity extends BaseActivity {
         Fragment frg=null;
         if(fragment instanceof Home)
         {
-            frg=new Home();
+            if(Utilclass.isConsultantModeOn)
+            {
+                frg=new ConsultantHome();
+            }
+            else
+            {
+                frg=new Home();
+            }
+
         }
         else if(fragment instanceof Chat)
         {
@@ -170,7 +177,15 @@ public class MainActivity extends BaseActivity {
         }
         else if(fragment instanceof ConsultantHome)
         {
-            frg=new ConsultantHome();
+            if(Utilclass.isConsultantModeOn)
+            {
+                frg=new ConsultantHome();
+            }
+            else
+            {
+                frg=new Home();
+            }
+
         }
         else if(fragment instanceof AppointMentHistoryFrg)
         {

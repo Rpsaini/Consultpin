@@ -59,7 +59,7 @@ public class EditTimeByConsultantFrg extends Fragment {
     private String isWeekendoff = "0";
 
     ArrayList<JSONObject> allTimeIntervalAr = new ArrayList<>();
-    Map<String,String> dateContinerMap=new HashMap<>();
+    Map<String, String> dateContinerMap = new HashMap<>();
 
     public EditTimeByConsultantFrg() {
         // Required empty public constructor
@@ -108,7 +108,6 @@ public class EditTimeByConsultantFrg extends Fragment {
 
             date_cal_view = view.findViewById(R.id.date_cal_view);
 
-
             if (editTimeByConsultant.getIntent().hasExtra(Utilclass.appointment_date)) {
                 String appointmentDate = editTimeByConsultant.getIntent().getStringExtra(Utilclass.appointment_date);
                 String[] appointStr = appointmentDate.split(" ");
@@ -117,8 +116,8 @@ public class EditTimeByConsultantFrg extends Fragment {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date date = (Date) formatter.parse(appointmentDate);
                 long mills = date.getTime();
+                //date_cal_view.setDate(mills);
 
-                //   date_cal_view.setDate(mills);
             } else {
                 Date todayDate = Calendar.getInstance().getTime();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -154,7 +153,7 @@ public class EditTimeByConsultantFrg extends Fragment {
         GridView grid_timing = view.findViewById(R.id.grid_timing);
         RelativeLayout relativeLayout = view.findViewById(R.id.rr_nodata_view);
 
-
+        getTimeInterval();
         if (timingAr.size() == 0) {
             relativeLayout.setVisibility(View.VISIBLE);
             grid_timing.setVisibility(View.GONE);
@@ -167,7 +166,7 @@ public class EditTimeByConsultantFrg extends Fragment {
             tv_saveAppointment.setEnabled(true);
         }
 
-        grid_timing.setAdapter(new EditTimeGridAdapter(editTimeByConsultant, timingAr, reservedTimeMap, alreadySettedMap));
+        grid_timing.setAdapter(new EditTimeGridAdapter(times, editTimeByConsultant, timingAr, reservedTimeMap, alreadySettedMap));
     }
 
 
@@ -189,6 +188,9 @@ public class EditTimeByConsultantFrg extends Fragment {
     private void getAlreadyAddedTime() {
         try {
             reservedTimeMap.clear();
+            alreadySettedMap.clear();
+            allTimeIntervalAr.clear();
+
             final Map<String, String> m = new HashMap<>();
             m.put("consultant_id", editTimeByConsultant.getRestParamsName(Utilclass.consultant_id));
             m.put("start_date", date);
@@ -225,7 +227,6 @@ public class EditTimeByConsultantFrg extends Fragment {
                                     for (int x = 0; x < timeArray.length(); x++) {
                                         String timeStr = timeArray.getString(x);
                                         String[] timeSplitAr = timeStr.split("-");
-
 
                                         String startTime = date + " " + timeSplitAr[0];
                                         String endTime = date + " " + timeSplitAr[1];
@@ -366,29 +367,12 @@ public class EditTimeByConsultantFrg extends Fragment {
                     newday = "0" + date1.getDay();
                 }
                 date = date1.getYear() + "-" + newmonth + "-" + newday;
-                if(dateContinerMap.containsKey(date)) {
+                if (dateContinerMap.containsKey(date)) {
                     getAlreadyAddedTime();
                 }
 
             }
         });
-
-//        date_cal_view.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//            @Override
-//            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-//                month = month + 1;
-//                String newmonth = month + "";
-//                String newday = day + "";
-//                if (month <= 9) {
-//                    newmonth = "0" + month;
-//                }
-//                if (day <= 9) {
-//                    newday = "0" + day;
-//                }
-//                date = year + "-" + newmonth + "-" + newday;
-//                getAlreadyAddedTime();
-//            }
-//        });
 
 
         tv_saveAppointment.setOnClickListener(new View.OnClickListener() {
@@ -455,12 +439,11 @@ public class EditTimeByConsultantFrg extends Fragment {
                 paircount++;
             }
 
-            System.out.println("Pre time map=="+editTimeByConsultant.preTimeMapCustom);
+            System.out.println("Pre time map==" + editTimeByConsultant.preTimeMapCustom);
 
             //sort key
 
             m.put("timing", SavedArray + "");
-
             m.put("device_type", "android");
             m.put("device_token", editTimeByConsultant.getDeviceToken() + "");
 
@@ -528,6 +511,7 @@ public class EditTimeByConsultantFrg extends Fragment {
                 jsonPreobj.put("timing", startAdd);
                 jsonPreobj.put("include_weekend_n_holidays", isWeekendoff);
                 allTimeIntervalAr.add(jsonPreobj);
+                alreadySettedMap.put(startAdd, true);
             }
 
             while (cal.getTime().before(EndTime)) {
@@ -541,6 +525,7 @@ public class EditTimeByConsultantFrg extends Fragment {
                 if (BaseActivity.compareTwoDates(date + " " + time + ":00", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()))) {
                     System.out.println("Timmm===>>>>" + time);
                     allTimeIntervalAr.add(jsonObject1);
+                    alreadySettedMap.put(time, true);
                 }
             }
         } catch (Exception e) {
@@ -554,6 +539,7 @@ public class EditTimeByConsultantFrg extends Fragment {
     private void getAllAppointmentDates() {
 
         dateContinerMap.clear();
+
         final Map<String, String> m = new HashMap<>();
         m.put("consultant_id", editTimeByConsultant.getRestParamsName(Utilclass.consultant_id));
         m.put("device_type", "android");
@@ -574,12 +560,11 @@ public class EditTimeByConsultantFrg extends Fragment {
                     if (jsonObject.getBoolean("status")) {
                         try {
 
-                            JSONArray dataAr=jsonObject.getJSONArray("data");
+                            JSONArray dataAr = jsonObject.getJSONArray("data");
 
-                            for(int x=0;x<dataAr.length();x++)
-                            {
-                                String datestr=dataAr.getJSONObject(x).getString("appointment_date");
-                                dateContinerMap.put(datestr,datestr);
+                            for (int x = 0; x < dataAr.length(); x++) {
+                                String datestr = dataAr.getJSONObject(x).getString("appointment_date");
+                                dateContinerMap.put(datestr, datestr);
                                 date_cal_view.markDate(Integer.parseInt(datestr.split("-")[0]), Integer.parseInt(datestr.split("-")[1]), Integer.parseInt(datestr.split("-")[2]));//mark multiple dates with this code.
                             }
                             getAlreadyAddedTime();

@@ -95,31 +95,37 @@ public class SelectCategorySubCategoryAdapter extends RecyclerView.Adapter<Selec
                  holder.chk_selectcategory.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                      @Override
                      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                         try {
-                             if (selectionType == 0) {
+                         try
+                          {
+                             if (selectionType == 0)
+                             {
                                  if (commonChekBox != null) {
                                      commonChekBox.setChecked(false);
                                  }
                                  commonChekBox = holder.chk_selectcategory;
                                  ((BecomeAConsultant) pActivity).category_id = buttonView.getTag() + "";
                                  ((BecomeAConsultant) pActivity).selected_category_str = jsonObject.getString("category_name");
-                             } else if (selectionType == 1) {
+                             }
+                             else if (selectionType == 1)
+                             {
                                  if (((BecomeAConsultant) pActivity).subcategory_id_Ar.size() == 2) {
                                      buttonView.setChecked(false);
+                                     ((BecomeAConsultant) pActivity).subcategory_id_Ar.remove(buttonView.getTag().toString());
                                      ((BecomeAConsultant) pActivity).alertDialogs.alertDialog(pActivity, pActivity.getResources().getString(R.string.Response), pActivity.getResources().getString(R.string.category_count), pActivity.getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                          @Override
                                          public void getDialogEvent(String buttonPressed) {
 
                                          }
                                      });
-                                 } else {
+                                 }
+                                 else {
                                      ((BecomeAConsultant) pActivity).selected_sub_category_str = ((BecomeAConsultant) pActivity).selected_sub_category_str + "," + jsonObject.getString("category_name");
                                      ((BecomeAConsultant) pActivity).subcategory_id_Ar.put(buttonView.getTag().toString(), buttonView.getTag().toString());
                                  }
 
                              }
-
-                         } catch (Exception e) {
+                          }
+                         catch(Exception e) {
                              e.printStackTrace();
                          }
                      }

@@ -23,6 +23,7 @@ public class Utilclass
     public static String appointment_date="appointment_date";
     public static String history="history";
     public static String upcoming="upcoming";
+    public static String baseUrl="http://178.62.28.106/v1/";
 
 
 

@@ -48,7 +48,7 @@
     <string name="mobile_number">Mobile</string>
     <string name="enteryouremail">Please enter your registered email</string>
     <string name="next_continue">Continue</string>
-    <string name="Required">Required</string>
+    <string name="Required">Consultpin</string>
     <string name="Invalid">Invalid</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_conf_password">Enter Confirm Password</string>
@@ -62,7 +62,7 @@
     <string name="enter_mobilenumber">Enter Mobile Number</string>
     <string name="enter_valid_mobilenumber">Enter Valid Mobile Number</string>
     <string name="select_term_condition">Select Terms and Conditions</string>
-    <string name="Response">Response</string>
+    <string name="Response">Consultpin</string>
     <string name="enter_otp">OTP</string>
     <string name="please_enter_otp">Please enter OTP</string>
     <string name="next">Next</string>
@@ -204,6 +204,7 @@
     <string name="upcomming_appointments">"Upcoming Appointments"</string>
     <string name="cancelled_appointment">"Cancelled Appointment"</string>
     <string name="totalincome">"Total Income"</string>
+    <string name="ongoining_appoints">"Ongoing Appointments"</string>
 
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 

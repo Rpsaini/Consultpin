@@ -249,7 +249,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                 Glide.with(pActivity)
                         .load(url)
                         .placeholder(R.drawable.profileavtar)
-                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                         .into(header_img);
             }
         });

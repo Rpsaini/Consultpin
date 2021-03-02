@@ -9,7 +9,34 @@
 
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <fontspackageForTextView.Regular
+            android:textSize="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="897L"
+            android:gravity="center"
+            ></fontspackageForTextView.Regular>
+
+        <fontspackageForTextView.Regular
+            android:textSize="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/totalincome"
+            android:gravity="center"
+            android:textColor="@color/texthintcolor"
+            ></fontspackageForTextView.Regular>
+    </LinearLayout>
+
+
+    <LinearLayout
+
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -90,7 +117,7 @@
                 android:textSize="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="897L"
+                android:text="2"
                 android:gravity="center"
                 ></fontspackageForTextView.Regular>
 
@@ -98,7 +125,7 @@
                 android:textSize="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/totalincome"
+                android:text="@string/ongoining_appoints"
                 android:gravity="center"
                 android:textColor="@color/texthintcolor"
                 ></fontspackageForTextView.Regular>
@@ -133,6 +160,28 @@
     </LinearLayout>
 
 
+    <View
+        android:layout_marginTop="30dp"
+        android:layout_height="1dp"
+        android:alpha=".5"
+        android:layout_width="match_parent"
+        android:background="@color/texthintcolor"
+        ></View>
+
+    <fontspackageForTextView.Regular
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/upcomming_appointments"
+        android:gravity="left"
+        android:layout_marginTop="30dp"
+        ></fontspackageForTextView.Regular>
+
+     <include layout="@layout/no_data_found"/>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/upcomming_app_recycler"
@@ -140,7 +189,7 @@
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         ></androidx.recyclerview.widget.RecyclerView>
 
 

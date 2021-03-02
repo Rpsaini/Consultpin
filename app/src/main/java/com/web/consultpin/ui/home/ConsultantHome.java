@@ -131,7 +131,8 @@ private View view;
 
     }
 
-    private void showAppointmentData(ArrayList<JSONObject> dataAr) {
+    private void showAppointmentData(ArrayList<JSONObject> dataAr)
+        {
         RecyclerView recyclerview_appointmenthistory = view.findViewById(R.id.upcomming_app_recycler);
 
         RelativeLayout relativeLayout = view.findViewById(R.id.rr_nodata_view);
