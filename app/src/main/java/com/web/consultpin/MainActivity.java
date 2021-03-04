@@ -57,7 +57,8 @@ public class MainActivity extends BaseActivity {
 
         drawer = findViewById(R.id.drawer_layout);
 
-
+        Intent intent = new Intent(MainActivity.this, BecomeAConsultant.class);
+        startActivity(intent);
         ImageView nav_oprn_toolbar = findViewById(R.id.nav_oprn_toolbar);
         nav_oprn_toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,6 +242,7 @@ public class MainActivity extends BaseActivity {
         View view_line = findViewById(R.id.view_line);
         TextView tv_logout = findViewById(R.id.tv_logout);
         TextView tv_favorite = findViewById(R.id.tv_favorite);
+        View view_fave = findViewById(R.id.view_fave);
 
 
         if (!Utilclass.isConsultantModeOn)
@@ -248,6 +250,9 @@ public class MainActivity extends BaseActivity {
             tv_events.setText(getResources().getString(R.string.view_events));
             addAppointment.setVisibility(View.GONE);
             view_line.setVisibility(View.GONE);
+            tv_favorite.setVisibility(View.VISIBLE);
+            view_fave.setVisibility(View.VISIBLE);
+
 
             tv_events.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -259,8 +264,11 @@ public class MainActivity extends BaseActivity {
             });
 
         } else {
+            System.out.println("Inside else===>");
             addAppointment.setVisibility(View.VISIBLE);
             view_line.setVisibility(View.VISIBLE);
+            tv_favorite.setVisibility(View.GONE);
+            view_fave.setVisibility(View.GONE);
             tv_events.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -345,16 +353,16 @@ public class MainActivity extends BaseActivity {
 
     private void switchUser()
      {
-        leftsidemenuclicks();
+
         int consultanmtId = Integer.parseInt(getRestParamsName(Utilclass.consultant_id));
         ImageView img_switch_to_user = findViewById(R.id.img_switch_to_user);
         TextView txt_switch_to_user = findViewById(R.id.txt_switch_to_user);
         LinearLayout ll_switch_to_user = findViewById(R.id.ll_switch_to_user);
         LinearLayout become_consultant = findViewById(R.id.become_consultant);
 
-        setSideMenuForUser();
 
-        if (consultanmtId == 0) {
+        if (consultanmtId == 0)
+          {
             Utilclass.isConsultantModeOn = false;
             ll_switch_to_user.setVisibility(View.GONE);
             become_consultant.setVisibility(View.VISIBLE);
@@ -386,6 +394,8 @@ public class MainActivity extends BaseActivity {
                 }
             });
         }
+         setSideMenuForUser();
+         leftsidemenuclicks();
     }
 
 

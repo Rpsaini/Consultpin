@@ -23,6 +23,7 @@ import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.AlreadyAddedTimeAdapter;
 import com.web.consultpin.adapter.CustomTimingGrid;
+import com.web.consultpin.main.BaseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,10 +44,10 @@ import java.util.Set;
 
 public class AddTimeByConsultantFrg extends Fragment {
     private TextView ed_datefrom, ed_date_end;
-//    public ArrayList<String> customTimeArray = new ArrayList<>();
+    //    public ArrayList<String> customTimeArray = new ArrayList<>();
     ImageView img_isweekdayopen;
     public String include_weekend_n_holidays = "1", timing_type = "1";//quicktime 1   custom 2
-//    public LinkedHashMap<Integer, String> preTimeMapCustom = new LinkedHashMap<>();
+    //    public LinkedHashMap<Integer, String> preTimeMapCustom = new LinkedHashMap<>();
 //    public LinkedHashMap<Integer, String> preTimeMapAlready = new LinkedHashMap<>();
     public TextView tv_saveAppointment;
 
@@ -86,6 +87,7 @@ public class AddTimeByConsultantFrg extends Fragment {
         getTimeInterval();
         return view;
     }
+
     private void getTimeInterval() {
         String[] quarterHours = {"00", "15", "30", "45"};
         ArrayList<String> times = new ArrayList<String>(); // <-- List instead of array
@@ -99,24 +101,31 @@ public class AddTimeByConsultantFrg extends Fragment {
                 times.add(time); // <-- no need to care about indexes
                 //System.out.println("Time interval====>"+time);
             }
-            viewTimingGrid(times);
+
+            //Check time is after current
+            ArrayList<String> timeAfterValidate = new ArrayList<>();
+            for (int x = 0; x < times.size(); x++) {
+                if (BaseActivity.compareTwoDates(ed_datefrom.getText() + " " + times.get(x) + ":00", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()))) {
+                    timeAfterValidate.add(times.get(x));
+                }
+            }
+
+            viewTimingGrid(timeAfterValidate);
         }
     }
 
     private void init() {
 
 
-
         ed_datefrom = view.findViewById(R.id.ed_datefrom);
         ed_date_end = view.findViewById(R.id.ed_date_end);
         img_isweekdayopen = view.findViewById(R.id.img_isweekdayopen);
-        tv_saveAppointment =view.findViewById(R.id.tv_saveAppointment);
+        tv_saveAppointment = view.findViewById(R.id.tv_saveAppointment);
 
         listeners();
 
 
     }
-
 
 
     private void getTodayTiming() {
@@ -184,7 +193,7 @@ public class AddTimeByConsultantFrg extends Fragment {
     public void viewTimingGrid(ArrayList<String> dataAr) {
 
         GridView grid_timing = view.findViewById(R.id.grid_timing);
-        customTimingGrid = new CustomTimingGrid(timeManagement, dataAr,this);
+        customTimingGrid = new CustomTimingGrid(timeManagement, dataAr, this);
         grid_timing.setAdapter(customTimingGrid);
     }
 
@@ -223,7 +232,7 @@ public class AddTimeByConsultantFrg extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerview_alreadyAddedTime.setHasFixedSize(true);
         recyclerview_alreadyAddedTime.setItemAnimator(new DefaultItemAnimator());
-        horizontalCategoriesAdapter = new AlreadyAddedTimeAdapter(commonTime, timeManagement, dateStr,this);
+        horizontalCategoriesAdapter = new AlreadyAddedTimeAdapter(commonTime, timeManagement, dateStr, this);
         recyclerview_alreadyAddedTime.setAdapter(horizontalCategoriesAdapter);
     }
 
@@ -312,8 +321,7 @@ public class AddTimeByConsultantFrg extends Fragment {
 
         try {
 
-            if (timeManagement.preTimeMapCustom.size() > 0 && timeManagement.preTimeMapCustom.size() % 2 != 0)
-            {
+            if (timeManagement.preTimeMapCustom.size() > 0 && timeManagement.preTimeMapCustom.size() % 2 != 0) {
                 timeManagement.alertDialogs.alertDialog(timeManagement, getResources().getString(R.string.Required), getResources().getString(R.string.selectvalidTimepair), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                     @Override
                     public void getDialogEvent(String buttonPressed) {
@@ -328,11 +336,10 @@ public class AddTimeByConsultantFrg extends Fragment {
             m.put("consultant_id", timeManagement.getRestParamsName(Utilclass.consultant_id));
             m.put("include_weekend_n_holidays", include_weekend_n_holidays);
 
-            Set<Integer> keyset =timeManagement.preTimeMapCustom.keySet();
-            Iterator<Integer> intItr=keyset.iterator();
+            Set<Integer> keyset = timeManagement.preTimeMapCustom.keySet();
+            Iterator<Integer> intItr = keyset.iterator();
             List<Integer> intList = new ArrayList<Integer>();
-            while (intItr.hasNext())
-            {
+            while (intItr.hasNext()) {
                 intList.add(intItr.next());
             }
 
@@ -348,16 +355,14 @@ public class AddTimeByConsultantFrg extends Fragment {
             JSONArray SavedArray = new JSONArray();
             int paircount = 0;
             String pairStr = "";
-            for (int x=0;x<intList.size();x++)
-            {
+            for (int x = 0; x < intList.size(); x++) {
                 pairStr = pairStr + "-" + timeManagement.preTimeMapCustom.get(intList.get(x));
-                if (paircount == 1)
-                {
-                    pairStr=pairStr.replaceFirst("-","");
+                if (paircount == 1) {
+                    pairStr = pairStr.replaceFirst("-", "");
                     SavedArray.put(pairStr);
                     m.put("timing_type", "2");
                     paircount = -1;
-                    pairStr="";
+                    pairStr = "";
                 }
                 paircount++;
             }
@@ -370,7 +375,7 @@ public class AddTimeByConsultantFrg extends Fragment {
                 SavedArray.put(map.getValue());
                 m.put("timing_type", "1");
             }
-            m.put("timing", SavedArray+"");
+            m.put("timing", SavedArray + "");
 
 
             m.put("device_type", "android");
@@ -402,8 +407,7 @@ public class AddTimeByConsultantFrg extends Fragment {
 
                                 timeManagement.alertDialogs.alertDialog(timeManagement, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                                     @Override
-                                    public void getDialogEvent(String buttonPressed)
-                                    {
+                                    public void getDialogEvent(String buttonPressed) {
                                         timeManagement.finish();
                                     }
                                 });
@@ -435,12 +439,11 @@ public class AddTimeByConsultantFrg extends Fragment {
     }
 
 
-    public void notifyMap(Map<Integer, String> map, String type)
-    {
+    public void notifyMap(Map<Integer, String> map, String type) {
         if (type.equalsIgnoreCase("custom")) {
             timeManagement.preTimeMapCustom.clear();
             customTimingGrid.notifyDataSetChanged();
-           } else if (type.equalsIgnoreCase("already")) {
+        } else if (type.equalsIgnoreCase("already")) {
             timeManagement.preTimeMapAlready.clear();
             horizontalCategoriesAdapter.notifyDataSetChanged();
         }

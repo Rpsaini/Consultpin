@@ -69,6 +69,7 @@
 
 
         <View
+            android:id="@+id/view_fave"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/border_color"
@@ -109,11 +110,11 @@
             android:layout_width="match_parent"
             ></fontspackageForTextView.Regular>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_color"
-            ></View>
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="@color/border_color"-->
+<!--            ></View>-->
 
 
 
@@ -121,18 +122,18 @@
 
 
 
-        <fontspackageForTextView.Regular
-            android:id="@+id/tv_help"
-            android:gravity="center|left"
-            android:drawablePadding="10dp"
-            android:padding="10dp"
-            android:drawableLeft="@drawable/ic_help"
-            style="@style/edittext_style_14_black"
-            android:text="@string/help"
+<!--        <fontspackageForTextView.Regular-->
+<!--            android:id="@+id/tv_help"-->
+<!--            android:gravity="center|left"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:drawableLeft="@drawable/ic_help"-->
+<!--            style="@style/edittext_style_14_black"-->
+<!--            android:text="@string/help"-->
 
-            android:layout_height="50dp"
-            android:layout_width="match_parent"
-            ></fontspackageForTextView.Regular>
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            ></fontspackageForTextView.Regular>-->
 
         <View
             android:layout_width="match_parent"
@@ -157,24 +158,25 @@
             ></fontspackageForTextView.Regular>
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_color"
-            ></View>
+<!--        <View-->
+<!--            android:id="@+id/view_ratue"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="@color/border_color"-->
+<!--            ></View>-->
 
-        <fontspackageForTextView.Regular
-            android:id="@+id/tv_privacy"
-            android:gravity="center|left"
-            android:drawablePadding="10dp"
-            android:padding="10dp"
-            android:drawableTint="@color/buttonskyblue"
-            android:drawableLeft="@drawable/ic_star"
-            style="@style/edittext_style_14_black"
-            android:text="@string/rate_us"
-            android:layout_height="50dp"
-            android:layout_width="match_parent"
-            ></fontspackageForTextView.Regular>
+<!--        <fontspackageForTextView.Regular-->
+<!--            android:id="@+id/tv_privacy"-->
+<!--            android:gravity="center|left"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:drawableTint="@color/buttonskyblue"-->
+<!--            android:drawableLeft="@drawable/ic_star"-->
+<!--            style="@style/edittext_style_14_black"-->
+<!--            android:text="@string/rate_us"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            ></fontspackageForTextView.Regular>-->
 
         <View
             android:layout_width="match_parent"

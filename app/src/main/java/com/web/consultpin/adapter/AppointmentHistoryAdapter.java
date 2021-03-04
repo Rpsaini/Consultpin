@@ -133,7 +133,22 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                 else {
                     holder.ll_status.setVisibility(View.GONE);
                     holder.txt_cancel.setVisibility(View.GONE);
-                    if (appointment_status.equalsIgnoreCase("1"))
+
+                     if (appointment_status.equalsIgnoreCase("0"))
+                     {
+                        holder.appointment_status.setText(pActivity.getString(R.string.pending));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                        holder.ll_status.setVisibility(View.INVISIBLE);
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,0);
+
+
+                            }
+                        });
+                     }
+                   else if (appointment_status.equalsIgnoreCase("1"))
                      {
                         holder.appointment_status.setText(pActivity.getString(R.string.Approved));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
@@ -141,9 +156,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                         holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration);
-
-
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,1);
                             }
                         });
                     } else if (appointment_status.equalsIgnoreCase("2")) {
@@ -181,7 +194,22 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                 else {
                     holder.ll_status.setVisibility(View.GONE);
                     holder.txt_cancel.setVisibility(View.GONE);
-                    if(appointment_status.equalsIgnoreCase("1")) {
+                    if(appointment_status.equalsIgnoreCase("0"))
+                    {
+                        holder.appointment_status.setText(pActivity.getString(R.string.pending));
+                        holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                        holder.ll_status.setVisibility(View.INVISIBLE);
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,0);
+                            }
+                        });
+                    }
+
+                   else if(appointment_status.equalsIgnoreCase("1"))
+                    {
                         holder.appointment_status.setText(pActivity.getString(R.string.Approved));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
                         holder.ll_status.setVisibility(View.INVISIBLE);
@@ -189,10 +217,11 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                             @Override
                             public void onClick(View v)
                             {
-                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration);
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,1);
                             }
                         });
-                    } else if (appointment_status.equalsIgnoreCase("2")) {
+                    }
+                    else if (appointment_status.equalsIgnoreCase("2")) {
                         holder.appointment_status.setText(pActivity.getString(R.string.Rejected));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.yellow_color));
                     } else if (appointment_status.equalsIgnoreCase("3")) {
@@ -268,12 +297,15 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
         txt_messagee.setText(Msg);
 
+
+
         txt_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
+
 
         txt_yes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,7 +371,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     }
 
 
-    private void showUserDetails(String username, String userimage, String fee, String appointmentId, String consultant_id, String videocallUrl,String appointment_status,String appointmentTime,String duration) {
+    private void showUserDetails(String username, String userimage, String fee, String appointmentId, String consultant_id, String videocallUrl,String appointment_status,String appointmentTime,String duration,int appointmentSTatus) {
         try {
             SimpleDialog simpleDialog = new SimpleDialog();
             Dialog dialog = simpleDialog.simpleDailog(pActivity, R.layout.dialog_call_initiate, new ColorDrawable(android.graphics.Color.TRANSPARENT), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
@@ -351,6 +383,9 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             TextView txt_fee = dialog.findViewById(R.id.txt_fee);
             TextView time_duration = dialog.findViewById(R.id.time_duration);
             TextView txt_date = dialog.findViewById(R.id.txt_date);
+            LinearLayout ll_showVideoChat = dialog.findViewById(R.id.ll_showVideoChat);
+            ImageView img_edit = dialog.findViewById(R.id.img_edit);
+            LinearLayout ll_edit_appointment = dialog.findViewById(R.id.ll_edit_appointment);
 
             txt_username.setText(username);
             showImage(userimage, txt_user_profile_img);
@@ -358,16 +393,30 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             time_duration.setText(duration+"Minutes/");
             txt_date.setText(appointmentTime);
 
-            txt_date.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(pActivity, TimeManagement.class);
-                    intent.putExtra(Utilclass.appointment_date,txt_date.getText().toString());
-                    pActivity.startActivity(intent);
-                    dialog.dismiss();
 
-                }
-            });
+            if(appointmentSTatus==0)
+            {
+                ll_showVideoChat.setVisibility(View.GONE);
+                img_edit.setVisibility(View.VISIBLE);
+
+                ll_edit_appointment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(pActivity, TimeManagement.class);
+                        intent.putExtra(Utilclass.appointment_date,txt_date.getText().toString());
+                        pActivity.startActivity(intent);
+                        dialog.dismiss();
+
+                    }
+                });
+            }
+            else
+            {
+                ll_showVideoChat.setVisibility(View.VISIBLE);
+                img_edit.setVisibility(View.GONE);
+            }
+
+
 
 
             //jsonObject.getString("");

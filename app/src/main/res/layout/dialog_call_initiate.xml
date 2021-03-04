@@ -77,6 +77,14 @@
                 ></fontspackageForTextView.BoldMedium>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_edit_appointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:drawablePadding="10dp"
+            >
         <fontspackageForTextView.Regular
             android:textColor="@color/black"
             android:layout_height="wrap_content"
@@ -88,12 +96,22 @@
             android:textSize="14dp"
             android:id="@+id/txt_date"
             android:drawableTint="@color/texthintcolor"
-            android:drawablePadding="10dp"
-            android:drawableRight="@drawable/edit"
+
             ></fontspackageForTextView.Regular>
 
+            <ImageView
+                android:id="@+id/img_edit"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/edit"
+                ></ImageView>
+
+
+
+        </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_showVideoChat"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"

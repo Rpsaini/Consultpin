@@ -154,19 +154,29 @@ public class EditTimeByConsultantFrg extends Fragment {
         RelativeLayout relativeLayout = view.findViewById(R.id.rr_nodata_view);
 
         getTimeInterval();
-        if (timingAr.size() == 0) {
-            relativeLayout.setVisibility(View.VISIBLE);
-            grid_timing.setVisibility(View.GONE);
-            tv_saveAppointment.setAlpha(.5f);
-            tv_saveAppointment.setEnabled(false);
-        } else {
-            relativeLayout.setVisibility(View.GONE);
-            grid_timing.setVisibility(View.VISIBLE);
-            tv_saveAppointment.setAlpha(1f);
-            tv_saveAppointment.setEnabled(true);
+
+//        if (timingAr.size() == 0) {
+//            relativeLayout.setVisibility(View.VISIBLE);
+//            grid_timing.setVisibility(View.GONE);
+//            tv_saveAppointment.setAlpha(.5f);
+//            tv_saveAppointment.setEnabled(false);
+//        } else {
+//            relativeLayout.setVisibility(View.GONE);
+//            grid_timing.setVisibility(View.VISIBLE);
+//            tv_saveAppointment.setAlpha(1f);
+//            tv_saveAppointment.setEnabled(true);
+//        }
+
+        ArrayList<String> timeAfterValidate=new ArrayList<>();
+        for(int x=0;x<times.size();x++)
+        {
+            if (BaseActivity.compareTwoDates(date + " " + times.get(x) + ":00", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime())))
+            {
+                timeAfterValidate.add(times.get(x));
+            }
         }
 
-        grid_timing.setAdapter(new EditTimeGridAdapter(times, editTimeByConsultant, timingAr, reservedTimeMap, alreadySettedMap));
+        grid_timing.setAdapter(new EditTimeGridAdapter(timeAfterValidate, editTimeByConsultant, timingAr, reservedTimeMap, alreadySettedMap));
     }
 
 
@@ -256,8 +266,6 @@ public class EditTimeByConsultantFrg extends Fragment {
                                     }
 
                                     System.out.println("Reserve time data===" + reservedTimeMap);
-
-
                                     viewTimingGrid(allTimeIntervalAr, reservedTimeMap);
 
                                 } else {

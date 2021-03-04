@@ -26,6 +26,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.FileUtils;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -55,6 +56,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,7 +123,7 @@ public class BecomeAConsultant extends BaseActivity {
         ic_upload_licence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialogs.alertDialog(BecomeAConsultant.this, getResources().getString(R.string.choose), getResources().getString(R.string.img_sel_msg), getResources().getString(R.string.camera), getResources().getString(R.string.camera), new DialogCallBacks() {
+                alertDialogs.alertDialog(BecomeAConsultant.this, getResources().getString(R.string.choose), getResources().getString(R.string.img_sel_msg), getResources().getString(R.string.camera), getResources().getString(R.string.gallery), new DialogCallBacks() {
                     @Override
                     public void getDialogEvent(String buttonPressed) {
                         if (buttonPressed.equalsIgnoreCase("Camera")) {
@@ -162,6 +164,7 @@ public class BecomeAConsultant extends BaseActivity {
                 }
 
                 sub_category_id=sub_category_id.replaceFirst(",","");
+                sub_category_id.replaceFirst(",","");
 
                 if (validationRule.checkEmptyString(ed_indivisual) == 0) {
                     alertDialogs.alertDialog(BecomeAConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.waring_describe), getResources().getString(R.string.ok), "", new DialogCallBacks() {
@@ -388,6 +391,11 @@ public class BecomeAConsultant extends BaseActivity {
                 Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickPhoto, actionCode);
+
+//                Intent intent = new Intent();
+//                intent.setType("*/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Picture and files"), actionCode);
             }
         }
     }
@@ -421,10 +429,11 @@ public class BecomeAConsultant extends BaseActivity {
                     if (resultCode == RESULT_OK) {
                         if (imageReturnedIntent != null) {
                             try {
-                                selectedImage = imageReturnedIntent.getData();
+                                 selectedImage = imageReturnedIntent.getData();
+                                System.out.println("Selected path==="+selectedImage);
                                  selectedPath  = getRealPathFromURI(selectedImage);
 
-                                InputStream image_stream = getContentResolver().openInputStream(selectedImage);
+                                 InputStream image_stream = getContentResolver().openInputStream(selectedImage);
                                 bmap = BitmapFactory.decodeStream(image_stream);
                                 selected_image.setText(selectedPath);
 
@@ -451,6 +460,12 @@ public class BecomeAConsultant extends BaseActivity {
             finish();
         }
     }
+
+
+
+
+
+
 
     static final int REQUEST_TAKE_PHOTO = 0;
     Uri photoURI;
@@ -529,7 +544,27 @@ public class BecomeAConsultant extends BaseActivity {
         return 0;
     }
 
+    public static String getPath(Context context, Uri uri) throws URISyntaxException {
+        if ("content".equalsIgnoreCase(uri.getScheme())) {
+            String[] projection = { "_data" };
+            Cursor cursor = null;
 
+            try {
+                cursor = context.getContentResolver().query(uri, projection, null, null, null);
+                int column_index = cursor.getColumnIndexOrThrow("_data");
+                if (cursor.moveToFirst()) {
+                    return cursor.getString(column_index);
+                }
+            } catch (Exception e) {
+                // Eat it
+            }
+        }
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
 
 
 }

@@ -21,6 +21,7 @@ public class SplashScreen extends BaseActivity {
         changestatusBarColor(0);
         removeActionBar();
         initiateObj();
+//        Utilclass.isConsultantModeOn=false;
 //
 //        String userid=savePreferences.reterivePreference(SplashScreen.this, Utilclass.user_id).toString();
 //        System.out.println("USer id===>"+userid);

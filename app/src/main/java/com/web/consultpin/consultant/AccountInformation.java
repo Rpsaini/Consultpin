@@ -308,7 +308,7 @@ public class AccountInformation extends BaseActivity {
                             {
                                 try {
 
-                                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.choose), "Your consultant request saved successfully.", "ok", "", new DialogCallBacks() {
+                                    alertDialogs.alertDialog(AccountInformation.this, getResources().getString(R.string.choose), getResources().getString(R.string.consultantsaved), "ok", "", new DialogCallBacks() {
                                         @Override
                                         public void getDialogEvent(String buttonPressed) {
                                             if (buttonPressed.equalsIgnoreCase("ok")) {

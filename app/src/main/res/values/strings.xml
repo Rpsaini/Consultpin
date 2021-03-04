@@ -33,8 +33,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="chat">Chat</string>
-    <string name="appointment">Appointment</string>
-    <string name="becom_consultant">Become Consultant</string>
+    <string name="appointment">Appointments</string>
+    <string name="becom_consultant">Become a Consultant</string>
     <string name="account_info">Account Information</string>
     <string name="Favorites">Favorites</string>
     <string name="pinpara_wallet">PinPara Wallet</string>
@@ -76,7 +76,7 @@
     <string name="your_professional_background">Your professional background</string>
     <string name="Specialties">Specialties</string>
     <string name="fee">Fees</string>
-    <string name="setappointment">Set Appointment</string>
+    <string name="setappointment">Set Appointments</string>
     <string name="event_request">Event Request</string>
     <string name="how_would_you_describe">How would you describe yours</string>
     <string name="example">Ex: Criminal Law Attorney</string>
@@ -163,6 +163,7 @@
     <string name="appointment_date">Appointment Date</string>
     <string name="appointment_time">Appointment Time</string>
     <string name="appointment_request">Appointment Request</string>
+    <string name="appointment_request_edit">Save/Edit</string>
     <string name="accept">Accept</string>
     <string name="reject">Reject</string>
     <string name="Completed">Completed</string>
@@ -205,6 +206,7 @@
     <string name="cancelled_appointment">"Cancelled Appointment"</string>
     <string name="totalincome">"Total Income"</string>
     <string name="ongoining_appoints">"Ongoing Appointments"</string>
+    <string name="consultantsaved">"Your request to become consultant has been sent successfully"</string>
 
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 
