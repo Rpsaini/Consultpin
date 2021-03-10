@@ -21,29 +21,47 @@ import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.registration.SplashScreen;
 
+import org.json.JSONObject;
+
+import java.util.Map;
+
 public class MessagingService extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String token) {
         super.onNewToken(token);
 
-        System.out.println("My Device token===="+token);
-        SavePreferences savePreferences=new SavePreferences();
-        savePreferences.savePreferencesData(this,token, Utilclass.device_Token);
+        System.out.println("My Device token====" + token);
+        SavePreferences savePreferences = new SavePreferences();
+        savePreferences.savePreferencesData(this, token, Utilclass.device_Token);
 
 
     }
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage)
-    {
-        System.out.println("Inside messgae recived====>");
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+
+        System.out.println("Inside messgae recived====>" + remoteMessage);
         super.onMessageReceived(remoteMessage);
 
-    //    showNotification(remoteMessage);
+        try {
+            String loginDetail=new SavePreferences().reterivePreference(MessagingService.this, Utilclass.loginDetail).toString();
+            if(loginDetail.length()!=0)
+              {
+                Map<String, String> map = remoteMessage.getData();
+                String npData = map.get("data");
+                JSONObject jsonObject = new JSONObject(npData);
+                System.out.println("dataValue====" + jsonObject);
+                showNotification(jsonObject.getString("title"), jsonObject.getString("message"));
+              }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    private void showNotification(String title,String message) {
+    private void showNotification(String title, String message) {
         Intent intent = new Intent(this, SplashScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

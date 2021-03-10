@@ -8,6 +8,10 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 
+import com.app.preferences.SavePreferences;
+import com.google.firebase.FirebaseApp;
+import com.web.consultpin.R;
+
 import fontspackageForTextView.DefineYourAppFont;
 
 public class MyApplication extends MultiDexApplication {
@@ -26,6 +30,8 @@ public class MyApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        SavePreferences.prefName=getResources().getString(R.string.app_name);
+        FirebaseApp.initializeApp(this);
         DefineYourAppFont.fontNameRegular="fonts/OpenSans-Regular.ttf";
         DefineYourAppFont.fontNameBold="fonts/OpenSans-Bold.ttf";
         DefineYourAppFont.fontNameBoldExtra="fonts/OpenSans-ExtraBold.ttf";

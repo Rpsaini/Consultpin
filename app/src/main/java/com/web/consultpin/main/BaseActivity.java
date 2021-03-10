@@ -255,7 +255,6 @@ public class BaseActivity extends AppCompatActivity
    {
        try {
            System.out.println("Start End Date=="+startDate+"=="+endDate);
-
            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
            Date startDateD = simpleDateFormat.parse(startDate);
            Date endDateD = simpleDateFormat.parse(endDate);
@@ -271,15 +270,41 @@ public class BaseActivity extends AppCompatActivity
                System.out.println("Date1 is before Date2");
                return false;
            }
-
-
-       }
+        }
        catch (Exception e)
        {
            e.printStackTrace();
        }
        return false;
    }
+
+
+    public static  boolean compareTwoDatesonly(String startDate,String  endDate)
+    {
+        try {
+            System.out.println("Start End Date=="+startDate+"=="+endDate);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date startDateD = simpleDateFormat.parse(startDate);
+            Date endDateD = simpleDateFormat.parse(endDate);
+            if (startDateD.equals(endDateD)) {
+                return true;
+            }
+            else if (startDateD.after(endDateD)) {
+                System.out.println("Date1 is after Date2");
+                return true;
+            }
+            else if (startDateD.before(endDateD))
+            {
+                System.out.println("Date1 is before Date2");
+                return false;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 }

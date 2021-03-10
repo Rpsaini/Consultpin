@@ -23,20 +23,19 @@ public class SplashScreen extends BaseActivity {
         initiateObj();
 //        Utilclass.isConsultantModeOn=false;
 //
-//        String userid=savePreferences.reterivePreference(SplashScreen.this, Utilclass.user_id).toString();
-//        System.out.println("USer id===>"+userid);
-//        if(userid.equalsIgnoreCase("0"))
-//        {
+        String loginDetail=savePreferences.reterivePreference(SplashScreen.this, Utilclass.loginDetail).toString();
+        if(loginDetail.length()==0)
+        {
             Intent intent=new Intent(SplashScreen.this,LoginActivity.class);
             startActivity(intent);
             finish();
-//        }
-//        else
-//        {
-//            Intent intent=new Intent(SplashScreen.this, MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        }
+        else
+        {
+            Intent intent=new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 }

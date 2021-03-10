@@ -48,7 +48,8 @@ public class MainActivity extends BaseActivity {
     private String frgtag="";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initiateObj();
@@ -57,8 +58,9 @@ public class MainActivity extends BaseActivity {
 
         drawer = findViewById(R.id.drawer_layout);
 
-        Intent intent = new Intent(MainActivity.this, BecomeAConsultant.class);
-        startActivity(intent);
+//        Intent intent = new Intent(MainActivity.this, BecomeAConsultant.class);
+//        startActivity(intent);
+
         ImageView nav_oprn_toolbar = findViewById(R.id.nav_oprn_toolbar);
         nav_oprn_toolbar.setOnClickListener(new View.OnClickListener() {
             @Override

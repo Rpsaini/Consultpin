@@ -103,7 +103,21 @@ public class SelectCategorySubCategoryAdapter extends RecyclerView.Adapter<Selec
                                      commonChekBox.setChecked(false);
                                  }
                                  commonChekBox = holder.chk_selectcategory;
-                                 ((BecomeAConsultant) pActivity).category_id = buttonView.getTag() + "";
+//                                 ((BecomeAConsultant) pActivity).category_id = buttonView.getTag()+ "";
+                                 if(buttonView.getTag().equals("0"))
+                                 {
+                                     ((BecomeAConsultant) pActivity).category_id =  "private";
+                                 }
+                                 else if(buttonView.getTag().equals("1"))
+                                 {
+                                     ((BecomeAConsultant) pActivity).category_id = "individual";
+                                 }
+                                 else
+                                 {
+                                     ((BecomeAConsultant) pActivity).category_id = "company";
+                                 }
+
+
                                  ((BecomeAConsultant) pActivity).selected_category_str = jsonObject.getString("category_name");
                              }
                              else if (selectionType == 1)

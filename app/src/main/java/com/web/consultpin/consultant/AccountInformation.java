@@ -267,10 +267,6 @@ public class AccountInformation extends BaseActivity {
                     File file = new File(license);
                     if (file != null) {
 
-//                        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), "license");
-//                        MultipartBody.Part body = MultipartBody.Part.createFormData("license", file.getName(), requestBody);
-
-
                         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
                         MultipartBody.Part body = MultipartBody.Part.createFormData("license", file.getName(), requestBody);
                         RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());

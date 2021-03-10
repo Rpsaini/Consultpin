@@ -214,8 +214,6 @@ public class AddTimeByConsultantFrg extends Fragment {
                         textView.setText(year + "-"
                                 + (monthOfYear + 1) + "-" + dayOfMonth);
 
-                        //getDatesBetweenTWoDates(ed_datefrom.getText().toString(), ed_date_end.getText().toString());
-
 
                     }
                 }, mYear, mMonth, mDay);

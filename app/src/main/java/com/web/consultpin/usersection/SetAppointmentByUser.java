@@ -121,6 +121,9 @@ public class SetAppointmentByUser extends BaseActivity {
 
     private void getAlreadyAddedTime() {
         try {
+
+
+
             reservedTimeMap.clear();
             final Map<String, String> m = new HashMap<>();
             m.put("consultant_id", getIntent().getStringExtra(Utilclass.consultant_id));
@@ -287,12 +290,9 @@ public class SetAppointmentByUser extends BaseActivity {
             System.out.println("Start==end--mid===="+startTime+"=="+endTime+"=="+midtime);
             Date time1 = new SimpleDateFormat("HH:mm:ss").parse(startTime);
             Calendar calendar1 = Calendar.getInstance();
-//          calendar1.add(Calendar.MINUTE, -1);
             calendar1.setTime(time1);
             calendar1.add(Calendar.DATE, 1);
 
-
-//            String string2 = "14:49:00";
             Date time2 = new SimpleDateFormat("HH:mm:ss").parse(endTime);
             Calendar calendar2 = Calendar.getInstance();
             calendar2.setTime(time2);
@@ -307,7 +307,6 @@ public class SetAppointmentByUser extends BaseActivity {
             Date x = calendar3.getTime();
             if (x.after(calendar1.getTime()) && x.before(calendar2.getTime()))
             {
-
                 return true;
 
             }
@@ -344,7 +343,18 @@ public class SetAppointmentByUser extends BaseActivity {
                     newDaye = "0" + day;
                 }
                 date = year + "-" + newMonth + "-" + newDaye;
-                getAlreadyAddedTime();
+
+                if(BaseActivity.compareTwoDatesonly(date, new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()))) {
+                    getAlreadyAddedTime();
+                }
+                else
+                {
+
+                    date_cal_view.setDate(System.currentTimeMillis());
+
+
+                }
+
             }
         });
 
@@ -353,8 +363,6 @@ public class SetAppointmentByUser extends BaseActivity {
             @Override
             public void onClick(View v)
             {
-
-
                 if (validationRule.checkEmptyString(ed_description) == 0) {
                     alertDialogs.alertDialog(SetAppointmentByUser.this, getResources().getString(R.string.Required), getResources().getString(R.string.add_comment_msg), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override

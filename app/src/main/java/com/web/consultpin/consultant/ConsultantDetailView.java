@@ -190,7 +190,7 @@ public class ConsultantDetailView extends BaseActivity {
             public void run() {
                 Glide.with(ConsultantDetailView.this)
                         .load(url)
-                        .placeholder(R.drawable.man)
+                        .placeholder(R.drawable.profileavtar)
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                         .into(header_img);
             }

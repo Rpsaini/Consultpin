@@ -39,8 +39,8 @@ public class LoginActivity extends BaseActivity {
         TextView tv_sign_in =findViewById(R.id.tv_sign_in);
         TextView tv_forgot_pwd =findViewById(R.id.tv_forgot_pwd);
         TextView register =findViewById(R.id.register);
-       final EditText et_email =findViewById(R.id.et_email);
-       final EditText et_pwd =findViewById(R.id.et_pwd);
+        final EditText et_email =findViewById(R.id.et_email);
+        final EditText et_pwd =findViewById(R.id.et_pwd);
 
 
         tv_sign_in.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +102,8 @@ public class LoginActivity extends BaseActivity {
             m.put("password", password);
             m.put("device_type", "android");
             m.put("device_token", getDeviceToken()+"");
+
+            System.out.println("Token==>"+m);
 
             final Map<String, String> obj = new HashMap<>();
 

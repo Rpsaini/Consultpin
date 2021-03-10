@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "882616723901",
-    "project_id": "consultpin-3d7bf",
-    "storage_bucket": "consultpin-3d7bf.appspot.com"
+    "project_number": "91087251174",
+    "project_id": "consultpin-3c368",
+    "storage_bucket": "consultpin-3c368.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:882616723901:android:ca1c3f43ebf75d0f0ecad4",
+        "mobilesdk_app_id": "1:91087251174:android:0a76699f7ee08ba7b27d27",
         "android_client_info": {
           "package_name": "com.web.consultpin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "882616723901-m3go2l0dgtt2qk96ek80iv8ce8o79g0k.apps.googleusercontent.com",
+          "client_id": "91087251174-kg7742psh2jcptnbpor4nuhehk072vkc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.web.consultpin",
@@ -22,21 +22,29 @@
           }
         },
         {
-          "client_id": "882616723901-2nie550s8reo5ksa9t2qkkc3b6sa8tc6.apps.googleusercontent.com",
+          "client_id": "91087251174-bfsv0mv3rt1f9id8s6m4291r8f111b97.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAg_h_zrmQSXyonSUxF5pSrMYvf2-ZiLaI"
+          "current_key": "AIzaSyAKLvz1dt4swrgP91JKuI1H4_8zKOmmdG0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "882616723901-2nie550s8reo5ksa9t2qkkc3b6sa8tc6.apps.googleusercontent.com",
+              "client_id": "91087251174-bfsv0mv3rt1f9id8s6m4291r8f111b97.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "91087251174-1knocajg0csamsg6j35clu09po9g8g07.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.webcom.consultpin",
+                "app_store_id": "121234"
+              }
             }
           ]
         }

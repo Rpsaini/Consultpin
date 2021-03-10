@@ -288,17 +288,15 @@ public class BecomeAConsultant extends BaseActivity {
           tv_done.findViewById(R.id.tv_done).setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                  System.out.println("selected cat===="+selected_category_str+"=="+selected_sub_category_str);
-
                   downSourceDestinationView(ll_relativelayout,selectCategoryDialog);
                   if(selected_category_str!=null)
                   {
-                      txt_selct_catgory.setText(selected_category_str+"");
+                      txt_selct_catgory.setText(selected_category_str.replaceFirst(",","")+"");
                   }
                   if(selected_sub_category_str!=null)
                   {
                       selected_category_str=selected_category_str.replaceFirst(",","");
-                      txt_select_sub_category.setText(selected_sub_category_str + "");
+                      txt_select_sub_category.setText(selected_sub_category_str.replaceFirst(",","") + "");
                   }
 
               }
