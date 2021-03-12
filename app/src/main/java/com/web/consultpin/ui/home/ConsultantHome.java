@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.app.dialogsnpickers.DialogCallBacks;
 import com.app.vollycommunicationlib.CallBack;
@@ -29,8 +30,8 @@ import java.util.Map;
 
 public class ConsultantHome extends Fragment {
 
-private MainActivity mainActivity;
-private View view;
+    private MainActivity mainActivity;
+    private View view;
 
     public ConsultantHome() {
         // Required empty public constructor
@@ -50,47 +51,35 @@ private View view;
 
     }
 
+    TextView txt_upcomingappointment, txt_totalincom, txt_totalappointment, txt_cancelledappointment, txt_ongoingappointment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view=inflater.inflate(R.layout.fragment_consultant_home, container, false);
-        mainActivity=(MainActivity) getActivity();
+        view = inflater.inflate(R.layout.fragment_consultant_home, container, false);
+        mainActivity = (MainActivity) getActivity();
+
+        txt_upcomingappointment = view.findViewById(R.id.txt_upcomingappointment);
+        txt_totalincom = view.findViewById(R.id.txt_totalincom);
+        txt_totalappointment = view.findViewById(R.id.txt_totalappointment);
+        txt_cancelledappointment = view.findViewById(R.id.txt_cancelledappointment);
+        txt_ongoingappointment = view.findViewById(R.id.txt_ongoingappointment);
         getAppointmentHistory();
         return view;
     }
 
     private void getAppointmentHistory() {
-        try
-        {
-            String id = "";
+        try {
+
             String consultantId = mainActivity.getRestParamsName(Utilclass.consultant_id);
-            String userid = mainActivity.getRestParamsName(Utilclass.user_id);
-            String commonId = "";
             final Map<String, String> m = new HashMap<>();
-            String apiname = "";
-            if(!Utilclass.isConsultantModeOn)
-            {
-                commonId = userid;
-                apiname = "get-user-appointments";
-                m.put("user_id", commonId);
-
-            } else {
-                commonId = consultantId;
-                apiname = "get-consultant-appointments";
-                m.put("consultant_id", commonId);
-            }
-
-            m.put("device_type", "android");
-            m.put("request_type", "upcoming");
+            m.put("consultant_id", consultantId);
             m.put("device_token", mainActivity.getDeviceToken() + "");
-
             final Map<String, String> obj = new HashMap<>();
             obj.put("token", mainActivity.getRestParamsName(Utilclass.token) + "");
+            System.out.println("Consulta=====>"+m);
 
-            System.out.println("Consultant id===" + m + "====" + mainActivity.getApiUrl() + apiname);
-
-
-            mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + apiname, m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+            mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + "consultant-dashboard", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
@@ -99,7 +88,16 @@ private View view;
                         if (jsonObject.getBoolean("status")) {
 
                             try {
-                                JSONArray dataAr = jsonObject.getJSONArray("data");
+
+
+                                JSONArray dataAr = jsonObject.getJSONArray("upcoming_appointments_detail");
+
+                                txt_upcomingappointment.setText(jsonObject.getString("upcoming_appointments"));
+                                txt_totalincom.setText("0" + getResources().getString(R.string.lirasymbol));
+                                txt_totalappointment.setText(jsonObject.getString("total_appointments"));
+                                txt_cancelledappointment.setText(jsonObject.getString("cancelled_appointments"));
+                                txt_ongoingappointment.setText(jsonObject.getString("ongoing_appointments"));
+
                                 ArrayList<JSONObject> historyBookingAr = new ArrayList<>();
                                 for (int x = 0; x < dataAr.length(); x++) {
                                     historyBookingAr.add(dataAr.getJSONObject(x));
@@ -131,8 +129,7 @@ private View view;
 
     }
 
-    private void showAppointmentData(ArrayList<JSONObject> dataAr)
-        {
+    private void showAppointmentData(ArrayList<JSONObject> dataAr) {
         RecyclerView recyclerview_appointmenthistory = view.findViewById(R.id.upcomming_app_recycler);
 
         RelativeLayout relativeLayout = view.findViewById(R.id.rr_nodata_view);

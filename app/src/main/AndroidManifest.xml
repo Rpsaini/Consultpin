@@ -32,18 +32,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".consultant.ListFavouritesdata"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".consultant.TimeManagement"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".usersection.UserEventHistory"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".jitsi.MAinJistsiActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity android:name=".ui.home.ContactUs"></activity>
+        <activity
+            android:name=".consultant.ListFavouritesdata"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".consultant.TimeManagement"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usersection.UserEventHistory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".jitsi.MAinJistsiActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".initiatecall.InitiateCallWebview"
             android:screenOrientation="portrait" />
@@ -55,10 +56,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".events.EventRequestActivity"
-            android:screenOrientation="portrait" />
-<!--        <activity-->
-<!--            android:name=".consultant.SetTimeByConsultant"-->
-<!--            android:screenOrientation="portrait" />-->
+            android:screenOrientation="portrait" /> <!-- <activity -->
+        <!-- android:name=".consultant.SetTimeByConsultant" -->
+        <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name=".consultant.ConsultantDetailView"
             android:screenOrientation="portrait" />

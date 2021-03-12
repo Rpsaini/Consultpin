@@ -16,10 +16,11 @@
 
         >
         <fontspackageForTextView.Regular
+            android:id="@+id/txt_totalincom"
             android:textSize="28dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="897L"
+            android:text="0L"
             android:gravity="center"
             ></fontspackageForTextView.Regular>
 
@@ -51,10 +52,11 @@
             android:layout_weight=".5"
             >
         <fontspackageForTextView.Regular
+            android:id="@+id/txt_totalappointment"
             android:textSize="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1000"
+            android:text=""
             android:gravity="center"
             ></fontspackageForTextView.Regular>
 
@@ -76,10 +78,11 @@
             android:layout_weight=".5"
             >
             <fontspackageForTextView.Regular
+                android:id="@+id/txt_cancelledappointment"
                 android:textSize="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="90"
+                android:text=""
                 android:textColor="@color/red_color"
                 android:gravity="center"
                 ></fontspackageForTextView.Regular>
@@ -117,7 +120,8 @@
                 android:textSize="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2"
+                android:text="0"
+                android:id="@+id/txt_ongoingappointment"
                 android:gravity="center"
                 ></fontspackageForTextView.Regular>
 
@@ -139,10 +143,11 @@
             android:layout_weight=".5"
             >
             <fontspackageForTextView.Regular
+                android:id="@+id/txt_upcomingappointment"
                 android:textSize="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:text=""
                 android:gravity="center"
                 ></fontspackageForTextView.Regular>
 

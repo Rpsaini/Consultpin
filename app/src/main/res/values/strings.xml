@@ -191,22 +191,30 @@
     <string name="chooseimage">Choose time</string>
     <string name="selecteventtime">Select event time.</string>
     <string name="img_sel_msg">"Choose Image either from camera or from gallary?</string>
-    <string name="select_licence_image">"Select license Image.</string>
-    <string name="event_image">"Event Image.</string>
-    <string name="switchtouser">"Switch to user</string>
-    <string name="switchtoconsultant">"Switch to consultant</string>
-    <string name="view_events">"View events"</string>
-    <string name="set_appointment_time">"Set Appointment Time"</string>
-    <string name="select_start_time">"Select event start time"</string>
-    <string name="select_end_time">"Select event end time"</string>
-    <string name="date_validation">"Start date can not be grater than End date."</string>
-    <string name="favorite_consultants">"favourite consultants"</string>
-    <string name="total_appointments">"Total Appointments"</string>
-    <string name="upcomming_appointments">"Upcoming Appointments"</string>
-    <string name="cancelled_appointment">"Cancelled Appointment"</string>
-    <string name="totalincome">"Total Income"</string>
-    <string name="ongoining_appoints">"Ongoing Appointments"</string>
-    <string name="consultantsaved">"Your request to become consultant has been sent successfully"</string>
+    <string name="select_licence_image">Select license Image.</string>
+    <string name="event_image">Event Image.</string>
+    <string name="switchtouser">Switch to user</string>
+    <string name="switchtoconsultant">Switch to consultant</string>
+    <string name="view_events">View events</string>
+    <string name="set_appointment_time">Set Appointment Time</string>
+    <string name="select_start_time">Select event start time</string>
+    <string name="select_end_time">Select event end time</string>
+    <string name="date_validation">Start date can not be grater than End date.</string>
+    <string name="favorite_consultants">favourite consultants</string>
+    <string name="total_appointments">Total Appointments</string>
+    <string name="upcomming_appointments">Upcoming Appointments</string>
+    <string name="cancelled_appointment">Cancelled Appointment</string>
+    <string name="totalincome">Total Income</string>
+    <string name="ongoining_appoints">Ongoing Appointments</string>
+
+    <string name="fulllname">Full name</string>
+    <string name="ed_message">Message</string>
+    <string name="submit">Submit</string>
+    <string name="contactus">Contact us</string>
+    <string name="enterfullname">Enter your fullname</string>
+    <string name="enter_message">Enter message</string>
+
+    <string name="consultantsaved">Your request to become consultant has been sent successfully</string>
 
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 

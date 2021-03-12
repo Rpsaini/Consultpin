@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/profile_background"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.ContactUs">
+
+
+    <include layout="@layout/toolbar_without_shadow"/>
+
+    <ScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        >
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/fulllname"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <fontpackageforEdittext.Regular
+            android:id="@+id/ed_fullname"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/fulllname"
+            android:gravity="left|center"
+            >
+        </fontpackageforEdittext.Regular>
+
+
+
+        <fontspackageForTextView.BoldMedium
+        android:layout_marginTop="19dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+            android:padding="5dp"
+        style="@style/edittext_style_14_black"
+        android:text="@string/your_email"
+        >
+    </fontspackageForTextView.BoldMedium>
+
+    <fontpackageforEdittext.Regular
+        android:id="@+id/ed_email"
+        android:padding="5dp"
+        android:background="@drawable/roundcorner_drawable"
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        style="@style/edittext_style_12_grey"
+        android:hint="@string/your_email"
+        android:gravity="left|center"
+        >
+    </fontpackageforEdittext.Regular>
+
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/mobile_number"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <fontpackageforEdittext.Regular
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:inputType="number"
+            android:padding="5dp"
+            android:id="@+id/ed_mobile"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/mobile_number"
+            android:gravity="left|center"
+            >
+        </fontpackageforEdittext.Regular>
+
+
+
+
+        <fontspackageForTextView.BoldMedium
+            android:layout_marginTop="19dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_14_black"
+            android:text="@string/ed_message"
+            >
+        </fontspackageForTextView.BoldMedium>
+
+        <fontpackageforEdittext.Regular
+            android:id="@+id/ed_messgae"
+            android:gravity="top|left"
+            android:padding="5dp"
+            android:background="@drawable/roundcorner_drawable"
+            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            style="@style/edittext_style_12_grey"
+            android:hint="@string/ed_message"
+            >
+        </fontpackageforEdittext.Regular>
+
+
+
+    <fontspackageForTextView.Regular
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/tv_save"
+        android:background="@drawable/drawable_button_skyblue"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="@string/submit" />
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

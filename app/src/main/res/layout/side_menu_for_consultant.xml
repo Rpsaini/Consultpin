@@ -34,7 +34,6 @@
 
 
         <fontspackageForTextView.Regular
-
             android:id="@+id/tv_setAppointment"
             android:gravity="center|left"
             android:drawablePadding="10dp"
@@ -151,7 +150,7 @@
             android:padding="10dp"
             android:drawableLeft="@drawable/ic_about_us"
             style="@style/edittext_style_14_black"
-            android:text="@string/about_us"
+            android:text="@string/contactus"
 
             android:layout_height="50dp"
             android:layout_width="match_parent"

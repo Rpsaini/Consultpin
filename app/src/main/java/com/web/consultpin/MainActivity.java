@@ -27,6 +27,7 @@ import com.web.consultpin.appointmenthistory.AppointMentHistoryFrg;
 import com.web.consultpin.registration.SplashScreen;
 import com.web.consultpin.ui.home.Chat;
 import com.web.consultpin.ui.home.ConsultantHome;
+import com.web.consultpin.ui.home.ContactUs;
 import com.web.consultpin.ui.home.Home;
 
 import com.web.consultpin.ui.home.Profile;
@@ -245,6 +246,7 @@ public class MainActivity extends BaseActivity {
         TextView tv_logout = findViewById(R.id.tv_logout);
         TextView tv_favorite = findViewById(R.id.tv_favorite);
         View view_fave = findViewById(R.id.view_fave);
+        TextView tv_aboutus = findViewById(R.id.tv_aboutus);
 
 
         if (!Utilclass.isConsultantModeOn)
@@ -326,6 +328,14 @@ public class MainActivity extends BaseActivity {
             {
                 drawer.closeDrawer(Gravity.LEFT);
                 Intent intent=new Intent(MainActivity.this, ListFavouritesdata.class);
+                startActivity(intent);
+            }
+        });
+
+        tv_aboutus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, ContactUs.class);
                 startActivity(intent);
             }
         });
