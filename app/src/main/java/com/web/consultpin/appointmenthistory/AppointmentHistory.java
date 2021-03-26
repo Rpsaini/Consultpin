@@ -46,13 +46,22 @@ private MainActivity mainActivity;
 
     }
 
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && isResumed()) {
+            System.out.println("List fragment called===>>>");
+            getAppointmentHistory();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         view=inflater.inflate(R.layout.fragment_appointment_history, container, false);
         mainActivity=(MainActivity)getActivity();
-        getAppointmentHistory();
+
         return view;
     }
 

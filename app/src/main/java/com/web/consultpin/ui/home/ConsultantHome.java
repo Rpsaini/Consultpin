@@ -77,7 +77,7 @@ public class ConsultantHome extends Fragment {
             m.put("device_token", mainActivity.getDeviceToken() + "");
             final Map<String, String> obj = new HashMap<>();
             obj.put("token", mainActivity.getRestParamsName(Utilclass.token) + "");
-            System.out.println("Consulta=====>"+m);
+
 
             mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + "consultant-dashboard", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
@@ -88,10 +88,7 @@ public class ConsultantHome extends Fragment {
                         if (jsonObject.getBoolean("status")) {
 
                             try {
-
-
                                 JSONArray dataAr = jsonObject.getJSONArray("upcoming_appointments_detail");
-
                                 txt_upcomingappointment.setText(jsonObject.getString("upcoming_appointments"));
                                 txt_totalincom.setText("0" + getResources().getString(R.string.lirasymbol));
                                 txt_totalappointment.setText(jsonObject.getString("total_appointments"));
@@ -140,7 +137,6 @@ public class ConsultantHome extends Fragment {
             relativeLayout.setVisibility(View.GONE);
             recyclerview_appointmenthistory.setVisibility(View.VISIBLE);
         }
-
 
         recyclerview_appointmenthistory.setNestedScrollingEnabled(false);
         recyclerview_appointmenthistory.setLayoutManager(new LinearLayoutManager(getActivity(),

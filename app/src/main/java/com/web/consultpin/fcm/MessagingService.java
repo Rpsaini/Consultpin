@@ -31,7 +31,7 @@ public class MessagingService extends FirebaseMessagingService {
     public void onNewToken(String token) {
         super.onNewToken(token);
 
-        System.out.println("My Device token====" + token);
+        System.out.println("My Device token==tokrn==" + token);
         SavePreferences savePreferences = new SavePreferences();
         savePreferences.savePreferencesData(this, token, Utilclass.device_Token);
 
@@ -41,7 +41,7 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        System.out.println("Inside messgae recived====>" + remoteMessage);
+        System.out.println("Inside messgae recived=samremitance===>" + remoteMessage);
         super.onMessageReceived(remoteMessage);
 
         try {

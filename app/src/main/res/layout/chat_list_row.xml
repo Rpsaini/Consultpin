@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+
+        android:id="@+id/ll_myview"
+        android:layout_margin="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <fontspackageForTextView.Regular
+            android:padding="5dp"
+            android:id="@+id/txt_my_text"
+            android:background="@drawable/white_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black_color"
+            ></fontspackageForTextView.Regular>
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/txt_mytime"
+            android:gravity="end"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="time"
+            android:textSize="12dp"
+            android:textColor="@color/texthintcolor_50"
+            ></fontspackageForTextView.Regular>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_you"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/ll_myview"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <fontspackageForTextView.Regular
+            android:padding="5dp"
+            android:id="@+id/txt_you"
+
+            android:background="@drawable/blue_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            ></fontspackageForTextView.Regular>
+
+        <fontspackageForTextView.Regular
+            android:id="@+id/txt_you_time"
+            android:gravity="right"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="12dp"
+            android:textColor="@color/texthintcolor_50"
+            ></fontspackageForTextView.Regular>
+
+    </LinearLayout>
+
+</RelativeLayout>

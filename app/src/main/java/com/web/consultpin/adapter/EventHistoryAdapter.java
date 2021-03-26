@@ -57,7 +57,7 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
         LinearLayout ll_list_of_event;
         ImageView event_image;
-        TextView event_name, event_fee, event_number_of_user, appointment_time, txt_cancel;
+        TextView event_name, event_fee, event_number_of_user, appointment_time, txt_cancel,event_des;
 
 
         public MyViewHolder(View view) {
@@ -69,6 +69,7 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             event_number_of_user = view.findViewById(R.id.event_number_of_user);
             appointment_time = view.findViewById(R.id.appointment_time);
             txt_cancel = view.findViewById(R.id.txt_cancel);
+            event_des = view.findViewById(R.id.event_des);
 
         }
     }
@@ -87,7 +88,8 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
         try {
             JSONObject jsonObject = datAr.get(position);
-            holder.event_name.setText(jsonObject.getString("description"));
+            holder.event_des.setText(jsonObject.getString("description"));
+            holder.event_name.setText(jsonObject.getString("event_name"));
             holder.event_fee.setText(jsonObject.getString("event_fee") + pActivity.getResources().getString(R.string.lirasymbol));
             holder.event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint) + "  :  " + jsonObject.getString("number_of_participants"));
             holder.appointment_time.setText(jsonObject.getString("start_date") + " to  " + jsonObject.getString("end_date"));
@@ -143,8 +145,10 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             ImageView event_image = eventDetaildialog.findViewById(R.id.event_image);
             TextView event_number_of_user = eventDetaildialog.findViewById(R.id.event_number_of_user);
             TextView appointment_time = eventDetaildialog.findViewById(R.id.appointment_time);
+            TextView event_desc = eventDetaildialog.findViewById(R.id.event_desc);
 
-            event_name.setText(jsonObject.getString("description"));
+            event_name.setText(jsonObject.getString("event_name"));
+            event_desc.setText(jsonObject.getString("description"));
             event_fee.setText(jsonObject.getString("event_fee") + pActivity.getResources().getString(R.string.lirasymbol));
             event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint) + "  :  " + jsonObject.getString("number_of_participants"));
             appointment_time.setText(jsonObject.getString("start_date") + " to  " + jsonObject.getString("end_date"));

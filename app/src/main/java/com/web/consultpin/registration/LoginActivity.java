@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.dialogsnpickers.DialogCallBacks;
@@ -115,11 +117,25 @@ public class LoginActivity extends BaseActivity {
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
                         JSONObject jsonObject = new JSONObject(dta);
+
+                        System.out.println("JsonData==="+jsonObject);
                         if (jsonObject.getBoolean("status")) {
 
                             try {
 
                                 savePreferences.savePreferencesData(LoginActivity.this,jsonObject, Utilclass.loginDetail);
+
+                                int consultanmtId = Integer.parseInt(getRestParamsName(Utilclass.consultant_id));
+                                System.out.println("Consultant id login===="+consultanmtId);
+
+                                if (consultanmtId == 0) {
+                                    Utilclass.isConsultantModeOn = false;
+                                }
+                                else
+                                {
+                                    Utilclass.isConsultantModeOn = true;
+                                }
+
                                 Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();

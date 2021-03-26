@@ -130,6 +130,8 @@ public class ContactUs extends BaseActivity {
             obj.put("token", getRestParamsName(Utilclass.token));
 
 
+            System.out.println("before to save contact us==="+m+"==="+getApiUrl() + "contact-us");
+
             serverHandler.sendToServer(ContactUs.this, getApiUrl() + "contact-us", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
                 @Override
                 public void getRespone(String dta, ArrayList<Object> respons) {

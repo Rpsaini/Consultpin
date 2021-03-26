@@ -28,4 +28,9 @@
     <color name="yellow_color">#EFC014</color>
 
 
+    <color name="textcolor">#7B7B7B</color>
+    <color name="light_text_background">#F9F9F9</color>
+    <color name="light_text_background_detail">#F1F1F1</color>
+    <color name="black_color">#000</color>
+
 </resources>

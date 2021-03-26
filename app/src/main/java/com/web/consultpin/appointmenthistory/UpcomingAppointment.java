@@ -53,7 +53,6 @@ public class UpcomingAppointment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
 
         if (isVisibleToUser && isResumed()) {
-            System.out.println("List fragment called===>>>");
             getAppointmentHistory();
         }
     }
@@ -64,7 +63,7 @@ public class UpcomingAppointment extends Fragment {
 
         view=inflater.inflate(R.layout.fragment_upcoming_appointment, container, false);
         mainActivity=(MainActivity)getActivity();
-
+        getAppointmentHistory();
         return view;
     }
 
@@ -96,7 +95,7 @@ public class UpcomingAppointment extends Fragment {
             final Map<String, String> obj = new HashMap<>();
             obj.put("token", mainActivity.getRestParamsName(Utilclass.token) + "");
 
-            System.out.println("Consultant id===" + m + "====" + mainActivity.getApiUrl() + apiname);
+System.out.println("Befroe===?"+m);
 
 
             mainActivity.serverHandler.sendToServer(mainActivity, mainActivity.getApiUrl() + apiname, m, 0, obj, 20000, R.layout.progressbar, new CallBack() {

@@ -21,6 +21,9 @@ public class SplashScreen extends BaseActivity {
         changestatusBarColor(0);
         removeActionBar();
         initiateObj();
+
+        String deviceToken=savePreferences.reterivePreference(SplashScreen.this, Utilclass.device_Token)+"";
+        System.out.println("Device tttt==="+deviceToken);
 //        Utilclass.isConsultantModeOn=false;
 //
         String loginDetail=savePreferences.reterivePreference(SplashScreen.this, Utilclass.loginDetail).toString();

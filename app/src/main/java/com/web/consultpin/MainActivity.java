@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.app.dialogsnpickers.DialogCallBacks;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.UriLoader;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.navigation.NavigationView;
@@ -42,7 +43,6 @@ import androidx.appcompat.widget.Toolbar;
 
 //cTrf8iWVRnCYhbhAY2d3bn:APA91bGxxQOpA6FoDgO7VpEphA3xg-mlNzzDtL-TgP--E0_WnK-kRXyomuF3OUOVFuCoAh7EuRXgCMFFSMzz9uXU4kjegRFzrW5nnkX0cdPpsZzLqNvwzuHfj6seK8__VxRwY9dOzlk4
 public class MainActivity extends BaseActivity {
-
     private LinearLayout commonBottomBar;
     DrawerLayout drawer;
     private Fragment commonFragments;
@@ -345,13 +345,16 @@ public class MainActivity extends BaseActivity {
 
     public void logout()
     {
+
+
+        String deviceToken=savePreferences.reterivePreference(MainActivity.this, Utilclass.device_Token)+"";
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.app_name), MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.commit();
         editor.apply();
 
-        savePreferences.savePreferencesData(this,"done","tutorial");
+        savePreferences.savePreferencesData(this,deviceToken,Utilclass.device_Token);
         Intent intent = new Intent(MainActivity.this, SplashScreen.class);
         startActivity(intent);
         finishAffinity();
@@ -372,6 +375,7 @@ public class MainActivity extends BaseActivity {
         LinearLayout ll_switch_to_user = findViewById(R.id.ll_switch_to_user);
         LinearLayout become_consultant = findViewById(R.id.become_consultant);
 
+        System.out.println("Consultant id===="+consultanmtId);
 
         if (consultanmtId == 0)
           {

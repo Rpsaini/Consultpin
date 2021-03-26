@@ -79,8 +79,9 @@ public class AppointMentHistoryFrg extends Fragment {
 
     private void appointmentTabs() {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("HISTORY"));
         tabLayout.addTab(tabLayout.newTab().setText("UPCOMING"));
+        tabLayout.addTab(tabLayout.newTab().setText("HISTORY"));
+
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = (ViewPager)view. findViewById(R.id.pager);

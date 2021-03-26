@@ -73,6 +73,7 @@ public class AccountInformation extends BaseActivity {
         getSupportActionBar().hide();
         initiateObj();
         init();
+        hideKeyboard(this);
 
     }
 

@@ -5,6 +5,8 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.web.consultpin.Utilclass;
 
 import retrofit2.Retrofit;
@@ -37,10 +39,15 @@ public class ApiProduction {
     }
 
     private Retrofit provideRestAdapter() {
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         return new Retrofit.Builder()
                 .baseUrl(Utilclass.baseUrl)
                 .client(OkHttpProduction.getOkHttpClient(context, true))
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }

@@ -1,5 +1,6 @@
 package com.web.consultpin.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,18 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
+import com.web.consultpin.Utilclass;
+import com.web.consultpin.chat.ChatActivity;
 import com.web.consultpin.events.EventRequestActivity;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ListOfChatUsers extends RecyclerView.Adapter<ListOfChatUsers.MyViewHolder> {
 
     private ArrayList<JSONObject> datAr;
     private MainActivity pActivity;
-
 
 
     public ListOfChatUsers(ArrayList<JSONObject> ar, MainActivity paActiviity) {
@@ -33,8 +37,7 @@ public class ListOfChatUsers extends RecyclerView.Adapter<ListOfChatUsers.MyView
 
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         LinearLayout ll_list_of_event;
         ImageView chat_user_image;
         TextView chat_user_name, chat_speciality;
@@ -42,14 +45,10 @@ public class ListOfChatUsers extends RecyclerView.Adapter<ListOfChatUsers.MyView
 
         public MyViewHolder(View view) {
             super(view);
-
-
             ll_list_of_event = view.findViewById(R.id.ll_list_of_event);
             chat_user_name = view.findViewById(R.id.chat_user_name);
             chat_speciality = view.findViewById(R.id.chat_speciality);
-
-
-
+            chat_user_image = view.findViewById(R.id.chat_user_image);
         }
     }
 
@@ -66,12 +65,51 @@ public class ListOfChatUsers extends RecyclerView.Adapter<ListOfChatUsers.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         try {
-            //JSONObject jsonObject = datAr.get(position);
+            final JSONObject jsonObject = datAr.get(position);
 
-            }
-           catch(Exception e) {
+
+            holder.chat_user_name.setText(jsonObject.getString("name"));
+
+            showImage(jsonObject.getString("profile_pic"), holder.chat_user_image);
+            holder.ll_list_of_event.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try
+                    {
+                        Intent intent = new Intent(pActivity, ChatActivity.class);
+                        intent.putExtra(Utilclass.appointment_id, jsonObject.getString("appointment_id"));
+                        intent.putExtra(Utilclass.username, jsonObject.getString("name"));
+                        intent.putExtra(Utilclass.receiver_id, jsonObject.getString("receiver_user_id"));
+                        intent.putExtra(Utilclass.sender_id, jsonObject.getString("sender_user_id"));
+                        intent.putExtra(Utilclass.callFrom, "chatList");
+
+                        if(jsonObject.has("sender_consultant_id"))
+                        {
+                            intent.putExtra(Utilclass.sender_consultant_id, jsonObject.getString("sender_consultant_id"));
+                            intent.putExtra(Utilclass.receiver_consultant_id, "0");
+
+                        }
+                        else if(jsonObject.has("receiver_consultant_id"))
+                        {
+
+                            intent.putExtra(Utilclass.sender_consultant_id, "0");
+                            intent.putExtra(Utilclass.receiver_consultant_id, jsonObject.getString("receiver_consultant_id"));
+                        }
+                        pActivity.startActivity(intent);
+
+                       }
+                      catch(Exception e)
+                       {
+                        e.printStackTrace();
+                       }
+                }
+            });
+
+
+
+        } catch (Exception e) {
             e.printStackTrace();
-          }
+        }
 
     }
 
@@ -81,8 +119,9 @@ public class ListOfChatUsers extends RecyclerView.Adapter<ListOfChatUsers.MyView
     }
 
 
-    private void showImage(final String url, final ImageView header_img)
-    {
+    private void showImage(final String url, final ImageView header_img) {
+
+        System.out.println("Chat data==="+url);
         pActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

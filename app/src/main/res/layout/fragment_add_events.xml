@@ -20,6 +20,37 @@
 
 
             <fontspackageForTextView.BoldMedium
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                style="@style/edittext_style_14_black"
+                android:text="@string/event_name"
+                >
+            </fontspackageForTextView.BoldMedium>
+
+            <fontpackageforEdittext.Regular
+                android:maxLength="200"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/ed_event_name"
+                android:background="@drawable/roundcorner_drawable"
+                android:layout_height="45dp"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:layout_width="match_parent"
+                style="@style/edittext_style_12_grey"
+                android:hint="@string/event_name"
+                android:layout_marginStart="10dp"
+                android:gravity="left|center"
+                android:padding="5dp"
+                ></fontpackageforEdittext.Regular>
+
+
+            <fontspackageForTextView.BoldMedium
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_height="wrap_content"

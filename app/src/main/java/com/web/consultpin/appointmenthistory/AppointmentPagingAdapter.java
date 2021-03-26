@@ -21,12 +21,14 @@ public class AppointmentPagingAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                AppointmentHistory tab1 = new AppointmentHistory();
+                UpcomingAppointment tab1 = new UpcomingAppointment();
 
                 return tab1;
             case 1:
 
-                UpcomingAppointment tab2 = new UpcomingAppointment();
+
+
+                AppointmentHistory tab2 = new AppointmentHistory();
 
                 return tab2;
 

@@ -20,6 +20,7 @@ public interface AddEventInterface {
     @POST("create-event-request")
     Observable<ResponseBody> saveEvent(
             @Part("consultant_id") RequestBody consultant_id,
+            @Part("event_name") RequestBody event_name,
             @Part("description") RequestBody description,
             @Part("start_date") RequestBody event_date,
             @Part("end_date") RequestBody event_time,
@@ -37,6 +38,7 @@ public interface AddEventInterface {
     @POST("create-event-request")
     Observable<ResponseBody> saveEventWithotimage(
             @Part("consultant_id") RequestBody consultant_id,
+            @Part("event_name") RequestBody event_name,
             @Part("description") RequestBody description,
             @Part("start_date") RequestBody event_date,
             @Part("end_date") RequestBody event_time,

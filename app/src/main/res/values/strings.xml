@@ -213,6 +213,12 @@
     <string name="contactus">Contact us</string>
     <string name="enterfullname">Enter your fullname</string>
     <string name="enter_message">Enter message</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="event_name">Event name</string>
+    <string name="enter_event_name"> Enter Event name</string>
+
+
+    <string name="wouldyouliketochangeprofile">Would you like to change profile status?</string>
 
     <string name="consultantsaved">Your request to become consultant has been sent successfully</string>
 

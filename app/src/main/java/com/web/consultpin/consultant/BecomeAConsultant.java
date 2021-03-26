@@ -90,8 +90,8 @@ public class BecomeAConsultant extends BaseActivity {
         getSupportActionBar().hide();
         subcategory_id_Ar=new LinkedHashMap<>();
         initiateObj();
-
         init();
+        hideKeyboard(this);
     }
 
     private void init()

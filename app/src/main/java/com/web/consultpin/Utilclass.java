@@ -24,6 +24,12 @@ public class Utilclass
     public static String history="history";
     public static String upcoming="upcoming";
     public static String baseUrl="http://178.62.28.106/v1/";
+    public static String username="username";
+    public static String receiver_id="receiver_id";
+    public static String sender_id="sender_id";
+    public static String receiver_consultant_id="receiver_consultant_id";
+    public static String sender_consultant_id="sender_consultant_id";
+    public static String callFrom="callFrom";
 
 
 

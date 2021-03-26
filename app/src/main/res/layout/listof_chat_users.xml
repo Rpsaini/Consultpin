@@ -56,6 +56,7 @@
 
 
             <fontspackageForTextView.Regular
+                android:visibility="gone"
                 android:id="@+id/chat_speciality"
                 style="@style/edittext_style_12_purple"
                 android:layout_width="match_parent"

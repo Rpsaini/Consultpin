@@ -56,6 +56,17 @@
                 android:maxLines="1"
                 android:text="text"></fontspackageForTextView.BoldMedium>
 
+            <fontspackageForTextView.BoldMedium
+                android:id="@+id/event_des"
+                style="@style/edittext_style_12_grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:singleLine="true"
+                android:maxLines="2"
+                android:text="text"></fontspackageForTextView.BoldMedium>
+
             <fontspackageForTextView.Regular
                 android:id="@+id/appointment_time"
                 style="@style/edittext_style_12_grey"

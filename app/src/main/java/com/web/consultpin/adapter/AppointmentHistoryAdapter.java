@@ -22,13 +22,17 @@ import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
+import com.web.consultpin.chat.ChatActivity;
 import com.web.consultpin.consultant.TimeManagement;
 import com.web.consultpin.jitsi.MAinJistsiActivity;
+import com.web.consultpin.main.BaseActivity;
 //import com.web.consultpin.initiatecall.InitiateCallWebview;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,8 +48,6 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         datAr = ar;
         pActivity = paActiviity;
         this.type = type;
-
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -55,7 +57,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         ImageView consultant_image;
         TextView consultant_name, time_duration, appointment_time, amount;
 
-        TextView txt_reject, txt_accept, appointment_status,txt_cancel;
+        TextView txt_reject, txt_accept, appointment_status, txt_cancel;
 
 
         public MyViewHolder(View view) {
@@ -92,6 +94,9 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
 
             JSONObject jsonObject = datAr.get(position);
+
+            System.out.println("user data===" + jsonObject);
+
             final String appointment_id = jsonObject.getString("appointment_id");
             String user_name = jsonObject.getString("user_name");
             String duration = jsonObject.getString("appointment_duration");
@@ -103,14 +108,15 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             final String meeting_url = jsonObject.getString("meeting_url");
 
 
+            final String sender_user_id = jsonObject.getString("sender_user_id");
+            final String receiver_user_id = jsonObject.getString("receiver_user_id");
+
+
             //0 pending  1 apporved,2 rejected,3 cancelled,4 completed
 
-            if(!Utilclass.isConsultantModeOn)
-            {
-                if (appointment_status.equalsIgnoreCase("0"))
-                {
-                    if(type.equalsIgnoreCase(Utilclass.upcoming))
-                     {
+            if (!Utilclass.isConsultantModeOn) {
+                if (appointment_status.equalsIgnoreCase("0")) {
+                    if (type.equalsIgnoreCase(Utilclass.upcoming)) {
                         holder.ll_status.setVisibility(View.GONE);
                         holder.appointment_status.setText(pActivity.getString(R.string.pending));
                         holder.txt_cancel.setVisibility(View.VISIBLE);
@@ -121,42 +127,94 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                                 showConfirmDialog(appointment_id, pActivity.getResources().getString(R.string.cancel_appointment), "3", position);
                             }
                         });
-                    }
-                    else if(type.equalsIgnoreCase(Utilclass.history))
-                    {
+                    } else if (type.equalsIgnoreCase(Utilclass.history)) {
                         holder.ll_status.setVisibility(View.GONE);
                         holder.appointment_status.setText(pActivity.getString(R.string.Completed));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
                         holder.txt_cancel.setVisibility(View.GONE);
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 1, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
+                            }
+                        });
                     }
-                }
-                else {
+                } else {
                     holder.ll_status.setVisibility(View.GONE);
                     holder.txt_cancel.setVisibility(View.GONE);
 
-                     if (appointment_status.equalsIgnoreCase("0"))
-                     {
+                    if (appointment_status.equalsIgnoreCase("0")) {
                         holder.appointment_status.setText(pActivity.getString(R.string.pending));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
                         holder.ll_status.setVisibility(View.INVISIBLE);
                         holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,0);
+
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 0, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
 
 
                             }
                         });
-                     }
-                   else if (appointment_status.equalsIgnoreCase("1"))
-                     {
+                    } else if (appointment_status.equalsIgnoreCase("1")) {
                         holder.appointment_status.setText(pActivity.getString(R.string.Approved));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
                         holder.ll_status.setVisibility(View.INVISIBLE);
                         holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,1);
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+
+
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 1, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
                             }
                         });
                     } else if (appointment_status.equalsIgnoreCase("2")) {
@@ -168,60 +226,133 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                     } else if (appointment_status.equalsIgnoreCase("5")) {
                         holder.appointment_status.setText(pActivity.getString(R.string.Completed));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+
+                        holder.ll_status.setVisibility(View.INVISIBLE);
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 1, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
+                            }
+                        });
                     }
                 }
 
             }
             else
-            {
-                if (appointment_status.equalsIgnoreCase("0"))
                 {
-                    if(type.equalsIgnoreCase(Utilclass.upcoming))
-                    {
+                if (appointment_status.equalsIgnoreCase("0")) {
+                    if (type.equalsIgnoreCase(Utilclass.upcoming)) {
                         holder.ll_status.setVisibility(View.VISIBLE);
                         holder.txt_cancel.setVisibility(View.GONE);
                         holder.appointment_status.setText(pActivity.getString(R.string.pending));
-                    }
-                    else
-                    {
+                    } else {
                         holder.ll_status.setVisibility(View.GONE);
                         holder.txt_cancel.setVisibility(View.GONE);
                         holder.appointment_status.setText(pActivity.getString(R.string.Completed));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 1, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
+                            }
+                        });
+
+
                     }
 
-                }
-                else {
+                } else {
+                    System.out.println("Inside else====???"+position+"==="+appointment_status);
                     holder.ll_status.setVisibility(View.GONE);
                     holder.txt_cancel.setVisibility(View.GONE);
-                    if(appointment_status.equalsIgnoreCase("0"))
+                    if (appointment_status.equalsIgnoreCase("0"))
                     {
                         holder.appointment_status.setText(pActivity.getString(R.string.pending));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
                         holder.ll_status.setVisibility(View.INVISIBLE);
                         holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View v)
-                            {
-                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,0);
+                            public void onClick(View v) {
+
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+
+
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 0, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
                             }
                         });
-                    }
-
-                   else if(appointment_status.equalsIgnoreCase("1"))
-                    {
+                    } else if (appointment_status.equalsIgnoreCase("1")) {
                         holder.appointment_status.setText(pActivity.getString(R.string.Approved));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
                         holder.ll_status.setVisibility(View.INVISIBLE);
                         holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View v)
-                            {
-                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url,appointment_status,appointmentTime,duration,1);
+                            public void onClick(View v) {
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 1, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
                             }
                         });
                     }
-                    else if (appointment_status.equalsIgnoreCase("2")) {
+                       else if (appointment_status.equalsIgnoreCase("2")) {
                         holder.appointment_status.setText(pActivity.getString(R.string.Rejected));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.yellow_color));
                     } else if (appointment_status.equalsIgnoreCase("3")) {
@@ -230,6 +361,30 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                     } else if (appointment_status.equalsIgnoreCase("5")) {
                         holder.appointment_status.setText(pActivity.getString(R.string.Completed));
                         holder.appointment_status.setTextColor(pActivity.getResources().getColor(R.color.green_color));
+                        holder.ll_status.setVisibility(View.INVISIBLE);
+                        holder.ll_best_restaurant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String sender_consultant_id = "0", receiver_consultant_id = "0";
+
+                                if (jsonObject.has("sender_consultant_id")) {
+                                    try {
+                                        sender_consultant_id = jsonObject.getString("sender_consultant_id");
+                                    } catch (Exception e) {
+
+                                    }
+
+                                } else if (jsonObject.has("receiver_consultant_id")) {
+                                    try {
+                                        receiver_consultant_id = jsonObject.getString("receiver_consultant_id");
+                                    } catch (Exception e) {
+                                    }
+
+                                }
+                                showUserDetails(user_name, profilePic, fee, appointment_id, consultant_id, meeting_url, appointment_status, appointmentTime, duration, 1, sender_consultant_id, receiver_consultant_id, sender_user_id, receiver_user_id);
+                            }
+                        });
+
                     }
                 }
             }
@@ -296,7 +451,6 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         TextView txt_yes = dialog.findViewById(R.id.txt_yes);
 
         txt_messagee.setText(Msg);
-
 
 
         txt_no.setOnClickListener(new View.OnClickListener() {
@@ -371,7 +525,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     }
 
 
-    private void showUserDetails(String username, String userimage, String fee, String appointmentId, String consultant_id, String videocallUrl,String appointment_status,String appointmentTime,String duration,int appointmentSTatus) {
+    private void showUserDetails(String username, String userimage, String fee, String appointmentId, String consultant_id, String videocallUrl, String appointment_status, String appointmentTime, String duration, int appointmentSTatus, final String sender_consultant_id, final String receiver_consultant_id, final String sender_user_id, final String receiver_user_id) {
         try {
             SimpleDialog simpleDialog = new SimpleDialog();
             Dialog dialog = simpleDialog.simpleDailog(pActivity, R.layout.dialog_call_initiate, new ColorDrawable(android.graphics.Color.TRANSPARENT), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, false);
@@ -390,36 +544,29 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             txt_username.setText(username);
             showImage(userimage, txt_user_profile_img);
             txt_fee.setText(fee + " " + pActivity.getResources().getString(R.string.lirasymbol));
-            time_duration.setText(duration+"Minutes/");
+            time_duration.setText(duration + "Minutes/");
             txt_date.setText(appointmentTime);
 
 
-            if(appointmentSTatus==0)
-            {
+            if (appointmentSTatus == 0) {
                 ll_showVideoChat.setVisibility(View.GONE);
                 img_edit.setVisibility(View.VISIBLE);
 
                 ll_edit_appointment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(pActivity, TimeManagement.class);
-                        intent.putExtra(Utilclass.appointment_date,txt_date.getText().toString());
+                        Intent intent = new Intent(pActivity, TimeManagement.class);
+                        intent.putExtra(Utilclass.appointment_date, txt_date.getText().toString());
                         pActivity.startActivity(intent);
                         dialog.dismiss();
 
                     }
                 });
-            }
-            else
-            {
+            } else {
                 ll_showVideoChat.setVisibility(View.VISIBLE);
                 img_edit.setVisibility(View.GONE);
             }
 
-
-
-
-            //jsonObject.getString("");
 
             img_hide.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -428,21 +575,68 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
                 }
             });
 
-            txt_videochat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(pActivity, MAinJistsiActivity.class);
-                    intent.putExtra(Utilclass.appointment_id, appointmentId);
-                    intent.putExtra(Utilclass.consultant_id, consultant_id);
-                    intent.putExtra(Utilclass.videocall, videocallUrl);
-                    intent.putExtra(Utilclass.first_name, username);
-                    intent.putExtra(Utilclass.imageUrl, userimage);
 
-                    pActivity.startActivityForResult(intent,Utilclass.appointmentRequsestcode);
-                    dialog.dismiss();
+            if(type.equalsIgnoreCase(Utilclass.history))
+            {
+                txt_videochat.setEnabled(false);
+                txt_videochat.setAlpha(.4f);
+            }
+            else
+            {
+                txt_videochat.setEnabled(true);
+                txt_videochat.setAlpha(1f);
+            }
 
-                }
-            });
+
+            String currentTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            if(BaseActivity.compareTwoDates(currentTime,appointmentTime))
+            {
+                txt_videochat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(pActivity, MAinJistsiActivity.class);
+                        intent.putExtra(Utilclass.appointment_id, appointmentId);
+                        intent.putExtra(Utilclass.consultant_id, consultant_id);
+                        intent.putExtra(Utilclass.videocall, videocallUrl);
+                        intent.putExtra(Utilclass.first_name, username);
+                        intent.putExtra(Utilclass.imageUrl, userimage);
+
+                        pActivity.startActivityForResult(intent, Utilclass.appointmentRequsestcode);
+                        dialog.dismiss();
+
+                    }
+                });
+
+                txt_chat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        try {
+                            dialog.dismiss();
+                            Intent intent = new Intent(pActivity, ChatActivity.class);
+                            intent.putExtra(Utilclass.appointment_id, appointmentId);
+                            intent.putExtra(Utilclass.username, username);
+                            intent.putExtra(Utilclass.receiver_id, receiver_user_id);
+                            intent.putExtra(Utilclass.sender_id, sender_user_id);
+                            intent.putExtra(Utilclass.receiver_consultant_id, receiver_consultant_id);
+                            intent.putExtra(Utilclass.sender_consultant_id, sender_consultant_id);
+                            intent.putExtra(Utilclass.callFrom, "appointment");
+                            pActivity.startActivity(intent);
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            else
+            {
+                txt_chat.setAlpha(.5f);
+                txt_videochat.setAlpha(.5f);
+            }
+
+
+
 
 
         } catch (Exception e) {
