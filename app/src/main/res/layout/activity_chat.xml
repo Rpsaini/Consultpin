@@ -47,24 +47,38 @@
             android:paddingEnd="80dp"
             android:text=""></fontpackageforEdittext.Regular>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_margin="3dp"
-            android:id="@+id/rr_postmessage"
             android:padding="3dp"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
+            android:orientation="horizontal"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/blue_drawable"
+
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/img_postmessage"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/compass"
-                app:tint="@color/white"></ImageView>
-        </RelativeLayout>
+                app:tint="@color/buttonskyblue"></ImageView>
+
+
+            <ImageView
+                android:id="@+id/img_more"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/imagegallery"
+                ></ImageView>
+        </LinearLayout>
 
     </RelativeLayout>
 

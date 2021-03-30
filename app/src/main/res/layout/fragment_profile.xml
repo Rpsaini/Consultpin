@@ -7,7 +7,6 @@
 
 
     <ScrollView
-
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         >
@@ -354,10 +353,29 @@
     </LinearLayout>
 
 
+        <fontspackageForTextView.Regular
+            android:visibility="gone"
+            android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/txt_resetpassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/resetpassword"
+            android:textColor="@color/black_color"
+            android:textSize="12dp">
+        </fontspackageForTextView.Regular>
+
+
 
     </LinearLayout>
 
+
+
+
     </ScrollView>
+
 
 
 

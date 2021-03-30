@@ -39,6 +39,7 @@ import com.web.consultpin.interfaces.RxAPICallHelper;
 import com.web.consultpin.interfaces.RxAPICallback;
 import com.web.consultpin.main.BaseActivity;
 import com.web.consultpin.registration.LoginActivity;
+import com.web.consultpin.registration.ResetPassword;
 
 import org.json.JSONObject;
 
@@ -66,7 +67,7 @@ public class EditProfileConsultant extends BaseActivity {
 
     private ImageView img_profile;
     private EditText ed_firstname, ed_lastname, ed_fee;
-    TextView tv_update;
+    TextView tv_update,txt_resetpassword;
     private String selectedPath = "";
     private String id = "", usertype = "";
 
@@ -97,6 +98,7 @@ public class EditProfileConsultant extends BaseActivity {
         ed_lastname = findViewById(R.id.ed_lastname);
         ed_fee = findViewById(R.id.ed_fee);
         tv_update = findViewById(R.id.tv_update);
+        txt_resetpassword = findViewById(R.id.txt_resetpassword);
 
         ed_firstname.setText(getRestParamsName("first_name"));
         ed_lastname.setText(getRestParamsName("last_name"));
@@ -123,6 +125,17 @@ public class EditProfileConsultant extends BaseActivity {
             id = getRestParamsName(Utilclass.user_id);
             usertype = "0";
         }
+
+
+
+
+        txt_resetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(EditProfileConsultant.this, ResetPassword.class);
+                startActivity(intent);
+            }
+        });
 
         update();
     }
@@ -172,15 +185,6 @@ public class EditProfileConsultant extends BaseActivity {
                     return;
                 }
 
-//                if (validationRule.checkEmptyString(ed_phone) == 0) {
-//                    alertDialogs.alertDialog(EditProfileConsultant.this, getResources().getString(R.string.Required), getResources().getString(R.string.enter_email), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-//                        @Override
-//                        public void getDialogEvent(String buttonPressed) {
-//
-//                        }
-//                    });
-//                    return;
-//                }
 
 
                 if (Utilclass.isConsultantModeOn) {

@@ -44,6 +44,9 @@ public class MessagingService extends FirebaseMessagingService {
         System.out.println("Inside messgae recived=samremitance===>" + remoteMessage);
         super.onMessageReceived(remoteMessage);
 
+
+        Intent intent = new Intent(Utilclass.callChatBroadCast);
+        sendBroadcast(intent);
         try {
             String loginDetail=new SavePreferences().reterivePreference(MessagingService.this, Utilclass.loginDetail).toString();
             if(loginDetail.length()!=0)
@@ -53,6 +56,21 @@ public class MessagingService extends FirebaseMessagingService {
                 JSONObject jsonObject = new JSONObject(npData);
                 System.out.println("dataValue====" + jsonObject);
                 showNotification(jsonObject.getString("title"), jsonObject.getString("message"));
+
+//                  {
+//                      "image": null,
+//                          "is_background": null,
+//                          "payload": {
+//                      "notification_type": "signup-successful",
+//                              "badge": "16",
+//                              "type": "signal"
+//                  },
+//                      "title": "New Message Arrived from \"Android consultant\"",
+//                          "message": "hello all ",
+//                          "timestamp": "2021-03-30 17:25:23"
+//                  }
+
+
               }
         }
         catch(Exception e)

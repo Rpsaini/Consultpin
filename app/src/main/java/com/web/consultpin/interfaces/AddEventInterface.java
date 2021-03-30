@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -78,6 +79,29 @@ public interface AddEventInterface {
             @Header("token") String authHeader
         );
 
+
+
+    @Multipart
+    @POST("send-chat-message")
+    Observable<ResponseBody> chatWithImage(
+            @Part("appointment_id") RequestBody consultant_id,
+            @Part("receiver_user_id") RequestBody user_id,
+            @Part("sender_user_id") RequestBody description,
+            @Part("message") RequestBody event_date,
+            @Part("sender_consultant_id") RequestBody event_time,
+            @Part("receiver_consultant_id") RequestBody type,
+            @Header("token") String authHeader,
+            @Part MultipartBody.Part image,
+            @Part("profile_pic") RequestBody name
+
+    );
+
+ //    RequestBody appointment_id = RequestBody.create(MediaType.parse("text/plain"), getIntent().getStringExtra(Utilclass.appointment_id));
+//    RequestBody receiver_id = RequestBody.create(MediaType.parse("text/plain"), getIntent().getStringExtra(Utilclass.receiver_id));
+//    RequestBody sender_id = RequestBody.create(MediaType.parse("text/plain"), getIntent().getStringExtra(Utilclass.sender_id));
+//    RequestBody msg = RequestBody.create(MediaType.parse("text/plain"), "");
+//    RequestBody sender_consultant_id = RequestBody.create(MediaType.parse("text/plain"),getIntent().getStringExtra(Utilclass.sender_consultant_id));
+//    RequestBody receiver_consultant_id = RequestBody.create(MediaType.parse("text/plain"),getIntent().getStringExtra(Utilclass.receiver_consultant_id));
 
 
 

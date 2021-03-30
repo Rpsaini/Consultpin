@@ -30,6 +30,7 @@ public class Utilclass
     public static String receiver_consultant_id="receiver_consultant_id";
     public static String sender_consultant_id="sender_consultant_id";
     public static String callFrom="callFrom";
+    public static String callChatBroadCast="com.chatbroadcast";
 
 
 

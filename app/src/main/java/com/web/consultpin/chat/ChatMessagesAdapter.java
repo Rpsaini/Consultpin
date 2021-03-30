@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,6 +12,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 
@@ -23,6 +29,7 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<ChatMessagesAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
         LinearLayout ll_myview,ll_you;
         TextView txt_my_text,txt_mytime,txt_you,txt_you_time;
+        ImageView img_youfile,img_myfile;
 
         public MyViewHolder(View view) {
             super(view);
@@ -33,6 +40,9 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<ChatMessagesAdapte
             ll_you = view.findViewById(R.id.ll_you);
             txt_you = view.findViewById(R.id.txt_you);
             txt_you_time = view.findViewById(R.id.txt_you_time);
+
+            img_youfile = view.findViewById(R.id.img_youfile);
+            img_myfile = view.findViewById(R.id.img_myfile);
 
 
 
@@ -64,25 +74,27 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<ChatMessagesAdapte
             final JSONObject pos = (JSONObject) moviesList.get(position);
 
 
-//            "id": "112",
-//                    "user_id": "0",
-//                    "consultant_id": "0",
-//                    "appointment_id": "0",
-//                    "sender_id": "93",
-//                    "receiver_id": "72",
-//                    "message": "Hi chander sir",
-//                    "attachment_name": "",
-//                    "file_ext": "",
-//                    "mime_type": "",
-//                    "message_date_time": "2021-03-15 13:59:32",
-//                    "ip_address": "106.66.42.13"
-
             if(pos.getString("sender_id").equalsIgnoreCase(ira1.getRestParamsName(Utilclass.user_id)))
             {
                 holder.txt_my_text.setText(pos.getString("message"));
                 holder.txt_mytime.setText(pos.getString("message_date_time"));
                 holder.ll_myview.setVisibility(View.VISIBLE);
                 holder.ll_you.setVisibility(View.GONE);
+
+
+                if(pos.getString("message").length()==0)
+                {
+                    holder.txt_my_text.setVisibility(View.GONE);
+                    holder.img_myfile.setVisibility(View.VISIBLE);
+                    showImage(pos.getString("attachment"),holder.img_myfile);
+
+                }
+                else
+                {
+                    holder.txt_my_text.setVisibility(View.VISIBLE);
+                    holder.img_myfile.setVisibility(View.GONE);
+                }
+
             }
             else
             {
@@ -90,20 +102,23 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<ChatMessagesAdapte
                 holder.txt_you_time.setText(pos.getString("message_date_time"));
                 holder.ll_myview.setVisibility(View.GONE);
 
+                if(pos.getString("message").length()==0)
+                {
+                    holder.txt_you.setVisibility(View.GONE);
+                    holder.img_youfile.setVisibility(View.VISIBLE);
+                    showImage(pos.getString("attachment"),holder.img_youfile);
+                }
+                else
+                {
+                    holder.txt_you.setVisibility(View.VISIBLE);
+                    holder.img_youfile.setVisibility(View.GONE);
+                }
+
+
 
             }
 
 
-//            "TicketId": "57d7f5eb-df1a-4ac5-b95c-2206d3b43cef",
-//                    "Message": "description",
-//                    "LastUpdated": "Tuesday, 16 March 2021 10:41",
-//                    "status": "Success",
-//                    "ErrorMessage": "List Found",
-//                    "AttachFile": "",
-//                    "CreatedDate": "Tuesday, 16 March 2021 10:41",
-//                    "Title": "hello sub",
-//                    "Type": 1,
-//                    "IsMainMessage": true
 
 
 
@@ -129,4 +144,18 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<ChatMessagesAdapte
     }
 
 
-}
+    private void showImage(final String url, final ImageView header_img) {
+        System.out.println("Image url==" + url);
+        ira1.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(ira1)
+                        .load(url)
+                        .placeholder(R.drawable.placeholderimg)
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                        .into(header_img);
+            }
+        });
+
+    }
+    }

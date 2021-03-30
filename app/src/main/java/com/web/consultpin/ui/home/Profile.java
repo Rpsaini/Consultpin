@@ -24,6 +24,7 @@ import com.web.consultpin.Utilclass;
 
 import com.web.consultpin.consultant.TimeManagement;
 import com.web.consultpin.events.EventRequestActivity;
+import com.web.consultpin.registration.ResetPassword;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ public class Profile extends Fragment {
     private View view;
     private ImageView img_profile, img_edit_profile, profile_enable_disable;
     private String isprofileActive = "";
-    private TextView tv_username, tv_usermobile, tv_user_email, tv_professionalbg, tv_speciality, tv_fee, txt_setappointment, txt_event_request;
+    private TextView tv_username, tv_usermobile, tv_user_email, tv_professionalbg, tv_speciality, tv_fee, txt_setappointment, txt_event_request,resetpassword;
     private MainActivity mainActivity;
 
     public Profile() {
@@ -82,6 +83,7 @@ public class Profile extends Fragment {
         txt_setappointment = view.findViewById(R.id.txt_setappointment);
         txt_event_request = view.findViewById(R.id.txt_event_request);
         profile_enable_disable = view.findViewById(R.id.profile_enable_disable);
+        resetpassword = view.findViewById(R.id.txt_resetpassword);
 
         if (!Utilclass.isConsultantModeOn) {
             ll_consultant_layout.setVisibility(View.GONE);
@@ -141,6 +143,15 @@ public class Profile extends Fragment {
                     }
                 });
 
+            }
+        });
+
+
+        resetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), ResetPassword.class);
+                startActivity(intent);
             }
         });
     }

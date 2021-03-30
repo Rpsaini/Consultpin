@@ -1,8 +1,12 @@
 package com.web.consultpin;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
@@ -74,6 +78,8 @@ public class MainActivity extends BaseActivity {
         navigationMenu();
 
         switchUser();
+
+       // sendNotification();
     }
 
     @Override
@@ -442,6 +448,23 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
+
+
+
+
+//    private void callBroadCast()
+//    {
+//        Handler handler=new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        },2000);
+//
+//    }
+
 
 
 }

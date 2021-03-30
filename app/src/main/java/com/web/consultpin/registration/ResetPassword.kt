@@ -20,27 +20,45 @@ class ResetPassword : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
         initiateObj()
+        supportActionBar!!.hide()
         init();
     }
 
     fun init() {
         var et_password = findViewById<EditText>(R.id.et_password);
         var et_conf_password = findViewById<EditText>(R.id.et_conf_password);
+        var et_oldpaswword = findViewById<EditText>(R.id.et_oldpaswword);
         var tv_submit = findViewById<TextView>(R.id.tv_submit);
         var img_eye_password = findViewById<ImageView>(R.id.img_eye_password);
         var img_eye_conf_password = findViewById<ImageView>(R.id.img_eye_conf_password);
+        var img_eye_oldpassword = findViewById<ImageView>(R.id.img_eye_oldpassword);
 
         Otp = intent?.getStringExtra(Utilclass.otp).toString();
         email = intent?.getStringExtra(Utilclass.email).toString();
+
+
+        img_eye_oldpassword.setTag("0")
+        img_eye_oldpassword.setOnClickListener(View.OnClickListener { v ->
+            if (v.tag == "0") {
+                img_eye_oldpassword.setTag("1")
+                hideShowPassword(1, et_oldpaswword, img_eye_oldpassword)
+            } else {
+                img_eye_oldpassword.setTag("0")
+                hideShowPassword(0, et_oldpaswword, img_eye_oldpassword)
+            }
+        })
+
+
+
 
         img_eye_password.setTag("0")
         img_eye_password.setOnClickListener(View.OnClickListener { v ->
             if (v.tag == "0") {
                 img_eye_password.setTag("1")
-                hideShowPassword(1, et_password,img_eye_password)
+                hideShowPassword(1, et_password, img_eye_password)
             } else {
                 img_eye_password.setTag("0")
-                hideShowPassword(0, et_password,img_eye_password)
+                hideShowPassword(0, et_password, img_eye_password)
             }
         })
 
@@ -48,10 +66,10 @@ class ResetPassword : BaseActivity() {
         img_eye_conf_password.setOnClickListener(View.OnClickListener { v ->
             if (v.tag == "0") {
                 img_eye_conf_password.setTag("1")
-                hideShowPassword(1, et_conf_password,img_eye_conf_password)
+                hideShowPassword(1, et_conf_password, img_eye_conf_password)
             } else {
                 img_eye_conf_password.setTag("0")
-                hideShowPassword(0, et_conf_password,img_eye_conf_password)
+                hideShowPassword(0, et_conf_password, img_eye_conf_password)
             }
         })
 
@@ -61,6 +79,10 @@ class ResetPassword : BaseActivity() {
 
         tv_submit.setOnClickListener(View.OnClickListener {
             addClickEventEffet(tv_submit)
+
+            if (et_oldpaswword.text.toString().length == 0) {
+                alertDialogs.alertDialog(this, resources.getString(R.string.Required), resources.getString(R.string.enter_old_password), resources.getString(R.string.ok), "", DialogCallBacks { })
+            }
             if (et_password.text.toString().length == 0) {
                 alertDialogs.alertDialog(this, resources.getString(R.string.Required), resources.getString(R.string.enter_password), resources.getString(R.string.ok), "", DialogCallBacks { })
             } else if (et_conf_password.text.toString().length == 0) {
@@ -68,30 +90,31 @@ class ResetPassword : BaseActivity() {
             } else if (!et_conf_password.text.toString().equals(et_password.text.toString())) {
                 alertDialogs.alertDialog(this, resources.getString(R.string.Invalid), resources.getString(R.string.password_invalid), resources.getString(R.string.ok), "", DialogCallBacks { })
             } else {
-                callResetPassword(et_password.text.toString(), et_conf_password.text.toString());
+                callResetPassword(et_oldpaswword.text.toString(), et_password.text.toString(), et_conf_password.text.toString());
             }
 
         })
 
     }
 
-    fun callResetPassword(password: String, confirmPass: String) {
+    fun callResetPassword(oldPassword: String, password: String, confirmPass: String) {
 
         var map = LinkedHashMap<String, String>();
-        map.put("password", password);
-        map.put("confirm_password", confirmPass);
-        map.put("email", email);
-        map.put("otp", Otp);
+        map.put("old_password", oldPassword);
+        map.put("new_password", password);
+        map.put("confirm_new_password", confirmPass);
+        map.put("user_id", getRestParamsName(Utilclass.user_id));
         map["device_type"] = "android"
         map["device_token"] = getDeviceToken() + ""
 
-        System.out.println("Before---"+map)
+        System.out.println("Before---" + map)
 
-        val obj: MutableMap<String, String> = HashMap()
-//        obj["X-API-KEY"] = getXapiKey()
-//        obj["Token"] = savePreferences.reterivePreference(this, "session_token").toString() + ""
-//        obj["uid"] = getRestParamsName("uid")
-        serverHandler.sendToServer(this, getApiUrl() + "reset", map, 0, obj, 20000, R.layout.progressbar) { dta, respons ->
+
+
+        val obj: MutableMap<String, String> = java.util.HashMap()
+        obj["token"] = getRestParamsName(Utilclass.token) + ""
+
+        serverHandler.sendToServer(this, getApiUrl() + "updatepassword", map, 0, obj, 20000, R.layout.progressbar) { dta, respons ->
             try {
                 val jsonObject = JSONObject(dta)
                 if (jsonObject.getBoolean("status"))

@@ -84,7 +84,7 @@ public class AddEventsFragment extends Fragment {
     EditText ed_numberofparticipaints,ed_event_name;
     TextView selected_image;
     TextView tv_save;
-    int isPaid = 0;
+    int isPaid = 1;
     private String selectedPath = "";
     private JSONArray categoryArray;
     public String event_cat_id = "";
@@ -99,6 +99,25 @@ public class AddEventsFragment extends Fragment {
         AddEventsFragment fragment = new AddEventsFragment();
 
         return fragment;
+    }
+
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(ed_event_name!=null)
+        {
+            ed_event_name.setText("");
+            ed_paid_fee.setText("");
+            ed_numberofparticipaints.setText("");
+            ed_about_event.setText("");
+            selectedPath="";
+            isPaid=1;
+            img_ispaid.setImageResource(R.drawable.ic_button);
+            ed_paid_fee.setEnabled(true);
+
+        }
+
     }
 
     @Override
@@ -255,16 +274,11 @@ public class AddEventsFragment extends Fragment {
                     return;
                 }
 
-                if(eventRequestActivity.validationRule.checkEmptyString(ed_numberofparticipaints) == 0) {
-                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.numberofdays), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-                        @Override
-                        public void getDialogEvent(String buttonPressed) {
-                        }
-                    });
-                    return;
-                }
 
-                if(eventRequestActivity.validationRule.checkEmptyString(ed_paid_fee) == 0)
+
+
+
+                if(eventRequestActivity.validationRule.checkEmptyString(ed_paid_fee) == 0&&isPaid==1)
                 {
                     eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.enter_event_fee), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
@@ -274,6 +288,15 @@ public class AddEventsFragment extends Fragment {
                     return;
                 }
 
+
+                if(eventRequestActivity.validationRule.checkEmptyString(ed_numberofparticipaints) == 0) {
+                    eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.enter_number_of_participaints), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+                        }
+                    });
+                    return;
+                }
                 if(!BaseActivity.compareTwoDates(ed_date_end.getText().toString()+" "+ed_end_time.getText().toString(),ed_datefrom.getText().toString()+" "+ed_time_start.getText().toString()))
                 {
                     eventRequestActivity.alertDialogs.alertDialog(eventRequestActivity, getResources().getString(R.string.Required), getResources().getString(R.string.date_validation), getResources().getString(R.string.ok), "", new DialogCallBacks() {
@@ -442,7 +465,7 @@ public class AddEventsFragment extends Fragment {
 
                         Uri uri = getImageUri(eventRequestActivity, bmap);
                         selectedPath = getRealPathFromURI(uri);
-                        selected_image.setText(selectedPath);
+                        selected_image.setText(selectedPath.substring(selectedPath.lastIndexOf("/")+1,selectedPath.length()));
                         System.out.println("Selected camera image====" + selectedPath);
 
                     } catch (Exception e) {
@@ -459,7 +482,7 @@ public class AddEventsFragment extends Fragment {
 
                                 InputStream image_stream = eventRequestActivity.getContentResolver().openInputStream(selectedImage);
                                 bmap = BitmapFactory.decodeStream(image_stream);
-                                selected_image.setText(selectedPath);
+                                selected_image.setText(selectedPath.substring(selectedPath.lastIndexOf("/")+1,selectedPath.length()));
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -471,6 +494,12 @@ public class AddEventsFragment extends Fragment {
 
         }
     }
+
+
+
+
+
+
 
     static final int REQUEST_TAKE_PHOTO = 0;
     Uri photoURI;
@@ -563,6 +592,8 @@ public class AddEventsFragment extends Fragment {
 
     private void saveEvent() {
         Observable<ResponseBody> responseObservable=null;
+
+        System.out.println("Is paid==="+isPaid);
         AddEventInterface contestService = ApiProduction.getInstance(eventRequestActivity).provideService(AddEventInterface.class);
         RequestBody consultant_id = RequestBody.create(MediaType.parse("text/plain"), eventRequestActivity.getRestParamsName(Utilclass.consultant_id));
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), ed_about_event.getText().toString());

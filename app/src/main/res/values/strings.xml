@@ -51,6 +51,7 @@
     <string name="Required">Consultpin</string>
     <string name="Invalid">Invalid</string>
     <string name="enter_password">Enter Password</string>
+    <string name="enter_old_password">Enter old Password</string>
     <string name="enter_conf_password">Enter Confirm Password</string>
     <string name="password_invalid">Confirm Password does not matched</string>
     <string name="ok">Ok</string>
@@ -206,6 +207,7 @@
     <string name="cancelled_appointment">Cancelled Appointment</string>
     <string name="totalincome">Total Income</string>
     <string name="ongoining_appoints">Ongoing Appointments</string>
+    <string name="enter_number_of_participaints">Enter number of participants</string>
 
     <string name="fulllname">Full name</string>
     <string name="ed_message">Message</string>
@@ -216,6 +218,8 @@
     <string name="type_a_message">Type a message</string>
     <string name="event_name">Event name</string>
     <string name="enter_event_name"> Enter Event name</string>
+    <string name="resetpassword">Reset Password</string>
+    <string name="oldPassword">Old Password</string>
 
 
     <string name="wouldyouliketochangeprofile">Would you like to change profile status?</string>
