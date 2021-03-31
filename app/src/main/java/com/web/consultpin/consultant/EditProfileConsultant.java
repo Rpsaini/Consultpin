@@ -223,8 +223,11 @@ public class EditProfileConsultant extends BaseActivity {
 //choose proile
 
 
+    private  int browseType=0;
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void selectImage(int actionCode) {
+    private void selectImage(int actionCode)
+    {
+        browseType=actionCode;
         if (checkAndRequestPermissions() == 0) {
             if (actionCode == 0) {
                 dispatchTakePictureIntent();
@@ -333,7 +336,8 @@ public class EditProfileConsultant extends BaseActivity {
     }
 
 
-    private int checkAndRequestPermissions() {
+    private int checkAndRequestPermissions()
+    {
         int permissionCAMERA = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
         int readExternal = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         int writeExternal = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -360,11 +364,12 @@ public class EditProfileConsultant extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        System.out.println("Request permission result==="+requestCode+"===");
+        selectImage(browseType);
 
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+    public Uri getImageUri(Context inContext, Bitmap inImage)
+    {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);

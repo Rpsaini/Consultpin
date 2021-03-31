@@ -1,5 +1,6 @@
 package com.web.consultpin.consultant;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -379,9 +380,11 @@ public class BecomeAConsultant extends BaseActivity {
     }
 
 
+    private int browseType=0;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void selectImage(int actionCode) {
+        browseType=actionCode;
         if (checkAndRequestPermissions() == 0) {
             if (actionCode == 0) {
                 dispatchTakePictureIntent();
@@ -459,7 +462,13 @@ public class BecomeAConsultant extends BaseActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        selectImage(browseType);
+
+    }
 
 
 

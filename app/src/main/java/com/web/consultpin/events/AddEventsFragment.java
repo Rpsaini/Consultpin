@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -88,6 +89,7 @@ public class AddEventsFragment extends Fragment {
     private String selectedPath = "";
     private JSONArray categoryArray;
     public String event_cat_id = "";
+    private int browseType=0;
     private EventRequestActivity eventRequestActivity;
 
     public AddEventsFragment() {
@@ -443,6 +445,7 @@ public class AddEventsFragment extends Fragment {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void selectImage(int actionCode) {
+        browseType=actionCode;
         if (checkAndRequestPermissions() == 0) {
             if (actionCode == 0) {
                 dispatchTakePictureIntent();
@@ -503,6 +506,13 @@ public class AddEventsFragment extends Fragment {
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        selectImage(browseType);
+
+    }
 
 
 
