@@ -224,7 +224,9 @@
 
     <string name="wouldyouliketochangeprofile">Would you like to change profile status?</string>
 
-    <string name="consultantsaved">Your request to become consultant has been sent successfully</string>
+    <string name="consultantsaved">Appoitment request has been sent successfully.</string>
+    <string name="not_saved">Your consultant request not saved .</string>
+    <string name="event_type">Event type</string>
 
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 

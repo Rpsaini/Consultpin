@@ -116,6 +116,13 @@ public class AddEventsFragment extends Fragment {
             img_ispaid.setImageResource(R.drawable.ic_button);
             ed_paid_fee.setEnabled(true);
 
+            ed_time_start.setText("");
+            ed_end_time.setText("");
+            ed_datefrom.setText("");
+            ed_date_end.setText("");
+
+
+
         }
 
     }

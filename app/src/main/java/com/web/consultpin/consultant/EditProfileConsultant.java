@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -100,10 +101,24 @@ public class EditProfileConsultant extends BaseActivity {
         tv_update = findViewById(R.id.tv_update);
         txt_resetpassword = findViewById(R.id.txt_resetpassword);
 
-        ed_firstname.setText(getRestParamsName("first_name"));
-        ed_lastname.setText(getRestParamsName("last_name"));
 
-        showImage(getRestParamsName("profile_pic"), img_profile);
+
+
+
+
+        getIntent().getStringExtra("email");
+        getIntent().getStringExtra("phone");
+        getIntent().getStringExtra("fee");
+
+
+
+
+
+
+        ed_firstname.setText(getIntent().getStringExtra("firstname"));
+        ed_lastname.setText(getIntent().getStringExtra("lastname"));
+
+        showImage(getIntent().getStringExtra("profile_pic"), img_profile);
         TextView txt_fee_lable = findViewById(R.id.txt_fee_lable);
 
 
@@ -113,8 +128,8 @@ public class EditProfileConsultant extends BaseActivity {
             id = getRestParamsName(Utilclass.consultant_id);
             usertype = "1";
             try {
-                JSONObject consltantData = new JSONObject(savePreferences.reterivePreference(this, Utilclass.consultant_data).toString());
-                ed_fee.setText(consltantData.getString("rate"));
+             //   JSONObject consltantData = new JSONObject(savePreferences.reterivePreference(this, Utilclass.consultant_data).toString());
+                ed_fee.setText(getIntent().getStringExtra("fee"));
                }
                catch (Exception e) {
                 e.printStackTrace();
@@ -338,6 +353,15 @@ public class EditProfileConsultant extends BaseActivity {
             return 1;
         }
         return 0;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        System.out.println("Request permission result==="+requestCode+"===");
+
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {

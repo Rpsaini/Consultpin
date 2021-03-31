@@ -117,7 +117,7 @@ class EnterOTP : BaseActivity() {
             println("entered otp====" + enteredOtp + "===" + OTP)
 
             if (enteredOtp.equals(OTP)) {
-                val intent = Intent(this@EnterOTP, ResetPassword::class.java)
+                val intent = Intent(this@EnterOTP, RecoverPassword::class.java)
                 intent.putExtra(Utilclass.otp, OTP)
                 intent.putExtra(Utilclass.email, email)
                 startActivityForResult(intent, 1001)

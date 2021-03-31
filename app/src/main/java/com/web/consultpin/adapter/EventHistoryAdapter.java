@@ -146,12 +146,14 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             TextView event_number_of_user = eventDetaildialog.findViewById(R.id.event_number_of_user);
             TextView appointment_time = eventDetaildialog.findViewById(R.id.appointment_time);
             TextView event_desc = eventDetaildialog.findViewById(R.id.event_desc);
+            TextView event_type = eventDetaildialog.findViewById(R.id.event_type);
 
             event_name.setText(jsonObject.getString("event_name"));
             event_desc.setText(jsonObject.getString("description"));
             event_fee.setText(jsonObject.getString("event_fee") + pActivity.getResources().getString(R.string.lirasymbol));
             event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint) + "  :  " + jsonObject.getString("number_of_participants"));
             appointment_time.setText(jsonObject.getString("start_date") + " to  " + jsonObject.getString("end_date"));
+            event_type.setText(pActivity.getResources().getString(R.string.event_type)+" : "+jsonObject.getString("category_name"));
             showImage(jsonObject.getString("banner"), event_image);
 
 

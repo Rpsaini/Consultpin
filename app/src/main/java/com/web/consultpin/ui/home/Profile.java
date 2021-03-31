@@ -41,6 +41,9 @@ public class Profile extends Fragment {
     private TextView tv_username, tv_usermobile, tv_user_email, tv_professionalbg, tv_speciality, tv_fee, txt_setappointment, txt_event_request,resetpassword;
     private MainActivity mainActivity;
 
+    private String firstname,lastname,email,phone,profile_pic,fee;
+
+
     public Profile() {
         // Required empty public constructor
     }
@@ -91,6 +94,12 @@ public class Profile extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mainActivity, EditProfileConsultant.class);
+                    intent.putExtra("firstname",firstname);
+                    intent.putExtra("lastname",lastname);
+                    intent.putExtra("email",email);
+                    intent.putExtra("phone",phone);
+                    intent.putExtra("fee",fee);
+                    intent.putExtra("profile_pic",profile_pic);
                     startActivity(intent);
                 }
             });
@@ -100,6 +109,12 @@ public class Profile extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mainActivity, EditProfileConsultant.class);
+                    intent.putExtra("firstname",firstname);
+                    intent.putExtra("lastname",lastname);
+                    intent.putExtra("email",email);
+                    intent.putExtra("phone",phone);
+                    intent.putExtra("fee",fee);
+                    intent.putExtra("profile_pic",profile_pic);
                     startActivity(intent);
                 }
             });
@@ -133,7 +148,8 @@ public class Profile extends Fragment {
                         if (buttonPressed.equalsIgnoreCase("yes"))
                         {
 
-                            if (isprofileActive.equalsIgnoreCase("1")) {
+                            if (isprofileActive.equalsIgnoreCase("1"))
+                            {
                                 callApi(0);
                             } else {
 
@@ -198,14 +214,18 @@ public class Profile extends Fragment {
 
                                 JSONObject userdata = jsonObject.getJSONObject("data").getJSONObject("user_data");
 
+                                firstname=userdata.getString("first_name");
+                                lastname=userdata.getString("last_name");
+                                email=userdata.getString("email");
+                                phone=userdata.getString("phone");
+
+
                                 tv_username.setText(userdata.getString("first_name") + " " + userdata.getString("last_name"));
                                 tv_usermobile.setText(userdata.getString("phone"));
                                 tv_user_email.setText(userdata.getString("email"));
-                               if(jsonObject.getJSONObject("data").has("consultant_data")) {
+                               if(jsonObject.getJSONObject("data").has("consultant_data"))
+                               {
                                    JSONObject consultant_data = jsonObject.getJSONObject("data").getJSONObject("consultant_data");
-
-
-
                                    if (consultant_data.has("specialties")) {
                                        tv_speciality.setText(consultant_data.getString("specialties"));
                                    }
@@ -213,6 +233,7 @@ public class Profile extends Fragment {
                                        tv_professionalbg.setText(consultant_data.getString("experience"));
                                    }
                                    if (consultant_data.has("rate")) {
+                                       fee=consultant_data.getString("rate");
                                        tv_fee.setText(consultant_data.getString("rate") + "TL");
 
                                    }
@@ -228,6 +249,7 @@ public class Profile extends Fragment {
                                     profile_enable_disable.setImageResource(R.drawable.ic_unselect_button);
                                 }
 
+                                profile_pic=userdata.getString("profile_pic");
                                 showImage(userdata.getString("profile_pic"), img_profile);
 
 

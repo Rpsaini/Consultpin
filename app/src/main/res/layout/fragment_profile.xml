@@ -63,6 +63,7 @@
                >
 
             <ImageView
+                android:scaleType="fitXY"
                 android:id="@+id/img_profile"
                 android:layout_height="100dp"
                 android:layout_width="100dp"
@@ -87,8 +88,8 @@
 
             <LinearLayout
                 android:id="@+id/ll_detaillayout"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/profile_drawable"
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
@@ -133,7 +134,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         >
-                    <fontspackageForTextView.BoldMedium
+                    <fontspackageForTextView.Regular
                         android:id="@+id/tv_usermobile"
                         android:drawablePadding="5dp"
                         android:drawableLeft="@drawable/ic_call"
@@ -143,7 +144,7 @@
                         android:text="9090909090"
                         android:gravity="center"
                         style="@style/edittext_style_12_grey"
-                        ></fontspackageForTextView.BoldMedium>
+                        ></fontspackageForTextView.Regular>
                     </RelativeLayout>
 
 
@@ -153,7 +154,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         >
-                        <fontspackageForTextView.BoldMedium
+                        <fontspackageForTextView.Regular
                             android:maxLines="1"
                             android:id="@+id/tv_user_email"
                             android:drawablePadding="5dp"
@@ -164,7 +165,7 @@
                             android:text="email"
                             android:gravity="center"
                             style="@style/edittext_style_12_grey"
-                            ></fontspackageForTextView.BoldMedium>
+                            ></fontspackageForTextView.Regular>
                     </RelativeLayout>
 
 

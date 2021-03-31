@@ -169,7 +169,7 @@ public class RegistrationScreen extends BaseActivity {
                 }
                 if(!chk_termsselected.isChecked())
                 {
-                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Invalid), getResources().getString(R.string.select_term_condition), getResources().getString(R.string.Invalid), "", new DialogCallBacks() {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Response), getResources().getString(R.string.select_term_condition), getResources().getString(R.string.ok), "", new DialogCallBacks() {
                         @Override
                         public void getDialogEvent(String buttonPressed) {
 
@@ -235,7 +235,7 @@ public class RegistrationScreen extends BaseActivity {
 
                             System.out.println("Restaurant obj===" + jsonObject);
 
-                            alertDialogs.alertDialog(RegistrationScreen.this, "Response", jsonObject.getString("msg"), "Ok", "", new DialogCallBacks() {
+                            alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Required), jsonObject.getString("msg"), "Ok", "", new DialogCallBacks() {
                                 @Override
                                 public void getDialogEvent(String buttonPressed)
                                 {
@@ -246,7 +246,7 @@ public class RegistrationScreen extends BaseActivity {
                             });
 
                         } else {
-                            alertDialogs.alertDialog(RegistrationScreen.this, "Response", jsonObject.getString("msg"), "Ok", "", new DialogCallBacks() {
+                            alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Required), jsonObject.getString("msg"), "Ok", "", new DialogCallBacks() {
                                 @Override
                                 public void getDialogEvent(String buttonPressed) {
                                 }

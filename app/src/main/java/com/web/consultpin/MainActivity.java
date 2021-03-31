@@ -95,11 +95,38 @@ public class MainActivity extends BaseActivity {
 
 
 
-        callFragment(new Home(), "home");
+
+
+
+
         LinearLayout bnave_ll_home = findViewById(R.id.bnave_ll_home);
         LinearLayout bnave_ll_chat = findViewById(R.id.bnave_ll_chat);
         LinearLayout bnave_ll_appontment = findViewById(R.id.bnave_ll_appontment);
         LinearLayout bnave_ll_profile = findViewById(R.id.bnave_ll_profile);
+
+
+        int consultanmtId = Integer.parseInt(getRestParamsName(Utilclass.consultant_id));
+        ImageView img_switch_to_user = findViewById(R.id.img_switch_to_user);
+        TextView txt_switch_to_user = findViewById(R.id.txt_switch_to_user);
+        LinearLayout ll_switch_to_user = findViewById(R.id.ll_switch_to_user);
+        LinearLayout become_consultant = findViewById(R.id.become_consultant);
+
+
+        if (consultanmtId == 0)
+          {
+            Utilclass.isConsultantModeOn = false;
+            ll_switch_to_user.setVisibility(View.GONE);
+            become_consultant.setVisibility(View.VISIBLE);
+            callFragment(new Home(), "home");
+        } else {
+            Utilclass.isConsultantModeOn = true;
+            ll_switch_to_user.setVisibility(View.VISIBLE);
+            become_consultant.setVisibility(View.GONE);
+            txt_switch_to_user.setText(getResources().getString(R.string.switchtouser));
+            img_switch_to_user.setImageResource(R.drawable.ic_button);
+            callFragment(new ConsultantHome(), "chome");
+        }
+
 
         commonBottomBar = bnave_ll_home;
         doBottomBarSelection(bnave_ll_home);
@@ -448,22 +475,6 @@ public class MainActivity extends BaseActivity {
 
 
     }
-
-
-
-
-
-//    private void callBroadCast()
-//    {
-//        Handler handler=new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        },2000);
-//
-//    }
 
 
 

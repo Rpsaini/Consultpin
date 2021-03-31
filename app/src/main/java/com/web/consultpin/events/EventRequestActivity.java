@@ -82,7 +82,7 @@ public class EventRequestActivity extends BaseActivity {
         addEventsPager();
 
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText(getResources().getString(R.string.event_request));
+        toolbar_title.setText(getResources().getString(R.string.event));
         findViewById(R.id.toolbar_back_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

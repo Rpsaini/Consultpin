@@ -108,6 +108,17 @@
                 android:text=""></fontspackageForTextView.Regular>
 
 
+            <fontspackageForTextView.Regular
+                android:id="@+id/event_type"
+                style="@style/edittext_style_12_grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:singleLine="true"
+                android:text=""></fontspackageForTextView.Regular>
+
+
         </LinearLayout>
 
     </LinearLayout>

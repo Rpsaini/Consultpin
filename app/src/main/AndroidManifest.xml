@@ -32,9 +32,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consultpin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".chat.ChatActivity"></activity>
-<!--        <activity android:name=".chat.ChatListing" />-->
-        <activity android:name=".ui.home.ContactUs" />
+        <activity android:name=".registration.RecoverPassword"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".chat.ChatActivity"
+            android:screenOrientation="portrait"
+
+            /> <!-- <activity android:name=".chat.ChatListing" /> -->
+        <activity android:name=".ui.home.ContactUs"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".consultant.ListFavouritesdata"
             android:screenOrientation="portrait" />
