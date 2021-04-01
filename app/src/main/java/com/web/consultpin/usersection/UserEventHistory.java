@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,6 +20,7 @@ import com.app.vollycommunicationlib.CallBack;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
 import com.web.consultpin.adapter.EventHistoryAdapter;
+import com.web.consultpin.events.EventRequestActivity;
 import com.web.consultpin.events.ListOfEventsFragment;
 import com.web.consultpin.main.BaseActivity;
 
@@ -132,6 +134,55 @@ public class UserEventHistory extends BaseActivity {
             e.printStackTrace();
         }
     }
+
+    public void bookEvent(String eventfee, String eventId, final Dialog eventDetaildialog) {
+
+
+        try {
+            final Map<String, String> m = new HashMap<>();
+            m.put("fullname", getRestParamsName(Utilclass.first_name) + " " + Utilclass.last_name);
+            m.put("email", getRestParamsName(Utilclass.email));
+            m.put("phone", getRestParamsName(Utilclass.phone));
+            m.put("provience", "");
+            m.put("event_fee", eventfee);
+            m.put("event_id", eventId);
+
+            final Map<String, String> obj = new HashMap<>();
+            obj.put("token",getRestParamsName(Utilclass.token));
+
+
+            serverHandler.sendToServer(UserEventHistory.this, getApiUrl() + "book-event", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
+                @Override
+                public void getRespone(String dta, ArrayList<Object> respons) {
+                    try {
+                        eventDetaildialog.dismiss();
+
+                        JSONObject jsonObject = new JSONObject(dta);
+                        if (jsonObject.getBoolean("status")) {
+                            alertDialogs.alertDialog(UserEventHistory.this, getResources().getString(R.string.Response), jsonObject.getString("msg"),getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                                @Override
+                                public void getDialogEvent(String buttonPressed) {
+                                }
+                            });
+                        } else {
+                            alertDialogs.alertDialog(UserEventHistory.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
+                                @Override
+                                public void getDialogEvent(String buttonPressed) {
+                                }
+                            });
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 }

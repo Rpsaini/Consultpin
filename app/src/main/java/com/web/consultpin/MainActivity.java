@@ -63,6 +63,11 @@ public class MainActivity extends BaseActivity {
 
         drawer = findViewById(R.id.drawer_layout);
 
+
+        passwordValidation("Qwerty1234");
+        passwordValidation("qwerty");
+        passwordValidation("QWERTY123#heke");
+
 //        Intent intent = new Intent(MainActivity.this, BecomeAConsultant.class);
 //        startActivity(intent);
 

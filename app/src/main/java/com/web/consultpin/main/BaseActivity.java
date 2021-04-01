@@ -30,6 +30,8 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import animationpackage.AnimationForViews;
 import animationpackage.IsAnimationEndedCallback;
@@ -305,6 +307,36 @@ public class BaseActivity extends AppCompatActivity
         }
         return false;
     }
+
+
+    public boolean passwordValidation(String password)
+    {
+
+
+        System.out.println("Paterrrn==="+password);
+
+        if (Pattern.matches("[a-zA-Z]+", password.trim())==false)
+        {
+            System.out.println("Pattern matche==="+password);
+            if (Pattern.matches(".*\\d.*", password.trim())==true)
+            {
+                System.out.println("Pattern matche=in=="+password);
+                return true;
+            }
+
+
+        }
+
+
+        return false;
+    }
+
+
+
+
+
+
+
 
 
 }

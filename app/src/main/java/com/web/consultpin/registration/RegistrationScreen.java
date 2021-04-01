@@ -158,6 +158,20 @@ public class RegistrationScreen extends BaseActivity {
                     });
                     return;
                 }
+
+
+               if(!passwordValidation(et_password.getText().toString()))
+                {
+                    alertDialogs.alertDialog(RegistrationScreen.this, getString(R.string.Required), getString(R.string.passwordformat), getString(R.string.ok), "", new DialogCallBacks() {
+                        @Override
+                        public void getDialogEvent(String buttonPressed) {
+
+                        }
+                    });
+                    return;
+                }
+
+
                 if (validationRule.checkPssword(et_password, et_conf_password) != 2) {
                     alertDialogs.alertDialog(RegistrationScreen.this, getResources().getString(R.string.Invalid), getResources().getString(R.string.enter_conf_password), getResources().getString(R.string.Invalid), "", new DialogCallBacks() {
                         @Override

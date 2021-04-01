@@ -106,7 +106,8 @@ private EventRequestActivity eventRequestActivity;
                 public void getRespone(String dta, ArrayList<Object> respons) {
                     try {
                         JSONObject jsonObject = new JSONObject(dta);
-                        if (jsonObject.getBoolean("status")) {
+                        if (jsonObject.getBoolean("status"))
+                        {
                             try {
 
                                 JSONArray dataAr=jsonObject.getJSONArray("data");

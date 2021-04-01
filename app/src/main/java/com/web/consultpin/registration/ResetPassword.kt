@@ -82,10 +82,19 @@ class ResetPassword : BaseActivity() {
 
             if (et_oldpaswword.text.toString().length == 0) {
                 alertDialogs.alertDialog(this, resources.getString(R.string.Required), resources.getString(R.string.enter_old_password), resources.getString(R.string.ok), "", DialogCallBacks { })
+
             }
-            if (et_password.text.toString().length == 0) {
+
+
+          else  if (et_password.text.toString().length == 0) {
                 alertDialogs.alertDialog(this, resources.getString(R.string.Required), resources.getString(R.string.enter_password), resources.getString(R.string.ok), "", DialogCallBacks { })
-            } else if (et_conf_password.text.toString().length == 0) {
+            }
+
+            else if(!passwordValidation(et_password.text.toString()))
+            {
+                alertDialogs.alertDialog(this, resources.getString(R.string.Required), resources.getString(R.string.passwordformat), resources.getString(R.string.ok), "", DialogCallBacks { })
+            }
+            else if (et_conf_password.text.toString().length == 0) {
                 alertDialogs.alertDialog(this, resources.getString(R.string.Required), resources.getString(R.string.enter_your_new_password), resources.getString(R.string.ok), "", DialogCallBacks { })
             } else if (!et_conf_password.text.toString().equals(et_password.text.toString())) {
                 alertDialogs.alertDialog(this, resources.getString(R.string.Invalid), resources.getString(R.string.password_invalid), resources.getString(R.string.ok), "", DialogCallBacks { })

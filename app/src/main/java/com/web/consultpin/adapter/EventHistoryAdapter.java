@@ -25,18 +25,24 @@ import com.bumptech.glide.request.RequestOptions;
 import com.web.consultpin.MainActivity;
 import com.web.consultpin.R;
 import com.web.consultpin.Utilclass;
+import com.web.consultpin.chat.ChatActivity;
 import com.web.consultpin.consultant.AccountInformation;
 import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.PapularConsultantFullListing;
+import com.web.consultpin.consultant.TimeManagement;
 import com.web.consultpin.events.EventRequestActivity;
 import com.web.consultpin.initiatecall.InitiateCallWebview;
 import com.web.consultpin.jitsi.MAinJistsiActivity;
+import com.web.consultpin.main.BaseActivity;
+import com.web.consultpin.usersection.UserEventHistory;
 //import com.web.consultpin.initiatecall.InitiateCallWebview;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,7 +63,7 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
         LinearLayout ll_list_of_event;
         ImageView event_image;
-        TextView event_name, event_fee, event_number_of_user, appointment_time, txt_cancel,event_des;
+        TextView event_name, event_fee, event_number_of_user, appointment_time, txt_cancel, event_des;
 
 
         public MyViewHolder(View view) {
@@ -98,11 +104,10 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
 
             holder.ll_list_of_event.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
 
                     showDialog(jsonObject);
-                  }
+                }
             });
 
 
@@ -147,13 +152,17 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             TextView appointment_time = eventDetaildialog.findViewById(R.id.appointment_time);
             TextView event_desc = eventDetaildialog.findViewById(R.id.event_desc);
             TextView event_type = eventDetaildialog.findViewById(R.id.event_type);
+            TextView txt_bookevent = eventDetaildialog.findViewById(R.id.txt_bookevent);
+
+            final String eventFee = jsonObject.getString("event_fee");
+            final String event_id = jsonObject.getString("event_id");
 
             event_name.setText(jsonObject.getString("event_name"));
             event_desc.setText(jsonObject.getString("description"));
             event_fee.setText(jsonObject.getString("event_fee") + pActivity.getResources().getString(R.string.lirasymbol));
             event_number_of_user.setText(pActivity.getResources().getString(R.string.numberofparticipaint) + "  :  " + jsonObject.getString("number_of_participants"));
             appointment_time.setText(jsonObject.getString("start_date") + " to  " + jsonObject.getString("end_date"));
-            event_type.setText(pActivity.getResources().getString(R.string.event_type)+" : "+jsonObject.getString("category_name"));
+            event_type.setText(pActivity.getResources().getString(R.string.event_type) + " : " + jsonObject.getString("category_name"));
             showImage(jsonObject.getString("banner"), event_image);
 
 
@@ -161,12 +170,36 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
                 @Override
                 public void onClick(View v) {
                     eventDetaildialog.dismiss();
+
                 }
             });
+
+            txt_bookevent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(pActivity instanceof  EventRequestActivity)
+                    {
+                        EventRequestActivity eventRequestActivity=(EventRequestActivity) pActivity;
+                        eventRequestActivity.bookEvent(eventFee, event_id, eventDetaildialog);
+                    }
+                    else if(pActivity instanceof UserEventHistory)
+                    {
+                        UserEventHistory eventRequestActivity=(UserEventHistory) pActivity;
+                        eventRequestActivity.bookEvent(eventFee, event_id, eventDetaildialog);
+                    }
+
+                }
+            });
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
+
+
 
 
 }

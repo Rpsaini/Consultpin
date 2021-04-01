@@ -227,6 +227,8 @@
     <string name="consultantsaved">Appoitment request has been sent successfully.</string>
     <string name="not_saved">Your consultant request not saved .</string>
     <string name="event_type">Event type</string>
+    <string name="bookevent">Book Event</string>
+    <string name="passwordformat">Passwords must be contain 1 capital letter and 1 numbers and password length must be 8 characters </string>
 
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>
 
