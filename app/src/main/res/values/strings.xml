@@ -198,7 +198,14 @@
     <string name="switchtoconsultant">Switch to consultant</string>
     <string name="view_events">View events</string>
     <string name="set_appointment_time">Set Appointment Time</string>
+    <string name="select_start_Date">Select start date</string>
+    <string name="select_end_date">Select end date</string>
     <string name="select_start_time">Select event start time</string>
+
+    <string name="select_starttime">Select start time</string>
+    <string name="select_startendtime">Select start time</string>
+
+
     <string name="select_end_time">Select event end time</string>
     <string name="date_validation">Start date can not be grater than End date.</string>
     <string name="favorite_consultants">favourite consultants</string>
@@ -228,6 +235,9 @@
     <string name="not_saved">Your consultant request not saved .</string>
     <string name="event_type">Event type</string>
     <string name="bookevent">Book Event</string>
+    <string name="save">Save</string>
+    <string name="enter_fullname">Enter full name</string>
+    <string name="enter_valid_email">Enter valid email</string>
     <string name="passwordformat">Passwords must be contain 1 capital letter and 1 numbers and password length must be 8 characters </string>
 
     <string name="brifeabout_appointment">Briefly mention your needs and concerns so that our consultant provides you with a better quality service</string>

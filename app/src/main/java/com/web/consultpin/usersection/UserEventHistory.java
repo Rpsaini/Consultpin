@@ -135,53 +135,7 @@ public class UserEventHistory extends BaseActivity {
         }
     }
 
-    public void bookEvent(String eventfee, String eventId, final Dialog eventDetaildialog) {
 
-
-        try {
-            final Map<String, String> m = new HashMap<>();
-            m.put("fullname", getRestParamsName(Utilclass.first_name) + " " + Utilclass.last_name);
-            m.put("email", getRestParamsName(Utilclass.email));
-            m.put("phone", getRestParamsName(Utilclass.phone));
-            m.put("provience", "");
-            m.put("event_fee", eventfee);
-            m.put("event_id", eventId);
-
-            final Map<String, String> obj = new HashMap<>();
-            obj.put("token",getRestParamsName(Utilclass.token));
-
-
-            serverHandler.sendToServer(UserEventHistory.this, getApiUrl() + "book-event", m, 0, obj, 20000, R.layout.progressbar, new CallBack() {
-                @Override
-                public void getRespone(String dta, ArrayList<Object> respons) {
-                    try {
-                        eventDetaildialog.dismiss();
-
-                        JSONObject jsonObject = new JSONObject(dta);
-                        if (jsonObject.getBoolean("status")) {
-                            alertDialogs.alertDialog(UserEventHistory.this, getResources().getString(R.string.Response), jsonObject.getString("msg"),getResources().getString(R.string.ok), "", new DialogCallBacks() {
-                                @Override
-                                public void getDialogEvent(String buttonPressed) {
-                                }
-                            });
-                        } else {
-                            alertDialogs.alertDialog(UserEventHistory.this, getResources().getString(R.string.Response), jsonObject.getString("msg"), getResources().getString(R.string.ok), "", new DialogCallBacks() {
-                                @Override
-                                public void getDialogEvent(String buttonPressed) {
-                                }
-                            });
-
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
 

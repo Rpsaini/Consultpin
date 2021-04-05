@@ -31,6 +31,10 @@ public class Utilclass
     public static String sender_consultant_id="sender_consultant_id";
     public static String callFrom="callFrom";
     public static String callChatBroadCast="com.chatbroadcast";
+    public static String eventFee="eventFee";
+    public static String event_id="event_id";
+
+
 
 
 

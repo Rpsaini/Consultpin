@@ -81,6 +81,7 @@ public class EditProfileConsultant extends BaseActivity {
         removeActionBar();
         changestatusBarColorBlue();
         init();
+        hideKeyboard(this);
 
     }
 

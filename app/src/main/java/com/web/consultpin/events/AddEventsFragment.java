@@ -149,11 +149,11 @@ public class AddEventsFragment extends Fragment {
     private void init() {
 
         ed_about_event = view.findViewById(R.id.ed_about_event);
-        ed_datefrom = view.findViewById(R.id.ed_datefrom);
+
         ed_event_name = view.findViewById(R.id.ed_event_name);
 
         ed_date_end = view.findViewById(R.id.ed_date_end);
-
+        ed_datefrom = view.findViewById(R.id.ed_datefrom);
 
         ed_time_start = view.findViewById(R.id.ed_time_start);
         ed_end_time = view.findViewById(R.id.ed_end_time);
@@ -282,10 +282,6 @@ public class AddEventsFragment extends Fragment {
                     });
                     return;
                 }
-
-
-
-
 
                 if(eventRequestActivity.validationRule.checkEmptyString(ed_paid_fee) == 0&&isPaid==1)
                 {
@@ -602,8 +598,8 @@ public class AddEventsFragment extends Fragment {
         return Uri.parse(path);
     }
 
-    public void downView() {
-
+    public void downView(String catName) {
+        txt_event_category.setText(catName);
         eventRequestActivity.downSourceDestinationView(downView, designDialog);
     }
 

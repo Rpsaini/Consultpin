@@ -323,6 +323,7 @@
                 </LinearLayout>
 
                 <fontpackageforEdittext.Regular
+                    android:layout_margin="5dp"
                     android:id="@+id/ed_paid_fee"
                     style="@style/edittext_style_12_grey"
                     android:layout_width="100dp"

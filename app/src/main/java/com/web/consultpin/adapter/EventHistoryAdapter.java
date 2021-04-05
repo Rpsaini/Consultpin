@@ -30,6 +30,7 @@ import com.web.consultpin.consultant.AccountInformation;
 import com.web.consultpin.consultant.AppointmentHistory;
 import com.web.consultpin.consultant.PapularConsultantFullListing;
 import com.web.consultpin.consultant.TimeManagement;
+import com.web.consultpin.events.BookEventActivity;
 import com.web.consultpin.events.EventRequestActivity;
 import com.web.consultpin.initiatecall.InitiateCallWebview;
 import com.web.consultpin.jitsi.MAinJistsiActivity;
@@ -177,17 +178,25 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
             txt_bookevent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(pActivity instanceof  EventRequestActivity)
-                    {
-                        EventRequestActivity eventRequestActivity=(EventRequestActivity) pActivity;
-                        eventRequestActivity.bookEvent(eventFee, event_id, eventDetaildialog);
-                    }
-                    else if(pActivity instanceof UserEventHistory)
-                    {
-                        UserEventHistory eventRequestActivity=(UserEventHistory) pActivity;
-                        eventRequestActivity.bookEvent(eventFee, event_id, eventDetaildialog);
-                    }
+                  //  if(pActivity instanceof  EventRequestActivity)
+                   // {
+                       // EventRequestActivity eventRequestActivity=(EventRequestActivity) pActivity;
+                      // eventRequestActivity.bookEvent(eventFee, event_id, eventDetaildialog);
+                   // }
+//                    else if(pActivity instanceof UserEventHistory)
+//                    {
+//                        Intent intent=new Intent(pActivity, BookEventActivity.class);
+//                        intent.putExtra(Utilclass.eventFee,eventFee);
+//                        intent.putExtra(Utilclass.event_id,event_id);
+//                        pActivity.startActivityForResult(intent,1001);
+//                        eventDetaildialog.dismiss();
+//                    }
 
+                    Intent intent=new Intent(pActivity, BookEventActivity.class);
+                    intent.putExtra(Utilclass.eventFee,eventFee);
+                    intent.putExtra(Utilclass.event_id,event_id);
+                    pActivity.startActivityForResult(intent,1001);
+                    eventDetaildialog.dismiss();
                 }
             });
 

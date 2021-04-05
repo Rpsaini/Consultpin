@@ -60,7 +60,8 @@ public class EventCategoryAdapter extends RecyclerView.Adapter<EventCategoryAdap
 
         try {
             final JSONObject pos = (JSONObject) moviesList.get(position);
-            holder.txt_reason.setText(pos.getString("category_name"));
+            String catName=pos.getString("category_name");
+            holder.txt_reason.setText(catName);
             //Id
             holder.ll_selectReason.setTag(pos.getString("id"));
             holder.ll_selectReason.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,7 @@ public class EventCategoryAdapter extends RecyclerView.Adapter<EventCategoryAdap
                     try {
 
                         addEventsFragment.event_cat_id=v.getTag()+"";
-                        addEventsFragment.downView();
+                        addEventsFragment.downView(catName);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
