@@ -48,6 +48,8 @@ public class MessagingService extends FirebaseMessagingService {
         Intent intent = new Intent(Utilclass.callChatBroadCast);
         sendBroadcast(intent);
         try {
+
+           // ddd
             String loginDetail=new SavePreferences().reterivePreference(MessagingService.this, Utilclass.loginDetail).toString();
             if(loginDetail.length()!=0)
               {
