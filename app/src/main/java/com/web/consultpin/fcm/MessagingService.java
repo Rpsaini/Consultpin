@@ -28,23 +28,20 @@ import java.util.Map;
 public class MessagingService extends FirebaseMessagingService {
 
     @Override
-    public void onNewToken(String token) {
+    public void onNewToken(String token)
+    {
         super.onNewToken(token);
-
         System.out.println("My Device token==tokrn==" + token);
         SavePreferences savePreferences = new SavePreferences();
         savePreferences.savePreferencesData(this, token, Utilclass.device_Token);
-
-
-    }
+     }
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived(RemoteMessage remoteMessage)
+    {
 
         System.out.println("Inside messgae recived=samremitance===>" + remoteMessage);
         super.onMessageReceived(remoteMessage);
-
-
         Intent intent = new Intent(Utilclass.callChatBroadCast);
         sendBroadcast(intent);
         try {

@@ -449,6 +449,8 @@ public class ChatActivity extends BaseActivity {
         RequestBody receiver_consultant_id = RequestBody.create(MediaType.parse("text/plain"),getIntent().getStringExtra(Utilclass.receiver_consultant_id));
 
 
+        System.out.println("Chat data==");
+
         if(selectedPath.length() > 0)
         {
             File file = new File(selectedPath);
@@ -470,6 +472,7 @@ public class ChatActivity extends BaseActivity {
             public void onSuccess(ResponseBody t) {
                 progressDialog.dismiss();
                 getUserMessages(1);
+
 //                alertDialogs.alertDialog(ChatActivity.this, getResources().getString(R.string.Response), "Uploaded.", getResources().getString(R.string.ok), "", new DialogCallBacks() {
 //                    @Override
 //                    public void getDialogEvent(String buttonPressed)
@@ -479,7 +482,7 @@ public class ChatActivity extends BaseActivity {
 //
 //                        }
 //                    }
-//                })
+//                });
             }
 
             @Override
